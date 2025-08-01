@@ -59,5 +59,9 @@
 	},
 	"keywords": [
 		"svelte"
-	]
+	],
+	"dependencies": {
+		"tailwind-merge": "^3.3.1",
+		"tailwind-variants": "^2.1.0"
+	}
 }
