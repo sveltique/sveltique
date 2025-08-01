@@ -1,3 +1,23 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--color-*: initial;
+
+	--color-white: #ffffff;
+	--color-black: #000000;
+	--color-accent: blue;
+}
+
+* {
+	font-family: 'Nunito', sans-serif;
+	font-optical-sizing: auto;
+}
+
+body {
+	width: 100%;
+	height: 100vh;
+}
