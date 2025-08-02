@@ -2,14 +2,14 @@ import { tv, type VariantProps } from 'tailwind-variants';
 
 /** The styles of a button. */
 export const button = tv({
-	base: 'relative duration-150 ease-in-out text-center flex items-center cursor-pointer [&_*]:pointer-events-none',
+	base: 'relative duration-150 ease-in-out text-center flex items-center gap-5 cursor-pointer [&_*]:pointer-events-none',
 	variants: {
 		variant: {
 			contained:
-				'bg-blue-700 text-white hover:bg-blue-700/90 dark:bg-blue-400 dark:text-zinc-800 dark:hover:bg-blue-500',
+				'bg-primary text-white hover:bg-primary/90 dark:bg-blue-400 dark:text-zinc-800 dark:hover:bg-blue-500',
 			outline:
-				'bg-transparent text-black hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-700 border border-solid border-zinc-300 font-medium dark:border-zinc-700',
-			text: 'bg-transparent text-black hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-700'
+				'bg-transparent text-black hover:bg-zinc-100 dark:text-white dark:hover:bg-grey-soft-dark border border-solid border-grey-soft font-medium dark:border-grey-soft-dark',
+			text: 'bg-transparent text-black hover:bg-zinc-100 dark:text-white dark:hover:bg-grey-soft-dark'
 		},
 		shape: {
 			rectangle: 'rounded-2xl',
@@ -34,17 +34,17 @@ export const button = tv({
 		{
 			shape: 'square',
 			size: 'small',
-			class: 'p-1.5 rounded-lg'
+			class: 'p-2 rounded-lg'
 		},
 		{
 			shape: 'square',
 			size: 'medium',
-			class: 'p-2.5 rounded-2xl'
+			class: 'p-3 rounded-2xl'
 		},
 		{
 			shape: 'square',
 			size: 'large',
-			class: 'p-3.5 rounded-2xl'
+			class: 'p-4 rounded-2xl'
 		},
 		{
 			shape: 'circle',
