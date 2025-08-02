@@ -1,5 +1,7 @@
 <script lang="ts">
 	import Playground from '$docs/Playground.svelte';
+	import { toTitleCase } from '$utils/string.js';
+	import { Select } from '../index.js';
 	import TextInput from '../text-input/TextInput.svelte';
 	import Field from './Field.svelte';
 
@@ -19,10 +21,14 @@
 	</Field>
 
 	{#snippet controls()}
-		<Field label="Label" />
-		<select bind:value={type}>
-			<option>text</option>
-			<option>number</option>
-		</select>
+		<Field label="Input type">
+			{#snippet input(props)}
+				<Select.Root {...props} containerClass="w-[200px]">
+					{#each ['text', 'number', 'select'] as type}
+						<Select.Option value={type}>{toTitleCase(type)}</Select.Option>
+					{/each}
+				</Select.Root>
+			{/snippet}
+		</Field>
 	{/snippet}
 </Playground>

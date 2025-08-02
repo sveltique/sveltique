@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { cn } from '$utils/cn.js';
 	import type { HTMLAttributes } from 'svelte/elements';
-	import { paper, type PaperVariants } from './variant.js';
+	import { paper, type PaperVariants } from './variants.js';
 
 	interface Props extends HTMLAttributes<HTMLDivElement>, PaperVariants {}
 
@@ -12,6 +12,8 @@
 		variant = 'shadow',
 		...restProps
 	}: Props = $props();
+
+	let _elevation = $derived(variant === 'outline' ? 0 : elevation);
 </script>
 
 <!--
@@ -19,6 +21,6 @@
 A surface to display content and actions.
 -->
 
-<div class={cn(paper({ elevation, variant }), className)} {...restProps}>
+<div class={cn(paper({ elevation: _elevation, variant }), className)} {...restProps}>
 	{@render children?.()}
 </div>

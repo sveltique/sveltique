@@ -8,8 +8,8 @@ export const button = tv({
 			contained:
 				'bg-primary text-white hover:bg-primary/90 dark:bg-blue-400 dark:text-zinc-800 dark:hover:bg-blue-500',
 			outline:
-				'bg-transparent text-black hover:bg-zinc-100 dark:text-white dark:hover:bg-grey-soft-dark border border-solid border-grey-soft font-medium dark:border-grey-soft-dark',
-			text: 'bg-transparent text-black hover:bg-zinc-100 dark:text-white dark:hover:bg-grey-soft-dark'
+				'bg-transparent text-black hover:bg-grey-hover dark:text-white dark:hover:bg-grey-hover-dark border border-solid border-grey-soft font-medium dark:border-grey-soft-dark',
+			text: 'bg-transparent text-black hover:bg-grey-hover dark:text-white dark:hover:bg-grey-hover-dark'
 		},
 		shape: {
 			rectangle: 'rounded-2xl',

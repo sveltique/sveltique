@@ -1,4 +1,4 @@
-import { toTitleCase } from '$utils/string.js';
+import { capitalize, toTitleCase } from '$utils/string.js';
 import type { Component } from 'svelte';
 
 export async function load({ params }) {
@@ -13,7 +13,7 @@ async function importComponent(category: string, name: string) {
 		'../../../../../lib/components/*/*/*.docs.svelte',
 		{ import: 'default' }
 	);
-	const path = `../../../../../lib/components/${category}/${name}/${toTitleCase(name)}.docs.svelte`;
+	const path = `../../../../../lib/components/${category}/${name}/${capitalize(name).replaceAll(' ', '')}.docs.svelte`;
 
 	const loader = modules[path];
 
