@@ -7,3 +7,10 @@ export function toTitleCase(str: string) {
 export function capitalize(slug: string) {
 	return slug.split('-').map(toTitleCase).join(' ');
 }
+
+export function slugify(str: string) {
+	return str
+		.split(' ')
+		.map((word) => word.toLowerCase())
+		.join('-');
+}

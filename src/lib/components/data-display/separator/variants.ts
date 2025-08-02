@@ -1,7 +1,7 @@
 import { tv, type VariantProps } from 'tailwind-variants';
 
 export const separator = tv({
-	base: 'relative bg-zinc-300 dark:bg-zinc-700',
+	base: 'relative bg-grey-soft dark:bg-grey-soft-dark',
 	variants: {
 		orientation: {
 			horizontal: 'h-px w-full',
