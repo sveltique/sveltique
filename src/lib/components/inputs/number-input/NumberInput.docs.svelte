@@ -1,23 +1,14 @@
 <script lang="ts">
-	import Playground from '$docs/Playground.svelte';
 	import NumberInput from './NumberInput.svelte';
-
-	let value = $state(50);
-	let step = $state(1);
-	let min = $state(0);
-	let max = $state(100);
+	import Paper from '$lib/components/surfaces/paper/Paper.svelte';
 </script>
 
-<h1>Separator</h1>
-<p>Text NumberInputs allow users to enter text into a UI.</p>
+<h1>Number Input</h1>
+<p>Number Inputs allow users to enter text into a UI.</p>
 <h2>Basic Usage</h2>
 <p>
-	The NumberInput is a text NumberInput, and includes a label and an error message when provided.
+	The Number Input is a text NumberInput, and includes a label and an error message when provided.
 </p>
-<Playground>
-	<NumberInput bind:value {step} {min} {max} />
-
-	{#snippet controls()}
-		<NumberInput />
-	{/snippet}
-</Playground>
+<Paper variant="outline" class="flex justify-center p-6">
+	<NumberInput step={1} value={50} min={0} max={100} containerClass="max-w-3xs" />
+</Paper>

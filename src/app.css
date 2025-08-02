@@ -22,6 +22,8 @@
 	--color-white: #fff;
 	--color-black: #000;
 
+	--color-grey-hover: oklch(96.7% 0.001 286.375);
+	--color-grey-hover-dark: oklch(21% 0.006 285.885);
 	--color-grey-soft: oklch(87.1% 0.006 286.286);
 	--color-grey-soft-dark: oklch(37.3% 0.034 259.733);
 
@@ -42,4 +44,15 @@
 body {
 	width: 100%;
 	height: 100vh;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type='number'] {
+	appearance: textfield;
+	-moz-appearance: textfield;
 }

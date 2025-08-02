@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Paper from './Paper.svelte';
 	import Playground from '$docs/Playground.svelte';
-	import type { PaperVariants } from './variant.js';
+	import type { PaperVariants } from './variants.js';
 	import Field from '$lib/components/inputs/field/Field.svelte';
 
 	let elevation = $state<PaperVariants['elevation']>(1);
