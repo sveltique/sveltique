@@ -13,7 +13,7 @@
 	styles are uniform through the different browsers.
 </p>
 <Paper variant="outline" class="flex justify-center p-6">
-	<Select.Root value="apple" containerClass="w-32">
+	<Select.Root value="apple" containerClass="w-24">
 		<Select.Option value="" selected disabled>Select a fruit</Select.Option>
 		{#each fruits as fruit}
 			<Select.Option value={fruit} />
