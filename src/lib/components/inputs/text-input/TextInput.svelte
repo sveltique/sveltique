@@ -1,13 +1,16 @@
 <script lang="ts">
-	import { cn } from '$utils/cn.js';
-	import type { HTMLInputAttributes } from 'svelte/elements';
 	import { textInput, type TextInputVariants } from './variants.js';
+	import type { HTMLInputAttributes } from 'svelte/elements';
+	import type { ClassNameValue } from 'tailwind-merge';
 
-	interface Props extends HTMLInputAttributes, TextInputVariants {}
+	interface Props extends Omit<HTMLInputAttributes, 'class' | 'value'>, TextInputVariants {
+		class?: ClassNameValue;
+		value?: string;
+	}
 
-	let { class: className, fullWidth = true, value = $bindable(''), ...restProps }: Props = $props();
+	let { class: className, value = $bindable(''), ...restProps }: Props = $props();
 
-	const { input } = $derived(textInput({ fullWidth }));
+	const { input } = $derived(textInput());
 </script>
 
-<input bind:value type="text" class={cn(input(), className)} {...restProps} />
+<input bind:value type="text" class={input({ className })} {...restProps} />

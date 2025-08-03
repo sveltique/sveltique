@@ -5,26 +5,27 @@
 	import type { Snippet } from 'svelte';
 	import type { ClassNameValue } from 'tailwind-merge';
 
+	type InputSnippet = Snippet<
+		[{ id: string; 'aria-invalid': boolean; 'aria-describedby': string | undefined }]
+	>;
+
 	interface Props {
-		input?: Snippet<[{ id: string; 'aria-invalid': boolean }]>;
+		input: InputSnippet;
 		class?: ClassNameValue;
 		error?: string | undefined;
 		label?: string | undefined;
-		/** @default true */
-		fullWidth?: boolean | undefined;
 	}
 
 	let {
 		class: className = undefined,
 		input,
 		error = undefined,
-		label = undefined,
-		fullWidth = true
+		label = undefined
 	}: Props = $props();
 
 	const id = $props.id();
 
-	const { container } = $derived(field({ fullWidth }));
+	const { container, error: errorClasses } = $derived(field());
 </script>
 
 <!--
@@ -34,10 +35,14 @@ Fields allow users to enter data into a UI.
 
 <div class={cn(container(), className)}>
 	<label for={id}>{label}</label>
-	{@render input?.({ id, 'aria-invalid': !!error })}
+	{@render input({
+		id,
+		'aria-invalid': !!error,
+		'aria-describedby': error ? `${id}-error` : undefined
+	})}
 	{#if error}
-		<p id="{id}-error" role="alert" class="text-sm text-danger">
-			<IconInfoCircle />
+		<p id="{id}-error" role="alert" class={errorClasses()}>
+			<IconInfoCircle class="min-w-5" />
 			{error}
 		</p>
 	{/if}

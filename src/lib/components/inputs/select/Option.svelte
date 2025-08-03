@@ -7,7 +7,9 @@
 	interface Props extends Omit<HTMLAttributes<HTMLLIElement>, 'class'> {
 		value: string;
 		class?: ClassNameValue;
+		/** @default false */
 		selected?: boolean;
+		/** @default false */
 		disabled?: boolean;
 	}
 
@@ -15,8 +17,8 @@
 		children,
 		value,
 		class: className,
-		selected: _selected,
-		disabled,
+		selected: _selected = false,
+		disabled = false,
 		...restProps
 	}: Props = $props();
 
@@ -24,7 +26,7 @@
 	let ref = $state<HTMLLIElement>();
 
 	let selected = $derived(_selected);
-	const { container } = $derived(option({ selected }));
+	const { container } = $derived(option({ selected, disabled }));
 
 	onMount(() => {
 		parent = ref?.parentElement as HTMLUListElement;
