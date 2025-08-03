@@ -33,23 +33,19 @@
 
 	#content :global {
 		h1 {
-			@apply mb-4 text-2xl font-bold;
+			@apply pb-4 text-2xl font-bold;
 		}
 
 		h2 {
-			@apply mb-4 text-xl font-bold;
+			@apply py-4 text-xl font-bold;
 		}
 
 		p {
-			@apply mb-4;
+			@apply pb-4;
 		}
 
-		code {
-			@apply rounded-lg bg-primary px-2 py-1 text-white;
-		}
-
-		.ui-container {
-			@apply relative mb-6 flex w-full items-center justify-center gap-3 rounded-2xl border border-grey-soft p-6;
+		a {
+			@apply text-primary underline;
 		}
 	}
 </style>

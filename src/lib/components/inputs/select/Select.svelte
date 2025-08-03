@@ -1,11 +1,9 @@
 <script lang="ts">
-	import { on } from 'svelte/events';
-	import { paper } from '$lib/components/surfaces/index.js';
-	import { cn } from '$utils/cn.js';
-	import IconChevronDown from '@tabler/icons-svelte/icons/chevron-down';
 	import { onMount, type Snippet } from 'svelte';
-	import type { ClassNameValue } from 'tailwind-merge';
+	import { on } from 'svelte/events';
 	import { select } from './variants.js';
+	import IconChevronDown from '@tabler/icons-svelte/icons/chevron-down';
+	import type { ClassNameValue } from 'tailwind-merge';
 
 	interface Props {
 		id?: string;
@@ -15,6 +13,7 @@
 		name?: string;
 		value?: string;
 		'aria-invalid'?: boolean;
+		'aria-describedby'?: string;
 	}
 
 	let {
@@ -80,7 +79,10 @@
 				return;
 			}
 
-			if (!target.hasAttribute('data-select-option')) {
+			if (
+				!target.hasAttribute('data-select-option') ||
+				target.getAttribute('data-disabled') === 'true'
+			) {
 				return;
 			}
 
@@ -91,6 +93,13 @@
 		});
 	});
 </script>
+
+<!--
+@component
+A drop-in replacement for the native `select` element.
+
+Note : The element takes its parent's full width, so if you want to restrict it, you can do so with the `containerClass` prop.
+-->
 
 <div id={componentId} class={container({ class: containerClass })}>
 	<input type="hidden" {name} {value} />

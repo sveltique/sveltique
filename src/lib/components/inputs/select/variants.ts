@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants';
 
 export const select = tv({
 	slots: {
-		container: 'relative',
+		container: 'relative w-full',
 		trigger: paper({
 			variant: 'outline',
 			elevation: 0,
@@ -14,7 +14,7 @@ export const select = tv({
 		listBox: paper({
 			elevation: 4,
 			class:
-				'absolute top-full left-0 hidden w-full flex-col divide-y divide-grey-soft overflow-hidden'
+				'absolute top-full z-10 left-0 hidden w-full flex-col divide-y divide-grey-soft overflow-hidden'
 		})
 	},
 	variants: {
@@ -33,7 +33,26 @@ export const option = tv({
 	},
 	variants: {
 		selected: {
-			true: 'bg-primary text-white'
+			true: {
+				container: 'bg-primary text-white'
+			}
+		},
+		disabled: {
+			true: {
+				container: 'italic cursor-not-allowed'
+			},
+			false: {
+				container: 'hover:bg-grey-hover'
+			}
 		}
-	}
+	},
+	compoundVariants: [
+		{
+			selected: true,
+			disabled: false,
+			class: {
+				container: 'hover:bg-primary'
+			}
+		}
+	]
 });

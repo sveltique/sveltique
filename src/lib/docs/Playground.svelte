@@ -11,12 +11,14 @@
 	let { children, controls }: Props = $props();
 </script>
 
-<Paper variant="outline" elevation={0} class="flex w-full items-stretch justify-between">
+<Paper variant="outline" elevation={0} class="mb-4 flex w-full items-stretch justify-between">
 	<div class="relative flex grow items-center justify-center p-6">
 		{@render children?.()}
 	</div>
-	<Separator orientation="vertical" />
-	<div class="relative p-6">
-		{@render controls?.()}
-	</div>
+	{#if controls}
+		<Separator orientation="vertical" />
+		<div class="relative p-6">
+			{@render controls()}
+		</div>
+	{/if}
 </Paper>
