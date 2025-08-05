@@ -1,9 +1,11 @@
 <script lang="ts">
-	import { cn } from '$utils/cn.js';
 	import { button, type ButtonVariants } from './variants.js';
 	import type { HTMLButtonAttributes } from 'svelte/elements';
+	import type { WithTWMergeClass } from '$lib/types.js';
 
-	interface Props extends Omit<HTMLButtonAttributes, 'color' | 'disabled'>, ButtonVariants {
+	interface Props
+		extends WithTWMergeClass<Omit<HTMLButtonAttributes, 'color' | 'disabled'>>,
+			ButtonVariants {
 		ref?: HTMLButtonElement;
 	}
 
@@ -30,7 +32,7 @@ Buttons allow users to take actions, and make choices, with a single tap.
 	{type}
 	{disabled}
 	aria-disabled={disabled}
-	class={cn(button({ shape, size, variant }), className)}
+	class={button({ shape, size, variant, disabled, className })}
 	{...restProps}
 >
 	{@render children?.()}
