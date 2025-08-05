@@ -1,14 +1,44 @@
 <script lang="ts">
 	import NumberInput from './NumberInput.svelte';
-	import Paper from '$lib/components/surfaces/paper/Paper.svelte';
+	import Playground from '$docs/Playground.svelte';
+	import Badge from '$lib/components/data-display/badge/Badge.svelte';
+
+	const code = {
+		short: `<NumberInput
+    step={5}
+    value={50}
+    min={0}
+    max={100}
+    containerClass="w-3xs"
+/>`,
+		expanded: `&lt;script lang="ts"&gt;
+    import { NumberInput } from '@novaotp/design/components';
+&lt;/script&gt;
+
+<!--
+step : increment/decrement buttons use this
+value : a bindable starting value
+min : enforces a min value with JS
+max : enforces a max value with JS
+containerClass : caps the input width
+-->
+
+<NumberInput
+    step={5}
+    value={50} 
+    min={0}
+    max={100}
+    containerClass="w-3xs"
+/>`
+	};
 </script>
 
 <h1>Number Input</h1>
-<p>Number Inputs allow users to enter text into a UI.</p>
-<h2>Basic Usage</h2>
 <p>
-	The Number Input is a text NumberInput, and includes a label and an error message when provided.
+	An JS-enhanced input for numbers, with increment/decrement buttons and built-in <Badge>min</Badge>
+	and <Badge>max</Badge> enforcement.
 </p>
-<Paper variant="outline" class="flex justify-center p-6">
-	<NumberInput step={1} value={50} min={0} max={100} containerClass="max-w-3xs" />
-</Paper>
+<h2>Basic Usage</h2>
+<Playground {code}>
+	<NumberInput step={5} value={50} min={0} max={100} containerClass="w-3xs" />
+</Playground>

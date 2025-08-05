@@ -1,18 +1,13 @@
 <script lang="ts">
 	import Paper from './Paper.svelte';
 	import Playground from '$docs/Playground.svelte';
-	import type { PaperVariants } from './variants.js';
-	import Field from '$lib/components/inputs/field/Field.svelte';
-
-	let elevation = $state<PaperVariants['elevation']>(1);
 </script>
 
 <h1>Paper</h1>
 <p>A surface to display content and actions.</p>
 <Playground>
-	<Paper {elevation}>hi</Paper>
-
-	{#snippet controls()}
-		<Field label="Elevation"></Field>
-	{/snippet}
+	<Paper class="flex flex-col gap-3 p-6">
+		<p class="p-0 text-lg font-bold">A fully customizable paper</p>
+		<p class="p-0">It's simply a styled div under the hood.</p>
+	</Paper>
 </Playground>

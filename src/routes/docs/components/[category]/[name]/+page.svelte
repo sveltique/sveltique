@@ -40,7 +40,7 @@
 			@apply py-4 text-xl font-bold;
 		}
 
-		p {
+		& > p {
 			@apply pb-4;
 		}
 

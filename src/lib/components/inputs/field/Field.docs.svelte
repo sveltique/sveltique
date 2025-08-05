@@ -4,6 +4,7 @@
 	import { Select } from '../index.js';
 	import NumberInput from '../number-input/NumberInput.svelte';
 	import TextInput from '../text-input/TextInput.svelte';
+	import { ageCode } from './content.js';
 	import Field from './Field.svelte';
 
 	type Input = 'text' | 'number' | 'select';
@@ -50,7 +51,7 @@
 <h2>Error</h2>
 <p>You can show an error message under the field by setting the error property.</p>
 <p class="text-sm text-zinc-500 italic">Tip : Try setting the age under 16 or above 25.</p>
-<Playground>
+<Playground code={ageCode}>
 	<Field label="Age" error={ageError} class="w-[240px]">
 		{#snippet input(props)}
 			<NumberInput bind:value={age} min={0} max={99} {...props} />

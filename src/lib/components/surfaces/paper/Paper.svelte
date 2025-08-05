@@ -2,8 +2,11 @@
 	import { cn } from '$utils/cn.js';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import { paper, type PaperVariants } from './variants.js';
+	import type { ClassNameValue } from 'tailwind-merge';
 
-	interface Props extends HTMLAttributes<HTMLDivElement>, PaperVariants {}
+	interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'class'>, PaperVariants {
+		class?: ClassNameValue;
+	}
 
 	let {
 		children,
@@ -21,6 +24,6 @@
 A surface to display content and actions.
 -->
 
-<div class={cn(paper({ elevation: _elevation, variant }), className)} {...restProps}>
+<div class={paper({ elevation: _elevation, variant, className })} {...restProps}>
 	{@render children?.()}
 </div>
