@@ -21,6 +21,7 @@
             <IconPlayerSkipForwardFilled />
         </div>
     </div>
+    <Separator orientation="vertical" />
     <div class="relative aspect-square w-1/3">
         <img
             src="/images/lost-in-japan.jpg"
@@ -51,6 +52,7 @@
             <IconPlayerSkipForwardFilled />
         </div>
     </div>
+    <Separator orientation="vertical" />
     <div class="relative aspect-square w-1/3">
         <img
             src="/images/lost-in-japan.jpg"
@@ -80,6 +82,7 @@
 				<IconPlayerSkipForwardFilled />
 			</div>
 		</div>
+		<Separator orientation="vertical" />
 		<div class="relative aspect-square w-1/3">
 			<!-- svelte-ignore a11y_img_redundant_alt -->
 			<img

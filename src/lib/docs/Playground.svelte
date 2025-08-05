@@ -45,18 +45,17 @@
 			</div>
 		{/if}
 	</div>
+	<Separator />
+	<div class="relative flex h-10 w-full items-center justify-end px-4 py-2">
+		<button onclick={() => (expanded = !expanded)} class="cursor-pointer px-2 py-1 text-sm">
+			{expanded ? 'Collapse code' : 'Expand code'}
+		</button>
+	</div>
 
 	{#if highlightedCode}
 		{@const _code = expanded ? highlightedCode.expanded : highlightedCode.short}
 		<div class="highlighted-code relative">
 			{@html _code}
-
-			<button
-				onclick={() => (expanded = !expanded)}
-				class="absolute top-4 right-4 cursor-pointer rounded-lg bg-primary px-2 py-1 text-sm text-white"
-			>
-				{expanded ? 'Collapse code' : 'Expand code'}
-			</button>
 		</div>
 	{/if}
 </Paper>
