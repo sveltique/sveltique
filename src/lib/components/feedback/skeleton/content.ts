@@ -1,54 +1,26 @@
 import { script } from '$utils/playground.js';
 
 export const code = {
-	short: `<div class="relative aspect-square w-40 overflow-hidden rounded-2xl">
-    {#if loading}
-        <Skeleton class="h-full w-full" />
-    {:else}
-        <img
-            src="/images/lost-in-japan.jpg"
-            alt="Lost In Japan cover"
-            class="h-full w-full object-cover"
-        />
-    {/if}
-</div>
-<Button onclick={() => (loading = true)} disabled={loading}>
-    Restart
-</Button>`,
-	expanded: `${script(`import { Button, Skeleton } from '@novaotp/design/components';
+	short: `{@render videoLoading()}
+{@render videoLoading()}
 
-    let loading = $state(true);
+{#snippet videoLoading()}
+    <div class="relative flex w-full max-w-3xs flex-col items-start gap-2.5">
+        <Skeleton class="h-32 w-full" />
+        <Skeleton class="h-4 w-full" />
+        <Skeleton class="h-4 w-1/2" />
+    </div>
+{/snippet}`,
+	expanded: `${script("import { Skeleton } from '@novaotp/design/components';")}
 
-    $effect(() => {
-        if (loading) {
-            main();
-        }
+{@render videoLoading()}
+{@render videoLoading()}
 
-        async function main() {
-            await sleep(3000);
-            loading = false;
-        }
-    });
-
-    // In actual code, this could be a fetch request
-    async function sleep(ms: number) {
-        return new Promise<void>((resolve) => {
-            setTimeout(resolve, ms);
-        });
-    }`)}
-
-<div class="relative aspect-square w-40 overflow-hidden rounded-2xl">
-    {#if loading}
-        <Skeleton class="h-full w-full" />
-    {:else}
-        <img
-            src="/images/lost-in-japan.jpg"
-            alt="Lost In Japan cover"
-            class="h-full w-full object-cover"
-        />
-    {/if}
-</div>
-<Button onclick={() => (loading = true)} disabled={loading}>
-    Restart
-</Button>`
+{#snippet videoLoading()}
+    <div class="relative flex w-full max-w-3xs flex-col items-start gap-2.5">
+        <Skeleton class="h-32 w-full" />
+        <Skeleton class="h-4 w-full" />
+        <Skeleton class="h-4 w-1/2" />
+    </div>
+{/snippet}`
 };
