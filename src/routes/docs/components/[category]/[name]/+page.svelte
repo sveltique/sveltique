@@ -32,11 +32,11 @@
 	@reference '../../../../../app.css';
 
 	#content :global {
-		h1 {
+		& > h1 {
 			@apply pb-4 text-2xl font-bold;
 		}
 
-		h2 {
+		& > h2 {
 			@apply py-4 text-xl font-bold;
 		}
 
@@ -44,7 +44,11 @@
 			@apply pb-4;
 		}
 
-		a {
+		& > ul {
+			@apply pb-4;
+		}
+
+		& > a {
 			@apply text-primary underline;
 		}
 	}

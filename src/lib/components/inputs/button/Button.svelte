@@ -15,6 +15,7 @@
 		disabled,
 		ref = $bindable(),
 		type = 'button',
+		color = 'primary',
 		shape = 'rectangle',
 		size = 'medium',
 		variant = 'contained',
@@ -32,7 +33,7 @@ Buttons allow users to take actions, and make choices, with a single tap.
 	{type}
 	{disabled}
 	aria-disabled={disabled}
-	class={button({ shape, size, variant, disabled, className })}
+	class={button({ shape, size, variant, color, disabled, className })}
 	{...restProps}
 >
 	{@render children?.()}
