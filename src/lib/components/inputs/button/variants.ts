@@ -2,14 +2,12 @@ import { tv, type VariantProps } from 'tailwind-variants';
 
 /** The styles of a button. */
 export const button = tv({
-	base: 'relative duration-150 ease-in-out text-center flex items-center gap-5 cursor-pointer [&_*]:pointer-events-none',
+	base: 'relative duration-150 ease-in-out text-center flex items-center gap-5 cursor-pointer [&_*]:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
 	variants: {
 		variant: {
-			contained:
-				'bg-primary text-white not-disabled:hover:bg-primary/90 dark:bg-blue-400 dark:text-zinc-800 not-disabled:dark:hover:bg-blue-500',
-			outline:
-				'bg-transparent text-black not-disabled:hover:bg-grey-hover dark:text-white not-disabled:dark:hover:bg-grey-hover-dark border border-solid border-grey-soft font-medium dark:border-grey-soft-dark',
-			text: 'bg-transparent text-black not-disabled:hover:bg-grey-hover dark:text-white not-disabled:dark:hover:bg-grey-hover-dark'
+			contained: '',
+			outline: 'border border-solid font-medium',
+			text: ''
 		},
 		shape: {
 			rectangle: 'rounded-2xl',
@@ -23,6 +21,10 @@ export const button = tv({
 		},
 		disabled: {
 			true: 'cursor-not-allowed opacity-50'
+		},
+		color: {
+			primary: '',
+			danger: ''
 		}
 	},
 	compoundVariants: [
@@ -60,12 +62,50 @@ export const button = tv({
 			shape: 'circle',
 			size: 'large',
 			class: 'p-4 rounded-full'
+		},
+		{
+			variant: 'contained',
+			color: 'primary',
+			class:
+				'bg-primary text-white not-disabled:hover:bg-primary/90 dark:bg-blue-400 dark:text-zinc-800 not-disabled:dark:hover:bg-blue-500'
+		},
+		{
+			variant: 'outline',
+			color: 'primary',
+			class:
+				'bg-transparent text-black not-disabled:hover:bg-grey-hover dark:text-white not-disabled:dark:hover:bg-grey-hover-dark border-grey-soft dark:border-grey-soft-dark'
+		},
+		{
+			variant: 'text',
+			color: 'primary',
+			class:
+				'bg-transparent text-black not-disabled:hover:bg-grey-hover dark:text-white not-disabled:dark:hover:bg-grey-hover-dark'
+		},
+		{
+			variant: 'contained',
+			color: 'danger',
+			class:
+				'bg-red-500 text-white not-disabled:hover:bg-red-500/90 dark:bg-red-600 dark:text-white not-disabled:dark:hover:bg-red-700'
+		},
+		{
+			variant: 'outline',
+			color: 'danger',
+			class:
+				'bg-transparent text-red-500 border border-red-100 not-disabled:hover:bg-red-50 dark:text-red-400 not-disabled:dark:hover:bg-red-900'
+		},
+		{
+			variant: 'text',
+			color: 'danger',
+			class:
+				'bg-transparent text-red-500 not-disabled:hover:bg-red-50 dark:text-red-400 not-disabled:dark:hover:bg-red-900'
 		}
 	],
 	defaultVariants: {
 		size: 'medium',
 		variant: 'contained',
-		shape: 'rectangle'
+		shape: 'rectangle',
+		color: 'primary',
+		disabled: false
 	}
 });
 
