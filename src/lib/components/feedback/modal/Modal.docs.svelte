@@ -19,6 +19,9 @@
 	centered overlay with a dimmed backdrop.
 </p>
 <h2>Basic Usage</h2>
+<p>
+	A modal is composed of three elements : a trigger, the modals' content and the modal's actions.
+</p>
 <Playground {code}>
 	<Modal>
 		{#snippet trigger({ open })}
@@ -77,32 +80,25 @@
 <h2>Accessiblity</h2>
 
 <h3>Allow overlay click</h3>
-<Banner type="info" class="mb-4">
-	<strong>Accessibility tip:</strong>
-	<code>closeOnOverlayClick</code> should only be enabled for low-stakes interactions where
-	accidentally closing the modal will not cause loss of important data or irreversible actions. See
-	the
+<p class="italic">
+	Note : You should only set <Badge>closeOnOverlayClick</Badge> for low-stakes interactions where accidentally
+	closing the modal will not cause loss of important data or irreversible actions. See the
 	<Link external href="https://www.w3.org/WAI/ARIA/apg/patterns/dialogmodal/">
-		WAI-ARIA Authoring Practices: Modal Dialog
-	</Link>
-	for accessibility guidelines.
-</Banner>
+		accessibility guidelines
+	</Link> for more information.
+</p>
 <Playground>
 	<Modal closeOnOverlayClick>
 		{#snippet trigger({ open })}
 			<Button onclick={open}>Show modal</Button>
 		{/snippet}
 
-		{#snippet children({ close })}
-			<h2 class="mb-2 text-xl font-semibold">Subscribe to our newsletter</h2>
-			<p class="mb-4">
-				Join our mailing list to receive occasional updates. You can unsubscribe at any time.
-			</p>
+		<h2 class="text-xl font-semibold">Subscribe to our newsletter</h2>
+		<p>Join our mailing list to receive occasional updates. You can unsubscribe at any time.</p>
 
-			<div class="flex gap-2">
-				<Button onclick={close} variant="text">No thanks</Button>
-				<Button onclick={close} color="primary">Subscribe</Button>
-			</div>
+		{#snippet actions({ close })}
+			<Button onclick={close} variant="text">No thanks</Button>
+			<Button onclick={close} color="primary">Subscribe</Button>
 		{/snippet}
 	</Modal>
 </Playground>

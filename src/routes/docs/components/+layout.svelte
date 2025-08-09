@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { capitalize } from '$utils/string.js';
 	import { Separator } from '$components';
-	import { setContext } from 'svelte';
 	import { setOnThisPageContext } from '$lib/contexts/on-this-page.svelte.js';
+	import { cnBase } from 'tailwind-variants';
+	import { page } from '$app/state';
 
 	let { children, data } = $props();
 
@@ -11,33 +12,46 @@
 </script>
 
 <div class="relative flex min-h-[100vh] w-full">
-	<aside class="fixed top-16 left-0 z-50 h-full w-[300px] border-r border-grey-soft p-6">
-		<nav class="relative flex h-full flex-col gap-5">
-			<p>Components</p>
-			<Separator />
+	<aside
+		class="sticky top-16 left-0 z-50 flex h-[calc(100vh-4rem)] w-full items-start justify-end bg-zinc-50 p-6"
+	>
+		<nav class="relative flex h-full min-w-[200px] flex-col">
 			{#each treeArr as [category, names], index (index)}
-				<div class="relative flex flex-col gap-2.5">
-					<p class="font-bold">{capitalize(category)}</p>
+				<div
+					class={cnBase(
+						'relative flex flex-col pb-6 text-sm font-medium',
+						index !== 0 && 'border-t border-zinc-300 pt-2.5'
+					)}
+				>
+					<div role="heading" aria-level="2" class="pb-1 font-bold">{capitalize(category)}</div>
 					{#each names as name (name)}
-						<a href="/docs/components/{category}/{name}">{capitalize(name)}</a>
+						<a
+							href="/docs/components/{category}/{name}"
+							class={cnBase(
+								'py-1',
+								page.url.pathname.endsWith(name) ? 'text-primary' : 'text-zinc-600'
+							)}
+						>
+							{capitalize(name)}
+						</a>
 					{/each}
 				</div>
 			{/each}
 		</nav>
 	</aside>
-	<div class="relative w-full px-[300px]">
-		<div class="relative mx-auto w-full max-w-3xl">{@render children()}</div>
+	<div class="relative w-full px-32">
+		<div class="relative mx-auto w-2xl pt-12">{@render children()}</div>
 	</div>
-	<aside class="fixed top-16 right-0 z-50 h-full w-[300px] border-l border-grey-soft p-6">
-		<nav class="relative flex h-full flex-col gap-5">
-			<p>On This Page</p>
+	<aside class="sticky top-28 right-0 z-50 h-full w-full border-l border-grey-soft px-6 py-3">
+		<nav class="relative flex h-full flex-col gap-2.5 text-sm font-medium">
+			<div role="heading" aria-level="2" class="font-bold">On This Page</div>
 			{#each headings.current as { id, label, items } (id)}
-				<a href="#{id}">{label}</a>
+				<a href="#{id}" class="text-zinc-600">{label}</a>
 
 				{#if items.length > 0}
 					<div class="relative flex w-full flex-col gap-2.5 pl-5">
 						{#each items as item (item.id)}
-							<a href="#{item.id}" class="text-sm">{item.label}</a>
+							<a href="#{item.id}" class="text-zinc-600">{item.label}</a>
 						{/each}
 					</div>
 				{/if}
