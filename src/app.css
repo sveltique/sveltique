@@ -21,6 +21,8 @@
 	--color-zinc-900: oklch(21% 0.006 285.885);
 	--color-zinc-950: oklch(14.1% 0.005 285.823); */
 
+	--font-cascadia-code: 'Cascadia Code', sans-serif;
+
 	--color-white: #fff;
 	--color-black: #000;
 
@@ -37,15 +39,12 @@
 	--color-success: oklch(72.3% 0.219 149.579);
 }
 
-* {
-	scroll-behavior: smooth;
-	font-family: 'Nunito', sans-serif;
-	font-optical-sizing: auto;
-}
-
 body {
 	width: 100%;
 	height: 100vh;
+	scroll-behavior: smooth;
+	font-family: 'Nunito', sans-serif;
+	font-optical-sizing: auto;
 }
 
 input::-webkit-outer-spin-button,
