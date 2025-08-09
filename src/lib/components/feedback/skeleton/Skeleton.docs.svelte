@@ -6,6 +6,9 @@
 
 <h1>Skeleton</h1>
 <p>A placeholder component to display while the content is loading.</p>
+
+<h2>Basic Usage</h2>
+<p>Simply define the width and height of the skeleton.</p>
 <Playground {code}>
 	{@render videoLoading()}
 	{@render videoLoading()}

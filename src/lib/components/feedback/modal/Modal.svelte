@@ -57,6 +57,10 @@
 		);
 	});
 
+	$effect(() => {
+		document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+	});
+
 	const open = () => (isOpen = true);
 	const close = () => (isOpen = false);
 </script>

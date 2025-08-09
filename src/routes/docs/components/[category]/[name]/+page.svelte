@@ -15,7 +15,7 @@
 	<title>{data.name} | Components</title>
 </svelte:head>
 
-<div id="content" class="relative w-full py-6">
+<div id="content" class="relative w-full">
 	<data.Component />
 </div>
 
@@ -24,23 +24,23 @@
 
 	#content :global {
 		& > h1 {
-			@apply pb-4 text-2xl font-bold;
+			@apply w-full text-3xl font-bold;
 		}
 
 		& > h2 {
-			@apply scroll-mt-20 py-4 text-xl font-bold;
+			@apply mt-12 mb-4 scroll-mt-20 border-t border-zinc-300 pt-6 text-2xl font-bold;
 		}
 
 		& > h3 {
-			@apply scroll-mt-20 py-4 text-lg font-bold;
+			@apply mt-8 scroll-mt-20 text-xl font-bold;
 		}
 
 		& > p {
-			@apply pb-4;
+			@apply my-4;
 		}
 
 		& > ul {
-			@apply pb-4;
+			@apply my-4;
 		}
 
 		& > a {
