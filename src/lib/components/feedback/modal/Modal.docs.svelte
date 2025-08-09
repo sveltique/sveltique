@@ -97,6 +97,21 @@
 		aria-label="Opens the Github discussion in a new tab.">this discussion</Link
 	>.
 </p>
+<Playground>
+	<Modal closeOnOverlayClick>
+		{#snippet trigger(props)}
+			<Button bind:ref={props.ref} onclick={props.open}>Show modal</Button>
+		{/snippet}
+
+		<h2 class="text-xl font-semibold">Subscribe to our newsletter</h2>
+		<p>Join our mailing list to receive occasional updates. You can unsubscribe at any time.</p>
+
+		{#snippet actions({ close })}
+			<Button onclick={close} variant="text">No thanks</Button>
+			<Button onclick={close} color="primary">Subscribe</Button>
+		{/snippet}
+	</Modal>
+</Playground>
 
 <h3>Allow overlay click</h3>
 <p class="italic">
