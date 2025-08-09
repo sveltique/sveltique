@@ -23,3 +23,16 @@ async function importComponent(category: string, name: string) {
 
 	return loader();
 }
+
+export async function entries() {
+	const modules = import.meta.glob<boolean, string, Component>(
+		'../../../../../lib/components/*/*/*.docs.svelte',
+		{ import: 'default' }
+	);
+
+	return Object.keys(modules).map((path) => {
+		const [category, name] = path.split('/').slice(-3, -1);
+
+		return { category, name };
+	});
+}
