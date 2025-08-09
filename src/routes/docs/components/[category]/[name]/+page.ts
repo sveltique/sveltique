@@ -1,9 +1,9 @@
-import { capitalize, toTitleCase } from '$utils/string.js';
+import { capitalize } from '$utils/string.js';
 import type { Component } from 'svelte';
 
 export async function load({ params }) {
 	return {
-		name: toTitleCase(params.name),
+		name: capitalize(params.name),
 		Component: await importComponent(params.category, params.name)
 	};
 }
