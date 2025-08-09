@@ -25,7 +25,7 @@
 
 	const id = $props.id();
 
-	const { container, error: errorClasses } = $derived(field());
+	const { container, error: errorCss, label: labelCss } = $derived(field());
 </script>
 
 <!--
@@ -34,14 +34,14 @@ Fields allow users to enter data into a UI.
 -->
 
 <div class={cn(container(), className)}>
-	<label for={id}>{label}</label>
+	<label for={id} class={labelCss()}>{label}</label>
 	{@render input({
 		id,
 		'aria-invalid': !!error,
 		'aria-describedby': error ? `${id}-error` : undefined
 	})}
 	{#if error}
-		<p id="{id}-error" role="alert" class={errorClasses()}>
+		<p id="{id}-error" role="alert" class={errorCss()}>
 			<IconInfoCircle class="min-w-5" />
 			{error}
 		</p>
