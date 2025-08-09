@@ -38,7 +38,12 @@
 	</Modal>
 </Playground>
 
-<h2>Without <Badge>actions</Badge> snippet</h2>
+<h3>Without <Badge>actions</Badge> snippet</h3>
+<p>
+	Maybe you don't want actions at the bottom of the modal. If so, you can use the <Badge
+		>children</Badge
+	> snippet to access the close function.
+</p>
 <Playground>
 	<Modal>
 		{#snippet trigger({ open })}
@@ -78,6 +83,20 @@
 </Playground>
 
 <h2>Accessiblity</h2>
+<p>Some notes on accessibility.</p>
+
+<h3>Re-focus the trigger on exit</h3>
+<p>
+	The trigger snippet also passes a ref to get the trigger element. It is used to focus it when the
+	modal is exited.
+</p>
+<p class="italic">
+	Note : You cannot destructure the paramaters AND bind a value as per <Link
+		external
+		href="https://github.com/sveltejs/svelte/discussions/12688#discussioncomment-10215226"
+		aria-label="Opens the Github discussion in a new tab.">this discussion</Link
+	>.
+</p>
 
 <h3>Allow overlay click</h3>
 <p class="italic">
@@ -123,6 +142,30 @@
 
 		{#snippet actions({ close })}
 			<Button onclick={close} variant="text">Cancel</Button>
+			<Button onclick={close} color="danger">Log Out</Button>
+		{/snippet}
+	</Modal>
+</Playground>
+
+<h3>Autofocus</h3>
+<p>
+	You should have one element that is focused using the <Badge>autofocus</Badge> attribute.
+</p>
+<Playground>
+	<Modal>
+		{#snippet trigger({ open })}
+			<Button onclick={open}>Show modal</Button>
+		{/snippet}
+
+		{#snippet children({ labelProps, descriptionProps })}
+			<h1 class="text-2xl font-bold" {...labelProps}>Log out</h1>
+			<p {...descriptionProps}>
+				Are you sure you want to log out? You'll need to sign in again to continue.
+			</p>
+		{/snippet}
+
+		{#snippet actions({ close })}
+			<Button onclick={close} variant="text" autofocus>Cancel</Button>
 			<Button onclick={close} color="danger">Log Out</Button>
 		{/snippet}
 	</Modal>

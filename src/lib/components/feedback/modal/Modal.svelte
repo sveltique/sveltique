@@ -20,7 +20,7 @@
 	interface Props extends Omit<WithTWMergeClass<HTMLAttributes<HTMLElement>>, 'children'> {
 		actions?: Snippet<[{ close: VoidFunction }]>;
 		children: ChildrenSnippet;
-		trigger: Snippet<[{ open: VoidFunction }]>;
+		trigger: Snippet<[{ ref?: HTMLElement; open: VoidFunction }]>;
 		/**
 		 * Whether to close the modal if the overlay is clicked.
 		 *
@@ -41,7 +41,9 @@
 
 	const uid = $props.id();
 
+	let triggerRef = $state<HTMLElement>();
 	let isOpen = $state(false);
+
 	const { actions: actionsCss, dialog, overlay } = $derived(modal());
 
 	onMount(() => {
@@ -52,10 +54,13 @@
 				if (event.key !== 'Escape') return;
 
 				isOpen = false;
+				triggerRef?.focus();
 			},
 			{ passive: true }
 		);
 	});
+
+	$inspect(triggerRef);
 
 	$effect(() => {
 		document.body.style.overflow = isOpen ? 'hidden' : 'auto';
@@ -70,7 +75,7 @@
 A dialog component that interrupts the user flow to capture attention. Displays content in a centered overlay with a dimmed backdrop.
 -->
 
-{@render trigger({ open })}
+{@render trigger({ ref: triggerRef, open })}
 
 {#if isOpen}
 	<div
@@ -82,7 +87,7 @@ A dialog component that interrupts the user flow to capture attention. Displays 
 	<div
 		transition:flyAndScale={{ duration: 150 }}
 		id={uid}
-		role="dialog"
+		role="alertdialog"
 		aria-modal="true"
 		aria-labelledby="{uid}-label"
 		aria-describedby="{uid}-description"

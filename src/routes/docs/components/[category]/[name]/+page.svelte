@@ -28,7 +28,7 @@
 		}
 
 		& > h2 {
-			@apply mt-12 mb-4 scroll-mt-20 border-t border-zinc-300 pt-6 text-2xl font-bold;
+			@apply mt-12 mb-4 scroll-mt-[calc(4rem-2px)] border-t border-zinc-300 pt-6 text-2xl font-bold;
 		}
 
 		& > h3 {
