@@ -31,8 +31,7 @@
 
 <h3>Showing Line Numbers</h3>
 <p>
-	For easier reference, you can show line numbers by adding the
-	<Badge>showLineNumbers</Badge> attribute.
+	You can show line numbers with the <Badge>showLineNumbers</Badge> attribute.
 </p>
 <Playground>
 	<Codeblock
