@@ -7,14 +7,42 @@
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { WithTWMergeClass } from '$lib/types.js';
 
-	interface Props extends WithTWMergeClass<HTMLAttributes<HTMLElement>> {
-		actions?: Snippet;
-		onClose: () => void;
+	type ChildrenSnippet = Snippet<
+		[
+			{
+				close: VoidFunction;
+				labelProps: { id: string };
+				descriptionProps: { id: string };
+			}
+		]
+	>;
+
+	interface Props extends Omit<WithTWMergeClass<HTMLAttributes<HTMLElement>>, 'children'> {
+		actions?: Snippet<[{ close: VoidFunction }]>;
+		children: ChildrenSnippet;
+		trigger: Snippet<[{ open: VoidFunction }]>;
+		/**
+		 * Whether to close the modal if the overlay is clicked.
+		 *
+		 * This should only be enabled for low-stake modals.
+		 * @default false
+		 */
+		closeOnOverlayClick?: boolean;
 	}
 
-	let { actions, children, class: className = undefined, onClose, ...restProps }: Props = $props();
+	let {
+		actions,
+		children,
+		trigger,
+		class: className = undefined,
+		closeOnOverlayClick = false,
+		...restProps
+	}: Props = $props();
 
-	const { actions: actionsCss, background, dialog } = $derived(modal());
+	const uid = $props.id();
+
+	let isOpen = $state(false);
+	const { actions: actionsCss, dialog, overlay } = $derived(modal());
 
 	onMount(() => {
 		return on(
@@ -23,11 +51,14 @@
 			(event) => {
 				if (event.key !== 'Escape') return;
 
-				onClose();
+				isOpen = false;
 			},
 			{ passive: true }
 		);
 	});
+
+	const open = () => (isOpen = true);
+	const close = () => (isOpen = false);
 </script>
 
 <!--
@@ -35,21 +66,35 @@
 A dialog component that interrupts the user flow to capture attention. Displays content in a centered overlay with a dimmed backdrop.
 -->
 
-<!-- svelte-ignore a11y_click_events_have_key_events -->
-<!-- svelte-ignore a11y_no_static_element_interactions -->
-<div onclick={onClose} transition:fade={{ duration: 150 }} class={background()}></div>
-<div
-	transition:flyAndScale={{ duration: 150 }}
-	role="dialog"
-	aria-modal="true"
-	class={dialog({ className })}
-	{...restProps}
->
-	{@render children?.()}
+{@render trigger({ open })}
 
-	{#if actions}
-		<div class={actionsCss()}>
-			{@render actions()}
-		</div>
-	{/if}
-</div>
+{#if isOpen}
+	<div
+		transition:fade={{ duration: 150 }}
+		onclick={() => closeOnOverlayClick && close()}
+		aria-hidden={true}
+		class={overlay()}
+	></div>
+	<div
+		transition:flyAndScale={{ duration: 150 }}
+		id={uid}
+		role="dialog"
+		aria-modal="true"
+		aria-labelledby="{uid}-label"
+		aria-describedby="{uid}-description"
+		class={dialog({ className })}
+		{...restProps}
+	>
+		{@render children?.({
+			close,
+			labelProps: { id: `${uid}-label` },
+			descriptionProps: { id: `${uid}-description` }
+		})}
+
+		{#if actions}
+			<div class={actionsCss()}>
+				{@render actions({ close })}
+			</div>
+		{/if}
+	</div>
+{/if}
