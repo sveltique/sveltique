@@ -99,8 +99,8 @@
 </p>
 <Playground>
 	<Modal closeOnOverlayClick>
-		{#snippet trigger(props)}
-			<Button bind:ref={props.ref} onclick={props.open}>Show modal</Button>
+		{#snippet trigger({ open })}
+			<Button onclick={open}>Show modal</Button>
 		{/snippet}
 
 		<h2 class="text-xl font-semibold">Subscribe to our newsletter</h2>
