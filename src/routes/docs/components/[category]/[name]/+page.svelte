@@ -1,22 +1,13 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { slugify } from '$utils/string.js';
-	import { getContext } from 'svelte';
+	import { getOnThisPageContext } from '$lib/contexts/on-this-page.svelte.js';
 
 	let { data } = $props();
 
-	const v = getContext<{ headings: HTMLHeadingElement[] }>('headings');
+	const headings = getOnThisPageContext();
 
 	$effect(() => {
-		page.url.pathname;
-
-		const arr = Array.from(document.getElementsByTagName('h2'));
-
-		for (const el of arr) {
-			el.id = slugify(el.textContent!);
-		}
-
-		v.headings = Array.from(document.getElementsByTagName('h2'));
+		page.url.pathname && headings.getFromDOM();
 	});
 </script>
 
@@ -37,7 +28,11 @@
 		}
 
 		& > h2 {
-			@apply py-4 text-xl font-bold;
+			@apply scroll-mt-20 py-4 text-xl font-bold;
+		}
+
+		& > h3 {
+			@apply scroll-mt-20 py-4 text-lg font-bold;
 		}
 
 		& > p {

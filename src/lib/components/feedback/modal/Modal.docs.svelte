@@ -1,9 +1,16 @@
 <script lang="ts">
-	import Playground from '$docs/Playground.svelte';
-	import Button from '$lib/components/inputs/button/Button.svelte';
+	import { code } from './content.js';
 	import Modal from './Modal.svelte';
 
-	let open = $state(false);
+	import Playground from '$docs/Playground.svelte';
+	import Badge from '$lib/components/data-display/badge/Badge.svelte';
+	import Button from '$lib/components/inputs/button/Button.svelte';
+	import Link from '$lib/components/navigation/link/Link.svelte';
+
+	import IconX from '@tabler/icons-svelte/icons/x';
+	import IconEdit from '@tabler/icons-svelte/icons/edit';
+	import IconTrash from '@tabler/icons-svelte/icons/trash';
+	import Banner from '../banner/Banner.svelte';
 </script>
 
 <h1>Modal</h1>
@@ -12,18 +19,115 @@
 	centered overlay with a dimmed backdrop.
 </p>
 <h2>Basic Usage</h2>
+<Playground {code}>
+	<Modal>
+		{#snippet trigger({ open })}
+			<Button onclick={open}>Show modal</Button>
+		{/snippet}
+
+		<h1 class="text-2xl font-bold">Log out</h1>
+		<p>Are you sure you want to log out? You'll need to sign in again to continue.</p>
+
+		{#snippet actions({ close })}
+			<Button onclick={close} variant="text">Cancel</Button>
+			<Button onclick={close} color="danger">Log Out</Button>
+		{/snippet}
+	</Modal>
+</Playground>
+
+<h2>Without <Badge>actions</Badge> snippet</h2>
 <Playground>
-	<Button onclick={() => (open = true)}>Show modal</Button>
+	<Modal>
+		{#snippet trigger({ open })}
+			<Button onclick={open}>Show modal</Button>
+		{/snippet}
 
-	{#if open}
-		<Modal onClose={() => (open = false)}>
-			<h1 class="text-2xl font-bold">Log out</h1>
-			<p>Are you sure you want to log out? You'll need to sign in again to continue.</p>
+		{#snippet children({ close })}
+			<div class="flex items-center justify-between">
+				<Button onclick={close} variant="text" shape="square" title="Close">
+					<IconX class="h-5 w-5" />
+				</Button>
 
-			{#snippet actions()}
-				<Button onclick={() => (open = false)} variant="text">Cancel</Button>
-				<Button onclick={() => (open = false)} color="danger">Log Out</Button>
-			{/snippet}
-		</Modal>
-	{/if}
+				<div class="flex items-center gap-3">
+					<Button onclick={() => alert('Edit action')} shape="square" title="Edit">
+						<IconEdit class="h-5 w-5" />
+					</Button>
+					<Button
+						onclick={() => confirm('Delete this project?')}
+						shape="square"
+						color="danger"
+						title="Delete"
+					>
+						<IconTrash class="h-5 w-5" />
+					</Button>
+				</div>
+			</div>
+
+			<div class="flex flex-col items-start gap-3">
+				<h2 class="text-xl font-bold">Project Alpha</h2>
+				<p class="text-gray-600">
+					This is an example project. You can edit details, view members, or delete it entirely
+					using the actions in the top-right corner.
+				</p>
+			</div>
+		{/snippet}
+	</Modal>
+</Playground>
+
+<h2>Accessiblity</h2>
+
+<h3>Allow overlay click</h3>
+<Banner type="info" class="mb-4">
+	<strong>Accessibility tip:</strong>
+	<code>closeOnOverlayClick</code> should only be enabled for low-stakes interactions where
+	accidentally closing the modal will not cause loss of important data or irreversible actions. See
+	the
+	<Link external href="https://www.w3.org/WAI/ARIA/apg/patterns/dialogmodal/">
+		WAI-ARIA Authoring Practices: Modal Dialog
+	</Link>
+	for accessibility guidelines.
+</Banner>
+<Playground>
+	<Modal closeOnOverlayClick>
+		{#snippet trigger({ open })}
+			<Button onclick={open}>Show modal</Button>
+		{/snippet}
+
+		{#snippet children({ close })}
+			<h2 class="mb-2 text-xl font-semibold">Subscribe to our newsletter</h2>
+			<p class="mb-4">
+				Join our mailing list to receive occasional updates. You can unsubscribe at any time.
+			</p>
+
+			<div class="flex gap-2">
+				<Button onclick={close} variant="text">No thanks</Button>
+				<Button onclick={close} color="primary">Subscribe</Button>
+			</div>
+		{/snippet}
+	</Modal>
+</Playground>
+
+<h3>Passing aria</h3>
+<p>
+	As per aria, you should link a modal label and description. The <Badge>children</Badge> snippet also
+	contains spreadable label and description props that you can use.
+</p>
+<Playground>
+	<Modal>
+		{#snippet trigger({ open })}
+			<Button onclick={open}>Show modal</Button>
+		{/snippet}
+
+		{#snippet children({ labelProps, descriptionProps })}
+			<h1 class="text-2xl font-bold" {...labelProps}>Log out</h1>
+			<p {...descriptionProps}>
+				Are you sure you want to log out? You'll need to sign in again to continue.
+			</p>
+		{/snippet}
+
+		{#snippet actions({ close })}
+			<Button onclick={close} variant="text">Cancel</Button>
+			<Button onclick={close} color="danger">Log Out</Button>
+		{/snippet}
+	</Modal>
 </Playground>
