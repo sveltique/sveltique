@@ -7,7 +7,7 @@ export async function load() {
 }
 
 async function getTree() {
-	const modules = import.meta.glob('../../../lib/components/*/*/*.docs.svelte');
+	const modules = import.meta.glob('../../../docs/*/*/*.docs.svelte');
 
 	return Object.keys(modules).reduce((acc, curr) => {
 		const [category, name] = curr.split('/').slice(-3, -1);
