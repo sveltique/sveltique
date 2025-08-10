@@ -28,7 +28,7 @@
 							href="/docs/components/{category}/{name}"
 							class={cnBase(
 								'py-1',
-								page.url.pathname.endsWith(name) ? 'text-primary' : 'text-zinc-600'
+								page.url.pathname.endsWith(name) ? 'text-blue-700' : 'text-zinc-600'
 							)}
 						>
 							{capitalize(name)}
@@ -49,7 +49,7 @@
 			</svelte:boundary>
 		</div>
 	</div>
-	<aside class="border-grey-soft sticky right-0 top-28 z-50 h-full w-full border-l px-6 py-3">
+	<aside class="sticky right-0 top-28 z-50 h-full w-full border-l border-zinc-300 px-6 py-3">
 		<nav class="relative flex h-full flex-col gap-2.5 text-sm font-medium">
 			<div role="heading" aria-level="2" class="font-bold">On This Page</div>
 			{#each headings.current as { id, label, items } (id)}

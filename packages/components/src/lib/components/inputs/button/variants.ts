@@ -2,7 +2,7 @@ import { tv, type VariantProps } from 'tailwind-variants';
 
 /** The styles of a button. */
 export const button = tv({
-	base: 'relative duration-150 ease-in-out text-center flex items-center gap-5 cursor-pointer [&_*]:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
+	base: 'relative duration-150 ease-in-out text-center flex items-center gap-5 cursor-pointer [&_*]:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700',
 	variants: {
 		variant: {
 			contained: '',
@@ -67,19 +67,19 @@ export const button = tv({
 			variant: 'contained',
 			color: 'primary',
 			class:
-				'bg-primary text-white not-disabled:hover:bg-primary/90 dark:bg-blue-400 dark:text-zinc-800 not-disabled:dark:hover:bg-blue-500'
+				'bg-blue-700 text-white not-disabled:hover:bg-blue-700/90 dark:bg-blue-400 dark:text-zinc-800 not-disabled:dark:hover:bg-blue-500'
 		},
 		{
 			variant: 'outline',
 			color: 'primary',
 			class:
-				'bg-transparent text-black not-disabled:hover:bg-grey-hover dark:text-white not-disabled:dark:hover:bg-grey-hover-dark border-grey-soft dark:border-grey-soft-dark'
+				'bg-transparent text-black not-disabled:hover:bg-zinc-100 dark:text-white not-disabled:dark:hover:bg-zinc-700 border-zinc-300 dark:border-zinc-300-dark'
 		},
 		{
 			variant: 'text',
 			color: 'primary',
 			class:
-				'bg-transparent text-black not-disabled:hover:bg-grey-hover dark:text-white not-disabled:dark:hover:bg-grey-hover-dark'
+				'bg-transparent text-black not-disabled:hover:bg-zinc-100 dark:text-white not-disabled:dark:hover:bg-zinc-700'
 		},
 		{
 			variant: 'contained',

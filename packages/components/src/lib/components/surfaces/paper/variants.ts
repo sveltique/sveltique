@@ -5,7 +5,7 @@ export const paper = tv({
 	variants: {
 		variant: {
 			shadow: '',
-			outline: 'border border-grey-soft dark:border-none dark:bg-zinc-800'
+			outline: 'border border-zinc-300 dark:border-none dark:bg-zinc-800'
 		},
 		elevation: {
 			0: 'shadow-none',

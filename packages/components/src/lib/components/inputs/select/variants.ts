@@ -14,7 +14,7 @@ export const select = tv({
 		listBox: paper({
 			elevation: 4,
 			class:
-				'absolute top-full z-10 left-0 hidden w-full flex-col divide-y divide-grey-soft overflow-hidden'
+				'absolute top-full z-10 left-0 hidden w-full flex-col divide-y divide-zinc-300 overflow-hidden'
 		})
 	},
 	variants: {
@@ -36,7 +36,7 @@ export const option = tv({
 	variants: {
 		selected: {
 			true: {
-				container: 'bg-primary text-white'
+				container: 'bg-blue-700 text-white'
 			}
 		},
 		disabled: {
@@ -44,7 +44,7 @@ export const option = tv({
 				container: 'italic cursor-not-allowed'
 			},
 			false: {
-				container: 'hover:bg-grey-hover'
+				container: 'hover:bg-zinc-100'
 			}
 		}
 	},
@@ -53,7 +53,7 @@ export const option = tv({
 			selected: true,
 			disabled: false,
 			class: {
-				container: 'hover:bg-primary'
+				container: 'hover:bg-blue-700'
 			}
 		}
 	]
