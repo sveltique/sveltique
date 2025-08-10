@@ -1,4 +1,4 @@
-import { tv } from 'tailwind-variants';
+import { tv, type VariantProps } from 'tailwind-variants';
 
 export const codeBlock = tv({
 	slots: {
@@ -15,3 +15,5 @@ export const codeBlock = tv({
 		}
 	}
 });
+
+export type CodeBlockVariants = VariantProps<typeof codeBlock>;

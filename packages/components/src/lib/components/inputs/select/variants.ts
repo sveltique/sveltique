@@ -1,5 +1,5 @@
 import { paper } from '$lib/components/surfaces/paper/variants.js';
-import { tv } from 'tailwind-variants';
+import { tv, type VariantProps } from 'tailwind-variants';
 
 export const select = tv({
 	slots: {
@@ -26,6 +26,8 @@ export const select = tv({
 		}
 	}
 });
+
+export type SelectVariants = VariantProps<typeof select>;
 
 export const option = tv({
 	slots: {
@@ -56,3 +58,5 @@ export const option = tv({
 		}
 	]
 });
+
+export type OptionVariants = VariantProps<typeof option>;

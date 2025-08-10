@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { cn } from '$utils/cn.js';
 	import { field } from './variants.js';
 	import IconInfoCircle from '@tabler/icons-svelte/icons/info-circle';
 	import type { Snippet } from 'svelte';
@@ -33,7 +32,7 @@
 Fields allow users to enter data into a UI.
 -->
 
-<div class={cn(container(), className)}>
+<div class={container({ className })}>
 	<label for={id} class={labelCss()}>{label}</label>
 	{@render input({
 		id,
