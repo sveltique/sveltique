@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { capitalize } from '$utils/string.js';
-	import { Separator } from '$components';
 	import { setOnThisPageContext } from '$lib/contexts/on-this-page.svelte.js';
 	import { cnBase } from 'tailwind-variants';
 	import { page } from '$app/state';
@@ -13,7 +12,7 @@
 
 <div class="relative flex min-h-[100vh] w-full">
 	<aside
-		class="sticky top-16 left-0 z-50 flex h-[calc(100vh-4rem)] w-full items-start justify-end bg-zinc-50 p-6"
+		class="sticky left-0 top-16 z-50 flex h-[calc(100vh-4rem)] w-full items-start justify-end bg-zinc-50 p-6"
 	>
 		<nav class="relative flex h-full min-w-[200px] flex-col">
 			{#each treeArr as [category, names], index (index)}
@@ -40,7 +39,7 @@
 		</nav>
 	</aside>
 	<div class="relative w-full px-32">
-		<div class="relative mx-auto w-2xl pt-12">
+		<div class="w-2xl relative mx-auto pt-12">
 			<svelte:boundary>
 				{@render children()}
 
@@ -50,7 +49,7 @@
 			</svelte:boundary>
 		</div>
 	</div>
-	<aside class="sticky top-28 right-0 z-50 h-full w-full border-l border-grey-soft px-6 py-3">
+	<aside class="border-grey-soft sticky right-0 top-28 z-50 h-full w-full border-l px-6 py-3">
 		<nav class="relative flex h-full flex-col gap-2.5 text-sm font-medium">
 			<div role="heading" aria-level="2" class="font-bold">On This Page</div>
 			{#each headings.current as { id, label, items } (id)}

@@ -10,10 +10,10 @@ export async function load({ params }) {
 
 async function importComponent(category: string, name: string) {
 	const modules = import.meta.glob<boolean, string, Component>(
-		'../../../../../lib/components/*/*/*.docs.svelte',
+		'../../../../../docs/*/*/*.docs.svelte',
 		{ import: 'default' }
 	);
-	const path = `../../../../../lib/components/${category}/${name}/${capitalize(name).replaceAll(' ', '')}.docs.svelte`;
+	const path = `../../../../../docs/${category}/${name}/${capitalize(name).replaceAll(' ', '')}.docs.svelte`;
 
 	const loader = modules[path];
 
@@ -26,7 +26,7 @@ async function importComponent(category: string, name: string) {
 
 export async function entries() {
 	const modules = import.meta.glob<boolean, string, Component>(
-		'../../../../../lib/components/*/*/*.docs.svelte',
+		'../../../../../docs/*/*/*.docs.svelte',
 		{ import: 'default' }
 	);
 

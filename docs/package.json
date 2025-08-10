@@ -27,6 +27,8 @@
     "dependencies": {
         "@novaotp/components": "file:../packages/components",
         "@tabler/icons-svelte": "^3.34.1",
-        "shiki": "^3.9.2"
+        "shiki": "^3.9.2",
+        "tailwind-merge": "^3.3.1",
+        "tailwind-variants": "^2.1.0"
     }
 }

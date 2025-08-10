@@ -2,11 +2,10 @@
 	import { apply } from '$utils/apply.js';
 	import { replaceEntities } from '$utils/html.js';
 	import { style } from '$utils/shiki.js';
-	import Separator from '$lib/components/data-display/separator/Separator.svelte';
-	import Paper from '$lib/components/surfaces/paper/Paper.svelte';
 	import type { Snippet } from 'svelte';
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { cn } from '$utils/cn.js';
+	import { Paper, Separator } from '@novaotp/components';
 
 	type Code = {
 		short: string;
