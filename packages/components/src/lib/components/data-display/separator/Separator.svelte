@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { cn } from '$utils/cn.js';
 	import { separator, type SeparatorVariants } from './variants.js';
 	import type { ClassNameValue } from 'tailwind-merge';
 

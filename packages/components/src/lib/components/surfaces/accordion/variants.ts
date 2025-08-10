@@ -1,4 +1,4 @@
-import { tv } from 'tailwind-variants';
+import { tv, type VariantProps } from 'tailwind-variants';
 
 export const accordion = tv({
 	slots: {
@@ -26,3 +26,5 @@ export const accordionItem = tv({
 		}
 	}
 });
+
+export type AccordionItemVariants = VariantProps<typeof accordionItem>;

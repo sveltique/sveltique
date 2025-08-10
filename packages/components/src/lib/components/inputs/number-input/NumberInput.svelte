@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { isNumber } from '$utils/is-number.js';
 	import { numberInput } from './variants.js';
 	import IconMinus from '@tabler/icons-svelte/icons/minus';
 	import IconPlus from '@tabler/icons-svelte/icons/plus';
@@ -52,6 +51,10 @@
 		} else {
 			value = newValue;
 		}
+	}
+
+	function isNumber(value: unknown) {
+		return value !== null && value !== '' && !isNaN(Number(String(value)));
 	}
 </script>
 
