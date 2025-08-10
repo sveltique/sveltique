@@ -1,9 +1,9 @@
-<script>
-	import Playground from '$docs/Playground.svelte';
-	import Banner from '$lib/components/feedback/banner/Banner.svelte';
+<script lang="ts">
 	import { replaceEntities } from '$utils/html.js';
-	import Badge from '../badge/Badge.svelte';
 	import Codeblock from './CodeBlock.svelte';
+	import Badge from '../badge/Badge.svelte';
+	import Playground from '$docs/Playground.svelte';
+	import { codeToHtml } from 'shiki';
 </script>
 
 <h1>Code Block</h1>
@@ -12,6 +12,14 @@
 	need clear, readable code examples.
 </p>
 
+{@html await codeToHtml(
+	`<div class="card">;
+    <h2>Hello, world!</h2>;
+    <p>This is a simple HTML example.</p>
+</div>`,
+	{ lang: 'svelte', theme: 'catppuccin-latte' }
+)}
+
 <h2>Basic Usage</h2>
 <p>
 	Wrap your code in a <code>&lt;Codeblock&gt;</code> component, set the language and the theme, and you're
@@ -19,10 +27,10 @@
 </p>
 <Playground>
 	<Codeblock
-		code={`<div class="card">
-    <h2>Hello, world!</h2>
-    <p>This is a simple HTML example.</p>
-</div>`}
+		code={`&lt;div class="card"&gt;
+    &lt;h2&gt;Hello, world!&lt;/h2&gt;
+    &lt;p&gt;This is a simple HTML example.&lt;/p&gt;
+&lt;/div&gt;`}
 		lang="html"
 		theme="catppuccin-latte"
 		class="**:font-cascadia-code"
@@ -45,6 +53,29 @@
 		lang="svelte"
 		theme="catppuccin-latte"
 		showLineNumbers
+		class="**:font-cascadia-code"
+	/>
+</Playground>
+
+<h3>Highlighting lines</h3>
+<p>
+	You can highlight certain lines by passing a list of number (starting from one) using the <Badge
+		>highlightedLines</Badge
+	> attribute.
+</p>
+<Playground>
+	<Codeblock
+		code={replaceEntities(`&lt;script&gt;
+    let a = $state(5);
+    let b = $state(7);
+    let sum = $derived(a + b);
+&lt;/script&gt;
+
+<p>{a} + {b} = {sum}</p>`)}
+		lang="svelte"
+		theme="catppuccin-latte"
+		showLineNumbers
+		highlightedLines={[4]}
 		class="**:font-cascadia-code"
 	/>
 </Playground>

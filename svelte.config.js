@@ -11,6 +11,11 @@ const config = {
 			$docs: './src/lib/docs',
 			$utils: './src/lib/utils'
 		}
+	},
+	compilerOptions: {
+		experimental: {
+			async: true
+		}
 	}
 };
 

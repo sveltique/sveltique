@@ -40,7 +40,15 @@
 		</nav>
 	</aside>
 	<div class="relative w-full px-32">
-		<div class="relative mx-auto w-2xl pt-12">{@render children()}</div>
+		<div class="relative mx-auto w-2xl pt-12">
+			<svelte:boundary>
+				{@render children()}
+
+				{#snippet pending()}
+					<p>loading...</p>
+				{/snippet}
+			</svelte:boundary>
+		</div>
 	</div>
 	<aside class="sticky top-28 right-0 z-50 h-full w-full border-l border-grey-soft px-6 py-3">
 		<nav class="relative flex h-full flex-col gap-2.5 text-sm font-medium">
