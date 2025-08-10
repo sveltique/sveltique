@@ -1,6 +1,6 @@
 <script>
-	import Playground from '$docs/Playground.svelte';
-	import Banner from './Banner.svelte';
+	import Playground from '$components/Playground.svelte';
+	import { Banner } from '@novaotp/components';
 </script>
 
 <h1>Banner</h1>

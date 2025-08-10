@@ -1,7 +1,6 @@
 <script lang="ts">
-	import Playground from '$docs/Playground.svelte';
-	import Paper from '$lib/components/surfaces/paper/Paper.svelte';
-	import Separator from './Separator.svelte';
+	import Playground from '$components/Playground.svelte';
+	import { Paper, Separator } from '@novaotp/components';
 
 	import IconPlayerPauseFilled from '@tabler/icons-svelte/icons/player-pause-filled';
 	import IconPlayerSkipBackFilled from '@tabler/icons-svelte/icons/player-skip-back-filled';
@@ -92,7 +91,7 @@
 			/>
 		</div>
 	</Paper>
-	<p class="text-sm text-zinc-500 italic">
+	<p class="text-sm italic text-zinc-500">
 		Image from <a
 			href="https://www.last.fm/music/Shawn+Mendes/Lost+in+Japan/+images"
 			target="_blank">last.fm</a

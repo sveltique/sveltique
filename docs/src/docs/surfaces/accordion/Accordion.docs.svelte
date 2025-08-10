@@ -1,8 +1,6 @@
 <script>
-	import Playground from '$docs/Playground.svelte';
-	import Badge from '$lib/components/data-display/badge/Badge.svelte';
-	import Accordion from './Accordion.svelte';
-	import AccordionItem from './AccordionItem.svelte';
+	import Playground from '$components/Playground.svelte';
+	import { Accordion, Badge } from '@novaotp/components';
 	import IconArrowDown from '@tabler/icons-svelte/icons/arrow-down';
 	import IconCaretDownFilled from '@tabler/icons-svelte/icons/caret-down-filled';
 </script>
@@ -14,8 +12,8 @@
 	An accordion is made of two items, a container {'<Accordion />'} and one or many items {'<AccordionItem />'}.
 </p>
 <Playground>
-	<Accordion class="max-w-md">
-		<AccordionItem>
+	<Accordion.Root class="max-w-md">
+		<Accordion.Item>
 			{#snippet summary()}
 				What is this feature for?
 			{/snippet}
@@ -24,9 +22,9 @@
 				This feature helps you organize and access your content more easily by grouping it into
 				collapsible sections.
 			</p>
-		</AccordionItem>
+		</Accordion.Item>
 
-		<AccordionItem>
+		<Accordion.Item>
 			{#snippet summary()}
 				Can I customize how it looks?
 			{/snippet}
@@ -34,23 +32,23 @@
 			<p>
 				Yes! You can change colors, spacing, icons, and animations to match your design preferences.
 			</p>
-		</AccordionItem>
+		</Accordion.Item>
 
-		<AccordionItem>
+		<Accordion.Item>
 			{#snippet summary()}
 				Will this work on mobile devices?
 			{/snippet}
 
 			<p>Absolutely. The accordion is fully responsive and works smoothly on all screen sizes.</p>
-		</AccordionItem>
-	</Accordion>
+		</Accordion.Item>
+	</Accordion.Root>
 </Playground>
 
 <h2>Icon</h2>
 <p>You can customize the expand icon by passing an <Badge>Icon</Badge> property.</p>
 <Playground>
-	<Accordion>
-		<AccordionItem Icon={IconArrowDown}>
+	<Accordion.Root>
+		<Accordion.Item Icon={IconArrowDown}>
 			{#snippet summary()}
 				What is this feature for?
 			{/snippet}
@@ -59,14 +57,14 @@
 				This feature helps you organize and access your content more easily by grouping it into
 				collapsible sections.
 			</p>
-		</AccordionItem>
+		</Accordion.Item>
 
-		<AccordionItem Icon={IconCaretDownFilled}>
+		<Accordion.Item Icon={IconCaretDownFilled}>
 			{#snippet summary()}
 				Will this work on mobile devices?
 			{/snippet}
 
 			<p>Absolutely. The accordion is fully responsive and works smoothly on all screen sizes.</p>
-		</AccordionItem>
-	</Accordion>
+		</Accordion.Item>
+	</Accordion.Root>
 </Playground>

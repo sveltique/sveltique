@@ -1,8 +1,7 @@
 <script lang="ts">
-	import Playground from '$docs/Playground.svelte';
-	import Badge from '$lib/components/data-display/badge/Badge.svelte';
+	import Playground from '$components/Playground.svelte';
+	import { Badge, Link } from '@novaotp/components';
 	import { basicUsageCode } from './content.js';
-	import Link from './Link.svelte';
 </script>
 
 <h1>Link</h1>

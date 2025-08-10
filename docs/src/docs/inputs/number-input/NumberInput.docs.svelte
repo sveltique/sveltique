@@ -1,7 +1,6 @@
 <script lang="ts">
-	import NumberInput from './NumberInput.svelte';
-	import Playground from '$docs/Playground.svelte';
-	import Badge from '$lib/components/data-display/badge/Badge.svelte';
+	import Playground from '$components/Playground.svelte';
+	import { Badge, NumberInput } from '@novaotp/components';
 
 	const code = {
 		short: `<NumberInput
