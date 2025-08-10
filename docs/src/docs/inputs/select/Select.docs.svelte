@@ -1,6 +1,5 @@
 <script lang="ts">
-	import Paper from '$lib/components/surfaces/paper/Paper.svelte';
-	import * as Select from './index.js';
+	import { Paper, Select } from '@novaotp/components';
 
 	const fruits = ['apple', 'banana', 'mango', 'kiwi'];
 </script>

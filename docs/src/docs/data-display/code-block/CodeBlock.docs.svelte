@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { replaceEntities } from '$utils/html.js';
-	import Codeblock from './CodeBlock.svelte';
-	import Badge from '../badge/Badge.svelte';
-	import Playground from '$docs/Playground.svelte';
+	import { Badge, CodeBlock } from '@novaotp/components';
+	import Playground from '$components/Playground.svelte';
 	import { codeToHtml } from 'shiki';
 </script>
 
@@ -22,11 +21,11 @@
 
 <h2>Basic Usage</h2>
 <p>
-	Wrap your code in a <code>&lt;Codeblock&gt;</code> component, set the language and the theme, and you're
+	Wrap your code in a <code>&lt;CodeBlock&gt;</code> component, set the language and the theme, and you're
 	done.
 </p>
 <Playground>
-	<Codeblock
+	<CodeBlock
 		code={`&lt;div class="card"&gt;
     &lt;h2&gt;Hello, world!&lt;/h2&gt;
     &lt;p&gt;This is a simple HTML example.&lt;/p&gt;
@@ -42,7 +41,7 @@
 	You can show line numbers with the <Badge>showLineNumbers</Badge> attribute.
 </p>
 <Playground>
-	<Codeblock
+	<CodeBlock
 		code={replaceEntities(`&lt;script&gt;
     let a = $state(5);
     let b = $state(7);
@@ -64,7 +63,7 @@
 	> attribute.
 </p>
 <Playground>
-	<Codeblock
+	<CodeBlock
 		code={replaceEntities(`&lt;script&gt;
     let a = $state(5);
     let b = $state(7);

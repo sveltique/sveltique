@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { code } from './content.js';
-	import Skeleton from './Skeleton.svelte';
-	import Playground from '$docs/Playground.svelte';
+	import Playground from '$components/Playground.svelte';
+	import { Skeleton } from '@novaotp/components';
 </script>
 
 <h1>Skeleton</h1>
@@ -15,7 +15,7 @@
 </Playground>
 
 {#snippet videoLoading()}
-	<div class="relative flex w-full max-w-3xs flex-col items-start gap-2.5">
+	<div class="max-w-3xs relative flex w-full flex-col items-start gap-2.5">
 		<Skeleton class="h-32 w-full" />
 		<Skeleton class="h-4 w-full" />
 		<Skeleton class="h-4 w-1/2" />

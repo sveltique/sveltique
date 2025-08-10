@@ -1,16 +1,11 @@
 <script lang="ts">
 	import { code } from './content.js';
-	import Modal from './Modal.svelte';
-
-	import Playground from '$docs/Playground.svelte';
-	import Badge from '$lib/components/data-display/badge/Badge.svelte';
-	import Button from '$lib/components/inputs/button/Button.svelte';
-	import Link from '$lib/components/navigation/link/Link.svelte';
+	import Playground from '$components/Playground.svelte';
 
 	import IconX from '@tabler/icons-svelte/icons/x';
 	import IconEdit from '@tabler/icons-svelte/icons/edit';
 	import IconTrash from '@tabler/icons-svelte/icons/trash';
-	import Banner from '../banner/Banner.svelte';
+	import { Badge, Button, Link, Modal } from '@novaotp/components';
 </script>
 
 <h1>Modal</h1>

@@ -1,8 +1,7 @@
 <script>
-	import Button from './Button.svelte';
-	import Playground from '$docs/Playground.svelte';
+	import Playground from '$components/Playground.svelte';
+	import { Badge, Button } from '@novaotp/components';
 	import IconPlus from '@tabler/icons-svelte/icons/plus';
-	import Badge from '$lib/components/data-display/badge/Badge.svelte';
 </script>
 
 <h1>Button</h1>

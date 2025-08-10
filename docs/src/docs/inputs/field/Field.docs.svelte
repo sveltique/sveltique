@@ -1,11 +1,8 @@
 <script lang="ts">
-	import Playground from '$docs/Playground.svelte';
+	import Playground from '$components/Playground.svelte';
 	import { toTitleCase } from '$utils/string.js';
-	import { Select } from '../index.js';
-	import NumberInput from '../number-input/NumberInput.svelte';
-	import TextInput from '../text-input/TextInput.svelte';
+	import { Field, TextInput, NumberInput, Select } from '@novaotp/components';
 	import { ageCode } from './content.js';
-	import Field from './Field.svelte';
 
 	type Input = 'text' | 'number' | 'select';
 
@@ -50,7 +47,7 @@
 </Playground>
 <h2>Error</h2>
 <p>You can show an error message under the field by setting the error property.</p>
-<p class="text-sm text-zinc-500 italic">Tip : Try setting the age under 16 or above 25.</p>
+<p class="text-sm italic text-zinc-500">Tip : Try setting the age under 16 or above 25.</p>
 <Playground code={ageCode}>
 	<Field label="Age" error={ageError} class="w-[240px]">
 		{#snippet input(props)}
