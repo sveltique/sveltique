@@ -1,4 +1,4 @@
-import { paper } from '$lib/components/surfaces/paper/variants.js';
+import { paper } from '../paper/variants.js';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 export const select = tv({

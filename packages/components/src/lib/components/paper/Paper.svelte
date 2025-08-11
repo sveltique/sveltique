@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { HTMLAttributes } from 'svelte/elements';
 	import { paper, type PaperVariants } from './variants.js';
+	import type { HTMLAttributes } from 'svelte/elements';
 	import type { ClassNameValue } from 'tailwind-merge';
 
 	interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'class'>, PaperVariants {
