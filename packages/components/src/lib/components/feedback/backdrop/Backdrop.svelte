@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { backdrop } from './variants.js';
+	import type { Snippet } from 'svelte';
+	import type { WithTWMergeClass } from '$lib/types.js';
 
-	interface Props {
+	interface Props extends WithTWMergeClass {
+		children?: Snippet;
 		/** @default 150 */
 		fadeDuration?: number;
 		/** @default 10 */
@@ -10,7 +13,7 @@
 		onClick?: () => void;
 	}
 
-	let { fadeDuration = 150, z = 10, onClick }: Props = $props();
+	let { children, class: className, fadeDuration = 150, z = 10, onClick }: Props = $props();
 </script>
 
 <div
@@ -18,5 +21,7 @@
 	onclick={onClick}
 	aria-hidden={true}
 	style="z-index: {z}"
-	class={backdrop()}
-></div>
+	class={backdrop({ className })}
+>
+	{@render children?.()}
+</div>

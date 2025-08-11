@@ -8,20 +8,15 @@
 </script>
 
 <div class="relative w-full">
-	<header class="fixed left-0 top-0 z-50 h-16 w-full border-b border-zinc-300 bg-white">
-		<nav class="ga[-5 relative flex w-full items-center justify-center">
-			<a href="/">home</a>
-			<a href="/docs/components">components</a>
-		</nav>
-	</header>
-	<div class="relative w-full pt-16">
+	{@render navigation()}
+	<div class="relative w-full">
 		{@render children()}
 	</div>
 </div>
 
 {#snippet navigation()}
 	<header
-		class="fixed left-0 top-0 z-50 h-16 w-full border-b border-zinc-300 bg-white max-lg:hidden"
+		class="sticky left-0 top-0 z-50 hidden h-16 w-full border-b border-zinc-300 bg-white lg:block"
 	>
 		<nav class="relative flex w-full items-center justify-center gap-5">
 			<a href="/">home</a>
@@ -29,8 +24,10 @@
 		</nav>
 	</header>
 
-	<header class="sticky left-0 top-0 z-50 h-16 w-full border-b border-zinc-300 bg-white lg:hidden">
-		<nav class="relative flex w-full items-center justify-between">
+	<header
+		class="relative left-0 top-0 z-50 h-16 w-full border-b border-zinc-300 bg-white lg:hidden"
+	>
+		<nav class="relative flex h-full w-full items-center justify-between px-6">
 			<a href="/" class="text-xl font-black">C</a>
 			<button onclick={() => (showMenu = !showMenu)} class="grid h-full place-items-center">
 				<IconMenuDeep />
