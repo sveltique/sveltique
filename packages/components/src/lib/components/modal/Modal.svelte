@@ -3,7 +3,7 @@
 	import { on } from 'svelte/events';
 	import { flyAndScale } from '$lib/transitions/fly-and-scale.js';
 	import { modal } from './variants.js';
-	import Backdrop from '../backdrop/Backdrop.svelte';
+	import Backdrop, { type BackdropProps } from '../backdrop/Backdrop.svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { WithTWMergeClass } from '$lib/types.js';
 
@@ -28,6 +28,13 @@
 		 * @default false
 		 */
 		closeOnOverlayClick?: boolean;
+		/** @default false */
+		isOpen?: boolean;
+		/**
+		 * Customize the backdrop component directly.
+		 * @default {}
+		 */
+		backdropProps?: Omit<BackdropProps, 'onClick'>;
 	}
 
 	let {
@@ -36,14 +43,13 @@
 		trigger,
 		class: className = undefined,
 		closeOnOverlayClick = false,
+		isOpen = $bindable(false),
+		backdropProps = {},
 		...restProps
 	}: Props = $props();
 
 	const uid = $props.id();
-
-	let isOpen = $state(false);
-
-	const { actions: actionsCss, dialog, overlay } = $derived(modal());
+	let { actions: actionsCss, dialog } = $derived(modal());
 
 	onMount(() => {
 		return on(
@@ -74,27 +80,28 @@ A dialog component that interrupts the user flow to capture attention. Displays 
 {@render trigger({ open })}
 
 {#if isOpen}
-	<Backdrop onClick={() => closeOnOverlayClick && close()} />
-	<div
-		transition:flyAndScale={{ duration: 150 }}
-		id={uid}
-		role="alertdialog"
-		aria-modal="true"
-		aria-labelledby="{uid}-label"
-		aria-describedby="{uid}-description"
-		class={dialog({ className })}
-		{...restProps}
-	>
-		{@render children?.({
-			close,
-			labelProps: { id: `${uid}-label` },
-			descriptionProps: { id: `${uid}-description` }
-		})}
+	<Backdrop onClick={() => closeOnOverlayClick && close()} {...backdropProps}>
+		<div
+			transition:flyAndScale={{ duration: 150 }}
+			id={uid}
+			role="alertdialog"
+			aria-modal="true"
+			aria-labelledby="{uid}-label"
+			aria-describedby="{uid}-description"
+			class={dialog({ className })}
+			{...restProps}
+		>
+			{@render children?.({
+				close,
+				labelProps: { id: `${uid}-label` },
+				descriptionProps: { id: `${uid}-description` }
+			})}
 
-		{#if actions}
-			<div class={actionsCss()}>
-				{@render actions({ close })}
-			</div>
-		{/if}
-	</div>
+			{#if actions}
+				<div class={actionsCss()}>
+					{@render actions({ close })}
+				</div>
+			{/if}
+		</div>
+	</Backdrop>
 {/if}

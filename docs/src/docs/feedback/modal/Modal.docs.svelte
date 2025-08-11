@@ -1,11 +1,13 @@
 <script lang="ts">
-	import { code } from './content.js';
+	import { code, controlledStateCode } from './content.js';
 	import Playground from '$components/Playground.svelte';
 
 	import IconX from '@tabler/icons-svelte/icons/x';
 	import IconEdit from '@tabler/icons-svelte/icons/edit';
 	import IconTrash from '@tabler/icons-svelte/icons/trash';
 	import { Badge, Button, Link, Modal } from '@novaotp/components';
+
+	let isOpen = $state(false);
 </script>
 
 <h1>Modal</h1>
@@ -18,7 +20,7 @@
 	A modal is composed of three elements : a trigger, the modals' content and the modal's actions.
 </p>
 <Playground {code}>
-	<Modal>
+	<Modal backdropProps={{ z: 1000 }}>
 		{#snippet trigger({ open })}
 			<Button onclick={open}>Show modal</Button>
 		{/snippet}
@@ -40,7 +42,7 @@
 	> snippet to access the close function.
 </p>
 <Playground>
-	<Modal>
+	<Modal backdropProps={{ z: 1000 }}>
 		{#snippet trigger({ open })}
 			<Button onclick={open}>Show modal</Button>
 		{/snippet}
@@ -77,6 +79,47 @@
 	</Modal>
 </Playground>
 
+<h2>Controlling open/closed state</h2>
+<p>
+	If you need to control the open/closed state of the modal outside of the markup, you can bind to
+	it.
+</p>
+<Playground code={controlledStateCode}>
+	<Modal bind:isOpen backdropProps={{ z: 1000 }}>
+		{#snippet trigger()}
+			<Button onclick={() => (isOpen = true)}>Show modal</Button>
+		{/snippet}
+
+		<div class="flex items-center justify-between">
+			<Button onclick={() => (isOpen = false)} variant="text" shape="square" title="Close">
+				<IconX class="h-5 w-5" />
+			</Button>
+
+			<div class="flex items-center gap-3">
+				<Button onclick={() => alert('Edit action')} shape="square" title="Edit">
+					<IconEdit class="h-5 w-5" />
+				</Button>
+				<Button
+					onclick={() => confirm('Delete this project?')}
+					shape="square"
+					color="danger"
+					title="Delete"
+				>
+					<IconTrash class="h-5 w-5" />
+				</Button>
+			</div>
+		</div>
+
+		<div class="flex flex-col items-start gap-3">
+			<h2 class="text-xl font-bold">Project Alpha</h2>
+			<p class="text-gray-600">
+				This is an example project. You can edit details, view members, or delete it entirely using
+				the actions in the top-right corner.
+			</p>
+		</div>
+	</Modal>
+</Playground>
+
 <h2>Accessiblity</h2>
 <p>Some notes on accessibility.</p>
 
@@ -93,7 +136,7 @@
 	>.
 </p>
 <Playground>
-	<Modal closeOnOverlayClick>
+	<Modal backdropProps={{ z: 1000 }} closeOnOverlayClick>
 		{#snippet trigger({ open })}
 			<Button onclick={open}>Show modal</Button>
 		{/snippet}
@@ -117,7 +160,7 @@
 	</Link> for more information.
 </p>
 <Playground>
-	<Modal closeOnOverlayClick>
+	<Modal backdropProps={{ z: 1000 }} closeOnOverlayClick>
 		{#snippet trigger({ open })}
 			<Button onclick={open}>Show modal</Button>
 		{/snippet}
@@ -138,7 +181,7 @@
 	contains spreadable label and description props that you can use.
 </p>
 <Playground>
-	<Modal>
+	<Modal backdropProps={{ z: 1000 }}>
 		{#snippet trigger({ open })}
 			<Button onclick={open}>Show modal</Button>
 		{/snippet}
@@ -162,7 +205,7 @@
 	You should have one element that is focused using the <Badge>autofocus</Badge> attribute.
 </p>
 <Playground>
-	<Modal>
+	<Modal backdropProps={{ z: 1000 }}>
 		{#snippet trigger({ open })}
 			<Button onclick={open}>Show modal</Button>
 		{/snippet}
