@@ -1,12 +1,11 @@
 <script lang="ts">
 	import { onMount, type Snippet } from 'svelte';
 	import { on } from 'svelte/events';
-	import { fade } from 'svelte/transition';
 	import { flyAndScale } from '$lib/transitions/fly-and-scale.js';
 	import { modal } from './variants.js';
+	import Backdrop from '../backdrop/Backdrop.svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { WithTWMergeClass } from '$lib/types.js';
-	import Backdrop from '../backdrop/Backdrop.svelte';
 
 	type ChildrenSnippet = Snippet<
 		[

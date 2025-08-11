@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { skeleton } from './variants.js';
-	import type { WithTWMergeClass } from '$lib/types.js';
 	import type { HTMLAttributes } from 'svelte/elements';
+	import type { WithTWMergeClass } from '$lib/types.js';
 
 	type Props = WithTWMergeClass<HTMLAttributes<HTMLDivElement>>;
 
