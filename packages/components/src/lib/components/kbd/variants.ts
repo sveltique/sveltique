@@ -1,0 +1,5 @@
+import { tv } from 'tailwind-variants';
+
+export const kbd = tv({
+	base: 'rounded border border-zinc-300 bg-zinc-100 px-2 py-1 text-xs font-bold'
+});
