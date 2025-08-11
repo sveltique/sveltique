@@ -6,6 +6,7 @@ export * from './button/index.js';
 export * from './code-block/index.js';
 export * from './date-input/index.js';
 export * from './field/index.js';
+export * from './kbd/index.js';
 export * from './link/index.js';
 export * from './modal/index.js';
 export * from './number-input/index.js';
