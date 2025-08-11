@@ -4,7 +4,7 @@
 	import type { Snippet } from 'svelte';
 	import type { WithTWMergeClass } from '$lib/types.js';
 
-	interface Props extends WithTWMergeClass {
+	export interface BackdropProps extends WithTWMergeClass {
 		children?: Snippet;
 		/** @default 150 */
 		fadeDuration?: number;
@@ -13,7 +13,7 @@
 		onClick?: () => void;
 	}
 
-	let { children, class: className, fadeDuration = 150, z = 10, onClick }: Props = $props();
+	let { children, class: className, fadeDuration = 150, z = 10, onClick }: BackdropProps = $props();
 </script>
 
 <div
