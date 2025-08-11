@@ -6,6 +6,7 @@
 	import { modal } from './variants.js';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { WithTWMergeClass } from '$lib/types.js';
+	import Backdrop from '../backdrop/Backdrop.svelte';
 
 	type ChildrenSnippet = Snippet<
 		[
@@ -74,12 +75,7 @@ A dialog component that interrupts the user flow to capture attention. Displays 
 {@render trigger({ open })}
 
 {#if isOpen}
-	<div
-		transition:fade={{ duration: 150 }}
-		onclick={() => closeOnOverlayClick && close()}
-		aria-hidden={true}
-		class={overlay()}
-	></div>
+	<Backdrop onClick={() => closeOnOverlayClick && close()} />
 	<div
 		transition:flyAndScale={{ duration: 150 }}
 		id={uid}
