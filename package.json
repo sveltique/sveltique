@@ -1,5 +1,9 @@
 {
 	"name": "monorepo",
+	"scripts": {
+		"docs.dev": "npm --prefix ./docs run dev",
+		"components.dev": "npm --prefix ./packages/components run build"
+	},
 	"devDependencies": {
 		"prettier": "^3.6.2",
 		"prettier-plugin-svelte": "^3.4.0",
