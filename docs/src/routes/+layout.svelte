@@ -1,7 +1,10 @@
 <script lang="ts">
 	import '../app.css';
+	import IconMenuDeep from '@tabler/icons-svelte/icons/menu-deep';
 
 	let { children } = $props();
+
+	let showMenu = $state(false);
 </script>
 
 <div class="relative w-full">
@@ -15,3 +18,29 @@
 		{@render children()}
 	</div>
 </div>
+
+{#snippet navigation()}
+	<header
+		class="fixed left-0 top-0 z-50 h-16 w-full border-b border-zinc-300 bg-white max-lg:hidden"
+	>
+		<nav class="relative flex w-full items-center justify-center gap-5">
+			<a href="/">home</a>
+			<a href="/docs/components">components</a>
+		</nav>
+	</header>
+
+	<header class="sticky left-0 top-0 z-50 h-16 w-full border-b border-zinc-300 bg-white lg:hidden">
+		<nav class="relative flex w-full items-center justify-between">
+			<a href="/" class="text-xl font-black">C</a>
+			<button onclick={() => (showMenu = !showMenu)} class="grid h-full place-items-center">
+				<IconMenuDeep />
+			</button>
+		</nav>
+	</header>
+
+	{#if showMenu}
+		<div class="fixed top-16 flex w-full flex-col">
+			<a href="/docs/components">Components</a>
+		</div>
+	{/if}
+{/snippet}
