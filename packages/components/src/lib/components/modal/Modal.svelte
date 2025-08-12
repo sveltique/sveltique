@@ -17,7 +17,8 @@
 		]
 	>;
 
-	interface Props extends Omit<WithTWMergeClass<HTMLAttributes<HTMLElement>>, 'children'> {
+	export interface ModalProps
+		extends Omit<WithTWMergeClass<HTMLAttributes<HTMLElement>>, 'children'> {
 		actions?: Snippet<[{ close: VoidFunction }]>;
 		children: ChildrenSnippet;
 		trigger: Snippet<[{ open: VoidFunction }]>;
@@ -46,7 +47,7 @@
 		isOpen = $bindable(false),
 		backdropProps = {},
 		...restProps
-	}: Props = $props();
+	}: ModalProps = $props();
 
 	const uid = $props.id();
 	let { actions: actionsCss, dialog } = $derived(modal());

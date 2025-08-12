@@ -12,6 +12,7 @@
 		containerClass?: ClassNameValue;
 		name?: string;
 		value?: string;
+		placeholder?: string;
 		'aria-invalid'?: boolean;
 		'aria-describedby'?: string;
 	}
@@ -23,6 +24,7 @@
 		containerClass,
 		name,
 		value = $bindable(),
+		placeholder = '',
 		...restProps
 	}: Props = $props();
 
@@ -32,24 +34,12 @@
 	let listBoxRef = $state<HTMLUListElement>()!;
 
 	let open = $state(false);
-	let valueContent = $state();
+	let valueContent = $state<string | undefined>();
 
 	const { container, listBox, trigger, triggerContent, triggerIcon } = $derived(select({ open }));
 
 	onMount(() => {
 		if (!value) return;
-
-		const element = Array.from(listBoxRef.children).find(
-			(element) => element.getAttribute('data-value') === value
-		);
-
-		if (!element) return;
-
-		valueContent = element.textContent;
-	});
-
-	onMount(() => {
-		if (value) return;
 		if (!listBoxRef) return;
 
 		const elements = Array.from(listBoxRef.children);
@@ -92,6 +82,8 @@
 			open = false;
 		});
 	});
+
+	$inspect(valueContent);
 </script>
 
 <!--
@@ -113,7 +105,13 @@ Note : The element takes its parent's full width, so if you want to restrict it,
 		class={trigger()}
 		{...restProps}
 	>
-		<span class={triggerContent()}>{valueContent}</span>
+		<span class={triggerContent()}>
+			{#if valueContent}
+				{valueContent}
+			{:else}
+				<span class="text-zinc-500">{placeholder}</span>
+			{/if}
+		</span>
 		<IconChevronDown class={triggerIcon()} />
 	</button>
 	<ul

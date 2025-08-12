@@ -32,7 +32,11 @@
 	});
 </script>
 
-<Paper variant="outline" elevation={0} class="mb-4 flex w-full flex-col items-stretch">
+<Paper
+	variant="outline"
+	elevation={0}
+	class="mb-4 flex w-full flex-col items-stretch overflow-hidden"
+>
 	<div class="relative flex w-full items-stretch justify-between">
 		<div class={cn('relative flex grow items-center justify-center gap-5 p-6', className)}>
 			{@render children?.()}

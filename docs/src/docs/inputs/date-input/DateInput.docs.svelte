@@ -2,4 +2,4 @@
 	import { DateInput } from '@novaotp/components';
 </script>
 
-<DateInput />
+<DateInput modalProps={{ closeOnOverlayClick: true, backdropProps: { z: 1000 } }} />

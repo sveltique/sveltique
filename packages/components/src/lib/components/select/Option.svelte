@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { option } from './variants.js';
+	import IconCheck from '@tabler/icons-svelte/icons/check';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { ClassNameValue } from 'tailwind-merge';
 
@@ -67,9 +68,17 @@ Designed to be a drop-in replacement for the native `option` element.
 	class={container({ className })}
 	{...restProps}
 >
+	{@render content()}
+
+	{#if selected && !disabled}
+		<IconCheck class="h-4 w-4" />
+	{/if}
+</li>
+
+{#snippet content()}
 	{#if children}
 		{@render children()}
 	{:else}
 		{value}
 	{/if}
-</li>
+{/snippet}

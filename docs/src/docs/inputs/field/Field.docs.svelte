@@ -75,8 +75,7 @@
 {#snippet selectInput()}
 	<Field label="Fruit">
 		{#snippet input(props)}
-			<Select.Root {...props}>
-				<Select.Option value="" selected disabled>Choose a fruit</Select.Option>
+			<Select.Root placeholder="Choose a fruit" {...props}>
 				{#each ['apple', 'banana', 'kiwi', 'mango'] as fruit}
 					<Select.Option value={fruit}>{toTitleCase(fruit)}</Select.Option>
 				{/each}
