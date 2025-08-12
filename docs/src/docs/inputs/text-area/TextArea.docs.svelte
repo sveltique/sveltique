@@ -1,0 +1,21 @@
+<script>
+	import Playground from '$components/Playground.svelte';
+	import { script } from '$utils/playground';
+	import { TextArea } from '@novaotp/components';
+
+	const code = {
+		short: '<TextArea placeholder="Enter your message here..." />',
+		expanded: `${script("import { TextArea } from '@novaotp/components';")}
+        
+<TextArea placeholder="Enter your message here..." />`
+	};
+</script>
+
+<h1>TextArea</h1>
+<p>A styled text area.</p>
+
+<h2>Basic Usage</h2>
+<p>You can use it as a drop-in replacement for text areas.</p>
+<Playground {code}>
+	<TextArea placeholder="Enter your message here..." />
+</Playground>
