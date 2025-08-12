@@ -95,10 +95,23 @@
 	$effect(() => {
 		if (!open) return;
 
+		if (value) {
+			const elements = getListChildren();
+
+			const defaultElement =
+				elements.find(
+					(element) =>
+						element.hasAttribute('data-select-option') &&
+						element.getAttribute('data-value') === value
+				) ?? elements.at(0);
+
+			if (defaultElement) {
+				focusedId = defaultElement.id;
+			}
+		}
+
 		return on(window, 'keydown', (event) => {
 			event.preventDefault();
-
-			console.log(event.key);
 
 			if (!focusedId) return;
 			if (event.key === 'Escape') {

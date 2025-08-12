@@ -13,7 +13,7 @@ export const select = tv({
 		listBox: paper({
 			elevation: 4,
 			class:
-				'absolute p-2 top-[calc(100%+0.625rem)] z-10 left-0 hidden w-full flex-col min-w-max shadow-md'
+				'absolute p-2 top-[calc(100%+0.625rem)] z-10 left-0 hidden w-full flex-col gap-1 min-w-max shadow-md'
 		})
 	},
 	variants: {
