@@ -1,7 +1,7 @@
 import { tv, type VariantProps } from 'tailwind-variants';
 
 export const paper = tv({
-	base: 'relative rounded-2xl bg-white overflow-hidden',
+	base: 'relative rounded-2xl bg-white',
 	variants: {
 		variant: {
 			shadow: '',
@@ -17,9 +17,14 @@ export const paper = tv({
 		}
 	},
 	defaultVariants: {
-		variant: 'shadow',
-		elevation: 1
-	}
+		variant: 'outline'
+	},
+	compoundVariants: [
+		{
+			variant: 'outline',
+			class: 'shadow-none'
+		}
+	]
 });
 
 export type PaperVariants = VariantProps<typeof paper>;

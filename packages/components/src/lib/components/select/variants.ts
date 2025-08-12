@@ -3,18 +3,17 @@ import { tv, type VariantProps } from 'tailwind-variants';
 
 export const select = tv({
 	slots: {
-		container: 'relative w-full',
+		container: 'relative',
 		trigger: paper({
 			variant: 'outline',
-			elevation: 0,
-			class: 'flex w-full cursor-pointer items-center gap-3 py-3 pr-3 pl-6'
+			class: 'flex w-full cursor-pointer items-center gap-3 px-4 h-11'
 		}),
 		triggerContent: 'pointer-events-none grow text-start text-sm',
-		triggerIcon: 'pointer-events-none size-4',
+		triggerIcon: 'pointer-events-none size-4 text-zinc-500 duration-150 ease-in-out',
 		listBox: paper({
 			elevation: 4,
 			class:
-				'absolute top-full z-10 left-0 hidden w-full flex-col divide-y divide-zinc-300 overflow-hidden'
+				'absolute p-2 top-[calc(100%+0.625rem)] z-10 left-0 hidden w-full flex-col min-w-max shadow-md'
 		})
 	},
 	variants: {
@@ -31,7 +30,8 @@ export type SelectVariants = VariantProps<typeof select>;
 
 export const option = tv({
 	slots: {
-		container: 'cursor-pointer px-6 py-3 text-sm'
+		container:
+			'cursor-pointer relative flex items-center justify-between gap-2.5 rounded-lg py-2 px-4 text-sm'
 	},
 	variants: {
 		selected: {
@@ -41,7 +41,7 @@ export const option = tv({
 		},
 		disabled: {
 			true: {
-				container: 'italic cursor-not-allowed'
+				container: 'italic cursor-not-allowed text-zinc-500'
 			},
 			false: {
 				container: 'hover:bg-zinc-100'

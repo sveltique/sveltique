@@ -15,9 +15,9 @@ export const button = tv({
 			circle: 'rounded-full'
 		},
 		size: {
-			small: 'px-4 py-2',
+			small: 'text-sm px-4 py-2',
 			medium: 'px-6 py-3',
-			large: 'px-8 py-4'
+			large: 'text-lg px-8 py-4'
 		},
 		disabled: {
 			true: 'cursor-not-allowed opacity-50'

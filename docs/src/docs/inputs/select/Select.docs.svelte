@@ -1,7 +1,32 @@
 <script lang="ts">
-	import { Paper, Select } from '@novaotp/components';
+	import Playground from '$components/Playground.svelte';
+	import { script } from '$utils/playground';
+	import { Badge, Banner, Select } from '@novaotp/components';
 
-	const fruits = ['apple', 'banana', 'mango', 'kiwi'];
+	const fruits = ['Apple', 'Banana', 'Mango', 'Kiwi'];
+
+	const code = {
+		short: `<Select.Root
+    placeholder="Select a fruit"
+    containerClass="w-40"
+>
+    {#each fruits as fruit}
+        <Select.Option value={fruit} />
+    {/each}
+</Select.Root>`,
+		expanded: `${script(`import { Select } from '@novaotp/components';
+
+    const fruits = ['Apple', 'Banana', 'Mango', 'Kiwi'];`)}
+
+<Select.Root
+    placeholder="Select a fruit"
+    containerClass="w-40"
+>
+    {#each fruits as fruit}
+        <Select.Option value={fruit} />
+    {/each}
+</Select.Root>`
+	};
 </script>
 
 <h1>Select</h1>
@@ -11,11 +36,15 @@
 	It is meant to be used as a drop-in replacement for the native select element, and ensures the
 	styles are uniform through the different browsers.
 </p>
-<Paper variant="outline" class="flex justify-center p-6">
-	<Select.Root value="apple" containerClass="w-24">
-		<Select.Option value="" selected disabled>Select a fruit</Select.Option>
+<Banner type="info" class="mb-4">
+	To prevent the select from changing size, set a fixed width on the container using <Badge
+		>containerClass
+	</Badge>.
+</Banner>
+<Playground {code}>
+	<Select.Root placeholder="Select a fruit" containerClass="w-40">
 		{#each fruits as fruit}
 			<Select.Option value={fruit} />
 		{/each}
 	</Select.Root>
-</Paper>
+</Playground>
