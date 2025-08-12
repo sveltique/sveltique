@@ -4,3 +4,7 @@ import type { ClassNameValue } from 'tailwind-merge';
 export type WithTWMergeClass<T = Record<string, unknown>> = Omit<T, 'class'> & {
 	class?: ClassNameValue;
 };
+
+export type WithRef<T extends HTMLElement> = {
+	ref?: T;
+};
