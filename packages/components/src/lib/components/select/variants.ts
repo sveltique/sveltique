@@ -34,11 +34,6 @@ export const option = tv({
 			'cursor-pointer relative flex items-center justify-between gap-2.5 rounded-lg py-2 px-4 text-sm'
 	},
 	variants: {
-		selected: {
-			true: {
-				container: 'bg-blue-700 text-white'
-			}
-		},
 		disabled: {
 			true: {
 				container: 'italic cursor-not-allowed text-zinc-500'
@@ -46,17 +41,13 @@ export const option = tv({
 			false: {
 				container: 'hover:bg-zinc-100'
 			}
-		}
-	},
-	compoundVariants: [
-		{
-			selected: true,
-			disabled: false,
-			class: {
-				container: 'hover:bg-blue-700'
+		},
+		focused: {
+			true: {
+				container: 'bg-zinc-100'
 			}
 		}
-	]
+	}
 });
 
 export type OptionVariants = VariantProps<typeof option>;

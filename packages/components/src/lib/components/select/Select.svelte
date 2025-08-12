@@ -36,24 +36,33 @@
 	let open = $state(false);
 	let valueContent = $state<string | undefined>();
 
+	let focusedId = $state<string>();
+
 	const { container, listBox, trigger, triggerContent, triggerIcon } = $derived(select({ open }));
 
 	onMount(() => {
-		if (!value) return;
+		const elements = getListChildren();
+
+		// Focused day is the first one if no value selected
+		// Otherwise, the focused day starts at the current value
+		if (!value) {
+			focusedId = elements.at(0)?.id;
+			return;
+		}
+
 		if (!listBoxRef) return;
 
-		const elements = Array.from(listBoxRef.children);
 		const defaultElement =
 			elements.find(
 				(element) =>
-					element.hasAttribute('data-select-option') &&
-					element.getAttribute('data-selected') === 'true'
+					element.hasAttribute('data-select-option') && element.getAttribute('data-value') === value
 			) ?? elements.at(0);
 
 		if (!defaultElement) return;
 
-		value = (defaultElement as HTMLLIElement).getAttribute('data-value')!;
-		valueContent = (defaultElement as HTMLLIElement).textContent;
+		focusedId = defaultElement.id;
+		value = defaultElement.getAttribute('data-value')!;
+		valueContent = defaultElement.textContent;
 	});
 
 	$effect(() => {
@@ -83,7 +92,72 @@
 		});
 	});
 
-	$inspect(valueContent);
+	$effect(() => {
+		if (!open) return;
+
+		return on(window, 'keydown', (event) => {
+			event.preventDefault();
+
+			console.log(event.key);
+
+			if (!focusedId) return;
+			if (event.key === 'Escape') {
+				open = false;
+			}
+
+			const child = getChildById(focusedId);
+			if (!child) return;
+
+			if (event.key === 'ArrowUp') {
+				if (!child.previousElementSibling) return;
+
+				focusedId = child.previousElementSibling.id;
+			} else if (event.key === 'ArrowDown') {
+				if (!child.nextElementSibling) return;
+
+				focusedId = child.nextElementSibling.id;
+			} else if (event.key === 'Enter' || event.key === ' ') {
+				value = child.getAttribute('data-value')!;
+				valueContent = child.textContent;
+
+				open = false;
+			}
+		});
+	});
+
+	$effect(() => {
+		if (open) return;
+
+		const elements = getListChildren();
+
+		if (!value) {
+			focusedId = elements.at(0)?.id;
+			return;
+		} else {
+			if (!listBoxRef) return;
+
+			const defaultElement =
+				elements.find(
+					(element) =>
+						element.hasAttribute('data-select-option') &&
+						element.getAttribute('data-value') === value
+				) ?? elements.at(0);
+
+			if (!defaultElement) return;
+
+			focusedId = defaultElement.id;
+		}
+	});
+
+	function getListChildren() {
+		return Array.from(listBoxRef.children) as HTMLLIElement[];
+	}
+
+	function getChildById(id: string) {
+		const elements = getListChildren();
+
+		return elements.find((element) => element.id === id);
+	}
 </script>
 
 <!--
@@ -98,10 +172,11 @@ Note : The element takes its parent's full width, so if you want to restrict it,
 	<button
 		bind:this={triggerRef}
 		{id}
+		onclick={() => (open = !open)}
 		role="combobox"
 		aria-controls="{componentId}-listbox"
 		aria-expanded={open}
-		onclick={() => (open = !open)}
+		aria-activedescendant={focusedId}
 		class={trigger()}
 		{...restProps}
 	>
@@ -118,7 +193,9 @@ Note : The element takes its parent's full width, so if you want to restrict it,
 		bind:this={listBoxRef}
 		id="{componentId}-listbox"
 		role="listbox"
+		tabindex="-1"
 		data-selected-value={value}
+		data-focused-id={focusedId}
 		class={listBox()}
 	>
 		{@render children?.()}
