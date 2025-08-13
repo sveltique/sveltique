@@ -14,7 +14,7 @@ export const checkbox = tv({
 		{
 			checked: true,
 			disabled: true,
-			class: 'text-zinc-400'
+			class: 'text-blue-700/50'
 		}
 	]
 });

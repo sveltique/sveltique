@@ -10,12 +10,15 @@ export const switchTv = tv({
 		checked: {
 			true: {
 				container: 'bg-blue-700 dark:bg-blue-400',
-				thumb: 'translate-x-[calc(100%-0.25rem)]'
+				thumb: 'translate-x-[calc(100%+0.25rem)]'
 			}
 		},
 		disabled: {
 			true: {
 				container: 'bg-zinc-300/50 cursor-not-allowed'
+			},
+			false: {
+				container: 'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-700'
 			}
 		}
 	},

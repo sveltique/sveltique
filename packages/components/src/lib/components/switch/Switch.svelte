@@ -12,7 +12,9 @@
 	let {
 		checked = $bindable(false),
 		class: className,
-		disabled,
+		disabled = false,
+		name,
+		value,
 		ref = $bindable(),
 		...restProps
 	}: Props = $props();
@@ -20,9 +22,12 @@
 	let { container, thumb } = $derived(switchTv({ checked, disabled, className }));
 </script>
 
+<input type="checkbox" {name} {checked} aria-hidden="true" class="hidden" />
 <button
 	bind:this={ref}
 	onclick={() => !disabled && (checked = !checked)}
+	{disabled}
+	type="button"
 	role="switch"
 	aria-checked={checked}
 	class={container({ className })}
