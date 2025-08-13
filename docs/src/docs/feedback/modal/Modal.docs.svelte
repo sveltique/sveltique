@@ -5,7 +5,7 @@
 	import IconX from '@tabler/icons-svelte/icons/x';
 	import IconEdit from '@tabler/icons-svelte/icons/edit';
 	import IconTrash from '@tabler/icons-svelte/icons/trash';
-	import { Badge, Banner, Button, Kbd, Link, Modal } from '@novaotp/components';
+	import { Alert, Badge, Button, Kbd, Link, Modal } from '@novaotp/components';
 
 	let isOpen = $state(false);
 </script>
@@ -19,7 +19,7 @@
 <p>
 	A modal is composed of three elements : a trigger, the modals' content and the modal's actions.
 </p>
-<Banner type="info" class="mb-4">The modal closes on <Kbd>Esc</Kbd> press.</Banner>
+<Alert type="info" class="mb-4">The modal closes on <Kbd>Esc</Kbd> press.</Alert>
 <Playground {code}>
 	<Modal backdropProps={{ z: 1000 }}>
 		{#snippet trigger({ open })}

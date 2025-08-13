@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Playground from '$components/Playground.svelte';
 	import { script } from '$utils/playground';
-	import { Badge, Banner, Select } from '@novaotp/components';
+	import { Badge, Alert, Select } from '@novaotp/components';
 
 	const fruits = ['Apple', 'Banana', 'Mango', 'Kiwi'];
 
@@ -36,11 +36,11 @@
 	It is meant to be used as a drop-in replacement for the native select element, and ensures the
 	styles are uniform through the different browsers.
 </p>
-<Banner type="info" class="mb-4">
+<Alert type="info" class="mb-4">
 	To prevent the select from changing size, set a fixed width on the container using <Badge
 		>containerClass
 	</Badge>.
-</Banner>
+</Alert>
 <Playground {code}>
 	<Select.Root placeholder="Select a fruit" containerClass="w-40">
 		{#each fruits as fruit}
