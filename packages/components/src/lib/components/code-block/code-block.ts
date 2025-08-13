@@ -1,4 +1,32 @@
-import { codeToTokens, type BundledLanguage, type BundledTheme } from 'shiki';
+import type { BundledLanguage, BundledTheme, CodeToTokensOptions, TokensResult } from 'shiki';
+
+type ShikiModule = {
+	/**
+	 * Shorthand for `codeToTokens` with auto-loaded theme and language.
+	 * A singleton highlighter it maintained internally.
+	 *
+	 * Differences from `highlighter.codeToTokens()`, this function is async.
+	 */
+	codeToTokens: (
+		code: string,
+		options: CodeToTokensOptions<BundledLanguage, BundledTheme>
+	) => Promise<TokensResult>;
+};
+
+let shikiModule: ShikiModule;
+
+async function loadShiki() {
+	// @ts-ignore
+	if (shikiModule) return shikiModule;
+
+	try {
+		shikiModule = await import('shiki');
+		return shikiModule;
+	} catch (err) {
+		// shiki not installed
+		throw new Error("You must install 'shiki' to use the CodeBlock component.");
+	}
+}
 
 type CodeToHTMLOptions = {
 	lang: BundledLanguage;
@@ -10,6 +38,8 @@ type CodeToHTMLOptions = {
 /** Enhanced `codeToHTML` to enable line highlighting. */
 export async function codeToHTML(code: string, options: CodeToHTMLOptions) {
 	const { lang, theme, lines = [] } = options;
+
+	const { codeToTokens } = await loadShiki();
 
 	const result = await codeToTokens(code, { lang, theme });
 
