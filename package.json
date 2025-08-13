@@ -2,9 +2,11 @@
 	"name": "monorepo",
 	"scripts": {
 		"docs.dev": "npm --prefix ./docs run dev",
-		"components.dev": "npm --prefix ./packages/components run build"
+		"components.dev": "npm --prefix ./packages/components run build",
+		"dev": "concurrently 'npm:docs.dev' 'npm:components.dev'"
 	},
 	"devDependencies": {
+		"concurrently": "^9.2.0",
 		"prettier": "^3.6.2",
 		"prettier-plugin-svelte": "^3.4.0",
 		"prettier-plugin-tailwindcss": "^0.6.14"
