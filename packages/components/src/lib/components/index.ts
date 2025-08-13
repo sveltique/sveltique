@@ -19,3 +19,4 @@ export * from './switch/index.js';
 export * from './text-area/index.js';
 export * from './text-input/index.js';
 export * from './toast/index.js';
+export * from './tooltip/index.js';

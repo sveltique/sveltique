@@ -6,7 +6,7 @@
 	interface Props
 		extends WithTWMergeClass<Omit<HTMLButtonAttributes, 'color' | 'disabled'>>,
 			ButtonVariants {
-		ref?: HTMLButtonElement;
+		ref?: HTMLElement | HTMLButtonElement;
 	}
 
 	let {
