@@ -10,11 +10,17 @@
 		onClose?: () => void;
 		action?: Snippet;
 		children: Snippet;
+		open?: boolean;
 	}
 
-	let { action, children, class: className, type = 'info', onClose }: Props = $props();
-
-	let open = $state(true);
+	let {
+		action,
+		children,
+		class: className,
+		open = $bindable(true),
+		type = 'info',
+		onClose
+	}: Props = $props();
 
 	let Icon = $derived(ICONS[type]);
 	let { container, icon, content, closeButton, closeIcon } = $derived(toast({ type }));
