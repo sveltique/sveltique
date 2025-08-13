@@ -28,12 +28,9 @@
 	let isCopied = $state(false);
 	let CopyIcon = $derived(isCopied ? IconClipboardCheck : IconClipboard);
 
-	$inspect(code);
-
 	const { button, container, icon } = $derived(codeBlock());
 	let _code = $derived.by(async () => {
 		const h = await codeToHTML(code, { lang, theme, lines: highlightedLines });
-		console.log(h);
 
 		return h;
 	});
