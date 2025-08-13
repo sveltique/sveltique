@@ -1,6 +1,6 @@
 import { tv, type VariantProps } from 'tailwind-variants';
 
-export const banner = tv({
+export const alert = tv({
 	slots: {
 		container: 'relative flex w-full items-center gap-5 rounded-2xl p-5',
 		icon: 'min-h-6 min-w-6'
@@ -27,4 +27,4 @@ export const banner = tv({
 	}
 });
 
-export type BannerVariants = VariantProps<typeof banner>;
+export type AlertVariants = VariantProps<typeof alert>;

@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { icons } from './icons.js';
-	import { banner, type BannerVariants } from './variants.js';
+	import { alert, type AlertVariants } from './variants.js';
 	import type { Snippet } from 'svelte';
 	import type { ClassNameValue } from 'tailwind-merge';
 
-	interface Props extends BannerVariants {
+	interface Props extends AlertVariants {
 		children?: Snippet;
 		class?: ClassNameValue;
 	}
 
 	let { children, class: className = '', type = 'info' }: Props = $props();
 
-	const { container, icon } = $derived(banner({ type, className }));
+	const { container, icon } = $derived(alert({ type, className }));
 	const Icon = $derived(icons[type]);
 </script>
 
