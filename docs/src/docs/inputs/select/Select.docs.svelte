@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Playground from '$components/Playground.svelte';
 	import { script } from '$utils/playground';
-	import { Badge, Alert, Select } from '@novaotp/components';
+	import { Badge, Alert, Select } from '@sveltique/components';
 
 	const fruits = ['Apple', 'Banana', 'Mango', 'Kiwi'];
 
@@ -14,7 +14,7 @@
         <Select.Option value={fruit} />
     {/each}
 </Select.Root>`,
-		expanded: `${script(`import { Select } from '@novaotp/components';
+		expanded: `${script(`import { Select } from '@sveltique/components';
 
     const fruits = ['Apple', 'Banana', 'Mango', 'Kiwi'];`)}
 

@@ -1,7 +1,7 @@
 <script>
 	import Playground from '$components/Playground.svelte';
 	import { script } from '$utils/playground';
-	import { Badge, Button, Toast } from '@novaotp/components';
+	import { Badge, Button, Toast } from '@sveltique/components';
 </script>
 
 <h1>Toast</h1>
@@ -13,7 +13,7 @@
 		short: `<Toast type="success" class="max-w-96">
     Post added successfully.
 </Toast>`,
-		expanded: `${script("import { Toast } from '@novaotp/components';")}
+		expanded: `${script("import { Toast } from '@sveltique/components';")}
     
 <Toast type="success" class="max-w-96">
     Post added successfully.
@@ -41,7 +41,7 @@
         <Button variant="text" size="small">Undo</Button>
     {/snippet}
 </Toast>`,
-		expanded: `${script("import { Button, Toast } from '@novaotp/components';")}
+		expanded: `${script("import { Button, Toast } from '@sveltique/components';")}
 
 <Toast type="warning" onClose={() => {}} class="max-w-96">
     Your session will expire soon.

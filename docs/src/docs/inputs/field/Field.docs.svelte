@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Playground from '$components/Playground.svelte';
 	import { toTitleCase } from '$utils/string.js';
-	import { Field, TextInput, NumberInput, Select } from '@novaotp/components';
+	import { Field, TextInput, NumberInput, Select } from '@sveltique/components';
 	import { ageCode } from './content.js';
 
 	type Input = 'text' | 'number' | 'select';

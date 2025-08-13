@@ -5,7 +5,7 @@
 	import IconX from '@tabler/icons-svelte/icons/x';
 	import IconEdit from '@tabler/icons-svelte/icons/edit';
 	import IconTrash from '@tabler/icons-svelte/icons/trash';
-	import { Alert, Badge, Button, Kbd, Link, Modal } from '@novaotp/components';
+	import { Alert, Badge, Button, Kbd, Link, Modal } from '@sveltique/components';
 
 	let isOpen = $state(false);
 </script>

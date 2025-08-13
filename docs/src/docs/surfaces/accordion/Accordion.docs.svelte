@@ -1,6 +1,6 @@
 <script>
 	import Playground from '$components/Playground.svelte';
-	import { Accordion, Badge } from '@novaotp/components';
+	import { Accordion, Badge } from '@sveltique/components';
 	import IconArrowDown from '@tabler/icons-svelte/icons/arrow-down';
 	import IconCaretDownFilled from '@tabler/icons-svelte/icons/caret-down-filled';
 </script>

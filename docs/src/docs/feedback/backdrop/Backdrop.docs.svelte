@@ -1,6 +1,6 @@
 <script>
 	import Playground from '$components/Playground.svelte';
-	import { Backdrop, Button } from '@novaotp/components';
+	import { Backdrop, Button } from '@sveltique/components';
 	import { code } from './content';
 
 	let showBackdrop = $state(false);

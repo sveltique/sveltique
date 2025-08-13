@@ -11,7 +11,7 @@ export const code = {
         z={1000}
     />
 {/if}`,
-	expanded: `${script(`import { Backdrop, Button } from '@novaotp/components';
+	expanded: `${script(`import { Backdrop, Button } from '@sveltique/components';
 
     let showBackdrop = $state(false);`)}
 

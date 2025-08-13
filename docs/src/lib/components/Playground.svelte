@@ -5,7 +5,7 @@
 	import type { Snippet } from 'svelte';
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { cn } from '$utils/cn.js';
-	import { Paper, Separator } from '@novaotp/components';
+	import { Paper, Separator } from '@sveltique/components';
 
 	type Code = {
 		short: string;
