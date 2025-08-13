@@ -3,7 +3,7 @@
 	import { fly } from 'svelte/transition';
 	import { page } from '$app/state';
 	import { cnBase } from 'tailwind-variants';
-	import { Backdrop, button } from '@novaotp/components';
+	import { Backdrop, button } from '@sveltique/components';
 
 	import { setOnThisPageContext } from '$lib/contexts/on-this-page.svelte.js';
 	import { capitalize } from '$utils/string.js';

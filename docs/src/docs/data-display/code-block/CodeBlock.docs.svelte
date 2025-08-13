@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { replaceEntities } from '$utils/html.js';
-	import { Badge, CodeBlock } from '@novaotp/components';
+	import { Badge, CodeBlock } from '@sveltique/components';
 	import Playground from '$components/Playground.svelte';
 	import { codeToHtml } from 'shiki';
 </script>

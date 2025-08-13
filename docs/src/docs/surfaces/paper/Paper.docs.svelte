@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Playground from '$components/Playground.svelte';
-	import { Paper } from '@novaotp/components';
+	import { Paper } from '@sveltique/components';
 </script>
 
 <h1>Paper</h1>

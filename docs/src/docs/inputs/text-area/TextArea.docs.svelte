@@ -1,11 +1,11 @@
 <script>
 	import Playground from '$components/Playground.svelte';
 	import { script } from '$utils/playground';
-	import { TextArea } from '@novaotp/components';
+	import { TextArea } from '@sveltique/components';
 
 	const code = {
 		short: '<TextArea placeholder="Enter your message here..." />',
-		expanded: `${script("import { TextArea } from '@novaotp/components';")}
+		expanded: `${script("import { TextArea } from '@sveltique/components';")}
         
 <TextArea placeholder="Enter your message here..." />`
 	};

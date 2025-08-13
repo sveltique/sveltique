@@ -1,5 +1,5 @@
 <script>
-	import { DateInput } from '@novaotp/components';
+	import { DateInput } from '@sveltique/components';
 </script>
 
 <DateInput modalProps={{ closeOnOverlayClick: true, backdropProps: { z: 1000 } }} />

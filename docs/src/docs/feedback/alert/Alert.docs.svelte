@@ -1,6 +1,6 @@
 <script>
 	import Playground from '$components/Playground.svelte';
-	import { Alert } from '@novaotp/components';
+	import { Alert } from '@sveltique/components';
 </script>
 
 <h1>Alert</h1>

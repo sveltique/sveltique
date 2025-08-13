@@ -1,14 +1,14 @@
 <script>
 	import Playground from '$components/Playground.svelte';
 	import { script } from '$utils/playground';
-	import { Checkbox } from '@novaotp/components';
+	import { Checkbox } from '@sveltique/components';
 
 	const code = {
 		short: `<Checkbox />
 <Checkbox checked />
 <Checkbox disabled />
 <Checkbox checked disabled />`,
-		expanded: `${script("import { Checkbox } from '@novaotp/components';")}
+		expanded: `${script("import { Checkbox } from '@sveltique/components';")}
 
 <Checkbox />
 <Checkbox checked />

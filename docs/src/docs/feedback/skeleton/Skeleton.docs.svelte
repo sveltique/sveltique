@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { code } from './content.js';
 	import Playground from '$components/Playground.svelte';
-	import { Skeleton } from '@novaotp/components';
+	import { Skeleton } from '@sveltique/components';
 </script>
 
 <h1>Skeleton</h1>

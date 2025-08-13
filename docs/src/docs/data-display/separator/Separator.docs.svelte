@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Playground from '$components/Playground.svelte';
-	import { Paper, Separator } from '@novaotp/components';
+	import { Paper, Separator } from '@sveltique/components';
 
 	import IconPlayerPauseFilled from '@tabler/icons-svelte/icons/player-pause-filled';
 	import IconPlayerSkipBackFilled from '@tabler/icons-svelte/icons/player-skip-back-filled';

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Playground from '$components/Playground.svelte';
-	import { Badge, Link } from '@novaotp/components';
+	import { Badge, Link } from '@sveltique/components';
 	import { basicUsageCode } from './content.js';
 </script>
 

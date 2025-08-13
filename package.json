@@ -2,7 +2,10 @@
 	"name": "monorepo",
 	"scripts": {
 		"docs.dev": "npm --prefix ./docs run dev",
+		"docs.install": "npm --prefix ./docs install",
 		"components.dev": "npm --prefix ./packages/components run build",
+		"components.install": "npm --prefix ./packages/components install",
+		"install": "concurrently 'npm:docs.install' 'npm:components.install'",
 		"dev": "concurrently 'npm:docs.dev' 'npm:components.dev'"
 	},
 	"devDependencies": {

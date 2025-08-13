@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Playground from '$components/Playground.svelte';
-	import { Badge, NumberInput } from '@novaotp/components';
+	import { Badge, NumberInput } from '@sveltique/components';
 
 	const code = {
 		short: `<NumberInput

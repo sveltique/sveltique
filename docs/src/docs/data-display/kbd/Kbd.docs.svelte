@@ -1,7 +1,7 @@
 <script>
 	import Playground from '$components/Playground.svelte';
 	import { script } from '$utils/playground';
-	import { Kbd } from '@novaotp/components';
+	import { Kbd } from '@sveltique/components';
 
 	const code = {
 		short: `<div class="flex items-center gap-2.5">
@@ -18,7 +18,7 @@
         <Kbd>Ctrl</Kbd> + <Kbd>V</Kbd>
     </div>
 </div>`,
-		expanded: `${script("import { Kbd } from '@novaotp/components';")}
+		expanded: `${script("import { Kbd } from '@sveltique/components';")}
 
 <div class="flex items-center gap-2.5">
     <Kbd>Esc</Kbd>
