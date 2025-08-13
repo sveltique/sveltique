@@ -1,7 +1,7 @@
 <script>
 	import Playground from '$components/Playground.svelte';
 	import { script } from '$utils/playground';
-	import { Banner, Switch } from '@novaotp/components';
+	import { Alert, Switch } from '@novaotp/components';
 
 	const code = {
 		short: `<Switch />
@@ -21,7 +21,7 @@
 <p>A switch-style element for displaying on/off states.</p>
 
 <h2>Basic Usage</h2>
-<Banner type="info" class="mb-4">Under the hood, it behaves like a checkbox.</Banner>
+<Alert type="info" class="mb-4">Under the hood, it behaves like a checkbox.</Alert>
 <Playground {code}>
 	<Switch />
 	<Switch checked />
