@@ -8,13 +8,7 @@ const config = {
 		adapter: adapter(),
 		alias: {
 			$components: './src/lib/components/index.ts',
-			$docs: './src/lib/docs',
 			$utils: './src/lib/utils'
-		}
-	},
-	compilerOptions: {
-		experimental: {
-			async: true
 		}
 	}
 };
