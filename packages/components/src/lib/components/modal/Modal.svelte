@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { onMount, type Snippet } from 'svelte';
 	import { on } from 'svelte/events';
-	import { flyAndScale } from '$lib/transitions/fly-and-scale.js';
+	import { flyAndScale } from '../../transitions/fly-and-scale.js';
 	import { modal } from './variants.js';
-	import Backdrop, { type BackdropProps } from '../backdrop/Backdrop.svelte';
+	import { Backdrop, type BackdropProps } from '../backdrop/index.js';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { WithTWMergeClass } from '$lib/types.js';
 
