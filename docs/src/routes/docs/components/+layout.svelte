@@ -3,12 +3,16 @@
 	import { fly } from 'svelte/transition';
 	import { page } from '$app/state';
 	import { cnBase } from 'tailwind-variants';
-	import { Backdrop, button } from '@sveltique/components';
-
+	import { Backdrop, Button, button, Separator } from '@sveltique/components';
 	import { setOnThisPageContext } from '$lib/contexts/on-this-page.svelte.js';
 	import { capitalize } from '$utils/string.js';
+
 	import IconMenuDeep from '@tabler/icons-svelte/icons/menu-deep';
 	import IconChevronRight from '@tabler/icons-svelte/icons/chevron-right';
+	import IconChevronDown from '@tabler/icons-svelte/icons/chevron-down';
+	import IconSettingsCheck from '@tabler/icons-svelte/icons/settings-check';
+	import IconHelp from '@tabler/icons-svelte/icons/help';
+	import IconTable from '@tabler/icons-svelte/icons/table';
 
 	let { children, data } = $props();
 
@@ -16,8 +20,7 @@
 
 	let showMenu = $state(false);
 	let showOnThisPage = $state(false);
-
-	let treeArr = $derived(Object.entries(data.tree));
+	let showComponentsMenu = $state(page.url.pathname.startsWith('/docs/components/browse/'));
 
 	$effect(() => {
 		document.body.style.overflow = showMenu ? 'hidden' : 'auto';
@@ -50,20 +53,66 @@
 
 {#snippet componentsBar()}
 	<aside
-		class="sticky left-0 top-16 z-50 hidden h-[calc(100vh-4rem)] w-full items-start justify-end bg-zinc-50 p-6 lg:flex"
+		class="sticky left-0 top-16 z-50 hidden h-[calc(100vh-4rem)] w-full items-start justify-end overflow-auto bg-zinc-50 p-6 lg:flex"
 	>
-		<nav class="relative flex h-full min-w-[200px] flex-col">
-			{#each treeArr as [category, names], index (index)}
-				<div
+		<nav class="relative flex min-w-[240px] flex-col gap-1">
+			<a
+				href="/docs/components/installation"
+				class={button({
+					variant: 'text',
+					size: 'small',
+					class: [
+						'justify-start font-bold',
+						page.url.pathname === '/docs/components/installation' ? 'text-black' : 'text-zinc-500'
+					]
+				})}
+			>
+				<IconSettingsCheck /> Installation
+			</a>
+			<a
+				href="/docs/components/usage"
+				class={button({
+					variant: 'text',
+					size: 'small',
+					class: [
+						'justify-start font-bold',
+						page.url.pathname === '/docs/components/usage' ? 'text-black' : 'text-zinc-500'
+					]
+				})}
+			>
+				<IconHelp /> Usage
+			</a>
+			<Button
+				onclick={() => (showComponentsMenu = !showComponentsMenu)}
+				variant="text"
+				size="small"
+				class={['justify-between font-bold', showComponentsMenu ? 'text-black' : 'text-zinc-500']}
+			>
+				<div class="flex items-center gap-5">
+					<IconTable /> Components
+				</div>
+				<IconChevronDown
 					class={cnBase(
-						'relative flex flex-col pb-6 text-sm font-medium',
-						index !== 0 && 'border-t border-zinc-300 pt-2.5'
+						'aspect-square h-5 shrink-0 duration-150',
+						showComponentsMenu && 'rotate-180'
 					)}
-				>
-					<div role="heading" aria-level="2" class="pb-1 font-bold">{capitalize(category)}</div>
-					{#each names as name (name)}
+				/>
+			</Button>
+			{#if showComponentsMenu}
+				<div class="flex flex-col gap-1 pl-[60px] text-sm">
+					<a
+						href="/docs/components/browse"
+						class={cnBase(
+							'py-1',
+							page.url.pathname === '/docs/components/browse' ? 'text-blue-700' : 'text-zinc-600'
+						)}
+					>
+						All components
+					</a>
+					<Separator class="my-2" />
+					{#each data.componentNames as name, index (index)}
 						<a
-							href="/docs/components/{category}/{name}"
+							href="/docs/components/browse/{name}"
 							class={cnBase(
 								'py-1',
 								page.url.pathname.endsWith(name) ? 'text-blue-700' : 'text-zinc-600'
@@ -73,7 +122,7 @@
 						</a>
 					{/each}
 				</div>
-			{/each}
+			{/if}
 		</nav>
 	</aside>
 
@@ -108,26 +157,16 @@
 				transition:fly={{ x: -100, duration: 150 }}
 				class="relative flex h-[100vh] w-60 flex-col items-start justify-start overflow-auto bg-white p-6 shadow-[0_0_12px_4px_rgba(0,0,0,0.15)]"
 			>
-				{#each treeArr as [category, names], index (index)}
-					<div
+				{#each data.componentNames as name, index (index)}
+					<a
+						href="/docs/components/browse/{name}"
 						class={cnBase(
-							'relative flex w-full flex-col pb-6 text-sm font-medium',
-							index !== 0 && 'border-t border-zinc-300 pt-2.5'
+							'py-1',
+							page.url.pathname.endsWith(name) ? 'text-blue-700' : 'text-zinc-600'
 						)}
 					>
-						<div role="heading" aria-level="2" class="pb-1 font-bold">{capitalize(category)}</div>
-						{#each names as name (name)}
-							<a
-								href="/docs/components/{category}/{name}"
-								class={cnBase(
-									'py-1',
-									page.url.pathname.endsWith(name) ? 'text-blue-700' : 'text-zinc-600'
-								)}
-							>
-								{capitalize(name)}
-							</a>
-						{/each}
-					</div>
+						{capitalize(name)}
+					</a>
 				{/each}
 			</nav>
 		</Backdrop>

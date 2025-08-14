@@ -1,19 +1,12 @@
-type Tree = Record<string, string[]>;
-
 export async function load() {
 	return {
-		tree: await getTree()
+		componentNames: await getComponentNames()
 	};
 }
 
-async function getTree() {
-	const modules = import.meta.glob('../../../docs/*/*/*.docs.svelte');
+async function getComponentNames() {
+	const modules = import.meta.glob('../../../docs/*/*.docs.svelte');
+	const keys = Object.keys(modules);
 
-	return Object.keys(modules).reduce((acc, curr) => {
-		const [category, name] = curr.split('/').slice(-3, -1);
-
-		acc[category] = [...(acc[category] ?? []), name];
-
-		return acc;
-	}, {} as Tree);
+	return keys.map((path) => path.split('/').at(-2)!);
 }

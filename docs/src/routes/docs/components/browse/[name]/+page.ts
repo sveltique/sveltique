@@ -4,16 +4,16 @@ import type { Component } from 'svelte';
 export async function load({ params }) {
 	return {
 		name: capitalize(params.name),
-		Component: await importComponent(params.category, params.name)
+		Component: await importComponent(params.name)
 	};
 }
 
-async function importComponent(category: string, name: string) {
+async function importComponent(name: string) {
 	const modules = import.meta.glob<boolean, string, Component>(
-		'../../../../../docs/*/*/*.docs.svelte',
+		'../../../../../docs/*/*.docs.svelte',
 		{ import: 'default' }
 	);
-	const path = `../../../../../docs/${category}/${name}/${capitalize(name).replaceAll(' ', '')}.docs.svelte`;
+	const path = `../../../../../docs/${name}/${capitalize(name).replaceAll(' ', '')}.docs.svelte`;
 
 	const loader = modules[path];
 
@@ -26,7 +26,7 @@ async function importComponent(category: string, name: string) {
 
 export async function entries() {
 	const modules = import.meta.glob<boolean, string, Component>(
-		'../../../../../docs/*/*/*.docs.svelte',
+		'../../../../../../docs/*/*.docs.svelte',
 		{ import: 'default' }
 	);
 
