@@ -20,7 +20,7 @@
 	>
 		<nav class="relative flex w-full items-center justify-center gap-5">
 			<a href="/">home</a>
-			<a href="/docs/components">components</a>
+			<a href="/docs/components/browse">components</a>
 		</nav>
 	</header>
 
@@ -37,7 +37,7 @@
 
 	{#if showMenu}
 		<div class="fixed top-16 flex w-full flex-col">
-			<a href="/docs/components">Components</a>
+			<a href="/docs/components/browse">Components</a>
 		</div>
 	{/if}
 {/snippet}
