@@ -1,5 +1,5 @@
 <script>
-	import { Badge, Button, Tooltip } from '@sveltique/components';
+	import { Alert, Badge, Button, CodeBlock, Tooltip } from '@sveltique/components';
 	import Playground from '$components/Playground.svelte';
 	import IconEdit from '@tabler/icons-svelte/icons/edit';
 	import { script } from '$utils/playground';
@@ -31,7 +31,11 @@
 </Tooltip>`
 	};
 
-	const customComponentCode = {};
+	const customComponentCode = `<Tooltip title="Edit post">
+    {#snippet children({ ref })}
+        <div bind:this={ref.current}>...</div>
+    {/snippet}
+</Tooltip>`;
 </script>
 
 <h1>Tooltip</h1>
@@ -47,3 +51,37 @@
 		{/snippet}
 	</Tooltip>
 </Playground>
+
+<h3>Custom children</h3>
+<p>
+	You can use a custom component as the children of the tooltip as long as you can bind to an HTML
+	element.
+</p>
+<CodeBlock code={customComponentCode} lang="svelte" theme="catppuccin-latte" />
+
+<h2>Accessibility</h2>
+<p>
+	To make the tooltip accessible, it must be linked to the item it describes. For this, pass down
+	the tooltip's ID by using the <Badge>props</Badge> parameter.
+</p>
+<Alert type="info" class="mb-4">
+	You can set a custom ID to the tooltip and the props will use it. Else, it will use a generated
+	one via <Badge>$props.id()</Badge>.
+</Alert>
+<CodeBlock
+	code={`<Tooltip title="Edit post">
+
+    <!-- props : { 'aria-describedby': string } -->
+    {#snippet children({ props, ref })}
+        <Button
+            bind:ref={ref.current}
+            shape="square"
+            {...props}
+        >
+            <IconEdit />
+        </Button>
+    {/snippet}
+</Tooltip>`}
+	lang="svelte"
+	theme="catppuccin-latte"
+/>

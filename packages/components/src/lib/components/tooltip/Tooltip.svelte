@@ -2,22 +2,28 @@
 	import type { Snippet } from 'svelte';
 	import { on } from 'svelte/events';
 	import { fade } from 'svelte/transition';
+	import { tooltip } from './variants.js';
+	import type { WithTWMergeClass } from '$lib/types.js';
 
 	type Ref = { current: HTMLElement | undefined };
 
-	interface Props {
-		children?: Snippet<[{ ref: Ref; props: { 'aria-labelledby': string } }]>;
+	interface Props extends WithTWMergeClass {
+		children?: Snippet<[{ ref: Ref; props: { 'aria-describedby': string } }]>;
+		id?: string;
 		title: string;
 		/** @default 1000 */
 		z?: number;
 	}
 
-	let { children, title, z = 1000 }: Props = $props();
+	let { children, id, class: className, title, z = 1000 }: Props = $props();
 
 	const uid = $props.id();
 
 	let ref = $state<Ref>({ current: undefined });
 	let show = $state(false);
+
+	let _id = $derived(id ?? uid);
+	let { container, tip } = $derived(tooltip());
 
 	$effect(() => {
 		if (!ref.current) return;
@@ -39,15 +45,16 @@
 	});
 </script>
 
-<div class="relative">
-	{@render children?.({ ref, props: { 'aria-labelledby': uid } })}
+<div class={container()}>
+	{@render children?.({ ref, props: { 'aria-describedby': _id } })}
 	{#if show}
 		<div
 			transition:fade={{ duration: 150 }}
-			id={uid}
+			id={_id}
 			role="tooltip"
 			style="z-index: {z};"
-			class="absolute left-1/2 top-[calc(100%+4px)] -translate-x-1/2 whitespace-nowrap rounded-md border border-zinc-100 bg-white p-2 text-xs shadow-sm"
+			tabindex="-1"
+			class={tip({ className })}
 		>
 			{title}
 		</div>
