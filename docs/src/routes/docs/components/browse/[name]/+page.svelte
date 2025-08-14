@@ -1,14 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/state';
-	import { getOnThisPageContext } from '$lib/contexts/on-this-page.svelte.js';
-
 	let { data } = $props();
-
-	const headings = getOnThisPageContext();
-
-	$effect(() => {
-		page.url.pathname && headings.getFromDOM();
-	});
 </script>
 
 <svelte:head>

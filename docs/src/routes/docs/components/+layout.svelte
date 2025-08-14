@@ -27,6 +27,10 @@
 	});
 
 	$effect(() => {
+		page.url.pathname && headings.getFromDOM();
+	});
+
+	$effect(() => {
 		if (showMenu) {
 			untrack(() => (showOnThisPage = false));
 		} else if (showOnThisPage) {

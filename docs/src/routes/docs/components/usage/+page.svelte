@@ -1,7 +1,7 @@
 <script>
 	import Playground from '$components/Playground.svelte';
 	import { script } from '$utils/playground';
-	import { Button, Link, Tooltip } from '@sveltique/components';
+	import { Button, CodeBlock, Link, Tooltip } from '@sveltique/components';
 
 	const code = {
 		short: `<Tooltip title="Sveltique is awesome">
@@ -49,6 +49,18 @@
 		{/snippet}
 	</Tooltip>
 </Playground>
+
+<h2>Tree Shaking</h2>
+<p>
+	To reduce your bundle, you can import each component individually instead of using the root
+	import.
+</p>
+<CodeBlock
+	code={'import { Alert } from "@sveltique/components/alert";'}
+	lang="ts"
+	theme="catppuccin-latte"
+	class="**:font-cascadia-code"
+/>
 
 <style lang="postcss">
 	@reference "../../../../app.css";
