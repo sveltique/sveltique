@@ -31,30 +31,42 @@ async function loadShiki() {
 type CodeToHTMLOptions = {
 	lang: BundledLanguage;
 	theme: BundledTheme;
-	/** @default [] */
-	lines?: number[];
+	/** @default '' */
+	lines?: string;
 };
 
 /** Enhanced `codeToHTML` to enable line highlighting. */
 export async function codeToHTML(code: string, options: CodeToHTMLOptions) {
-	const { lang, theme, lines = [] } = options;
+	const { lang, theme, lines = '' } = options;
+	const parsedLines = parseNumberRanges(lines);
+
+	console.log(parsedLines);
 
 	const { codeToTokens } = await loadShiki();
 
-	const result = await codeToTokens(code, { lang, theme });
+	const result = await codeToTokens(transformHTMLEntities(code), { lang, theme });
 
 	const htmlLines = result.tokens.map((tokens, idx) => {
-		const isHighlighted = lines.includes(idx + 1);
-		const classes = isHighlighted ? ' highlighted-line' : '';
+		const isHighlighted = parsedLines.includes(idx + 1);
+		const classes = isHighlighted ? ' highlighted' : '';
 
-		const lineHtml = tokens
+		let lineHtml = tokens
 			.map((token) => {
 				const color = token.color ? `color:${token.color}` : '';
 				const bgColor = token.bgColor ? `background-color:${token.bgColor}` : '';
 
-				return `<span style="${color};${bgColor}">${escapeHtml(token.content)}</span>`;
+				let content = escapeHTML(token.content);
+				if (content.length === 0) {
+					content = '    ';
+				}
+
+				return `<span style="${color};${bgColor}">${content}</span>`;
 			})
 			.join('');
+
+		if (lineHtml.length === 0) {
+			lineHtml = '    ';
+		}
 
 		return `<span class="line${classes}">${lineHtml}</span>`;
 	});
@@ -62,11 +74,55 @@ export async function codeToHTML(code: string, options: CodeToHTMLOptions) {
 	return `<pre style="color: ${result.fg}; background-color: ${result.bg}"><code>${htmlLines.join('')}</code></pre>`;
 }
 
-function escapeHtml(str: string) {
+export function transformHTMLEntities(str: string) {
 	return str
-		.replace(/&/g, '&amp;')
-		.replace(/</g, '&lt;')
-		.replace(/>/g, '&gt;')
-		.replace(/"/g, '&quot;')
-		.replace(/'/g, '&#39;');
+		.replaceAll('&amp;', '&')
+		.replaceAll('&lt;', '<')
+		.replaceAll('&gt;', '>')
+		.replaceAll('&quot;', '"')
+		.replaceAll('&#39;', "'");
+}
+
+function escapeHTML(str: string) {
+	return str
+		.replaceAll('&', '&amp;')
+		.replaceAll('<', '&lt;')
+		.replaceAll('>', '&gt;')
+		.replaceAll('"', '&quot;')
+		.replaceAll("'", '&#39;');
+}
+
+/**
+ * @note You can use spaces.
+ * @example
+ * parseNumberRanges("1") // [1]
+ * parseNumberRanges("1,5,9") // [1, 5, 9]
+ * parseNumberRanges("1-3") // [1, 2, 3]
+ * parseNumberRanges("1,3-6,14") // [1, 3, 4, 5, 6, 14]
+ */
+export function parseNumberRanges(ranges: string): number[] {
+	const reducer = (acc: Set<number>, curr: string) => {
+		if (/^\d+$/.test(curr)) {
+			acc.add(Number(curr));
+		} else if (/^\d+-\d+$/.test(curr)) {
+			let [start, end] = curr.split('-').map(Number);
+
+			if (start > end) {
+				[start, end] = [end, start];
+			}
+
+			for (let i = start; i <= end; i++) {
+				acc.add(Number(i));
+			}
+		}
+
+		return acc;
+	};
+
+	return [
+		...ranges
+			.split(',')
+			.map((range) => range.trim())
+			.reduce(reducer, new Set<number>())
+	].sort((a, b) => a - b);
 }

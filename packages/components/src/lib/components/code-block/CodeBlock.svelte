@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { codeToHTML } from './code-block.js';
+	import { codeToHTML, transformHTMLEntities } from './code-block.js';
 	import { codeBlock } from './variants.js';
 	import IconClipboard from '@tabler/icons-svelte/icons/clipboard';
 	import IconClipboardCheck from '@tabler/icons-svelte/icons/clipboard-check';
@@ -12,8 +12,8 @@
 		theme: BundledTheme;
 		/** @default false */
 		showLineNumbers?: boolean;
-		/** @default [] */
-		highlightedLines?: number[];
+		/** @default '' */
+		highlightedLines?: string;
 	}
 
 	let {
@@ -22,7 +22,7 @@
 		lang,
 		theme,
 		showLineNumbers = false,
-		highlightedLines = []
+		highlightedLines = ''
 	}: Props = $props();
 
 	let isCopied = $state(false);
@@ -45,11 +45,13 @@
 
 	async function copy() {
 		isCopied = true;
-		await navigator.clipboard.writeText(code);
+		await navigator.clipboard.writeText(transformHTMLEntities(code));
 	}
 </script>
 
-{#await _code then highlighted}
+{#await _code}
+	<pre class="py-5">{transformHTMLEntities(code)}</pre>
+{:then highlighted}
 	<div class={container({ showLineNumbers, className })}>
 		{@html highlighted}
 		<button onclick={copy} class={button()}>
@@ -73,6 +75,10 @@
 
 				.line {
 					padding: 2px 20px;
+
+					&.highlighted {
+						background-color: color-mix(in srgb, currentColor 12%, transparent);
+					}
 				}
 			}
 		}

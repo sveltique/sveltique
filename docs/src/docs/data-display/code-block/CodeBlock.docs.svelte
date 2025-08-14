@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { replaceEntities } from '$utils/html.js';
 	import { Badge, CodeBlock } from '@sveltique/components';
+	import { replaceEntities } from '$utils/html.js';
 	import Playground from '$components/Playground.svelte';
-	import { codeToHtml } from 'shiki';
+	import { script } from '$utils/playground';
 </script>
 
 <h1>Code Block</h1>
@@ -10,14 +10,6 @@
 	Display syntax-highlighted code snippets. It's ideal for documentation, tutorials, or anywhere you
 	need clear, readable code examples.
 </p>
-
-{@html await codeToHtml(
-	`<div class="card">;
-    <h2>Hello, world!</h2>;
-    <p>This is a simple HTML example.</p>
-</div>`,
-	{ lang: 'svelte', theme: 'catppuccin-latte' }
-)}
 
 <h2>Basic Usage</h2>
 <p>
@@ -45,6 +37,7 @@
 		code={replaceEntities(`&lt;script&gt;
     let a = $state(5);
     let b = $state(7);
+
     let sum = $derived(a + b);
 &lt;/script&gt;
 
@@ -62,19 +55,43 @@
 		>highlightedLines</Badge
 	> attribute.
 </p>
-<Playground>
-	<CodeBlock
-		code={replaceEntities(`&lt;script&gt;
+<Playground
+	code={{
+		short: `<CodeBlock
+    {code}
+    lang="svelte"
+    theme="catppuccin-latte"
+    highlightedLines="2-3,5,8"
+/>`,
+		expanded: `${script(`import { CodeBlock } from '@sveltique/components';
+
+    const code = \`&lt;script&gt;
     let a = $state(5);
     let b = $state(7);
+
     let sum = $derived(a + b);
 &lt;/script&gt;
+
+<p>{a} + {b} = {sum}</p>\``)}
+
+<CodeBlock
+    {code}
+    lang="svelte"
+    theme="catppuccin-latte"
+    highlightedLines="2-3,5,8"
+/>`
+	}}
+>
+	<CodeBlock
+		code={replaceEntities(`${script(`let a = $state(5);
+    let b = $state(7);
+
+    let sum = $derived(a + b);`)}
 
 <p>{a} + {b} = {sum}</p>`)}
 		lang="svelte"
 		theme="catppuccin-latte"
-		showLineNumbers
-		highlightedLines={[4]}
+		highlightedLines="2-3,5,8"
 		class="**:font-cascadia-code"
 	/>
 </Playground>

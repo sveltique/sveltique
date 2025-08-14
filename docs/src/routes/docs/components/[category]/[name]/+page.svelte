@@ -15,7 +15,7 @@
 	<title>{data.name} | Components</title>
 </svelte:head>
 
-<div id="content" class="relative w-full">
+<div id="content" class="relative w-full pb-16">
 	<data.Component />
 </div>
 
