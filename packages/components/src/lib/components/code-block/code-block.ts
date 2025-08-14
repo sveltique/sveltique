@@ -40,8 +40,6 @@ export async function codeToHTML(code: string, options: CodeToHTMLOptions) {
 	const { lang, theme, lines = '' } = options;
 	const parsedLines = parseNumberRanges(lines);
 
-	console.log(parsedLines);
-
 	const { codeToTokens } = await loadShiki();
 
 	const result = await codeToTokens(transformHTMLEntities(code), { lang, theme });
