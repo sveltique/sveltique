@@ -2,8 +2,11 @@
 	import Playground from '$components/Playground.svelte';
 	import { Backdrop, Button } from '@sveltique/components';
 	import { code } from './content';
+	import { onKeyUp } from '$utils/on-key-up.svelte';
 
 	let showBackdrop = $state(false);
+
+	onKeyUp('Escape', () => (showBackdrop = false));
 </script>
 
 <h1>Backdrop</h1>
