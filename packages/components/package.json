@@ -26,12 +26,16 @@
 			"types": "./dist/components/index.d.ts",
 			"svelte": "./dist/components/index.js"
 		},
-		"./*": {
-			"types": "./dist/components/*/index.d.ts",
-			"svelte": "./dist/components/*/index.js"
+		"./utils": {
+			"types": "./dist/utils/index.d.ts",
+			"svelte": "./dist/utils/index.js"
 		},
 		"./types": {
 			"types": "./dist/types.d.ts"
+		},
+		"./*": {
+			"types": "./dist/components/*/index.d.ts",
+			"svelte": "./dist/components/*/index.js"
 		}
 	},
 	"peerDependencies": {

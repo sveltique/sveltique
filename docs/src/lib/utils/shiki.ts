@@ -3,7 +3,7 @@ import { createHighlighter, type BundledLanguage } from 'shiki';
 const registeredLangs = ['svelte'] as const satisfies BundledLanguage[];
 
 export const highlighter = await createHighlighter({
-	themes: ['one-dark-pro'],
+	themes: ['catppuccin-latte'],
 	langs: registeredLangs
 });
 
@@ -18,6 +18,6 @@ export function style(html: string, options: StyleOptions = {}) {
 
 	return highlighter.codeToHtml(html, {
 		lang,
-		theme: 'one-dark-pro'
+		theme: 'catppuccin-latte'
 	});
 }
