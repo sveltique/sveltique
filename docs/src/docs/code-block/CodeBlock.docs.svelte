@@ -16,7 +16,27 @@
 	Wrap your code in a <code>&lt;CodeBlock&gt;</code> component, set the language and the theme, and you're
 	done.
 </p>
-<Playground>
+<Playground
+	code={{
+		short: `<CodeBlock
+    {code}
+    lang="html"
+    theme="catppuccin-latte"
+/>`,
+		expanded: `${script(`import { CodeBlock } from '@sveltique/components';
+
+    const code = \`&lt;div class="card"&gt;
+    &lt;h2&gt;Hello, world!&lt;/h2&gt;
+    &lt;p&gt;This is a simple HTML example.&lt;/p&gt;
+&lt;/div&gt;\`;`)}
+
+<CodeBlock
+    {code}
+    lang="html"
+    theme="catppuccin-latte"
+/>`
+	}}
+>
 	<CodeBlock
 		code={`&lt;div class="card"&gt;
     &lt;h2&gt;Hello, world!&lt;/h2&gt;
@@ -32,7 +52,33 @@
 <p>
 	You can show line numbers with the <Badge>showLineNumbers</Badge> attribute.
 </p>
-<Playground>
+<Playground
+	code={{
+		short: `<CodeBlock
+    {code}
+    lang="svelte"
+    theme="catppuccin-latte"
+    showLineNumbers
+/>`,
+		expanded: `${script(`import { CodeBlock } from '@sveltique/components';
+
+    const code = \`&lt;script&gt;
+    let a = $state(5);
+    let b = $state(7);
+
+    let sum = $derived(a + b);
+&lt;/script&gt;
+
+<p>{a} + {b} = {sum}</p>\`;`)}
+
+<CodeBlock
+    {code}
+    lang="svelte"
+    theme="catppuccin-latte"
+    showLineNumbers
+/>`
+	}}
+>
 	<CodeBlock
 		code={replaceEntities(`&lt;script&gt;
     let a = $state(5);
@@ -72,7 +118,7 @@
     let sum = $derived(a + b);
 &lt;/script&gt;
 
-<p>{a} + {b} = {sum}</p>\``)}
+<p>{a} + {b} = {sum}</p>\`;`)}
 
 <CodeBlock
     {code}

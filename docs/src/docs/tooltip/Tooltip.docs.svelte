@@ -57,7 +57,12 @@
 	You can use a custom component as the children of the tooltip as long as you can bind to an HTML
 	element.
 </p>
-<CodeBlock code={customComponentCode} lang="svelte" theme="catppuccin-latte" />
+<CodeBlock
+	code={customComponentCode}
+	lang="svelte"
+	theme="catppuccin-latte"
+	class="**:font-cascadia-code"
+/>
 
 <h2>Accessibility</h2>
 <p>
@@ -65,12 +70,11 @@
 	the tooltip's ID by using the <Badge>props</Badge> parameter.
 </p>
 <Alert type="info" class="mb-4">
-	You can set a custom ID to the tooltip and the props will use it. Else, it will use a generated
-	one via <Badge>$props.id()</Badge>.
+	You can set a custom ID on the tooltip and the props will use it. Otherwise, it will use a
+	generated one via <Badge>$props.id()</Badge>.
 </Alert>
 <CodeBlock
 	code={`<Tooltip title="Edit post">
-
     <!-- props : { 'aria-describedby': string } -->
     {#snippet children({ props, ref })}
         <Button
@@ -84,4 +88,5 @@
 </Tooltip>`}
 	lang="svelte"
 	theme="catppuccin-latte"
+	class="**:font-cascadia-code"
 />

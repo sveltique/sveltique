@@ -30,7 +30,7 @@
     </div>
 </Paper>`,
 		expanded: `&lt;script lang="ts"&gt;
-    import { Paper, Separator } from '@novaotp/design/components';
+    import { Paper, Separator } from '@sveltique/components';
     import {
         IconPlayerPauseFilled,
         IconPlayerSkipBackFilled,
@@ -65,6 +65,7 @@
 
 <h1>Separator</h1>
 <p>A visible, thin line to visually divide two items.</p>
+
 <h2>Basic Usage</h2>
 <p>The separator can either be vertical or horizontal.</p>
 <Playground {code} class="flex-col">

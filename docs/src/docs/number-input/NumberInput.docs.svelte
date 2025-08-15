@@ -11,7 +11,7 @@
     containerClass="w-3xs"
 />`,
 		expanded: `&lt;script lang="ts"&gt;
-    import { NumberInput } from '@novaotp/design/components';
+    import { NumberInput } from '@sveltique/components';
 &lt;/script&gt;
 
 <!--

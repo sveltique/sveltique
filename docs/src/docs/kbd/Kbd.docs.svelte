@@ -39,6 +39,8 @@
 
 <h1>Kbd</h1>
 <p>Denotes textual user input from a keyboard, voice input, or any other text entry device.</p>
+
+<h2>Basic Usage</h2>
 <Playground {code} class="flex-col">
 	<div class="flex items-center gap-2.5">
 		<Kbd>Esc</Kbd>

@@ -68,6 +68,7 @@
 
 	.highlighted-code :global {
 		pre {
+			border-radius: 0;
 			padding: 20px 0;
 			counter-reset: line;
 			overflow-x: scroll;

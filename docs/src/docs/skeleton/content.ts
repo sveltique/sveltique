@@ -11,7 +11,7 @@ export const code = {
         <Skeleton class="h-4 w-1/2" />
     </div>
 {/snippet}`,
-	expanded: `${script("import { Skeleton } from '@novaotp/design/components';")}
+	expanded: `${script("import { Skeleton } from '@sveltique/components';")}
 
 {@render videoLoading()}
 {@render videoLoading()}
