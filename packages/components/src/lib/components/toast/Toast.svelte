@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { WithTWMergeClass } from '$lib/types.js';
 	import { ICONS } from './icons.js';
 	import { toast, type ToastVariants } from './variants.js';
 	import CloseIcon from '@tabler/icons-svelte/icons/x';
 	import type { Snippet } from 'svelte';
+	import type { WithTWMergeClass } from '$lib/types.js';
 
 	interface Props extends WithTWMergeClass<ToastVariants> {
 		/** If passed, renders a close button. */
