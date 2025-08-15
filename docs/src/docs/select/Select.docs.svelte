@@ -31,6 +31,7 @@
 
 <h1>Select</h1>
 <p>A dropdown.</p>
+
 <h2>Basic Usage</h2>
 <p>
 	It is meant to be used as a drop-in replacement for the native select element, and ensures the

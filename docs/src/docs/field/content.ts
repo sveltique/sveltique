@@ -1,11 +1,16 @@
 export const ageCode = {
 	short: `<Field label="Age" error={ageError} class="w-[240px]">
     {#snippet input(props)}
-        <NumberInput bind:value={age} min={0} max={99} {...props} />
+        <NumberInput
+            bind:value={age}
+            min={0}
+            max={99}
+            {...props}
+        />
     {/snippet}
 </Field>`,
 	expanded: `&lt;script&gt;
-    import { Field, NumberInput } from '@novaotp/design/components';
+    import { Field, NumberInput } from '@sveltique/components';
 
     let age = $state(18);
     let ageError = $derived.by(() => {
@@ -17,7 +22,12 @@ export const ageCode = {
 
 <Field label="Age" error={ageError} class="w-[240px]">
     {#snippet input(props)}
-        <NumberInput bind:value={age} min={0} max={99} {...props} />
+        <NumberInput
+            bind:value={age}
+            min={0}
+            max={99}
+            {...props}
+        />
     {/snippet}
 </Field>`
 };

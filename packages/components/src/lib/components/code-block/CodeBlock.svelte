@@ -29,11 +29,7 @@
 	let CopyIcon = $derived(isCopied ? IconClipboardCheck : IconClipboard);
 
 	const { button, container, icon } = $derived(codeBlock());
-	let _code = $derived.by(async () => {
-		const h = await codeToHTML(code, { lang, theme, lines: highlightedLines });
-
-		return h;
-	});
+	let _code = $derived(codeToHTML(code, { lang, theme, lines: highlightedLines }));
 
 	$effect(() => {
 		if (!isCopied) return;
@@ -49,9 +45,7 @@
 	}
 </script>
 
-{#await _code}
-	<pre class="py-5">{transformHTMLEntities(code)}</pre>
-{:then highlighted}
+{#await _code then highlighted}
 	<div class={container({ showLineNumbers, className })}>
 		{@html highlighted}
 		<button onclick={copy} class={button()}>
@@ -61,7 +55,7 @@
 {/await}
 
 <style>
-	.code-block :global {
+	:global {
 		pre {
 			border-radius: 16px;
 			padding: 20px 0;
@@ -84,13 +78,15 @@
 		}
 	}
 
-	.code-block.show-line-numbers :global code .line::before {
-		counter-increment: line;
-		content: counter(line);
-		display: inline-block;
-		width: 1rem;
-		margin-right: 2rem;
-		text-align: right;
-		color: gray;
+	.show-line-numbers :global {
+		.line::before {
+			counter-increment: line;
+			content: counter(line);
+			display: inline-block;
+			width: 1rem;
+			margin-right: 2rem;
+			text-align: right;
+			color: gray;
+		}
 	}
 </style>

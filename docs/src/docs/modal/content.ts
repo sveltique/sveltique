@@ -14,7 +14,7 @@ export const code = {
         <Button onclick={close} color="danger">Log Out</Button>
     {/snippet}
 </Modal>`,
-	expanded: `${script('import { Button, Modal } from "@novaotp/design/components";')}
+	expanded: `${script('import { Button, Modal } from "@sveltique/components";')}
 
 <Modal>
     {#snippet trigger({ open })}
@@ -65,7 +65,7 @@ export const controlledStateCode = {
         </p>
     </div>
 </Modal>`,
-	expanded: `${script(`import { Button, Modal } from "@novaotp/design/components";
+	expanded: `${script(`import { Button, Modal } from "@sveltique/components";
     
     let isOpen = $state(false);`)}
 
