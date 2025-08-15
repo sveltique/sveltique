@@ -71,14 +71,19 @@
 			border-radius: 0;
 			padding: 20px 0;
 			counter-reset: line;
-			overflow-x: scroll;
+			overflow-x: auto;
 
 			* {
 				font-family: 'Cascadia Code', sans-serif;
 			}
 
+			code {
+				display: contents;
+			}
+
 			code .line {
 				padding: 2px 20px;
+				white-space: pre;
 			}
 
 			code .line::before {

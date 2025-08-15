@@ -23,7 +23,7 @@
 		}
 
 		& > h3 {
-			@apply mt-8 scroll-mt-20 text-xl font-bold;
+			@apply mb-4 mt-8 scroll-mt-20 text-xl font-bold;
 		}
 
 		& > p {

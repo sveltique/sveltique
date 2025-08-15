@@ -15,7 +15,9 @@
 	<Button variant="text">TEXT</Button>
 </Playground>
 
-<h2>Shapes</h2>
+<h2>Customization</h2>
+
+<h3>Shapes</h3>
 <p>A button can have three different shapes: rectangle (default), square, and circle.</p>
 <Playground>
 	<Button>
@@ -29,7 +31,7 @@
 	</Button>
 </Playground>
 
-<h2>Colors</h2>
+<h3>Colors</h3>
 <p>The <Badge>color</Badge> prop changes the button's color theme :</p>
 <ul class="list-disc pl-5">
 	<li><strong>primary</strong> : the default color scheme for main actions</li>
@@ -51,7 +53,7 @@
 	</div>
 </Playground>
 
-<h2>Disabled</h2>
+<h3>Disabled</h3>
 <p>
 	When a button is disabled via the <Badge>disabled</Badge> prop, it reduces its opacity and disables
 	pointer events to indicate it is inactive and not clickable.
