@@ -6,7 +6,8 @@ export const select = tv({
 		container: 'relative',
 		trigger: paper({
 			variant: 'outline',
-			class: 'flex w-full cursor-pointer items-center gap-3 px-4 h-11'
+			class:
+				'flex w-full cursor-pointer items-center gap-3 px-4 h-11 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-700'
 		}),
 		triggerContent: 'pointer-events-none grow text-start text-sm',
 		triggerIcon: 'pointer-events-none size-4 text-zinc-500 duration-150 ease-in-out',
