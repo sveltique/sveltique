@@ -20,7 +20,7 @@ export const toast = tv({
 			warning: {
 				icon: 'text-yellow-500'
 			},
-			error: {
+			danger: {
 				icon: 'text-red-500'
 			}
 		}
