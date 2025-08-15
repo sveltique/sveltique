@@ -61,6 +61,7 @@
 			padding: 20px 0;
 			counter-reset: line;
 			overflow-x: auto;
+			font-size: 0.875rem;
 
 			code {
 				white-space: pre-wrap;
