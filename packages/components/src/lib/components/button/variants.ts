@@ -2,7 +2,7 @@ import { tv, type VariantProps } from 'tailwind-variants';
 
 /** The styles of a button. */
 export const button = tv({
-	base: 'relative duration-150 ease-in-out flex justify-center items-center gap-5 cursor-pointer [&_*]:pointer-events-none focus:outline-none focus:ring-2 dark:ring-offset-zinc-900 focus:ring-offset-2',
+	base: 'relative duration-150 ease-in-out flex justify-center items-center gap-5 cursor-pointer [&_*]:pointer-events-none focus:outline-none focus-visible:ring-2 dark:focus-visible:ring-offset-zinc-900 focus-visible:ring-offset-2',
 	variants: {
 		variant: {
 			contained: '',

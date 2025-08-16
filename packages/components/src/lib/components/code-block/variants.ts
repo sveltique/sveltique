@@ -2,10 +2,9 @@ import { tv, type VariantProps } from 'tailwind-variants';
 
 export const codeBlock = tv({
 	slots: {
-		container: 'code-block group relative',
-		button:
-			'absolute top-4 right-4 z-10 hidden cursor-pointer rounded-lg border border-zinc-300 bg-transparent p-2 duration-150 group-hover:block hover:bg-white',
-		icon: 'aspect-square h-5'
+		container:
+			'code-block group relative w-full flex flex-col py-5 rounded-2xl overflow-x-auto text-sm',
+		code: 'contents flex flex-col flex-nowrap'
 	},
 	variants: {
 		showLineNumbers: {

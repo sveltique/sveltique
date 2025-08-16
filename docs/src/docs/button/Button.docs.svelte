@@ -10,7 +10,7 @@
 
 <h2>Basic Usage</h2>
 <p>A button has three variants: contained (default), outline, and text.</p>
-<Playground code={basicCode}>
+<Playground code={basicCode} class="flex-col md:flex-row">
 	<Button>CONTAINED</Button>
 	<Button variant="outline">OUTLINE</Button>
 	<Button variant="text">TEXT</Button>

@@ -1,46 +1,38 @@
-import type { BundledLanguage, BundledTheme, HighlighterGeneric } from 'shiki';
+import type { ThemedToken } from 'shiki';
 
-type CodeToHTMLOptions = {
-	lang: BundledLanguage;
-	theme: BundledTheme;
-	highlighter: HighlighterGeneric<BundledLanguage, BundledTheme>;
-	/** @default '' */
-	lines?: string;
-};
+export function assembleLines(tokens: ThemedToken[][], parsedLines: number[]) {
+	return tokens
+		.map((t, idx) => {
+			const isHighlighted = parsedLines.includes(idx + 1);
+			const styles = isHighlighted
+				? 'background-color: color-mix(in srgb, currentColor 12%, transparent);'
+				: '';
 
-/** Enhanced `codeToHTML` to enable line highlighting. */
-export function codeToHTML(code: string, options: CodeToHTMLOptions) {
-	const { lang, theme, lines = '', highlighter } = options;
-	const parsedLines = parseNumberRanges(lines);
+			return `<span data-code-line style="${styles}">${assembleTokens(t)}</span>`;
+		})
+		.join('');
+}
 
-	const result = highlighter.codeToTokens(transformHTMLEntities(code), { lang, theme });
+export function assembleTokens(tokens: ThemedToken[]) {
+	let lineHtml = tokens
+		.map((token) => {
+			const color = token.color ? `color:${token.color}` : '';
+			const bgColor = token.bgColor ? `background-color:${token.bgColor}` : '';
 
-	const htmlLines = result.tokens.map((tokens, idx) => {
-		const isHighlighted = parsedLines.includes(idx + 1);
-		const classes = isHighlighted ? ' highlighted' : '';
+			let content = escapeHTML(token.content);
+			if (content.length === 0) {
+				content = '    ';
+			}
 
-		let lineHtml = tokens
-			.map((token) => {
-				const color = token.color ? `color:${token.color}` : '';
-				const bgColor = token.bgColor ? `background-color:${token.bgColor}` : '';
+			return `<span style="${color};${bgColor}">${content}</span>`;
+		})
+		.join('');
 
-				let content = escapeHTML(token.content);
-				if (content.length === 0) {
-					content = '    ';
-				}
+	if (lineHtml.length === 0) {
+		lineHtml = '    ';
+	}
 
-				return `<span style="${color};${bgColor}">${content}</span>`;
-			})
-			.join('');
-
-		if (lineHtml.length === 0) {
-			lineHtml = '    ';
-		}
-
-		return `<span class="line${classes}">${lineHtml}</span>`;
-	});
-
-	return `<pre style="color: ${result.fg}; background-color: ${result.bg}"><code>${htmlLines.join('')}</code></pre>`;
+	return lineHtml;
 }
 
 export function transformHTMLEntities(str: string) {
@@ -52,7 +44,7 @@ export function transformHTMLEntities(str: string) {
 		.replaceAll('&#39;', "'");
 }
 
-function escapeHTML(str: string) {
+export function escapeHTML(str: string) {
 	return str
 		.replaceAll('&', '&amp;')
 		.replaceAll('<', '&lt;')
