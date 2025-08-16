@@ -3,6 +3,8 @@
 	import Playground from '$components/Playground.svelte';
 	import IconEdit from '@tabler/icons-svelte/icons/edit';
 	import { script } from '$utils/playground';
+	import { theme } from '$lib/contexts/theme.svelte';
+	import { highlighter } from '$utils/shiki';
 
 	const code = {
 		short: `<Tooltip title="Edit post">
@@ -60,7 +62,8 @@
 <CodeBlock
 	code={customComponentCode}
 	lang="svelte"
-	theme="catppuccin-latte"
+	theme={theme.isDark ? 'one-dark-pro' : 'catppuccin-latte'}
+	{highlighter}
 	class="**:font-cascadia-code"
 />
 
@@ -87,6 +90,7 @@
     {/snippet}
 </Tooltip>`}
 	lang="svelte"
-	theme="catppuccin-latte"
+	theme={theme.isDark ? 'one-dark-pro' : 'catppuccin-latte'}
+	{highlighter}
 	class="**:font-cascadia-code"
 />

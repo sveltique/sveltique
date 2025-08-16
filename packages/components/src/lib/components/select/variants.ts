@@ -7,10 +7,12 @@ export const select = tv({
 		trigger: paper({
 			variant: 'outline',
 			class:
-				'flex w-full cursor-pointer items-center gap-3 px-4 h-11 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-700'
+				'flex w-full cursor-pointer items-center gap-3 px-4 h-11 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 dark:focus:ring-blue-300 dark:focus:ring-offset-zinc-900'
 		}),
 		triggerContent: 'pointer-events-none grow text-start text-sm',
-		triggerIcon: 'pointer-events-none size-4 text-zinc-500 duration-150 ease-in-out',
+		triggerIcon:
+			'pointer-events-none size-4 text-zinc-500 dark:text-zinc-400 duration-150 ease-in-out',
+		placeholder: 'text-zinc-500 dark:text-zinc-400',
 		listBox: paper({
 			elevation: 4,
 			class:
@@ -41,12 +43,12 @@ export const option = tv({
 				container: 'italic cursor-not-allowed text-zinc-500'
 			},
 			false: {
-				container: 'hover:bg-zinc-100'
+				container: 'hover:bg-zinc-100 dark:hover:bg-zinc-700'
 			}
 		},
 		focused: {
 			true: {
-				container: 'bg-zinc-100'
+				container: 'bg-zinc-100 dark:bg-zinc-700'
 			}
 		}
 	}

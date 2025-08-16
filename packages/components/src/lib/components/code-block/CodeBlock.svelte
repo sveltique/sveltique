@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { codeToHTML, transformHTMLEntities } from './code-block.js';
 	import { codeBlock } from './variants.js';
-	import type { BundledLanguage, BundledTheme } from 'shiki';
+	import type { BundledLanguage, BundledTheme, HighlighterGeneric } from 'shiki';
 	import type { WithTWMergeClass } from '$lib/types.js';
 
 	interface Props extends WithTWMergeClass {
 		code: string;
 		lang: BundledLanguage;
 		theme: BundledTheme;
+		highlighter: HighlighterGeneric<BundledLanguage, BundledTheme>;
 		/** @default false */
 		showLineNumbers?: boolean;
 		/** @default '' */
@@ -20,13 +21,16 @@
 		lang,
 		theme,
 		showLineNumbers = false,
-		highlightedLines = ''
+		highlightedLines = '',
+		highlighter
 	}: Props = $props();
 
 	let isCopied = $state(false);
 
-	const { button, container, icon } = $derived(codeBlock());
-	let _code = $derived(codeToHTML(code, { lang, theme, lines: highlightedLines }));
+	let { button, container, icon } = $derived(codeBlock());
+	let highlightedCode = $derived(
+		codeToHTML(code, { lang, theme, lines: highlightedLines, highlighter })
+	);
 
 	$effect(() => {
 		if (!isCopied) return;
@@ -42,14 +46,12 @@
 	}
 </script>
 
-{#await _code then highlighted}
-	<div class={container({ showLineNumbers, className })}>
-		{@html highlighted}
-		<button onclick={copy} class={button()}>
-			{@render copyIcon()}
-		</button>
-	</div>
-{/await}
+<div class={container({ showLineNumbers, className })}>
+	{@html highlightedCode}
+	<button onclick={copy} class={button()}>
+		{@render copyIcon()}
+	</button>
+</div>
 
 {#snippet copyIcon()}
 	{#if isCopied}

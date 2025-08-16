@@ -23,6 +23,7 @@
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.11.0",
 		"globals": "^16.3.0",
+		"shiki": "^3.9.2",
 		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
 		"tailwindcss": "^4.0.0",
@@ -33,7 +34,6 @@
 	"dependencies": {
 		"@sveltique/components": "file:../packages/components",
 		"@tabler/icons-svelte": "^3.34.1",
-		"shiki": "^3.9.2",
 		"tailwind-merge": "^3.3.1",
 		"tailwind-variants": "^2.1.0"
 	}

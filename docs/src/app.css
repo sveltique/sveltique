@@ -19,3 +19,11 @@ body {
 	font-family: 'Nunito', sans-serif;
 	font-optical-sizing: auto;
 }
+
+.dark body {
+	background-color: oklch(21% 0.006 285.885);
+}
+
+.dark {
+	color: oklch(96.7% 0.001 286.375);
+}

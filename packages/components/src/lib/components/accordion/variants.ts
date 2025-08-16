@@ -9,7 +9,7 @@ export const accordion = tv({
 export const accordionItem = tv({
 	slots: {
 		container:
-			'group relative flex w-full flex-col border border-b-0 border-zinc-300 first:rounded-t-2xl last:rounded-b-2xl last:border-b dark:border-zinc-700',
+			'group relative flex w-full flex-col border border-b-0 border-zinc-300 first:rounded-t-2xl last:rounded-b-2xl last:border-b dark:border-zinc-700 dark:text-zinc-100',
 		trigger:
 			'cursor-pointer flex items-center justify-between gap-5 p-4 text-start group-first:rounded-t-2xl group-last:rounded-b-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-700',
 		summary: 'pointer-events-none ',

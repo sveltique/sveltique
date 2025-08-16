@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { kbd } from './variants.js';
 	import type { WithTWMergeClass } from '$lib/types.js';
 	import type { HTMLAttributes } from 'svelte/elements';
-	import { kbd } from './variants.js';
 
 	type Props = WithTWMergeClass<HTMLAttributes<HTMLElement>>;
 

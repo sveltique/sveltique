@@ -9,8 +9,6 @@
 	}
 
 	let { class: className, value = $bindable(''), ...restProps }: Props = $props();
-
-	const { input } = $derived(textInput());
 </script>
 
-<input bind:value type="text" class={input({ className })} {...restProps} />
+<input bind:value type="text" class={textInput({ className })} {...restProps} />

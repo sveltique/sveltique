@@ -2,7 +2,7 @@ import { tv, type VariantProps } from 'tailwind-variants';
 
 export const switchTv = tv({
 	slots: {
-		container: 'relative h-6 w-12 cursor-pointer rounded-full bg-zinc-300',
+		container: 'relative h-6 w-12 cursor-pointer rounded-full bg-zinc-300 dark:bg-zinc-700',
 		thumb:
 			'absolute top-0.5 left-0.5 aspect-square h-[calc(100%-0.25rem)] rounded-full bg-white pointer-events-none duration-150 ease-in-out'
 	},
@@ -18,7 +18,8 @@ export const switchTv = tv({
 				container: 'bg-zinc-300/50 cursor-not-allowed'
 			},
 			false: {
-				container: 'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-700'
+				container:
+					'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 focus:ring-blue-300 dark:focus:ring-offset-zinc-900'
 			}
 		}
 	},

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Playground from '$components/Playground.svelte';
+	import { theme } from '$lib/contexts/theme.svelte';
 	import { script } from '$utils/playground';
 	import { Badge, CodeBlock, Field, NumberInput, Progress } from '@sveltique/components';
 	import { normalizeProgress } from '@sveltique/components/utils';
@@ -119,6 +120,6 @@
 <CodeBlock
 	code={'<Progress {value} transition={false} />'}
 	lang="svelte"
-	theme="catppuccin-latte"
+	theme={theme.isDark ? 'one-dark-pro' : 'catppuccin-latte'}
 	class="**:font-cascadia-code"
 />

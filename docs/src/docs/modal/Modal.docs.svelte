@@ -153,8 +153,8 @@
 </Playground>
 
 <h3>Allow overlay click</h3>
-<p class="italic">
-	Note : You should only set <Badge>closeOnOverlayClick</Badge> for low-stakes interactions where accidentally
+<p>
+	You should only set <Badge>closeOnOverlayClick</Badge> for low-stakes interactions where accidentally
 	closing the modal will not cause loss of important data or irreversible actions. See the
 	<Link external href="https://www.w3.org/WAI/ARIA/apg/patterns/dialogmodal/">
 		accessibility guidelines

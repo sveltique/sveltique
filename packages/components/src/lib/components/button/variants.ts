@@ -2,7 +2,7 @@ import { tv, type VariantProps } from 'tailwind-variants';
 
 /** The styles of a button. */
 export const button = tv({
-	base: 'relative duration-150 ease-in-out flex justify-center items-center gap-5 cursor-pointer [&_*]:pointer-events-none focus:outline-none focus:ring-2 focus:ring-offset-2',
+	base: 'relative duration-150 ease-in-out flex justify-center items-center gap-5 cursor-pointer [&_*]:pointer-events-none focus:outline-none focus:ring-2 dark:ring-offset-zinc-900 focus:ring-offset-2',
 	variants: {
 		variant: {
 			contained: '',
@@ -23,7 +23,7 @@ export const button = tv({
 			true: 'cursor-not-allowed opacity-50'
 		},
 		color: {
-			primary: 'focus:ring-blue-700',
+			primary: 'focus:ring-blue-700 dark:focus:ring-blue-300',
 			danger: 'focus:ring-red-500'
 		}
 	},
@@ -73,31 +73,31 @@ export const button = tv({
 			variant: 'outline',
 			color: 'primary',
 			class:
-				'bg-transparent text-black not-disabled:hover:bg-zinc-100 dark:text-white not-disabled:dark:hover:bg-zinc-700 border-zinc-300 dark:border-zinc-300-dark'
+				'bg-transparent text-black not-disabled:hover:bg-zinc-100 dark:text-zinc-100 not-disabled:dark:hover:bg-zinc-700 border-zinc-300 dark:border-zinc-700'
 		},
 		{
 			variant: 'text',
 			color: 'primary',
 			class:
-				'bg-transparent text-black not-disabled:hover:bg-zinc-100 dark:text-white not-disabled:dark:hover:bg-zinc-700'
+				'bg-transparent text-black not-disabled:hover:bg-zinc-100 dark:text-zinc-100 not-disabled:dark:hover:bg-zinc-700'
 		},
 		{
 			variant: 'contained',
 			color: 'danger',
 			class:
-				'bg-red-500 text-white not-disabled:hover:bg-red-500/90 dark:bg-red-600 dark:text-white not-disabled:dark:hover:bg-red-700'
+				'bg-red-500 dark:border-red-400 text-white not-disabled:hover:bg-red-500/90 dark:text-zinc-100 not-disabled:dark:hover:bg-red-700'
 		},
 		{
 			variant: 'outline',
 			color: 'danger',
 			class:
-				'bg-transparent text-red-500 border border-red-100 not-disabled:hover:bg-red-50 dark:text-red-400 not-disabled:dark:hover:bg-red-900'
+				'bg-transparent text-red-500 border border-red-100 dark:border-red-400 not-disabled:hover:bg-red-50 dark:text-red-400 not-disabled:dark:hover:bg-red-900'
 		},
 		{
 			variant: 'text',
 			color: 'danger',
 			class:
-				'bg-transparent text-red-500 not-disabled:hover:bg-red-50 dark:text-red-400 not-disabled:dark:hover:bg-red-900'
+				'bg-transparent text-red-500 not-disabled:hover:bg-red-50 dark:text-red-400 not-disabled:dark:hover:bg-red-500'
 		}
 	],
 	defaultVariants: {

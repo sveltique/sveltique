@@ -37,7 +37,14 @@
 
 	let focusedId = $state<string>();
 
-	const { container, listBox, trigger, triggerContent, triggerIcon } = $derived(select({ open }));
+	const {
+		container,
+		listBox,
+		trigger,
+		triggerContent,
+		triggerIcon,
+		placeholder: placeholderCss
+	} = $derived(select({ open }));
 
 	onMount(() => {
 		const elements = getListChildren();
@@ -196,7 +203,7 @@ Note : The element takes its parent's full width, so if you want to restrict it,
 			{#if valueContent}
 				{valueContent}
 			{:else}
-				<span class="text-zinc-500">{placeholder}</span>
+				<span class={placeholderCss()}>{placeholder}</span>
 			{/if}
 		</span>
 		<svg
