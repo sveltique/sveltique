@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { numberInput } from './variants.js';
-	import IconMinus from '@tabler/icons-svelte/icons/minus';
-	import IconPlus from '@tabler/icons-svelte/icons/plus';
 	import type { HTMLInputAttributes } from 'svelte/elements';
 	import type { ClassNameValue } from 'tailwind-merge';
 
@@ -27,9 +25,7 @@
 	}: Props = $props();
 
 	let ref = $state<HTMLInputElement>();
-	const { container, input, decrement, increment } = $derived(numberInput());
-
-	$inspect(value);
+	const { container, input, decrement, increment, icon } = $derived(numberInput());
 
 	$effect(() => {
 		ref!.value = value?.toString() ?? '';
@@ -67,7 +63,7 @@ Comes with increment/decrement buttons and built-in `min` and `max` validation.
 
 <div class={container({ class: containerClass })}>
 	<button onclick={() => changeValue((value ?? 0) - step)} class={decrement()}>
-		<IconMinus class="size-4" />
+		{@render minusIcon()}
 	</button>
 	<input
 		bind:this={ref}
@@ -83,9 +79,46 @@ Comes with increment/decrement buttons and built-in `min` and `max` validation.
 		{...restProps}
 	/>
 	<button onclick={() => changeValue((value ?? 0) + step)} class={increment()}>
-		<IconPlus class="size-4" />
+		{@render plusIcon()}
 	</button>
 </div>
+
+{#snippet minusIcon()}
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		width="24"
+		height="24"
+		viewBox="0 0 24 24"
+		fill="none"
+		stroke="currentColor"
+		stroke-width="2"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		class="icon icon-tabler icons-tabler-outline icon-tabler-minus {icon()}"
+	>
+		<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+		<path d="M5 12l14 0" />
+	</svg>
+{/snippet}
+
+{#snippet plusIcon()}
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		width="24"
+		height="24"
+		viewBox="0 0 24 24"
+		fill="none"
+		stroke="currentColor"
+		stroke-width="2"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		class="icon icon-tabler icons-tabler-outline icon-tabler-plus {icon()}"
+	>
+		<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+		<path d="M12 5l0 14" />
+		<path d="M5 12l14 0" />
+	</svg>
+{/snippet}
 
 <style>
 	input::-webkit-outer-spin-button,

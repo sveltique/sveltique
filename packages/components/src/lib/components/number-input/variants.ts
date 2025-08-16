@@ -8,6 +8,7 @@ export const numberInput = tv({
 		decrement:
 			'relative grid aspect-square h-full place-items-center cursor-pointer border-r border-zinc-300 duration-200 hover:bg-zinc-100',
 		increment:
-			'relative grid aspect-square h-full place-items-center cursor-pointer border-l border-zinc-300 duration-200 hover:bg-zinc-100'
+			'relative grid aspect-square h-full place-items-center cursor-pointer border-l border-zinc-300 duration-200 hover:bg-zinc-100',
+		icon: 'size-4'
 	}
 });
