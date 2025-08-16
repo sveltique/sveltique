@@ -57,7 +57,7 @@
 
 {#snippet componentsBar()}
 	<aside
-		class="sticky left-0 top-16 z-50 hidden h-[calc(100vh-4rem)] w-full items-start justify-end overflow-auto bg-zinc-50 p-6 lg:flex"
+		class="sticky left-0 top-16 z-50 hidden h-[calc(100vh-4rem)] w-full items-start justify-end overflow-auto bg-zinc-50 p-6 lg:flex dark:bg-zinc-800"
 	>
 		<nav class="relative flex min-w-[240px] flex-col gap-1">
 			<a
@@ -108,7 +108,9 @@
 						href="/docs/components/browse"
 						class={cnBase(
 							'py-1',
-							page.url.pathname === '/docs/components/browse' ? 'text-blue-700' : 'text-zinc-600'
+							page.url.pathname === '/docs/components/browse'
+								? 'text-blue-700 dark:text-blue-300'
+								: 'text-zinc-600 dark:text-zinc-400'
 						)}
 					>
 						All components
@@ -119,7 +121,9 @@
 							href="/docs/components/browse/{name}"
 							class={cnBase(
 								'py-1',
-								page.url.pathname.endsWith(name) ? 'text-blue-700' : 'text-zinc-600'
+								page.url.pathname.endsWith(name)
+									? 'text-blue-700 dark:text-blue-300'
+									: 'text-zinc-600 dark:text-zinc-400'
 							)}
 						>
 							{capitalize(name)}
@@ -130,9 +134,11 @@
 		</nav>
 	</aside>
 
-	<header class="sticky left-0 top-0 z-50 h-12 w-full border-b border-zinc-300 bg-white lg:hidden">
+	<header
+		class="sticky left-0 top-0 z-50 h-12 w-full border-b border-zinc-300 bg-white lg:hidden dark:border-zinc-700 dark:bg-zinc-900"
+	>
 		<nav
-			class="relative flex h-full w-full items-center justify-between px-6 text-sm font-medium text-zinc-600"
+			class="relative flex h-full w-full items-center justify-between px-6 text-sm font-medium text-zinc-600 dark:text-zinc-400"
 		>
 			<button
 				onclick={() => (showMenu = true)}
@@ -159,7 +165,7 @@
 		>
 			<nav
 				transition:fly={{ x: -100, duration: 150 }}
-				class="relative flex h-[100vh] w-60 flex-col items-start justify-start overflow-auto bg-white p-6 shadow-[0_0_12px_4px_rgba(0,0,0,0.15)]"
+				class="relative flex h-[100vh] w-60 flex-col items-start justify-start overflow-auto bg-white p-6 shadow-[0_0_12px_4px_rgba(0,0,0,0.15)] dark:bg-zinc-800"
 			>
 				{#each data.componentNames as name, index (index)}
 					<a
@@ -184,18 +190,18 @@
 		>
 			<nav
 				transition:fly={{ x: 100, duration: 150 }}
-				class="relative flex h-[100vh] w-60 flex-col items-start justify-between bg-white p-6 shadow-[0_0_12px_4px_rgba(0,0,0,0.15)]"
+				class="relative flex h-[100vh] w-60 flex-col items-start justify-between bg-white p-6 shadow-[0_0_12px_4px_rgba(0,0,0,0.15)] dark:bg-zinc-800"
 			>
 				<div
 					class="relative flex h-full w-full flex-col items-start justify-start gap-2.5 text-sm font-medium"
 				>
 					<div role="heading" aria-level="2" class="font-bold">On This Page</div>
 					{#each headings.current as { id, label, items } (id)}
-						<a href="#{id}" class="text-zinc-600">{label}</a>
+						<a href="#{id}" class="text-zinc-600 dark:text-zinc-400">{label}</a>
 						{#if items.length > 0}
 							<div class="relative flex w-full flex-col gap-2.5 pl-5">
 								{#each items as item (item.id)}
-									<a href="#{item.id}" class="text-zinc-600">{item.label}</a>
+									<a href="#{item.id}" class="text-zinc-600 dark:text-zinc-400">{item.label}</a>
 								{/each}
 							</div>
 						{/if}
@@ -212,17 +218,17 @@
 
 {#snippet onThisPageBar()}
 	<aside
-		class="sticky right-0 top-28 z-50 hidden h-full w-full border-l border-zinc-300 px-6 py-3 lg:block"
+		class="sticky right-0 top-28 z-50 hidden h-full w-full border-l border-zinc-300 px-6 py-3 lg:block dark:border-zinc-700"
 	>
 		<nav class="relative flex h-full flex-col gap-2.5 text-sm font-medium">
-			<div role="heading" aria-level="2" class="font-bold">On This Page</div>
+			<div role="heading" aria-level="2" class="font-bold dark:text-zinc-100">On This Page</div>
 			{#each headings.current as { id, label, items } (id)}
-				<a href="#{id}" class="text-zinc-600">{label}</a>
+				<a href="#{id}" class="text-zinc-600 dark:text-zinc-400">{label}</a>
 
 				{#if items.length > 0}
 					<div class="relative flex w-full flex-col gap-2.5 pl-5">
 						{#each items as item (item.id)}
-							<a href="#{item.id}" class="text-zinc-600">{item.label}</a>
+							<a href="#{item.id}" class="text-zinc-600 dark:text-zinc-400">{item.label}</a>
 						{/each}
 					</div>
 				{/if}

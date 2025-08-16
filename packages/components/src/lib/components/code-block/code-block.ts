@@ -1,4 +1,10 @@
-import type { BundledLanguage, BundledTheme, CodeToTokensOptions, TokensResult } from 'shiki';
+import {
+	type BundledLanguage,
+	type BundledTheme,
+	type CodeToTokensOptions,
+	type HighlighterGeneric,
+	type TokensResult
+} from 'shiki';
 
 type ShikiModule = {
 	/**
@@ -31,18 +37,17 @@ async function loadShiki() {
 type CodeToHTMLOptions = {
 	lang: BundledLanguage;
 	theme: BundledTheme;
+	highlighter: HighlighterGeneric<BundledLanguage, BundledTheme>;
 	/** @default '' */
 	lines?: string;
 };
 
 /** Enhanced `codeToHTML` to enable line highlighting. */
-export async function codeToHTML(code: string, options: CodeToHTMLOptions) {
-	const { lang, theme, lines = '' } = options;
+export function codeToHTML(code: string, options: CodeToHTMLOptions) {
+	const { lang, theme, lines = '', highlighter } = options;
 	const parsedLines = parseNumberRanges(lines);
 
-	const { codeToTokens } = await loadShiki();
-
-	const result = await codeToTokens(transformHTMLEntities(code), { lang, theme });
+	const result = highlighter.codeToTokens(transformHTMLEntities(code), { lang, theme });
 
 	const htmlLines = result.tokens.map((tokens, idx) => {
 		const isHighlighted = parsedLines.includes(idx + 1);

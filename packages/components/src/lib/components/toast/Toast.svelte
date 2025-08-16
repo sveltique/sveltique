@@ -2,6 +2,7 @@
 	import { toast, type ToastVariants } from './variants.js';
 	import type { Snippet } from 'svelte';
 	import type { WithTWMergeClass } from '$lib/types.js';
+	import { Button } from '../button/index.js';
 
 	interface Props extends WithTWMergeClass<ToastVariants> {
 		closeAriaLabel?: string;
@@ -36,7 +37,14 @@
 		{#if action}
 			{@render action()}
 		{:else if onClose}
-			<button onclick={onClose} aria-label={closeAriaLabel} class={closeButton()}>
+			<Button
+				onclick={onClose}
+				variant="text"
+				size="small"
+				shape="square"
+				aria-label={closeAriaLabel}
+				class={closeButton()}
+			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"
@@ -53,7 +61,7 @@
 					<path d="M18 6l-12 12" />
 					<path d="M6 6l12 12" />
 				</svg>
-			</button>
+			</Button>
 		{/if}
 	</div>
 {/if}

@@ -1,11 +1,12 @@
 import { tv, type VariantProps } from 'tailwind-variants';
 
 export const paper = tv({
-	base: 'relative rounded-2xl bg-white',
+	// TODO : bg-color should scale with elevation
+	base: 'relative rounded-2xl bg-white dark:bg-zinc-800',
 	variants: {
 		variant: {
 			shadow: '',
-			outline: 'border border-zinc-300 dark:border-none dark:bg-zinc-800'
+			outline: 'border border-zinc-300 dark:border-zinc-700'
 		},
 		elevation: {
 			0: 'shadow-none',

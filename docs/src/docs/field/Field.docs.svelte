@@ -7,10 +7,10 @@
 	type Input = 'text' | 'number' | 'select';
 
 	let type = $state<Input>('text');
-	let age = $state(18);
+	let age = $state(16);
 	let ageError = $derived.by(() => {
-		if (age < 16 || age > 25) {
-			return 'You must be between 16 and 25 years old to participate.';
+		if (age < 18) {
+			return 'You must be at least 18 years old to participate.';
 		}
 	});
 </script>
@@ -47,7 +47,9 @@
 </Playground>
 <h2>Error</h2>
 <p>You can show an error message under the field by setting the error property.</p>
-<p class="text-sm italic text-zinc-500">Tip : Try setting the age under 16 or above 25.</p>
+<p class="text-sm italic text-zinc-500 dark:text-blue-600">
+	Tip : Try setting the age above 18 to make the error disappear.
+</p>
 <Playground code={ageCode}>
 	<Field label="Age" error={ageError} class="w-[240px]">
 		{#snippet input(props)}

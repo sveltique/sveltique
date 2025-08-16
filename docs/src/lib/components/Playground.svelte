@@ -6,6 +6,7 @@
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { cn } from '$utils/cn.js';
 	import { Paper, Separator } from '@sveltique/components';
+	import { theme } from '$lib/contexts/theme.svelte';
 
 	type Code = {
 		short: string;
@@ -26,8 +27,8 @@
 		if (!code) return;
 
 		return {
-			short: apply(code.short, replaceEntities, style),
-			expanded: apply(code.expanded, replaceEntities, style)
+			short: apply(code.short, replaceEntities, (v) => style(v, { dark: theme.isDark })),
+			expanded: apply(code.expanded, replaceEntities, (v) => style(v, { dark: theme.isDark }))
 		} satisfies Code;
 	});
 </script>
@@ -50,7 +51,10 @@
 	</div>
 	<Separator />
 	<div class="relative flex h-10 w-full items-center justify-end px-4 py-2">
-		<button onclick={() => (expanded = !expanded)} class="cursor-pointer px-2 py-1 text-sm">
+		<button
+			onclick={() => (expanded = !expanded)}
+			class="cursor-pointer px-2 py-1 text-sm dark:text-zinc-100"
+		>
 			{expanded ? 'Collapse code' : 'Expand code'}
 		</button>
 	</div>
