@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Playground from '$components/Playground.svelte';
-	import { theme } from '$lib/contexts/theme.svelte';
-	import { script } from '$utils/playground';
-	import { Badge, CodeBlock, Field, NumberInput, Progress } from '@sveltique/components';
-	import { normalizeProgress } from '@sveltique/components/utils';
 	import { tick } from 'svelte';
+	import { Badge, Field, NumberInput, Progress } from '@sveltique/components';
+	import { normalizeProgress } from '@sveltique/components/utils';
+	import CodeBlock from '$components/CodeBlock.svelte';
+	import Playground from '$components/Playground.svelte';
+	import { script } from '$utils/playground';
 
 	let intervalValue = $state(100);
 	let step = $state(1);
@@ -117,9 +117,4 @@
 	If you update the value very frequently, the transition of 200ms might interfere with the
 	re-rendering process. In that case, you should disable the transition.
 </p>
-<CodeBlock
-	code={'<Progress {value} transition={false} />'}
-	lang="svelte"
-	theme={theme.isDark ? 'one-dark-pro' : 'catppuccin-latte'}
-	class="**:font-cascadia-code"
-/>
+<CodeBlock code={'<Progress {value} transition={false} />'} />
