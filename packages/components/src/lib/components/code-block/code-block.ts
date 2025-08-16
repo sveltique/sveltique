@@ -1,38 +1,4 @@
-import {
-	type BundledLanguage,
-	type BundledTheme,
-	type CodeToTokensOptions,
-	type HighlighterGeneric,
-	type TokensResult
-} from 'shiki';
-
-type ShikiModule = {
-	/**
-	 * Shorthand for `codeToTokens` with auto-loaded theme and language.
-	 * A singleton highlighter it maintained internally.
-	 *
-	 * Differences from `highlighter.codeToTokens()`, this function is async.
-	 */
-	codeToTokens: (
-		code: string,
-		options: CodeToTokensOptions<BundledLanguage, BundledTheme>
-	) => Promise<TokensResult>;
-};
-
-let shikiModule: ShikiModule;
-
-async function loadShiki() {
-	// @ts-ignore
-	if (shikiModule) return shikiModule;
-
-	try {
-		shikiModule = await import('shiki');
-		return shikiModule;
-	} catch (err) {
-		// shiki not installed
-		throw new Error("You must install 'shiki' to use the CodeBlock component.");
-	}
-}
+import type { BundledLanguage, BundledTheme, HighlighterGeneric } from 'shiki';
 
 type CodeToHTMLOptions = {
 	lang: BundledLanguage;

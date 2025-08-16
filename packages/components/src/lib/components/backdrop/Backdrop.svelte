@@ -2,10 +2,9 @@
 	import { fade } from 'svelte/transition';
 	import { backdrop } from './variants.js';
 	import type { Snippet } from 'svelte';
-	import type { WithTWMergeClass } from '$lib/types.js';
-	import { on } from 'svelte/events';
+	import type { TWMergeClass } from '$lib/types.js';
 
-	export interface BackdropProps extends WithTWMergeClass {
+	export interface BackdropProps extends TWMergeClass {
 		children?: Snippet;
 		/** @default 150 */
 		fadeDuration?: number;

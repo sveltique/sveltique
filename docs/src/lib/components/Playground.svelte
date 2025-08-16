@@ -67,15 +67,14 @@
 	{/if}
 </Paper>
 
-<style lang="postcss">
-	@reference '../../app.css';
-
+<style>
 	.highlighted-code :global {
 		pre {
 			border-radius: 0;
 			padding: 20px 0;
 			counter-reset: line;
 			overflow-x: auto;
+			font-size: 0.875rem;
 
 			* {
 				font-family: 'Cascadia Code', sans-serif;

@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { checkbox } from './variants.js';
 	import type { HTMLInputAttributes } from 'svelte/elements';
-	import type { WithRef, WithTWMergeClass } from '$lib/types.js';
+	import type { WithRef, TWMergeClass } from '$lib/types.js';
 
 	interface Props
 		extends Omit<HTMLInputAttributes, 'checked' | 'class' | 'disabled' | 'type'>,
-			WithTWMergeClass,
+			TWMergeClass,
 			WithRef<HTMLInputElement> {
 		checked?: boolean;
 		disabled?: boolean;

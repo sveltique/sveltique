@@ -1,11 +1,10 @@
 <script lang="ts" generics="T">
 	import { switchTv, type SwitchVariants } from './variants.js';
 	import type { HTMLButtonAttributes } from 'svelte/elements';
-	import type { WithRef, WithTWMergeClass } from '$lib/types.js';
+	import type { WithRef, ReplaceWithTWMergeClass } from '$lib/types.js';
 
 	interface Props
-		extends Omit<HTMLButtonAttributes, 'class' | 'disabled'>,
-			WithTWMergeClass,
+		extends ReplaceWithTWMergeClass<Omit<HTMLButtonAttributes, 'disabled'>>,
 			WithRef<HTMLButtonElement>,
 			SwitchVariants {}
 

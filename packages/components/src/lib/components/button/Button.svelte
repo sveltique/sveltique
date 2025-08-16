@@ -1,13 +1,12 @@
 <script lang="ts">
 	import { button, type ButtonVariants } from './variants.js';
 	import type { HTMLButtonAttributes } from 'svelte/elements';
-	import type { WithTWMergeClass } from '$lib/types.js';
+	import type { ReplaceWithTWMergeClass, WithRef } from '$lib/types.js';
 
 	interface Props
-		extends WithTWMergeClass<Omit<HTMLButtonAttributes, 'color' | 'disabled'>>,
-			ButtonVariants {
-		ref?: HTMLElement | HTMLButtonElement;
-	}
+		extends ReplaceWithTWMergeClass<Omit<HTMLButtonAttributes, 'color' | 'disabled'>>,
+			ButtonVariants,
+			WithRef<HTMLElement | HTMLButtonElement> {}
 
 	let {
 		children,

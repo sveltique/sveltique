@@ -31,7 +31,7 @@
 		}
 
 		& > ul {
-			@apply my-4 dark:text-zinc-100;
+			@apply my-4 flex list-disc flex-col gap-2 pl-10 dark:text-zinc-100;
 		}
 
 		& > a {

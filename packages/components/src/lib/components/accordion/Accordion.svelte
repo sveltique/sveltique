@@ -3,9 +3,9 @@
 	import { accordion } from './variants.js';
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
-	import type { WithTWMergeClass } from '$lib/types.js';
+	import type { ReplaceWithTWMergeClass } from '$lib/types.js';
 
-	interface Props extends WithTWMergeClass<HTMLAttributes<HTMLDivElement>> {
+	interface Props extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>> {
 		children?: Snippet;
 		multiple?: boolean;
 	}

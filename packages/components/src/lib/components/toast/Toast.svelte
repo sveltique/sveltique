@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { toast, type ToastVariants } from './variants.js';
+	import Button from '../button/Button.svelte';
 	import type { Snippet } from 'svelte';
-	import type { WithTWMergeClass } from '$lib/types.js';
-	import { Button } from '../button/index.js';
+	import type { TWMergeClass } from '$lib/types.js';
 
-	interface Props extends WithTWMergeClass<ToastVariants> {
+	interface Props extends TWMergeClass, ToastVariants {
 		closeAriaLabel?: string;
 		/** If passed, renders a close button. */
 		onClose?: () => void;

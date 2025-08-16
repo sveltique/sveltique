@@ -2,9 +2,9 @@
 	import { codeToHTML, transformHTMLEntities } from './code-block.js';
 	import { codeBlock } from './variants.js';
 	import type { BundledLanguage, BundledTheme, HighlighterGeneric } from 'shiki';
-	import type { WithTWMergeClass } from '$lib/types.js';
+	import type { TWMergeClass } from '$lib/types.js';
 
-	interface Props extends WithTWMergeClass {
+	export interface CodeBlockProps extends TWMergeClass {
 		code: string;
 		lang: BundledLanguage;
 		theme: BundledTheme;
@@ -23,7 +23,7 @@
 		showLineNumbers = false,
 		highlightedLines = '',
 		highlighter
-	}: Props = $props();
+	}: CodeBlockProps = $props();
 
 	let isCopied = $state(false);
 
@@ -46,7 +46,7 @@
 	}
 </script>
 
-<div class={container({ showLineNumbers, className })}>
+<div data-code-block class={container({ showLineNumbers, className })}>
 	{@html highlightedCode}
 	<button onclick={copy} class={button()}>
 		{@render copyIcon()}
@@ -93,7 +93,7 @@
 {/snippet}
 
 <style>
-	:global {
+	[data-code-block] :global {
 		pre {
 			border-radius: 16px;
 			padding: 20px 0;
@@ -102,22 +102,23 @@
 			font-size: 0.875rem;
 
 			code {
-				white-space: pre-wrap;
 				display: flex;
 				flex-direction: column;
+				flex-wrap: nowrap;
+			}
 
-				.line {
-					padding: 2px 20px;
+			.line {
+				padding: 2px 20px;
+				white-space: pre;
 
-					&.highlighted {
-						background-color: color-mix(in srgb, currentColor 12%, transparent);
-					}
+				&.highlighted {
+					background-color: color-mix(in srgb, currentColor 12%, transparent);
 				}
 			}
 		}
 	}
 
-	.show-line-numbers :global {
+	[data-code-block].show-line-numbers :global {
 		.line::before {
 			counter-increment: line;
 			content: counter(line);
