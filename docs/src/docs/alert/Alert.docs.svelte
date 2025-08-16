@@ -1,6 +1,20 @@
 <script>
 	import Playground from '$components/Playground.svelte';
+	import { script } from '$utils/playground';
 	import { Alert } from '@sveltique/components';
+
+	const code = {
+		short: `<Alert type="info">This is an informational message. You can safely ignore it.</Alert>
+<Alert type="success">Your profile was updated successfully.</Alert>
+<Alert type="warning">Your subscription will expire in 3 days.</Alert>
+<Alert type="danger">Failed to save changes. Please try again later.</Alert>`,
+		expanded: `${script('import { Alert } from "@sveltique/components";')}
+
+<Alert type="info">This is an informational message. You can safely ignore it.</Alert>
+<Alert type="success">Your profile was updated successfully.</Alert>
+<Alert type="warning">Your subscription will expire in 3 days.</Alert>
+<Alert type="danger">Failed to save changes. Please try again later.</Alert>`
+	};
 </script>
 
 <h1>Alert</h1>
@@ -13,7 +27,7 @@
 	An alert renders a different color and icon based on its type : info (default), success, warning,
 	and danger.
 </p>
-<Playground class="flex-col">
+<Playground {code} class="flex-col">
 	<Alert type="info">This is an informational message. You can safely ignore it.</Alert>
 	<Alert type="success">Your profile was updated successfully.</Alert>
 	<Alert type="warning">Your subscription will expire in 3 days.</Alert>
