@@ -3,11 +3,11 @@
 	import { on } from 'svelte/events';
 	import { fade } from 'svelte/transition';
 	import { tooltip } from './variants.js';
-	import type { WithTWMergeClass } from '$lib/types.js';
+	import type { TWMergeClass } from '$lib/types.js';
 
 	type Ref = { current: HTMLElement | undefined };
 
-	interface Props extends WithTWMergeClass {
+	interface Props extends TWMergeClass {
 		children?: Snippet<[{ ref: Ref; props: { 'aria-describedby': string } }]>;
 		id?: string;
 		title: string;

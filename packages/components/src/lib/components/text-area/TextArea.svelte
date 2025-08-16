@@ -1,10 +1,10 @@
 <script lang="ts">
-	import type { WithRef, WithTWMergeClass } from '$lib/types.js';
-	import type { HTMLTextareaAttributes } from 'svelte/elements';
 	import { textArea } from './variants.js';
+	import type { WithRef, ReplaceWithTWMergeClass } from '$lib/types.js';
+	import type { HTMLTextareaAttributes } from 'svelte/elements';
 
 	interface Props
-		extends WithTWMergeClass<Omit<HTMLTextareaAttributes, 'value'>>,
+		extends ReplaceWithTWMergeClass<Omit<HTMLTextareaAttributes, 'value'>>,
 			WithRef<HTMLTextAreaElement> {
 		value?: string;
 	}

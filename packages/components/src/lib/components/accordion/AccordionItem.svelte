@@ -2,9 +2,9 @@
 	import { slide } from 'svelte/transition';
 	import { onMount, type Component, type ComponentType, type Snippet } from 'svelte';
 	import { accordionItem } from './variants.js';
-	import type { WithTWMergeClass } from '$lib/types.js';
+	import type { TWMergeClass } from '$lib/types.js';
 
-	interface Props extends WithTWMergeClass {
+	interface Props extends TWMergeClass {
 		children: Snippet;
 		summary: Snippet;
 		value?: string;

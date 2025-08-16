@@ -3,9 +3,9 @@
 	import { on } from 'svelte/events';
 	import { flyAndScale } from '../../transitions/fly-and-scale.js';
 	import { modal } from './variants.js';
-	import { Backdrop, type BackdropProps } from '../backdrop/index.js';
+	import Backdrop, { type BackdropProps } from '../backdrop/Backdrop.svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
-	import type { WithTWMergeClass } from '$lib/types.js';
+	import type { ReplaceWithTWMergeClass } from '$lib/types.js';
 
 	type ChildrenSnippet = Snippet<
 		[
@@ -18,7 +18,7 @@
 	>;
 
 	export interface ModalProps
-		extends Omit<WithTWMergeClass<HTMLAttributes<HTMLElement>>, 'children'> {
+		extends ReplaceWithTWMergeClass<Omit<HTMLAttributes<HTMLElement>, 'children'>> {
 		actions?: Snippet<[{ close: VoidFunction }]>;
 		children: ChildrenSnippet;
 		trigger: Snippet<[{ open: VoidFunction }]>;

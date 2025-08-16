@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { link } from './variants.js';
-	import type { WithTWMergeClass } from '$lib/types.js';
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
+	import type { ReplaceWithTWMergeClass } from '$lib/types.js';
 
-	interface Props extends WithTWMergeClass<HTMLAnchorAttributes> {
+	interface Props extends ReplaceWithTWMergeClass<HTMLAnchorAttributes> {
 		/**
 		 * Shorthand for setting `target="_blank"` and `rel="noreferrer"`.
 		 * @note Passing target and/or rel overrides the values set by `external`.
