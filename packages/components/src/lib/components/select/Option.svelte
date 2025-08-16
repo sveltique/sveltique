@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { option } from './variants.js';
-	import IconCheck from '@tabler/icons-svelte/icons/check';
+	import { useMutationObserver } from '$utils/use-mutation-observer.svelte.js';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { ClassNameValue } from 'tailwind-merge';
-	import { useMutationObserver } from '$utils/use-mutation-observer.svelte.js';
 
 	interface Props extends Omit<HTMLAttributes<HTMLLIElement>, 'class'> {
 		/** @default $props.id() */
@@ -36,7 +35,7 @@
 	let selected = $derived(_selected);
 	let _id = $derived(id ?? uid);
 
-	const { container } = $derived(option({ disabled, focused }));
+	const { container, icon } = $derived(option({ disabled, focused }));
 
 	useMutationObserver(
 		() => parent,
@@ -64,10 +63,6 @@
 		parent = ref?.parentElement as HTMLUListElement;
 		selected = value === parent.getAttribute('data-selected-value');
 	});
-
-	$effect(() => {
-		if (!parent) return;
-	});
 </script>
 
 <!--
@@ -91,7 +86,21 @@ Designed to be a drop-in replacement for the native `option` element.
 	{@render content()}
 
 	{#if selected && !disabled}
-		<IconCheck class="h-4 w-4" />
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="24"
+			height="24"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			class="icon icon-tabler icons-tabler-outline icon-tabler-check {icon()}"
+		>
+			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+			<path d="M5 12l5 5l10 -10" />
+		</svg>
 	{/if}
 </li>
 

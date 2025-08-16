@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { codeToHTML, transformHTMLEntities } from './code-block.js';
 	import { codeBlock } from './variants.js';
-	import IconClipboard from '@tabler/icons-svelte/icons/clipboard';
-	import IconClipboardCheck from '@tabler/icons-svelte/icons/clipboard-check';
 	import type { BundledLanguage, BundledTheme } from 'shiki';
 	import type { WithTWMergeClass } from '$lib/types.js';
 
@@ -26,7 +24,6 @@
 	}: Props = $props();
 
 	let isCopied = $state(false);
-	let CopyIcon = $derived(isCopied ? IconClipboardCheck : IconClipboard);
 
 	const { button, container, icon } = $derived(codeBlock());
 	let _code = $derived(codeToHTML(code, { lang, theme, lines: highlightedLines }));
@@ -49,10 +46,49 @@
 	<div class={container({ showLineNumbers, className })}>
 		{@html highlighted}
 		<button onclick={copy} class={button()}>
-			<CopyIcon class={icon()} />
+			{@render copyIcon()}
 		</button>
 	</div>
 {/await}
+
+{#snippet copyIcon()}
+	{#if isCopied}
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="24"
+			height="24"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			class="icon icon-tabler icons-tabler-outline icon-tabler-clipboard-check {icon()}"
+		>
+			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+			<path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
+			<path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
+			<path d="M9 14l2 2l4 -4" />
+		</svg>
+	{:else}
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="24"
+			height="24"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			class="icon icon-tabler icons-tabler-outline icon-tabler-clipboard {icon()}"
+		>
+			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+			<path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
+			<path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
+		</svg>
+	{/if}
+{/snippet}
 
 <style>
 	:global {

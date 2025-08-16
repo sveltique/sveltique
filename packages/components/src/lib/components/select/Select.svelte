@@ -2,7 +2,6 @@
 	import { onMount, type Snippet } from 'svelte';
 	import { on } from 'svelte/events';
 	import { select } from './variants.js';
-	import IconChevronDown from '@tabler/icons-svelte/icons/chevron-down';
 	import type { ClassNameValue } from 'tailwind-merge';
 
 	interface Props {
@@ -200,7 +199,21 @@ Note : The element takes its parent's full width, so if you want to restrict it,
 				<span class="text-zinc-500">{placeholder}</span>
 			{/if}
 		</span>
-		<IconChevronDown class={triggerIcon()} />
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="24"
+			height="24"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down {triggerIcon()}"
+		>
+			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+			<path d="M6 9l6 6l6 -6" />
+		</svg>
 	</button>
 	<ul
 		bind:this={listBoxRef}

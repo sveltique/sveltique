@@ -32,7 +32,8 @@ export type SelectVariants = VariantProps<typeof select>;
 export const option = tv({
 	slots: {
 		container:
-			'cursor-pointer relative flex items-center justify-between gap-2.5 rounded-lg py-2 px-4 text-sm'
+			'cursor-pointer relative flex items-center justify-between gap-2.5 rounded-lg py-2 px-4 text-sm',
+		icon: 'h-4 w-4'
 	},
 	variants: {
 		disabled: {
