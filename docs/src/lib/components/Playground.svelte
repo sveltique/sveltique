@@ -1,12 +1,10 @@
 <script lang="ts">
-	import { apply } from '$utils/apply.js';
-	import { replaceEntities } from '$utils/html.js';
-	import { style } from '$utils/shiki.js';
+	import { Paper, Separator } from '@sveltique/components';
+	import { cnBase } from 'tailwind-variants';
+	import { cn } from '$utils/cn.js';
+	import CodeBlock from './CodeBlock.svelte';
 	import type { Snippet } from 'svelte';
 	import type { ClassNameValue } from 'tailwind-merge';
-	import { cn } from '$utils/cn.js';
-	import { Paper, Separator } from '@sveltique/components';
-	import { theme } from '$lib/contexts/theme.svelte';
 
 	type Code = {
 		short: string;
@@ -17,87 +15,56 @@
 		children?: Snippet;
 		controls?: Snippet;
 		class?: ClassNameValue;
-		code?: Code;
+		code?: string | Code;
 	}
 
 	let { children, controls, class: className, code }: Props = $props();
 
-	let expanded = $state(false);
-	let highlightedCode = $derived.by(() => {
-		if (!code) return;
-
-		return {
-			short: apply(code.short, replaceEntities, (v) => style(v, { dark: theme.isDark })),
-			expanded: apply(code.expanded, replaceEntities, (v) => style(v, { dark: theme.isDark }))
-		} satisfies Code;
-	});
+	let showCode = $state(false);
 </script>
 
-<Paper
-	variant="outline"
-	elevation={0}
-	class="mb-4 flex w-full flex-col items-stretch overflow-hidden"
->
-	<div class="relative flex w-full items-stretch justify-between">
-		<div class={cn('relative flex grow items-center justify-center gap-5 p-6', className)}>
-			{@render children?.()}
-		</div>
-		{#if controls}
-			<Separator orientation="vertical" />
-			<div class="relative p-6">
-				{@render controls()}
-			</div>
-		{/if}
-	</div>
-	<Separator />
-	<div class="relative flex h-10 w-full items-center justify-end px-4 py-2">
+<div class="relative mb-4 flex w-full flex-col items-start gap-2.5">
+	<div class="relative flex items-center gap-2.5">
 		<button
-			onclick={() => (expanded = !expanded)}
-			class="cursor-pointer px-2 py-1 text-sm dark:text-zinc-100"
+			onclick={() => (showCode = false)}
+			class={cnBase(
+				'cursor-pointer px-2 py-2 text-sm font-bold',
+				!showCode ? 'dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-500'
+			)}
 		>
-			{expanded ? 'Collapse code' : 'Expand code'}
+			Preview
+		</button>
+		<button
+			onclick={() => (showCode = true)}
+			class={cnBase(
+				'cursor-pointer px-2 py-2 text-sm font-bold',
+				showCode ? 'dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-500'
+			)}
+		>
+			Code
 		</button>
 	</div>
-
-	{#if highlightedCode}
-		{@const _code = expanded ? highlightedCode.expanded : highlightedCode.short}
-		<div class="highlighted-code relative">
-			{@html _code}
-		</div>
+	{#if showCode}
+		<CodeBlock
+			code={typeof code === 'string' ? code : (code?.expanded ?? '')}
+			showLineNumbers
+			class="h-[400px]"
+		/>
+	{:else}
+		<Paper
+			variant="outline"
+			elevation={0}
+			class="flex h-[400px] w-full flex-col items-stretch justify-between overflow-auto"
+		>
+			<div class={cn('relative flex grow items-center justify-center gap-5 p-6', className)}>
+				{@render children?.()}
+			</div>
+			{#if controls}
+				<Separator orientation="vertical" />
+				<div class="relative p-6">
+					{@render controls()}
+				</div>
+			{/if}
+		</Paper>
 	{/if}
-</Paper>
-
-<style>
-	.highlighted-code :global {
-		pre {
-			border-radius: 0;
-			padding: 20px 0;
-			counter-reset: line;
-			overflow-x: auto;
-			font-size: 0.875rem;
-
-			* {
-				font-family: 'Cascadia Code', sans-serif;
-			}
-
-			code {
-				display: contents;
-			}
-
-			code .line {
-				padding: 2px 20px;
-				white-space: pre;
-			}
-
-			code .line::before {
-				counter-increment: line;
-				content: counter(line);
-				display: inline-block;
-				width: 1rem;
-				margin-right: 2rem;
-				text-align: right;
-				color: gray;
-			}
-		}
-	}
-</style>
+</div>

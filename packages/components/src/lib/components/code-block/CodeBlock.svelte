@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { codeToHTML, transformHTMLEntities } from './code-block.js';
+	import { assembleLines, parseNumberRanges, transformHTMLEntities } from './code-block.js';
 	import { codeBlock } from './variants.js';
 	import type { BundledLanguage, BundledTheme, HighlighterGeneric } from 'shiki';
 	import type { TWMergeClass } from '$lib/types.js';
@@ -27,10 +27,12 @@
 
 	let isCopied = $state(false);
 
-	let { button, container, icon } = $derived(codeBlock());
-	let highlightedCode = $derived(
-		codeToHTML(code, { lang, theme, lines: highlightedLines, highlighter })
-	);
+	let { code: codeCss, container } = $derived(codeBlock());
+
+	let parsedLines = $derived(parseNumberRanges(highlightedLines));
+	let tokensResult = $derived.by(() => {
+		return highlighter.codeToTokens(transformHTMLEntities(code), { lang, theme });
+	});
 
 	$effect(() => {
 		if (!isCopied) return;
@@ -39,87 +41,27 @@
 
 		return () => clearTimeout(timeout);
 	});
-
-	async function copy() {
-		isCopied = true;
-		await navigator.clipboard.writeText(transformHTMLEntities(code));
-	}
 </script>
 
-<div data-code-block class={container({ showLineNumbers, className })}>
-	{@html highlightedCode}
-	<button onclick={copy} class={button()}>
-		{@render copyIcon()}
-	</button>
-</div>
-
-{#snippet copyIcon()}
-	{#if isCopied}
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			width="24"
-			height="24"
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			stroke-width="2"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-			class="icon icon-tabler icons-tabler-outline icon-tabler-clipboard-check {icon()}"
-		>
-			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-			<path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
-			<path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
-			<path d="M9 14l2 2l4 -4" />
-		</svg>
-	{:else}
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			width="24"
-			height="24"
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			stroke-width="2"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-			class="icon icon-tabler icons-tabler-outline icon-tabler-clipboard {icon()}"
-		>
-			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-			<path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
-			<path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
-		</svg>
-	{/if}
-{/snippet}
+<pre
+	data-code-block
+	data-show-line-numbers={showLineNumbers}
+	style="color: {tokensResult.fg}; background-color: {tokensResult.bg}"
+	class={container({ className })}>
+    <code class={codeCss()}>
+        {@html assembleLines(tokensResult.tokens, parsedLines)}
+    </code>
+</pre>
 
 <style>
-	[data-code-block] :global {
-		pre {
-			border-radius: 16px;
-			padding: 20px 0;
-			counter-reset: line;
-			overflow-x: auto;
-			font-size: 0.875rem;
+	:global(pre[data-code-block]) {
+		counter-reset: line;
 
-			code {
-				display: flex;
-				flex-direction: column;
-				flex-wrap: nowrap;
-			}
-
-			.line {
-				padding: 2px 20px;
-				white-space: pre;
-
-				&.highlighted {
-					background-color: color-mix(in srgb, currentColor 12%, transparent);
-				}
-			}
+		& [data-code-line] {
+			padding: 2px 20px;
 		}
-	}
 
-	[data-code-block].show-line-numbers :global {
-		.line::before {
+		&[data-show-line-numbers='true'] [data-code-line]::before {
 			counter-increment: line;
 			content: counter(line);
 			display: inline-block;
