@@ -26,7 +26,7 @@ async function importComponent(name: string) {
 
 export async function entries() {
 	const modules = import.meta.glob<boolean, string, Component>(
-		'../../../../../../docs/*/*.docs.svelte',
+		'../../../../../docs/*/*.docs.svelte',
 		{ import: 'default' }
 	);
 
