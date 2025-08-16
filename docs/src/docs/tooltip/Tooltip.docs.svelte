@@ -1,10 +1,11 @@
 <script>
-	import { Alert, Badge, Button, CodeBlock, Tooltip } from '@sveltique/components';
+	import { Alert, Badge, Button, Tooltip } from '@sveltique/components';
 	import Playground from '$components/Playground.svelte';
-	import IconEdit from '@tabler/icons-svelte/icons/edit';
-	import { script } from '$utils/playground';
 	import { theme } from '$lib/contexts/theme.svelte';
+	import { script } from '$utils/playground';
 	import { highlighter } from '$utils/shiki';
+	import IconEdit from '@tabler/icons-svelte/icons/edit';
+	import CodeBlock from '$components/CodeBlock.svelte';
 
 	const code = {
 		short: `<Tooltip title="Edit post">
@@ -38,6 +39,19 @@
         <div bind:this={ref.current}>...</div>
     {/snippet}
 </Tooltip>`;
+
+	const accessibleCode = `<Tooltip title="Edit post">
+    <!-- props : { 'aria-describedby': string } -->
+    {#snippet children({ props, ref })}
+        <Button
+            bind:ref={ref.current}
+            shape="square"
+            {...props}
+        >
+            <IconEdit />
+        </Button>
+    {/snippet}
+</Tooltip>`;
 </script>
 
 <h1>Tooltip</h1>
@@ -59,13 +73,7 @@
 	You can use a custom component as the children of the tooltip as long as you can bind to an HTML
 	element.
 </p>
-<CodeBlock
-	code={customComponentCode}
-	lang="svelte"
-	theme={theme.isDark ? 'one-dark-pro' : 'catppuccin-latte'}
-	{highlighter}
-	class="**:font-cascadia-code"
-/>
+<CodeBlock code={customComponentCode} />
 
 <h2>Accessibility</h2>
 <p>
@@ -76,21 +84,4 @@
 	You can set a custom ID on the tooltip and the props will use it. Otherwise, it will use a
 	generated one via <Badge>$props.id()</Badge>.
 </Alert>
-<CodeBlock
-	code={`<Tooltip title="Edit post">
-    <!-- props : { 'aria-describedby': string } -->
-    {#snippet children({ props, ref })}
-        <Button
-            bind:ref={ref.current}
-            shape="square"
-            {...props}
-        >
-            <IconEdit />
-        </Button>
-    {/snippet}
-</Tooltip>`}
-	lang="svelte"
-	theme={theme.isDark ? 'one-dark-pro' : 'catppuccin-latte'}
-	{highlighter}
-	class="**:font-cascadia-code"
-/>
+<CodeBlock code={accessibleCode} />

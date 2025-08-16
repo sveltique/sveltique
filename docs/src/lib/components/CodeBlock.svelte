@@ -3,7 +3,10 @@
 	import { theme } from '$lib/contexts/theme.svelte';
 	import { highlighter } from '$utils/shiki';
 
-	type Props = Omit<CodeBlockProps, 'highlighter' | 'showLineNumbers' | 'theme'>;
+	interface Props extends Omit<CodeBlockProps, 'highlighter' | 'lang' | 'theme'> {
+		/** @default 'svelte' */
+		lang?: CodeBlockProps['lang'];
+	}
 
 	let { class: className, lang = 'svelte', ...restProps }: Props = $props();
 </script>
@@ -13,6 +16,5 @@
 	{lang}
 	theme={theme.isDark ? 'one-dark-pro' : 'catppuccin-latte'}
 	class={[className, '**:font-cascadia-code']}
-	showLineNumbers
 	{...restProps}
 />

@@ -125,6 +125,13 @@
 		>highlightedLines</Badge
 	> attribute.
 </p>
+<p>Syntax :</p>
+<ul>
+	<li><p>Use numbers for one-line highlighting</p></li>
+	<li><p>Make ranges using hyphens</p></li>
+	<li><p>Combine numbers and/or ranges using commas</p></li>
+</ul>
+
 <Playground
 	code={{
 		short: `<CodeBlock
@@ -171,18 +178,21 @@
 
 <h2>Wrapper component</h2>
 <p>
-	The <code>{'<CodeBlock />'}</code> component, while useful on its own, requires you to pass the highlighter
-	every time. However, it can get repetitive pretty quickly, so we recommend that you make your own wrapper
-	component.
+	The <code>{'<CodeBlock />'}</code> component, while useful on its own, requires you to pass many
+	parameters (such as the <Badge>highlighter</Badge> and theme) every time.
+</p>
+<p>
+	However, if you often use the same values/defaults, it can get repetitive pretty quickly, so we
+	recommend that you make your own wrapper component.
 </p>
 <p>
 	It has the advantage to let you skip passing the highlighter every time, set the same theme for
-	evey code block or add your own logic (light/dark for example), setting the font and more.
+	evey code block or add your own logic (light/dark for example), setting fonts and more.
 </p>
 
 <h3>Implementation Example</h3>
 <p>
-	Here is an implementation example with some added defaults. Feel free to adapt it to your needs.
+	Here is an implementation example with some added defaults. Feel free to adapt it to your needs :
 </p>
 <ul>
 	<li>
@@ -192,19 +202,26 @@
 		<p>Theme is based on light/dark mode</p>
 	</li>
 	<li>
-		<p>Use <Link href="https://github.com/microsoft/cascadia-code">Cascadia Code</Link></p>
+		<p>Default language is <Badge>svelte</Badge></p>
 	</li>
 	<li>
-		<p>Always show line numbers</p>
+		<p>
+			Uses <Link href="https://github.com/microsoft/cascadia-code">Cascadia Code</Link> as the font
+		</p>
 	</li>
 </ul>
 
 <CodeBlock
 	code={`${script(`import { CodeBlock, type CodeBlockProps } from "@sveltique/components";
+
+    // Adapt these imports
     import { highlighter } from "path/to/highlighter";
     import { theme } from "path/to/theme";
 
-    type Props = Omit<CodeBlockProps, "highlighter" | "showLineNumbers" | "theme">;
+    interface Props extends Omit<CodeBlockProps, 'highlighter' | 'lang' | 'theme'> {
+		/** @default 'svelte' */
+		lang?: CodeBlockProps['lang'];
+	}
 
     let { class: className, lang = "svelte", ...restProps }: Props = $props();`)}
 
@@ -213,7 +230,6 @@
     {lang}
     theme={theme.isDark ? "one-dark-pro" : "catppuccin-latte"}
     class={[className, "**:font-cascadia-code"]}
-    showLineNumbers
     {...restProps}
 />`}
 	{highlighter}
@@ -225,7 +241,7 @@
 
 <h3>Usage</h3>
 <CodeBlock
-	code={'<CodeBlock code="<p>My own CodeBlock wrapper !</p>" />'}
+	code={'<CodeBlock code="<p>My own CodeBlock wrapper with defaults!</p>" />'}
 	{highlighter}
 	lang="svelte"
 	theme={theme.isDark ? 'one-dark-pro' : 'catppuccin-latte'}
