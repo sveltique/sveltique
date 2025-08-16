@@ -3,6 +3,8 @@
 	"scripts": {
 		"docs.dev": "npm --prefix ./docs run dev",
 		"docs.install": "npm --prefix ./docs install",
+		"docs.build": "npm --prefix ./docs run build",
+		"docs.preview": "npm --prefix ./docs run preview",
 		"components.dev": "npm --prefix ./packages/components run build",
 		"components.install": "npm --prefix ./packages/components install",
 		"install": "concurrently 'npm:docs.install' 'npm:components.install'",
