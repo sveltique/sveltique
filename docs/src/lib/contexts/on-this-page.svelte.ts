@@ -25,6 +25,7 @@ class OnThisPageContext {
 
 	public getFromDOM(): void {
 		this.current = Array.from(document.querySelectorAll<HTMLHeadingElement>('h2, h3'))
+			.filter((heading) => !heading.closest('[data-playground]'))
 			.map((node) => {
 				node.id = slugify(node.textContent);
 				const level = Number(node.tagName.substring(1)) as 2 | 3;
