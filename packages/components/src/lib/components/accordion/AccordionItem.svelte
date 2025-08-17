@@ -71,9 +71,9 @@
 
 	{#if open}
 		<div
+			transition:slide={{ duration: 150 }}
 			id="{uid}-panel"
 			aria-labelledby={uid}
-			transition:slide={{ duration: 150 }}
 			class={panel()}
 		>
 			{@render children()}
