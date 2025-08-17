@@ -10,3 +10,5 @@ export type TWMergeClass = {
 export type WithRef<T extends HTMLElement> = {
 	ref?: T;
 };
+
+export type MaybeGetter<T> = T | (() => T);

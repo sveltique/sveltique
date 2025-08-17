@@ -1,9 +1,11 @@
 <script lang="ts">
+	import { onMount, type Snippet } from 'svelte';
 	import { on } from 'svelte/events';
 	import { accordion } from './variants.js';
-	import { onMount, type Snippet } from 'svelte';
+	import { onKeyDown, onKeyUp } from '$utils/on-key.svelte.js';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { ReplaceWithTWMergeClass } from '$lib/types.js';
+	import { getActiveElement } from '$utils/use-active-element.svelte.js';
 
 	interface Props extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>> {
 		children?: Snippet;
@@ -37,6 +39,8 @@
 
 	let ref = $state<HTMLDivElement>();
 	let values = $state<string[]>([]);
+
+	const activeElement = getActiveElement();
 
 	onMount(() => {
 		if (!ref || !defaultExpand) return;
@@ -72,6 +76,78 @@
 			}
 		});
 	});
+
+	onKeyDown(['ArrowUp', 'ArrowDown'], preventArrowScroll, { preventDefault: true });
+
+	onKeyDown(
+		['ArrowUp', 'ArrowDown'],
+		(event) => {
+			if (!ref) return;
+
+			if (event.key === 'ArrowUp') {
+				focusPrevious(ref);
+			} else if (event.key === 'ArrowDown') {
+				focusNext(ref);
+			}
+		},
+		{
+			element: () => ref
+		}
+	);
+
+	function preventArrowScroll(event: Event) {
+		if (!ref) return;
+
+		if (ref === activeElement.current || ref.contains(activeElement.current)) {
+			event.preventDefault();
+		}
+	}
+
+	function focusPrevious(container: HTMLElement) {
+		if (!activeElement.current) return;
+
+		const selector = [
+			'a[href]:not([tabindex="-1"])',
+			'button:not([disabled]):not([tabindex="-1"])',
+			'input:not([disabled]):not([tabindex="-1"])',
+			'select:not([disabled]):not([tabindex="-1"])',
+			'textarea:not([disabled]):not([tabindex="-1"])',
+			'[tabindex]:not([tabindex="-1"])'
+		].join(',');
+
+		const tabbables = Array.from(container.querySelectorAll<HTMLElement>(selector)).filter(
+			(el) => el.offsetParent !== null
+		);
+
+		const idx = tabbables.indexOf(activeElement.current);
+		if (idx >= 0) {
+			const previous = tabbables.at(idx - 1);
+			previous?.focus();
+		}
+	}
+
+	function focusNext(container: HTMLElement) {
+		if (!activeElement.current) return;
+
+		const selector = [
+			'a[href]:not([tabindex="-1"])',
+			'button:not([disabled]):not([tabindex="-1"])',
+			'input:not([disabled]):not([tabindex="-1"])',
+			'select:not([disabled]):not([tabindex="-1"])',
+			'textarea:not([disabled]):not([tabindex="-1"])',
+			'[tabindex]:not([tabindex="-1"])'
+		].join(',');
+
+		const tabbables = Array.from(container.querySelectorAll<HTMLElement>(selector)).filter(
+			(el) => el.offsetParent !== null
+		);
+
+		const idx = tabbables.indexOf(activeElement.current);
+		if (idx >= 0) {
+			const next = tabbables.at((idx + 1) % tabbables.length);
+			next?.focus();
+		}
+	}
 </script>
 
 <div
