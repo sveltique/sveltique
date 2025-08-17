@@ -40,9 +40,9 @@
 
 	onMount(() => {
 		if (!ref || !defaultExpand) return;
-		if (!ref.firstElementChild) return;
+		if (!ref.firstElementChild?.firstElementChild) return;
 
-		values = [ref.firstElementChild?.id];
+		values = [ref.firstElementChild.firstElementChild.id];
 	});
 
 	$effect(() => {

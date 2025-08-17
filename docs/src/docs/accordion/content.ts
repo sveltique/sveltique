@@ -4,7 +4,7 @@ export const defaultExpandCode = `${script('import { Accordion } from "@sveltiqu
 
 <Accordion.Root defaultExpand>
     <Accordion.Item Icon={IconArrowDown}>
-        {#snippet summary()}
+        {#snippet header()}
             Accordion 1
         {/snippet}
 
@@ -16,7 +16,7 @@ export const defaultExpandCode = `${script('import { Accordion } from "@sveltiqu
     </Accordion.Item>
 
     <Accordion.Item Icon={IconCaretDownFilled}>
-        {#snippet summary()}
+        {#snippet header()}
             Accordion 2
         {/snippet}
 
@@ -28,9 +28,10 @@ export const defaultExpandCode = `${script('import { Accordion } from "@sveltiqu
     </Accordion.Item>
 </Accordion.Root>`;
 
-export const headingLevelCode = `<Accordion.Root headingLevel="h4">
+export const headingLevelCode = `<!-- The headers will now use an h4 element -->
+<Accordion.Root headingLevel="h4">
     <Accordion.Item>
-        {#snippet summary()}
+        {#snippet header()}
             Accordion 1
         {/snippet}
 

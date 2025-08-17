@@ -7,12 +7,12 @@
 
 	interface Props extends TWMergeClass {
 		children: Snippet;
-		summary: Snippet;
+		header: Snippet;
 		value?: string;
 		Icon?: ComponentType | Component;
 	}
 
-	let { children, class: className, summary, value, Icon: CustomIcon }: Props = $props();
+	let { children, class: className, header, value, Icon: CustomIcon }: Props = $props();
 
 	const uid = $props.id();
 
@@ -26,10 +26,10 @@
 
 	let {
 		container,
-		details,
 		icon,
 		iconContainer,
-		summary: summaryCss,
+		panel,
+		header: headerCss,
 		trigger
 	} = $derived(accordionItem({ open }));
 
@@ -55,13 +55,13 @@
 <div bind:this={ref} class={container({ className })}>
 	<button
 		id={uid}
-		aria-controls="{uid}-details"
 		data-accordion-item
+		aria-controls="{uid}-panel"
 		data-value={_value}
 		class={trigger()}
 	>
-		<svelte:element this={headingLevel} class={summaryCss()}>
-			{@render summary()}
+		<svelte:element this={headingLevel} class={headerCss()}>
+			{@render header()}
 		</svelte:element>
 		<div class={iconContainer()}>
 			{#if CustomIcon}
@@ -87,7 +87,7 @@
 	</button>
 
 	{#if open}
-		<div id="{uid}-details" transition:slide={{ duration: 150 }} class={details()}>
+		<div id="{uid}-panel" transition:slide={{ duration: 150 }} class={panel()}>
 			{@render children()}
 		</div>
 	{/if}
