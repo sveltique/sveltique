@@ -29,7 +29,7 @@
 			onclick={() => (showCode = false)}
 			class={cnBase(
 				'cursor-pointer px-2 py-2 text-sm font-bold',
-				!showCode ? 'dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-500'
+				!showCode ? 'dark:text-zinc-100' : 'text-zinc-500'
 			)}
 		>
 			Preview
@@ -38,7 +38,7 @@
 			onclick={() => (showCode = true)}
 			class={cnBase(
 				'cursor-pointer px-2 py-2 text-sm font-bold',
-				showCode ? 'dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-500'
+				showCode ? 'dark:text-zinc-100' : 'text-zinc-500'
 			)}
 		>
 			Code

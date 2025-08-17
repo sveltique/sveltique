@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { skeleton } from './variants.js';
+	import { skeleton, type SkeletonVariants } from './variants.js';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { ReplaceWithTWMergeClass } from '$lib/types.js';
 
-	type Props = ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>;
+	interface Props
+		extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
+			SkeletonVariants {}
 
-	let { class: className, ...restProps }: Props = $props();
-
-	const { container } = $derived(skeleton());
+	let { animation = 'pulse', class: className, ...restProps }: Props = $props();
 </script>
 
 <!--
@@ -15,4 +15,4 @@
 A placeholder component to display while the content is loading.
 -->
 
-<div class={container({ className })} {...restProps}></div>
+<div class={skeleton({ animation, className })} aria-hidden="true" {...restProps}></div>
