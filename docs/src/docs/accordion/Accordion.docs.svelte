@@ -16,7 +16,7 @@
 <Playground>
 	<Accordion.Root class="max-w-md">
 		<Accordion.Item>
-			{#snippet summary()}
+			{#snippet header()}
 				What is this feature for?
 			{/snippet}
 
@@ -27,7 +27,7 @@
 		</Accordion.Item>
 
 		<Accordion.Item>
-			{#snippet summary()}
+			{#snippet header()}
 				Can I customize how it looks?
 			{/snippet}
 
@@ -37,7 +37,7 @@
 		</Accordion.Item>
 
 		<Accordion.Item>
-			{#snippet summary()}
+			{#snippet header()}
 				Will this work on mobile devices?
 			{/snippet}
 
@@ -51,7 +51,7 @@
 <Playground>
 	<Accordion.Root class="max-w-md">
 		<Accordion.Item Icon={IconArrowDown}>
-			{#snippet summary()}
+			{#snippet header()}
 				What is this feature for?
 			{/snippet}
 
@@ -62,7 +62,7 @@
 		</Accordion.Item>
 
 		<Accordion.Item Icon={IconCaretDownFilled}>
-			{#snippet summary()}
+			{#snippet header()}
 				Will this work on mobile devices?
 			{/snippet}
 
@@ -76,7 +76,7 @@
 <Playground code={defaultExpandCode}>
 	<Accordion.Root defaultExpand class="max-w-md">
 		<Accordion.Item>
-			{#snippet summary()}
+			{#snippet header()}
 				Accordion 1
 			{/snippet}
 
@@ -86,7 +86,7 @@
 			</p>
 		</Accordion.Item>
 		<Accordion.Item>
-			{#snippet summary()}
+			{#snippet header()}
 				Accordion 2
 			{/snippet}
 
@@ -108,7 +108,7 @@
 <Playground>
 	<Accordion.Root multiple={false} class="max-w-md">
 		<Accordion.Item>
-			{#snippet summary()}
+			{#snippet header()}
 				What is this feature for?
 			{/snippet}
 
@@ -118,7 +118,7 @@
 			</p>
 		</Accordion.Item>
 		<Accordion.Item>
-			{#snippet summary()}
+			{#snippet header()}
 				Can I customize how it looks?
 			{/snippet}
 
@@ -127,7 +127,7 @@
 			</p>
 		</Accordion.Item>
 		<Accordion.Item>
-			{#snippet summary()}
+			{#snippet header()}
 				Will this work on mobile devices?
 			{/snippet}
 
@@ -138,7 +138,7 @@
 
 <h3>Heading level</h3>
 <p>
-	By default, accordion items use an <Badge>h3</Badge> element for the summary.
+	By default, accordion items use an <Badge>h3</Badge> element for the header.
 </p>
 <p>
 	You can change this to adapt it to your document hierarchy using the <Badge>headingLevel</Badge> attribute.
