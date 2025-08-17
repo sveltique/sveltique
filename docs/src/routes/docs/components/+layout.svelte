@@ -227,7 +227,7 @@
 
 				{#if items.length > 0}
 					<div class="relative flex w-full flex-col gap-2.5 pl-5">
-						{#each items as item (item.id)}
+						{#each items as item (item.label)}
 							<a href="#{item.id}" class="text-zinc-600 dark:text-zinc-400">{item.label}</a>
 						{/each}
 					</div>

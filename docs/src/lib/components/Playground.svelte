@@ -23,7 +23,7 @@
 	let showCode = $state(false);
 </script>
 
-<div class="relative mb-4 flex w-full flex-col items-start gap-2.5">
+<div data-playground class="relative mb-4 flex w-full flex-col items-start gap-2.5">
 	<div class="relative flex items-center gap-2.5">
 		<button
 			onclick={() => (showCode = false)}

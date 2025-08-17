@@ -2,6 +2,7 @@
 	import { slide } from 'svelte/transition';
 	import { onMount, type Component, type ComponentType, type Snippet } from 'svelte';
 	import { accordionItem } from './variants.js';
+	import { useMutationObserver } from '$utils/use-mutation-observer.svelte.js';
 	import type { TWMergeClass } from '$lib/types.js';
 
 	interface Props extends TWMergeClass {
@@ -17,11 +18,13 @@
 
 	let ref = $state<HTMLDivElement>();
 	let parent = $state<HTMLDivElement>();
+
 	let open = $state(false);
+	let headingLevel = $state<string>()!;
 
 	let _value = $derived(value ?? uid);
 
-	const {
+	let {
 		container,
 		details,
 		icon,
@@ -32,35 +35,22 @@
 
 	onMount(() => {
 		parent = ref?.parentElement as HTMLDivElement;
+		headingLevel = parent.getAttribute('data-heading-level')!;
+		updateOpen();
 	});
 
-	$effect(() => {
+	useMutationObserver(() => parent, updateOpen, {
+		attributes: true,
+		attributeFilter: ['data-open-values']
+	});
+
+	function updateOpen() {
 		if (!parent) return;
 
-		const observer = new MutationObserver(() => {
-			open = _value === parent!.getAttribute('data-selected-value');
-		});
-
-		observer.observe(parent, {
-			attributes: true,
-			attributeFilter: ['data-selected-value']
-		});
-
-		console.log(parent.getAttribute('data-selected-value'));
-
-		open = _value === parent.getAttribute('data-selected-value');
-
-		return () => observer.disconnect();
-	});
+		const openValues = parent.getAttribute('data-open-values')!.split(',');
+		open = openValues.includes(_value);
+	}
 </script>
-
-<!--
-@component
-An individual item inside an accordion.
-
-Props :
-* `value` The value of the item, used for opening/closing the accordion.
--->
 
 <div bind:this={ref} class={container({ className })}>
 	<button
@@ -70,7 +60,9 @@ Props :
 		data-value={_value}
 		class={trigger()}
 	>
-		<span class={summaryCss()}>{@render summary()}</span>
+		<svelte:element this={headingLevel} class={summaryCss()}>
+			{@render summary()}
+		</svelte:element>
 		<div class={iconContainer()}>
 			{#if CustomIcon}
 				<CustomIcon />

@@ -1,9 +1,7 @@
 import { tv, type VariantProps } from 'tailwind-variants';
 
 export const accordion = tv({
-	slots: {
-		container: 'relative flex w-full flex-col overflow-hidden'
-	}
+	base: 'relative flex w-full flex-col overflow-hidden'
 });
 
 export const accordionItem = tv({
