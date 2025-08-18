@@ -45,6 +45,7 @@
 		</button>
 	</div>
 	{#if showCode}
+		<!-- TODO : remove the code?.expanded support -->
 		<CodeBlock
 			code={typeof code === 'string' ? code : (code?.expanded ?? '')}
 			showLineNumbers
