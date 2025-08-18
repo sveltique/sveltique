@@ -4,7 +4,13 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
 	plugins: [tailwindcss(), sveltekit()],
-	ssr: {
-		noExternal: ['@sveltique/components']
+	optimizeDeps: {
+		exclude: [
+			'tailwind-variants',
+			'tailwind-merge',
+			'shiki',
+			'@tabler/icons-svelte',
+			'@sveltique/components'
+		]
 	}
 });
