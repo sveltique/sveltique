@@ -1,6 +1,6 @@
 import tailwindcss from '@tailwindcss/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig } from 'vite';
+import { defineConfig, searchForWorkspaceRoot } from 'vite';
 
 export default defineConfig({
 	plugins: [tailwindcss(), sveltekit()],
@@ -12,5 +12,10 @@ export default defineConfig({
 			'@tabler/icons-svelte',
 			'@sveltique/components'
 		]
+	},
+	server: {
+		fs: {
+			allow: [searchForWorkspaceRoot(process.cwd()), './content']
+		}
 	}
 });
