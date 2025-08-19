@@ -2,7 +2,7 @@ import { tv, type VariantProps } from 'tailwind-variants';
 
 /** The styles of a button. */
 export const button = tv({
-	base: 'relative duration-150 ease-in-out flex justify-center items-center gap-5 cursor-pointer [&_*]:pointer-events-none focus:outline-none focus-visible:ring-2 dark:focus-visible:ring-offset-zinc-900 focus-visible:ring-offset-2',
+	base: 'relative duration-150 ease-in-out flex justify-center items-center gap-2.5 cursor-pointer [&_*]:pointer-events-none focus:outline-none focus-visible:ring-2 dark:focus-visible:ring-offset-zinc-900 focus-visible:ring-offset-2',
 	variants: {
 		variant: {
 			contained: '',
@@ -10,14 +10,14 @@ export const button = tv({
 			text: ''
 		},
 		shape: {
-			rectangle: 'rounded-2xl',
+			rectangle: 'rounded-lg',
 			square: 'rounded-2xl',
 			circle: 'rounded-full'
 		},
 		size: {
-			small: 'text-sm px-4 py-2',
-			medium: 'px-6 py-3',
-			large: 'text-lg px-8 py-4'
+			small: 'text-sm px-3 py-1.5',
+			medium: 'px-4 py-2',
+			large: 'text-lg px-6 py-3'
 		},
 		disabled: {
 			true: 'cursor-not-allowed opacity-50'
@@ -31,37 +31,37 @@ export const button = tv({
 		{
 			shape: 'rectangle',
 			size: 'small',
-			class: 'rounded-lg'
+			class: 'rounded-sm'
 		},
 		{
 			shape: 'square',
 			size: 'small',
+			class: 'p-1 rounded-sm'
+		},
+		{
+			shape: 'square',
+			size: 'medium',
 			class: 'p-2 rounded-lg'
 		},
 		{
 			shape: 'square',
-			size: 'medium',
-			class: 'p-3 rounded-2xl'
-		},
-		{
-			shape: 'square',
 			size: 'large',
-			class: 'p-4 rounded-2xl'
+			class: 'p-3 rounded-2xl'
 		},
 		{
 			shape: 'circle',
 			size: 'small',
-			class: 'p-2 rounded-full'
+			class: 'p-1 rounded-full'
 		},
 		{
 			shape: 'circle',
 			size: 'medium',
-			class: 'p-3 rounded-full'
+			class: 'p-2 rounded-full'
 		},
 		{
 			shape: 'circle',
 			size: 'large',
-			class: 'p-4 rounded-full'
+			class: 'p-3 rounded-full'
 		},
 		{
 			variant: 'contained',
