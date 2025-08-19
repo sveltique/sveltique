@@ -1,10 +1,20 @@
+import { onMount, untrack } from 'svelte';
+
 type Theme = 'light' | 'dark';
 
 class ThemeContext {
 	private _theme = $state<Theme>()!;
 
 	constructor() {
-		this._theme = localStorage.theme ?? this.getSystemPreference();
+		this._theme = 'light';
+
+		$effect.root(() => {
+			$effect(() => {
+				untrack(() => {
+					this._theme = localStorage.theme ?? this.getSystemPreference();
+				});
+			});
+		});
 	}
 
 	get current(): Theme {

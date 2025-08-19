@@ -60,7 +60,23 @@
 		class="sticky left-0 top-16 z-50 hidden h-[calc(100vh-4rem)] w-full items-start justify-end overflow-auto bg-zinc-50 p-6 lg:flex dark:bg-zinc-800"
 	>
 		<nav class="relative flex min-w-[240px] flex-col gap-1">
-			<a
+			{#each data.sidebar as rootItem, index (index)}
+				<span class="font-semibold">{rootItem.name}</span>
+				{#each rootItem.children as item (item.name)}
+					<a
+						href="/docs/components/{item.slugPath}"
+						class={cnBase(
+							'py-1',
+							page.url.pathname.endsWith(item.slugPath)
+								? 'text-blue-700 dark:text-blue-300'
+								: 'text-zinc-600 dark:text-zinc-400'
+						)}
+					>
+						{item.name}
+					</a>
+				{/each}
+			{/each}
+			<!-- <a
 				href="/docs/components/installation"
 				class={button({
 					variant: 'text',
@@ -116,7 +132,7 @@
 						All components
 					</a>
 					<Separator class="my-2" />
-					{#each data.componentNames as name, index (index)}
+					{#each data.sidebarConfig as rootItem, index (index)}
 						<a
 							href="/docs/components/browse/{name}"
 							class={cnBase(
@@ -130,7 +146,7 @@
 						</a>
 					{/each}
 				</div>
-			{/if}
+			{/if} -->
 		</nav>
 	</aside>
 
@@ -167,7 +183,7 @@
 				transition:fly={{ x: -100, duration: 150 }}
 				class="relative flex h-[100vh] w-60 flex-col items-start justify-start overflow-auto bg-white p-6 shadow-[0_0_12px_4px_rgba(0,0,0,0.15)] dark:bg-zinc-800"
 			>
-				{#each data.componentNames as name, index (index)}
+				<!-- {#each data.componentNames as name, index (index)}
 					<a
 						href="/docs/components/browse/{name}"
 						class={cnBase(
@@ -177,7 +193,7 @@
 					>
 						{capitalize(name)}
 					</a>
-				{/each}
+				{/each} -->
 			</nav>
 		</Backdrop>
 	{/if}
