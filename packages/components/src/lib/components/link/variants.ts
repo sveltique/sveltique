@@ -1,12 +1,21 @@
 import { tv, type VariantProps } from 'tailwind-variants';
 
 export const link = tv({
-	base: 'text-blue-700 dark:text-blue-300',
+	slots: {
+		container: 'text-blue-700 dark:text-blue-300 inline-flex',
+		icon: 'aspect-square w-5 shrink-0 ml-1'
+	},
 	variants: {
 		underline: {
-			always: 'underline',
-			hover: 'hover:underline',
-			none: ''
+			always: {
+				container: 'underline'
+			},
+			hover: {
+				container: 'hover:underline'
+			},
+			none: {
+				container: ''
+			}
 		}
 	},
 	defaultVariants: {

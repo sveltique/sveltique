@@ -13,7 +13,7 @@
 	need clear, readable code examples.
 </p>
 <Alert
-	>You must have <Link href="https://shiki.style" external>shiki</Link> installed before using this component.</Alert
+	>You must have <Link href="https://shiki.style" external>shiki</Link> installed to use this component.</Alert
 >
 
 <h2>Basic Usage</h2>
@@ -24,8 +24,8 @@
 <p>
 	You can create one by following the <Link
 		href="https://shiki.style/guide/install#highlighter-usage"
-		external>"Highlighter Usage"</Link
-	> guide from shiki.
+		external>"Highlighter Usage" guide</Link
+	> from shiki.
 </p>
 
 <p>
