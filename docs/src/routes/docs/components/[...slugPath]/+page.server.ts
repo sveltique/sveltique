@@ -1,15 +1,9 @@
-import { error } from '@sveltejs/kit';
 import path from 'node:path';
+import { error } from '@sveltejs/kit';
+import { sidebarConfig } from '$lib/configs/sidebar.server';
 
 export async function load({ params, parent }) {
-	const data = await parent();
-
-	const root = data.sidebar.find((root) => {
-		return root.children.find((item) => item.slugPath === params.slugPath);
-	});
-	if (!root) error(404, 'Not found');
-
-	const item = root.children.find((item) => item.slugPath === params.slugPath);
+	const item = sidebarConfig.findBySlugPath(params.slugPath);
 	if (!item) error(404, 'Not found');
 
 	return {

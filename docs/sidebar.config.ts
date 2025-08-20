@@ -1,21 +1,19 @@
-import { fromFileSystem } from '$lib/static-generator/sidebar.server';
-import type { RootSidebarItem } from '$lib/static-generator/types';
+import { defineConfig, fromFileSystem } from 'codex/config';
 
-export const prefix: string = 'content/components';
+export default defineConfig(() => {
+	const prefix = 'content/components';
 
-export const sidebar: RootSidebarItem[] = [
-	{
-		name: 'Getting Started',
-		children: fromFileSystem('getting-started', prefix)
-	},
-	{
-		name: 'Components',
-		children: [
+	return {
+		prefix,
+		sidebar: [
 			{
-				name: 'All Components',
-				path: prefix + '/AllComponents.svelte'
+				name: 'Getting Started',
+				children: fromFileSystem('getting-started', prefix)
 			},
-			...fromFileSystem('browse', prefix)
+			{
+				name: 'Components',
+				children: fromFileSystem('browse', prefix)
+			}
 		]
-	}
-];
+	};
+});

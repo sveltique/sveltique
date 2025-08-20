@@ -35,6 +35,7 @@
 	"dependencies": {
 		"@sveltique/components": "file:../packages/components",
 		"@tabler/icons-svelte": "^3.34.1",
+		"codex": "file:../internal/codex",
 		"tailwind-merge": "^3.3.1",
 		"tailwind-variants": "^2.1.0"
 	}

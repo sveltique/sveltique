@@ -1,6 +1,6 @@
-export interface RootSidebarItem {
+export interface RootSidebarItem<T> {
 	name: string;
-	children: SidebarItem[];
+	children: T[];
 }
 
 export interface SidebarItem {
@@ -14,4 +14,15 @@ export interface SidebarItem {
 export interface ExtendedSidebarItem extends SidebarItem {
 	slug: string;
 	slugPath: string;
+}
+
+export interface SidebarConfigData<T> {
+	/**
+	 * The global prefix to search for docs.
+	 *
+	 * THIS IS REMOVED FROM THE PATH WHEN SERVING THE DOCS.
+	 * @default ""
+	 */
+	prefix?: string;
+	sidebar: RootSidebarItem<T>[];
 }

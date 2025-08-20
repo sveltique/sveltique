@@ -5,7 +5,6 @@
 	import { cnBase } from 'tailwind-variants';
 	import { Backdrop, Button, button, Separator } from '@sveltique/components';
 	import { setOnThisPageContext } from '$lib/contexts/on-this-page.svelte.js';
-	import { capitalize } from '$utils/string.js';
 
 	import IconMenuDeep from '@tabler/icons-svelte/icons/menu-deep';
 	import IconChevronRight from '@tabler/icons-svelte/icons/chevron-right';
