@@ -1,0 +1,29 @@
+{
+	"name": "codex",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"build": "tsup src/**/*.ts --dts --format esm",
+		"dev": "tsup src/**/*.ts --dts --format esm --watch"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "commonjs",
+	"devDependencies": {
+		"@types/node": "^24.3.0",
+		"tsup": "^8.5.0",
+		"typescript": "^5.9.2"
+	},
+	"exports": {
+		".": {
+			"types": "./dist/index.d.mts",
+			"import": "./dist/index.mjs"
+		},
+		"./config": {
+			"types": "./dist/config.d.mts",
+			"import": "./dist/config.mjs"
+		}
+	}
+}

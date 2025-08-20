@@ -1,5 +1,8 @@
-import { loadSidebarConfig } from '$lib/static-generator/sidebar.server';
+import { sidebarConfig } from '$lib/configs/sidebar.server';
 
 export async function load() {
-	return await loadSidebarConfig();
+	return {
+		prefix: sidebarConfig.prefix,
+		sidebar: sidebarConfig.sidebar
+	};
 }

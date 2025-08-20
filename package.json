@@ -7,8 +7,10 @@
 		"docs.preview": "npm --prefix ./docs run preview",
 		"components.dev": "npm --prefix ./packages/components run build",
 		"components.install": "npm --prefix ./packages/components install",
-		"install": "concurrently 'npm:docs.install' 'npm:components.install'",
-		"dev": "concurrently 'npm:docs.dev' 'npm:components.dev'"
+		"codex.install": "npm --prefix ./internal/codex install",
+		"codex.dev": "npm --prefix ./internal/codex run dev",
+		"install": "concurrently 'npm:docs.install' 'npm:codex.install' 'npm:components.install'",
+		"dev": "concurrently 'npm:docs.dev' 'npm:codex.dev' 'npm:components.dev'"
 	},
 	"devDependencies": {
 		"concurrently": "^9.2.0",

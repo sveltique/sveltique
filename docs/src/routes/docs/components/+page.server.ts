@@ -1,8 +1,6 @@
+import { sidebarConfig } from '$lib/configs/sidebar.server.js';
 import { redirect } from '@sveltejs/kit';
 
-export async function load({ parent }) {
-	const { sidebar } = await parent();
-	const firstItem = sidebar.at(0)!.children.at(0)!;
-
-	redirect(303, `/docs/components/${firstItem.slugPath}`);
+export async function load() {
+	redirect(303, `/docs/components/${sidebarConfig.getFirstItem().slugPath}`);
 }
