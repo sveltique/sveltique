@@ -42,7 +42,7 @@
 <div class="relative flex min-h-[100vh] w-full flex-col lg:flex-row">
 	{@render componentsBar()}
 	<div class="relative w-full px-6 lg:px-32">
-		<div class="lg:w-2xl relative mx-auto pt-12">
+		<div data-content class="lg:w-2xl relative mx-auto pt-12">
 			<svelte:boundary>
 				{@render children()}
 
@@ -59,22 +59,26 @@
 	<aside
 		class="sticky left-0 top-16 z-50 hidden h-[calc(100vh-4rem)] w-full items-start justify-end overflow-auto bg-zinc-50 p-6 lg:flex dark:bg-zinc-800"
 	>
-		<nav class="relative flex min-w-[240px] flex-col gap-1">
+		<nav class="relative flex min-w-[240px] flex-col gap-5 text-sm font-bold">
 			{#each data.sidebar as rootItem, index (index)}
-				<span class="font-semibold">{rootItem.name}</span>
-				{#each rootItem.children as item (item.name)}
-					<a
-						href="/docs/components/{item.slugPath}"
-						class={cnBase(
-							'py-1',
-							page.url.pathname.endsWith(item.slugPath)
-								? 'text-blue-700 dark:text-blue-300'
-								: 'text-zinc-600 dark:text-zinc-400'
-						)}
-					>
-						{item.name}
-					</a>
-				{/each}
+				<div class="relative flex w-full flex-col gap-2.5">
+					<span>{rootItem.name}</span>
+					<div class="relative flex w-full flex-col">
+						{#each rootItem.children as item (item.name)}
+							<a
+								href="/docs/components/{item.slugPath}"
+								class={cnBase(
+									'py-1',
+									page.url.pathname.endsWith(item.slugPath)
+										? 'text-blue-700 dark:text-blue-300'
+										: 'text-zinc-600 dark:text-zinc-400'
+								)}
+							>
+								{item.name}
+							</a>
+						{/each}
+					</div>
+				</div>
 			{/each}
 			<!-- <a
 				href="/docs/components/installation"
