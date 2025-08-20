@@ -22,7 +22,7 @@
 	>
 		<nav class="relative flex w-full items-center justify-center gap-5 dark:text-zinc-100">
 			<a href="/">home</a>
-			<a href="/docs/components/browse">components</a>
+			<a href="/docs/components">components</a>
 			<Button onclick={() => theme.switch()} variant="outline" size="small">{theme.current}</Button>
 		</nav>
 	</header>
