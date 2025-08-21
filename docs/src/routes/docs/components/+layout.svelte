@@ -40,8 +40,8 @@
 
 <div class="relative flex min-h-[100vh] w-full flex-col lg:flex-row">
 	{@render componentsBar()}
-	<div class="relative w-full px-6 lg:px-32">
-		<div data-content class="lg:w-2xl relative mx-auto pt-12">
+	<div class="md:px-18 relative w-full px-6 sm:px-12 lg:px-12 xl:px-32">
+		<div data-content class="lg:w-xl xl:w-2xl relative mx-auto pt-12">
 			<svelte:boundary>
 				{@render children()}
 
@@ -56,7 +56,7 @@
 
 {#snippet componentsBar()}
 	<aside
-		class="sticky left-0 top-16 z-50 hidden h-[calc(100vh-4rem)] w-full items-start justify-end overflow-auto bg-zinc-50 p-6 lg:flex dark:bg-zinc-800"
+		class="sticky left-0 top-16 z-50 hidden h-[calc(100vh-4rem)] items-start justify-end overflow-auto bg-zinc-50 p-6 lg:flex xl:w-full dark:bg-zinc-800"
 	>
 		<nav class="relative flex min-w-[240px] flex-col gap-5 text-sm font-bold">
 			{#each data.sidebar as rootItem, index (index)}
@@ -237,7 +237,7 @@
 
 {#snippet onThisPageBar()}
 	<aside
-		class="sticky right-0 top-28 z-50 hidden h-full w-full border-l border-zinc-300 px-6 py-3 lg:block dark:border-zinc-700"
+		class="sticky right-0 top-28 z-50 hidden h-full w-full border-l border-zinc-300 px-6 py-3 xl:block dark:border-zinc-700"
 	>
 		<nav class="relative flex h-full flex-col gap-2.5 text-sm font-medium">
 			<div role="heading" aria-level="2" class="font-bold dark:text-zinc-100">On This Page</div>
