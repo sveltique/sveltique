@@ -3,10 +3,13 @@
 	import { Button } from '@sveltique/components';
 	import '../app.css';
 	import IconMenuDeep from '@tabler/icons-svelte/icons/menu-deep';
+	import IconSunFilled from '@tabler/icons-svelte/icons/sun-filled';
+	import IconMoonFilled from '@tabler/icons-svelte/icons/moon-filled';
 
 	let { children } = $props();
 
 	let showMenu = $state(false);
+	let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
 </script>
 
 <div class="relative w-full">
@@ -20,10 +23,16 @@
 	<header
 		class="sticky left-0 top-0 z-50 hidden h-16 w-full border-b border-zinc-300 bg-white lg:block dark:border-zinc-700 dark:bg-zinc-900"
 	>
-		<nav class="relative flex w-full items-center justify-center gap-5 dark:text-zinc-100">
-			<a href="/">home</a>
-			<a href="/docs/components">components</a>
-			<Button onclick={() => theme.switch()} variant="outline" size="small">{theme.current}</Button>
+		<nav
+			class="relative flex h-full w-full items-center justify-between gap-5 px-20 dark:text-zinc-100"
+		>
+			<div class="relative flex items-center gap-10">
+				<a href="/" class="font-bold">SVELTIQUE</a>
+				<a href="/docs/components">Components</a>
+			</div>
+			<Button onclick={() => theme.switch()} variant="text" shape="square">
+				<ThemeIcon class="h-5 w-5" />
+			</Button>
 		</nav>
 	</header>
 

@@ -7,11 +7,7 @@
 	const code = {
 		short: `<Tooltip title="Sveltique is awesome">
     {#snippet children({ props, ref })}
-        <Button 
-            bind:ref={ref.current} 
-            size="small" 
-            {...props}
-        >
+        <Button bind:ref={ref.current} {...props}>
             Hover me !
         </Button>
     {/snippet}
@@ -20,10 +16,7 @@
 
 <Tooltip title="Sveltique is awesome">
     {#snippet children({ props, ref })}
-        <Button 
-            bind:ref={ref.current} size="small" 
-            {...props}
-        >
+        <Button bind:ref={ref.current} {...props}>
             Hover me !
         </Button>
     {/snippet}
