@@ -86,14 +86,12 @@ export const button = tv({
 		{
 			variant: 'outline',
 			color: 'danger',
-			class:
-				'bg-transparent text-danger border border-red-100 dark:border-red-400 not-disabled:hover:bg-red-50 dark:text-red-400 not-disabled:dark:hover:bg-red-900'
+			class: 'bg-transparent text-danger border border-muted not-disabled:hover:bg-danger-light'
 		},
 		{
 			variant: 'text',
 			color: 'danger',
-			class:
-				'bg-transparent text-danger not-disabled:hover:bg-red-50 dark:text-red-400 not-disabled:dark:hover:bg-red-500'
+			class: 'bg-transparent text-danger not-disabled:hover:bg-muted'
 		}
 	],
 	defaultVariants: {
