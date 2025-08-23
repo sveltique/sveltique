@@ -23,6 +23,6 @@ export interface SidebarConfigData<T> {
 	 * THIS IS REMOVED FROM THE PATH WHEN SERVING THE DOCS.
 	 * @default ""
 	 */
-	prefix?: string;
+	docsRoot?: string;
 	sidebar: RootSidebarItem<T>[];
 }

@@ -50,19 +50,3 @@
 	import.
 </p>
 <CodeBlock code={'import { Alert } from "@sveltique/components/alert";'} lang="ts" />
-
-<style lang="postcss">
-	@reference "tailwindcss";
-
-	h1 {
-		@apply w-full text-3xl font-bold dark:text-zinc-100;
-	}
-
-	h2 {
-		@apply mb-4 mt-12 scroll-mt-[calc(4rem-2px)] border-t border-zinc-300 pt-6 text-2xl font-bold dark:border-zinc-700 dark:text-zinc-100;
-	}
-
-	p {
-		@apply my-4;
-	}
-</style>

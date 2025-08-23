@@ -13,9 +13,9 @@ export function defineConfig(
  * Recursively generate sidebar items from a directory.
  * @note It only supports top-level files.
  */
-export function fromFileSystem(dirPath: string, prefix: string = ''): SidebarItem[] {
+export function fromFileSystem(dirPath: string, docsRoot: string = ''): SidebarItem[] {
 	const items: SidebarItem[] = [];
-	const entries = fs.readdirSync(path.join(prefix, dirPath), { withFileTypes: true });
+	const entries = fs.readdirSync(path.join(docsRoot, dirPath), { withFileTypes: true });
 
 	for (const entry of entries) {
 		// TODO : Support one day

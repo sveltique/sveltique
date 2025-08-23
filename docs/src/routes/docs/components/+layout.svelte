@@ -70,7 +70,7 @@
 									'py-1',
 									page.url.pathname.endsWith(item.slugPath)
 										? 'text-blue-700 dark:text-blue-300'
-										: 'text-zinc-600 dark:text-zinc-400'
+										: 'text-zinc-500 dark:text-zinc-500'
 								)}
 							>
 								{item.name}
