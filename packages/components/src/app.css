@@ -1,10 +1,7 @@
-@import url('https://fonts.cdnfonts.com/css/cascadia-code');
 @import 'tailwindcss';
 
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
-
-@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
 	/* --color-*: initial;
@@ -20,21 +17,4 @@
 	--color-zinc-800: oklch(27.4% 0.006 286.033);
 	--color-zinc-900: oklch(21% 0.006 285.885);
 	--color-zinc-950: oklch(14.1% 0.005 285.823); */
-
-	--font-cascadia-code: 'Cascadia Code', sans-serif;
-
-	--color-white: #fff;
-	--color-black: #000;
-
-	--color-grey-hover: oklch(96.7% 0.001 286.375);
-	--color-zinc-700: oklch(21% 0.006 285.885);
-	--color-zinc-300: oklch(87.1% 0.006 286.286);
-	--color-zinc-300-dark: oklch(37.3% 0.034 259.733);
-
-	--color-primary: oklch(48.8% 0.243 264.376);
-	--color-primary-dark: oklch(80.9% 0.105 251.813);
-
-	--color-danger: oklch(63.7% 0.237 25.331);
-	--color-warning: oklch(79.5% 0.184 86.047);
-	--color-success: oklch(72.3% 0.219 149.579);
 }
