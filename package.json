@@ -9,8 +9,8 @@
 		"components.install": "npm --prefix ./packages/components install",
 		"codex.install": "npm --prefix ./internal/codex install",
 		"codex.dev": "npm --prefix ./internal/codex run dev",
-		"install": "concurrently 'npm:docs.install' 'npm:codex.install' 'npm:components.install'",
-		"dev": "concurrently 'npm:docs.dev' 'npm:codex.dev' 'npm:components.dev'"
+		"install": "concurrently 'npm:components.install' 'npm:codex.install' 'npm:docs.install'",
+		"dev": "concurrently 'npm:components.dev' 'npm:codex.dev' 'npm:docs.dev'"
 	},
 	"devDependencies": {
 		"concurrently": "^9.2.0",
