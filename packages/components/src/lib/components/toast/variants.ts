@@ -3,7 +3,7 @@ import { tv, type VariantProps } from 'tailwind-variants';
 export const toast = tv({
 	slots: {
 		container:
-			'relative flex w-full items-center gap-4 overflow-hidden rounded-lg px-4 py-3 shadow-md bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-none dark:shadow-md',
+			'relative flex w-full items-center gap-4 overflow-hidden rounded-lg px-4 py-3 shadow-md bg-background border border-zinc-100 dark:border-none dark:shadow-md',
 		icon: 'size-6 shrink-0',
 		content: 'flex-grow text-sm',
 		closeButton: 'cursor-pointer border-none bg-transparent',
@@ -12,16 +12,16 @@ export const toast = tv({
 	variants: {
 		type: {
 			success: {
-				icon: 'text-green-500'
+				icon: 'text-success'
 			},
 			info: {
-				icon: 'text-blue-500'
+				icon: 'text-info'
 			},
 			warning: {
-				icon: 'text-yellow-500'
+				icon: 'text-warning'
 			},
 			danger: {
-				icon: 'text-red-500'
+				icon: 'text-danger'
 			}
 		}
 	},

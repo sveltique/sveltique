@@ -23,8 +23,8 @@ export const button = tv({
 			true: 'cursor-not-allowed opacity-50'
 		},
 		color: {
-			primary: 'focus:ring-blue-700 dark:focus:ring-blue-300',
-			danger: 'focus:ring-red-500'
+			primary: 'focus:ring-primary',
+			danger: 'focus:ring-danger'
 		}
 	},
 	compoundVariants: [
@@ -66,38 +66,34 @@ export const button = tv({
 		{
 			variant: 'contained',
 			color: 'primary',
-			class:
-				'bg-blue-700 text-white not-disabled:hover:bg-blue-700/90 dark:bg-blue-400 dark:text-zinc-800 not-disabled:dark:hover:bg-blue-500'
+			class: 'bg-primary text-primary-foreground not-disabled:hover:bg-primary/90'
 		},
 		{
 			variant: 'outline',
 			color: 'primary',
-			class:
-				'bg-transparent text-black not-disabled:hover:bg-zinc-100 dark:text-zinc-100 not-disabled:dark:hover:bg-zinc-700 border-zinc-300 dark:border-zinc-700'
+			class: 'bg-transparent text-foreground not-disabled:hover:bg-muted border-muted'
 		},
 		{
 			variant: 'text',
 			color: 'primary',
-			class:
-				'bg-transparent text-black not-disabled:hover:bg-zinc-100 dark:text-zinc-100 not-disabled:dark:hover:bg-zinc-700'
+			class: 'bg-transparent text-foreground not-disabled:hover:bg-muted'
 		},
 		{
 			variant: 'contained',
 			color: 'danger',
-			class:
-				'bg-red-500 dark:border-red-400 text-white not-disabled:hover:bg-red-500/90 dark:text-zinc-100 not-disabled:dark:hover:bg-red-700'
+			class: 'bg-danger text-primary-foreground not-disabled:hover:bg-danger/90'
 		},
 		{
 			variant: 'outline',
 			color: 'danger',
 			class:
-				'bg-transparent text-red-500 border border-red-100 dark:border-red-400 not-disabled:hover:bg-red-50 dark:text-red-400 not-disabled:dark:hover:bg-red-900'
+				'bg-transparent text-danger border border-red-100 dark:border-red-400 not-disabled:hover:bg-red-50 dark:text-red-400 not-disabled:dark:hover:bg-red-900'
 		},
 		{
 			variant: 'text',
 			color: 'danger',
 			class:
-				'bg-transparent text-red-500 not-disabled:hover:bg-red-50 dark:text-red-400 not-disabled:dark:hover:bg-red-500'
+				'bg-transparent text-danger not-disabled:hover:bg-red-50 dark:text-red-400 not-disabled:dark:hover:bg-red-500'
 		}
 	],
 	defaultVariants: {
