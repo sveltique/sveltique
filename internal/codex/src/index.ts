@@ -4,18 +4,18 @@ import { slugify } from './utils/string';
 import type { ExtendedSidebarItem, RootSidebarItem, SidebarConfigData, SidebarItem } from './types';
 
 export class SidebarConfig {
-	#prefix: string;
+	#docsRoot: string;
 	#originalSidebar: RootSidebarItem<SidebarItem>[];
 	#sidebar: RootSidebarItem<ExtendedSidebarItem>[];
 
-	constructor(prefix: string, sidebar: RootSidebarItem<SidebarItem>[]) {
-		this.#prefix = prefix;
+	constructor(docsRoot: string, sidebar: RootSidebarItem<SidebarItem>[]) {
+		this.#docsRoot = docsRoot;
 		this.#originalSidebar = sidebar;
-		this.#sidebar = this.#createExtendedSidebar(this.#prefix, this.#originalSidebar);
+		this.#sidebar = this.#createExtendedSidebar(this.#docsRoot, this.#originalSidebar);
 	}
 
-	get prefix() {
-		return this.#prefix;
+	get docsRoot() {
+		return this.#docsRoot;
 	}
 
 	get sidebar() {
@@ -35,25 +35,25 @@ export class SidebarConfig {
 	/** Loads a `sidebar.config.ts` file starting from root. */
 	public static async load(filePath: string = 'sidebar.config.ts') {
 		const absolutePath = path.resolve('./', filePath);
-		const { prefix = '', sidebar }: SidebarConfigData<SidebarItem> = (
+		const { docsRoot = '', sidebar }: SidebarConfigData<SidebarItem> = (
 			await import(/* @vite-ignore */ pathToFileURL(absolutePath).href)
 		).default;
 
-		return new SidebarConfig(prefix, sidebar);
+		return new SidebarConfig(docsRoot, sidebar);
 	}
 
 	public toJSON(): SidebarConfigData<SidebarItem> {
 		return {
-			prefix: this.#prefix,
+			docsRoot: this.#docsRoot,
 			sidebar: this.#originalSidebar
 		};
 	}
 
 	public static fromJSON(json: SidebarConfigData<SidebarItem>): SidebarConfig {
-		return new SidebarConfig(json.prefix ?? '', json.sidebar);
+		return new SidebarConfig(json.docsRoot ?? '', json.sidebar);
 	}
 
-	#createExtendedSidebar(prefix: string, sidebar: RootSidebarItem<SidebarItem>[]) {
+	#createExtendedSidebar(docsRoot: string, sidebar: RootSidebarItem<SidebarItem>[]) {
 		const clone = structuredClone(sidebar);
 
 		return clone.map((root) => {
@@ -68,7 +68,7 @@ export class SidebarConfig {
 						slugPath: [...item.path.replaceAll('\\', '/').split('/').slice(0, -1), slug]
 							.join('/')
 							.replaceAll('\\', '/')
-							.replace(new RegExp('^' + prefix + '/'), '')
+							.replace(new RegExp('^' + docsRoot + '/'), '')
 					};
 				}) satisfies ExtendedSidebarItem[]
 			};

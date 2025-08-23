@@ -1,18 +1,18 @@
 import { defineConfig, fromFileSystem } from 'codex/config';
 
 export default defineConfig(() => {
-	const prefix = 'content/components';
+	const docsRoot = 'content/components';
 
 	return {
-		prefix,
+		docsRoot,
 		sidebar: [
 			{
 				name: 'Getting Started',
-				children: fromFileSystem('getting-started', prefix)
+				children: fromFileSystem('getting-started', docsRoot)
 			},
 			{
 				name: 'Components',
-				children: fromFileSystem('browse', prefix)
+				children: fromFileSystem('browse', docsRoot)
 			}
 		]
 	};

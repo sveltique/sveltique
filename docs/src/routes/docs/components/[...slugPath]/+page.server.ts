@@ -2,7 +2,7 @@ import path from 'node:path';
 import { error } from '@sveltejs/kit';
 import { sidebarConfig } from '$lib/configs/sidebar.server';
 
-export async function load({ params, parent }) {
+export function load({ params, parent }) {
 	const item = sidebarConfig.findBySlugPath(params.slugPath);
 	if (!item) error(404, 'Not found');
 
