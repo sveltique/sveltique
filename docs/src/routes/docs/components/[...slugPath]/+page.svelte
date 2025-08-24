@@ -1,7 +1,21 @@
 <script lang="ts">
+	import { page } from '$app/state';
+	import { getOnThisPageContext } from '$lib/contexts/on-this-page.svelte.js';
+	import { onMount } from 'svelte';
+
 	let { data } = $props();
 
+	const headings = getOnThisPageContext();
+
 	const { default: Component, metadata } = $derived(await import(/* @vite-ignore */ data.path));
+
+	onMount(() => {
+		headings.getFromDOM();
+	});
+
+	$effect(() => {
+		page.url.pathname && headings.getFromDOM();
+	});
 </script>
 
 <svelte:head>

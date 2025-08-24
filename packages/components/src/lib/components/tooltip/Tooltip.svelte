@@ -1,13 +1,13 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
 	import { on } from 'svelte/events';
 	import { fade } from 'svelte/transition';
-	import { tooltip } from './variants.js';
+	import { tooltip, type TooltipVariants } from './variants.js';
+	import type { Snippet } from 'svelte';
 	import type { TWMergeClass } from '$lib/types.js';
 
 	type Ref = { current: HTMLElement | undefined };
 
-	interface Props extends TWMergeClass {
+	interface Props extends TWMergeClass, TooltipVariants {
 		children?: Snippet<[{ ref: Ref; props: { 'aria-describedby': string } }]>;
 		id?: string;
 		title: string;
@@ -15,7 +15,7 @@
 		z?: number;
 	}
 
-	let { children, id, class: className, title, z = 1000 }: Props = $props();
+	let { children, id, class: className, placement = 'bottom', title, z = 1000 }: Props = $props();
 
 	const uid = $props.id();
 
@@ -23,7 +23,7 @@
 	let show = $state(false);
 
 	let _id = $derived(id ?? uid);
-	let { container, tip } = $derived(tooltip());
+	let { container, tip } = $derived(tooltip({ placement }));
 
 	$effect(() => {
 		if (!ref.current) return;

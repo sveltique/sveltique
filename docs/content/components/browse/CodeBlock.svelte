@@ -5,12 +5,85 @@
 	import { script } from '$utils/playground';
 	import { highlighter } from '$utils/shiki';
 	import { theme } from '$lib/contexts/theme.svelte';
+
+	const basicUsageCode = `${script(`import { CodeBlock } from '@sveltique/components';
+    import { highlighter } from '$utils/my-highlighter';
+
+    const code = \`&lt;div class="card"&gt;
+    &lt;h2&gt;Hello, world!&lt;/h2&gt;
+    &lt;p&gt;This is a simple HTML example.&lt;/p&gt;
+&lt;/div&gt;\`;`)}
+
+<CodeBlock
+    {code}
+    {highlighter}
+    lang="svelte"
+    theme="catppuccin-latte"
+/>`;
+
+	const showLineNumbersCode = `${script(`import { CodeBlock } from '@sveltique/components';
+
+    const code = \`&lt;script&gt;
+    let a = $state(5);
+    let b = $state(7);
+
+    let sum = $derived(a + b);
+&lt;/script&gt;
+
+<p>{a} + {b} = {sum}</p>\`;`)}
+
+<CodeBlock
+    {code}
+    {highlighter}
+    lang="svelte"
+    theme="catppuccin-latte"
+    showLineNumbers
+/>`;
+
+	const highlightingLinesCode = `${script(`import { CodeBlock } from '@sveltique/components';
+
+    const code = \`&lt;script&gt;
+    let a = $state(5);
+    let b = $state(7);
+
+    let sum = $derived(a + b);
+&lt;/script&gt;
+
+<p>{a} + {b} = {sum}</p>\`;`)}
+
+<CodeBlock
+    {code}
+    {highlighter}
+    lang="svelte"
+    theme="catppuccin-latte"
+    highlightedLines="2-3,5,8"
+/>`;
+
+	const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } from "@sveltique/components";
+
+    // Adapt these imports
+    import { highlighter } from "path/to/highlighter";
+    import { theme } from "path/to/theme";
+
+    interface Props extends Omit<CodeBlockProps, 'highlighter' | 'lang' | 'theme'> {
+        /** @default 'svelte' */
+        lang?: CodeBlockProps['lang'];
+    }
+
+    let { lang = "svelte", ...restProps }: Props = $props();`)}
+
+<CodeBlock
+    {highlighter}
+    {lang}
+    theme={theme.isDark ? "one-dark-pro" : "catppuccin-latte"}
+    {...restProps}
+/>`;
 </script>
 
 <h1>Code Block</h1>
 <p>
-	Display syntax-highlighted code snippets. It's ideal for documentation, tutorials, or anywhere you
-	need clear, readable code examples.
+	Display syntax-highlighted code snippets. Ideal anywhere you need clear, readable code examples
+	(like on this website !).
 </p>
 <Alert
 	>You must have <Link href="https://shiki.style" external>shiki</Link> installed to use this component.</Alert
@@ -33,37 +106,14 @@
 		>highlighter</Badge
 	>, set the language and the theme, and you're done.
 </p>
-<Playground
-	code={{
-		short: `<CodeBlock
-    {code}
-    {highlighter}
-    lang="svelte"
-    theme="catppuccin-latte"
-/>`,
-		expanded: `${script(`import { CodeBlock } from '@sveltique/components';
-    import { highlighter } from '$utils/my-highlighter';
-
-    const code = \`&lt;div class="card"&gt;
-    &lt;h2&gt;Hello, world!&lt;/h2&gt;
-    &lt;p&gt;This is a simple HTML example.&lt;/p&gt;
-&lt;/div&gt;\`;`)}
-
-<CodeBlock
-    {code}
-    {highlighter}
-    lang="svelte"
-    theme="catppuccin-latte"
-/>`
-	}}
->
+<Playground code={basicUsageCode}>
 	<CodeBlock
 		code={`&lt;div class="card"&gt;
     &lt;h2&gt;Hello, world!&lt;/h2&gt;
     &lt;p&gt;This is a simple HTML example.&lt;/p&gt;
 &lt;/div&gt;`}
 		lang="svelte"
-		theme="catppuccin-latte"
+		theme={theme.isDark ? 'one-dark-pro' : 'catppuccin-latte'}
 		{highlighter}
 	/>
 </Playground>
@@ -72,35 +122,7 @@
 <p>
 	You can show line numbers with the <Badge>showLineNumbers</Badge> attribute.
 </p>
-<Playground
-	code={{
-		short: `<CodeBlock
-    {code}
-    {highlighter}
-    lang="svelte"
-    theme="catppuccin-latte"
-    showLineNumbers
-/>`,
-		expanded: `${script(`import { CodeBlock } from '@sveltique/components';
-
-    const code = \`&lt;script&gt;
-    let a = $state(5);
-    let b = $state(7);
-
-    let sum = $derived(a + b);
-&lt;/script&gt;
-
-<p>{a} + {b} = {sum}</p>\`;`)}
-
-<CodeBlock
-    {code}
-    {highlighter}
-    lang="svelte"
-    theme="catppuccin-latte"
-    showLineNumbers
-/>`
-	}}
->
+<Playground code={showLineNumbersCode}>
 	<CodeBlock
 		code={replaceEntities(`&lt;script&gt;
     let a = $state(5);
@@ -111,7 +133,7 @@
 
 <p>{a} + {b} = {sum}</p>`)}
 		lang="svelte"
-		theme="catppuccin-latte"
+		theme={theme.isDark ? 'one-dark-pro' : 'catppuccin-latte'}
 		{highlighter}
 		showLineNumbers
 	/>
@@ -130,46 +152,33 @@
 	<li><p>Combine numbers and/or ranges using commas</p></li>
 </ul>
 
-<Playground
-	code={{
-		short: `<CodeBlock
-    {code}
-    {highlighter}
-    lang="svelte"
-    theme="catppuccin-latte"
-    highlightedLines="2-3,5,8"
-/>`,
-		expanded: `${script(`import { CodeBlock } from '@sveltique/components';
-
-    const code = \`&lt;script&gt;
-    let a = $state(5);
-    let b = $state(7);
-
-    let sum = $derived(a + b);
-&lt;/script&gt;
-
-<p>{a} + {b} = {sum}</p>\`;`)}
-
-<CodeBlock
-    {code}
-    {highlighter}
-    lang="svelte"
-    theme="catppuccin-latte"
-    highlightedLines="2-3,5,8"
-/>`
-	}}
->
+<Playground code={highlightingLinesCode}>
 	<CodeBlock
-		code={replaceEntities(`${script(`let a = $state(5);
+		code={`${script(`let a = $state(5);
     let b = $state(7);
 
     let sum = $derived(a + b);`)}
 
-<p>{a} + {b} = {sum}</p>`)}
+<p>{a} + {b} = {sum}</p>`}
 		lang="svelte"
-		theme="catppuccin-latte"
+		theme={theme.isDark ? 'one-dark-pro' : 'catppuccin-latte'}
 		{highlighter}
 		highlightedLines="2-3,5,8"
+	/>
+</Playground>
+
+<h3>Filename</h3>
+<p>You can add a filename via the <Badge>filename</Badge> attribute.</p>
+<Playground>
+	<CodeBlock
+		code={`${script(`let counter = $state(0);`)}
+
+<p>{counter}</p>
+<button onclick={() => counter++}>increment</button>`}
+		filename="Counter.svelte"
+		lang="svelte"
+		theme={theme.isDark ? 'one-dark-pro' : 'catppuccin-latte'}
+		{highlighter}
 	/>
 </Playground>
 
@@ -204,25 +213,7 @@
 </ul>
 
 <CodeBlock
-	code={`${script(`import { CodeBlock, type CodeBlockProps } from "@sveltique/components";
-
-    // Adapt these imports
-    import { highlighter } from "path/to/highlighter";
-    import { theme } from "path/to/theme";
-
-    interface Props extends Omit<CodeBlockProps, 'highlighter' | 'lang' | 'theme'> {
-		/** @default 'svelte' */
-		lang?: CodeBlockProps['lang'];
-	}
-
-    let { lang = "svelte", ...restProps }: Props = $props();`)}
-
-<CodeBlock
-    {highlighter}
-    {lang}
-    theme={theme.isDark ? "one-dark-pro" : "catppuccin-latte"}
-    {...restProps}
-/>`}
+	code={implementationCode}
 	{highlighter}
 	lang="svelte"
 	theme={theme.isDark ? 'one-dark-pro' : 'catppuccin-latte'}
