@@ -1,8 +1,12 @@
 <script lang="ts">
+	import { Separator } from '../separator/index.js';
 	import { assembleLines, parseNumberRanges, transformHTMLEntities } from './code-block.js';
+	import { getIcon } from './icons.js';
 	import { codeBlock } from './variants.js';
 	import type { BundledLanguage, BundledTheme, HighlighterGeneric } from 'shiki';
 	import type { TWMergeClass } from '$lib/types.js';
+	import { Button } from '../button/index.js';
+	import { Tooltip } from '../tooltip/index.js';
 
 	export interface CodeBlockProps extends TWMergeClass {
 		code: string;
@@ -13,6 +17,7 @@
 		showLineNumbers?: boolean;
 		/** @default '' */
 		highlightedLines?: string;
+		filename?: string;
 	}
 
 	let {
@@ -22,13 +27,15 @@
 		theme,
 		showLineNumbers = false,
 		highlightedLines = '',
-		highlighter
+		highlighter,
+		filename
 	}: CodeBlockProps = $props();
 
 	let isCopied = $state(false);
 
-	let { code: codeCss, container } = $derived(codeBlock());
+	let { code: codeCss, container, pre, header, filename: filenameCss } = $derived(codeBlock());
 
+	let iconSnippet = $derived(isCopied ? copiedIcon : copyIcon);
 	let parsedLines = $derived(parseNumberRanges(highlightedLines));
 	let tokensResult = $derived.by(() => {
 		return highlighter.codeToTokens(transformHTMLEntities(code), { lang, theme });
@@ -41,17 +48,73 @@
 
 		return () => clearTimeout(timeout);
 	});
+
+	async function copy() {
+		await navigator.clipboard.writeText(transformHTMLEntities(code));
+		isCopied = true;
+	}
 </script>
 
-<pre
-	data-code-block
-	data-show-line-numbers={showLineNumbers}
-	style="color: {tokensResult.fg}; background-color: {tokensResult.bg}"
-	class={container({ className })}>
-    <code class={codeCss()}>
-        {@html assembleLines(tokensResult.tokens, parsedLines)}
-    </code>
-</pre>
+<div style="color: {tokensResult.fg}; background-color: {tokensResult.bg}" class={container()}>
+	{#if filename}
+		<div class={header()}>
+			<div class="relative flex items-center justify-start gap-2.5">
+				{@html getIcon(filename)}
+				<p class={filenameCss()}>{filename}</p>
+			</div>
+			<Tooltip title={isCopied ? 'Copied' : 'Copy to clipboard'} placement="top">
+				{#snippet children({ props, ref })}
+					<Button bind:ref={ref.current} onclick={copy} variant="text" shape="square" {...props}>
+						{@render iconSnippet()}
+					</Button>
+				{/snippet}
+			</Tooltip>
+		</div>
+		<Separator class="bg-muted-foreground" />
+	{/if}
+	<pre data-code-block data-show-line-numbers={showLineNumbers} class={pre({ className })}>
+        <code class={codeCss()}>
+            {@html assembleLines(tokensResult.tokens, parsedLines)}
+        </code>
+    </pre>
+</div>
+
+{#snippet copyIcon()}
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		width="24"
+		height="24"
+		viewBox="0 0 24 24"
+		fill="none"
+		stroke="currentColor"
+		stroke-width="2"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		class="icon icon-tabler icons-tabler-outline icon-tabler-clipboard size-5"
+	>
+		<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+		<path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
+		<path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
+	</svg>
+{/snippet}
+
+{#snippet copiedIcon()}
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		width="24"
+		height="24"
+		viewBox="0 0 24 24"
+		fill="none"
+		stroke="currentColor"
+		stroke-width="2"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		class="icon icon-tabler icons-tabler-outline icon-tabler-check size-5"
+	>
+		<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+		<path d="M5 12l5 5l10 -10" />
+	</svg>
+{/snippet}
 
 <style>
 	:global(pre[data-code-block]) {

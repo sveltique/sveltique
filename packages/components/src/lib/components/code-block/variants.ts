@@ -2,16 +2,11 @@ import { tv, type VariantProps } from 'tailwind-variants';
 
 export const codeBlock = tv({
 	slots: {
-		container:
-			'code-block group relative w-full flex flex-col py-5 rounded-2xl overflow-x-auto text-sm',
-		code: 'contents flex flex-col flex-nowrap font-codeblock'
-	},
-	variants: {
-		showLineNumbers: {
-			true: {
-				container: 'show-line-numbers'
-			}
-		}
+		container: 'relative w-full text-sm rounded-2xl',
+		header: 'relative w-full flex items-center justify-between px-5 py-2.5',
+		filename: 'font-codeblock',
+		pre: 'code-block group relative w-full flex flex-col overflow-x-auto',
+		code: 'contents flex flex-col flex-nowrap py-5 font-codeblock'
 	}
 });
 
