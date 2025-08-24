@@ -8,13 +8,12 @@
 		lang?: CodeBlockProps['lang'];
 	}
 
-	let { class: className, lang = 'svelte', ...restProps }: Props = $props();
+	let { lang = 'svelte', ...restProps }: Props = $props();
 </script>
 
 <CodeBlock
 	{highlighter}
 	{lang}
 	theme={theme.isDark ? 'one-dark-pro' : 'catppuccin-latte'}
-	class={[className, '**:font-cascadia-code']}
 	{...restProps}
 />

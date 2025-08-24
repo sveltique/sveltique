@@ -4,7 +4,7 @@ export const codeBlock = tv({
 	slots: {
 		container:
 			'code-block group relative w-full flex flex-col py-5 rounded-2xl overflow-x-auto text-sm',
-		code: 'contents flex flex-col flex-nowrap'
+		code: 'contents flex flex-col flex-nowrap font-codeblock'
 	},
 	variants: {
 		showLineNumbers: {
