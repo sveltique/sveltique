@@ -11,6 +11,10 @@ export const badge = tv({
 		number: {
 			true: 'rounded-full'
 		}
+	},
+	defaultVariants: {
+		variant: 'contained',
+		number: false
 	}
 });
 
