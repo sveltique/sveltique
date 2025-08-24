@@ -1,8 +1,7 @@
 @import url('https://fonts.cdnfonts.com/css/cascadia-code');
 @import 'tailwindcss';
 
-@plugin '@tailwindcss/forms';
-
+@source "../node_modules/@sveltique/components";
 @import './theme.css';
 
 body {
