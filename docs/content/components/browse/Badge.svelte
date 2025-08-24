@@ -78,5 +78,5 @@
 <p>You can make an interactive badge by using the <Badge>badge()</Badge> helper.</p>
 <Playground code={interactiveBadgeCode}>
 	<a href="/" class={badge()}>Link</a>
-	<button class={badge({ variant: 'danger' })}>Button</button>
+	<button class={badge({ variant: 'danger', class: 'cursor-pointer' })}>Button</button>
 </Playground>

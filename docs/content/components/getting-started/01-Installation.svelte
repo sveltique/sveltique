@@ -1,6 +1,6 @@
 <script>
 	import CodeBlock from '$components/CodeBlock.svelte';
-	import { Link } from '@sveltique/components';
+	import { Badge, Link } from '@sveltique/components';
 </script>
 
 <svelte:head>
@@ -33,3 +33,99 @@
 	> under the hood to provide syntax highlighting.
 </p>
 <CodeBlock code="npm install shiki" lang="bash" />
+
+<h2>Setting up your theme</h2>
+<p>
+	Define your theme in <Badge>theme.css</Badge> (you will learn more about theming later).
+</p>
+<CodeBlock
+	code={`@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    /* Fonts */
+    --font-codeblock: 'Cascadia Code', sans-serif; /* Ensure you have imported the font before */
+
+    /* Generic colors */
+    --color-black: #000;
+    --color-white: #fff;
+
+    /* Background color */
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+
+    /* Primary color */
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+
+    /* Accent colors */
+    --color-info: var(--info);
+    --color-success: var(--success);
+    --color-warning: var(--warning);
+    --color-danger: var(--danger);
+
+    /* DERIVED COLORS, SHOULD NOT BE MODIFIED */
+    --color-muted: color-mix(in oklch, var(--background), var(--foreground) 10%);
+    --color-muted-foreground: color-mix(in oklch, var(--background), var(--foreground) 50%);
+
+    --color-primary-muted: color-mix(in oklch, var(--primary), var(--background) 10%);
+    --color-primary-disabled: color-mix(in oklch, var(--primary), var(--background) 50%);
+
+    --color-info-light: color-mix(in oklch, var(--info), var(--background) 90%);
+    --color-success-light: color-mix(in oklch, var(--success), var(--background) 90%);
+    --color-warning-light: color-mix(in oklch, var(--warning), var(--background) 90%);
+    --color-danger-light: color-mix(in oklch, var(--danger), var(--background) 90%);
+    --color-danger-muted: color-mix(in oklch, var(--danger), var(--background) 10%);
+}
+
+:root {
+	/* Background color */
+	--background: white;
+	--foreground: oklch(20.5% 0 0);
+
+	/* Primary color */
+	--primary: oklch(48.8% 0.243 264.376);
+	--primary-foreground: white;
+
+	/* Accent colors */
+	--info: oklch(62.3% 0.214 259.815);
+	--success: oklch(72.3% 0.219 149.579);
+	--warning: oklch(79.5% 0.184 86.047);
+	--danger: oklch(63.7% 0.237 25.331);
+
+	@variant dark {
+        /* Background color */
+        --background: oklch(20.5% 0 0);
+        --foreground: white;
+
+        /* Primary color */
+        --primary: oklch(82.8% 0.111 230.318);
+        --primary-foreground: oklch(20.5% 0 0);
+
+        /* Accent colors */
+        --info: oklch(62.3% 0.214 259.815);
+        --success: oklch(72.3% 0.219 149.579);
+        --warning: oklch(79.5% 0.184 86.047);
+        --danger: oklch(63.7% 0.237 25.331);
+    }
+}`}
+	filename="theme.css"
+	lang="css"
+	showLineNumbers
+/>
+
+<p>Then, you can import both Sveltique's source files and your theme in your main css file.</p>
+<CodeBlock
+	code={`/* Replace with your codeblock font */
+@import url('https://fonts.cdnfonts.com/css/cascadia-code');
+
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+
+@source "../node_modules/@sveltique/components";
+@import './theme.css';
+
+/* Rest of your custom css here... */`}
+	filename="app.css"
+	lang="css"
+	showLineNumbers
+/>
