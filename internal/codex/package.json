@@ -5,13 +5,16 @@
 	"main": "index.js",
 	"scripts": {
 		"build": "tsup src/**/*.ts --dts --format esm",
-		"dev": "tsup src/**/*.ts --dts --format esm --watch"
+		"dev": "tsup src/**/*.ts --dts --format esm --watch",
+		"format": "npx @biomejs/biome format --write",
+		"lint": "npx @biomejs/biome lint --write"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"type": "commonjs",
 	"devDependencies": {
+		"@biomejs/biome": "2.2.2",
 		"@types/node": "^24.3.0",
 		"tsup": "^8.5.0",
 		"typescript": "^5.9.2"

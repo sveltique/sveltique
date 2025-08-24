@@ -13,9 +13,7 @@
 		"dev": "concurrently 'npm:components.dev' 'npm:codex.dev' 'npm:docs.dev'"
 	},
 	"devDependencies": {
-		"concurrently": "^9.2.0",
-		"prettier": "^3.6.2",
-		"prettier-plugin-svelte": "^3.4.0",
-		"prettier-plugin-tailwindcss": "^0.6.14"
+		"@biomejs/biome": "2.2.2",
+		"concurrently": "^9.2.0"
 	}
 }
