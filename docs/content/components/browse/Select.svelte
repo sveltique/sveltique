@@ -1,12 +1,12 @@
 <script lang="ts">
-	import Playground from '$components/Playground.svelte';
-	import { script } from '$utils/playground';
-	import { Badge, Alert, Select } from '@sveltique/components';
+import { Alert, Badge, Select } from "@sveltique/components";
+import Playground from "$components/Playground.svelte";
+import { script } from "$utils/playground";
 
-	const fruits = ['Apple', 'Banana', 'Mango', 'Kiwi'];
+const fruits = ["Apple", "Banana", "Mango", "Kiwi"];
 
-	const code = {
-		short: `<Select.Root
+const code = {
+	short: `<Select.Root
     placeholder="Select a fruit"
     containerClass="w-40"
 >
@@ -14,7 +14,7 @@
         <Select.Option value={fruit} />
     {/each}
 </Select.Root>`,
-		expanded: `${script(`import { Select } from '@sveltique/components';
+	expanded: `${script(`import { Select } from '@sveltique/components';
 
     const fruits = ['Apple', 'Banana', 'Mango', 'Kiwi'];`)}
 
@@ -26,7 +26,7 @@
         <Select.Option value={fruit} />
     {/each}
 </Select.Root>`
-	};
+};
 </script>
 
 <h1>Select</h1>

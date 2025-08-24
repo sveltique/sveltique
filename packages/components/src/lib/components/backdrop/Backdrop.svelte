@@ -1,27 +1,27 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
-	import { backdrop } from './variants.js';
-	import type { Snippet } from 'svelte';
-	import type { TWMergeClass } from '$lib/types.js';
+import type { Snippet } from "svelte";
+import { fade } from "svelte/transition";
+import type { TWMergeClass } from "$lib/types.js";
+import { backdrop } from "./variants.js";
 
-	export interface BackdropProps extends TWMergeClass {
-		children?: Snippet;
-		/** @default 150 */
-		fadeDuration?: number;
-		/** @default 10 */
-		z?: number;
-		onClick?: () => void;
-	}
+export interface BackdropProps extends TWMergeClass {
+	children?: Snippet;
+	/** @default 150 */
+	fadeDuration?: number;
+	/** @default 10 */
+	z?: number;
+	onClick?: () => void;
+}
 
-	let { children, class: className, fadeDuration = 150, z = 10, onClick }: BackdropProps = $props();
+let { children, class: className, fadeDuration = 150, z = 10, onClick }: BackdropProps = $props();
 
-	let ref = $state<HTMLDivElement>();
+let ref = $state<HTMLDivElement>();
 
-	function onclick(event: MouseEvent) {
-		if (event.target !== ref) return;
+function onclick(event: MouseEvent) {
+	if (event.target !== ref) return;
 
-		onClick?.();
-	}
+	onClick?.();
+}
 </script>
 
 <div

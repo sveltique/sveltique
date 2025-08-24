@@ -1,7 +1,7 @@
-import { slugify } from '$utils/string.js';
-import { getContext, setContext } from 'svelte';
+import { getContext, setContext } from "svelte";
+import { slugify } from "$utils/string.js";
 
-const KEY = Symbol('onThisPageContext');
+const KEY = Symbol("onThisPageContext");
 
 export function getOnThisPageContext(): OnThisPageContext {
 	return getContext(KEY);
@@ -24,8 +24,8 @@ class OnThisPageContext {
 	public current = $state<Heading[]>([]);
 
 	public getFromDOM(): void {
-		this.current = Array.from(document.querySelectorAll<HTMLHeadingElement>('h2, h3'))
-			.filter((heading) => !heading.closest('[data-playground]'))
+		this.current = Array.from(document.querySelectorAll<HTMLHeadingElement>("h2, h3"))
+			.filter((heading) => !heading.closest("[data-playground]"))
 			.map((node) => {
 				node.id = slugify(node.textContent);
 				const level = Number(node.tagName.substring(1)) as 2 | 3;

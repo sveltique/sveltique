@@ -1,7 +1,7 @@
 <script module>
-	export const metadata = {
-		description: 'haha'
-	};
+export const metadata = {
+	description: "haha"
+};
 </script>
 
 <script>

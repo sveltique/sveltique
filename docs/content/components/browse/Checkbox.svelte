@@ -1,20 +1,20 @@
 <script>
-	import Playground from '$components/Playground.svelte';
-	import { script } from '$utils/playground';
-	import { Checkbox } from '@sveltique/components';
+import { Checkbox } from "@sveltique/components";
+import Playground from "$components/Playground.svelte";
+import { script } from "$utils/playground";
 
-	const code = {
-		short: `<Checkbox />
+const code = {
+	short: `<Checkbox />
 <Checkbox checked />
 <Checkbox disabled />
 <Checkbox checked disabled />`,
-		expanded: `${script("import { Checkbox } from '@sveltique/components';")}
+	expanded: `${script("import { Checkbox } from '@sveltique/components';")}
 
 <Checkbox />
 <Checkbox checked />
 <Checkbox disabled />
 <Checkbox checked disabled />`
-	};
+};
 </script>
 
 <h1>Checkbox</h1>

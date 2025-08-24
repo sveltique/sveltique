@@ -1,182 +1,183 @@
 <script lang="ts">
-	import { onMount, type Snippet } from 'svelte';
-	import { on } from 'svelte/events';
-	import { select } from './variants.js';
-	import type { ClassNameValue } from 'tailwind-merge';
+import { onMount, type Snippet } from "svelte";
+import { on } from "svelte/events";
+import type { ClassNameValue } from "tailwind-merge";
+import { select } from "./variants.js";
 
-	interface Props {
-		id?: string;
-		children?: Snippet;
-		class?: ClassNameValue;
-		containerClass?: ClassNameValue;
-		name?: string;
-		value?: string;
-		placeholder?: string;
-		'aria-invalid'?: boolean;
-		'aria-describedby'?: string;
+interface Props {
+	id?: string;
+	children?: Snippet;
+	class?: ClassNameValue;
+	containerClass?: ClassNameValue;
+	name?: string;
+	value?: string;
+	placeholder?: string;
+	"aria-invalid"?: boolean;
+	"aria-describedby"?: string;
+}
+
+let {
+	id,
+	children,
+	class: className,
+	containerClass,
+	name,
+	value = $bindable(),
+	placeholder = "",
+	...restProps
+}: Props = $props();
+
+const componentId = $props.id();
+
+let triggerRef = $state<HTMLButtonElement>()!;
+let listBoxRef = $state<HTMLUListElement>()!;
+
+let open = $state(false);
+let valueContent = $state<string | undefined>();
+
+let focusedId = $state<string>();
+
+const {
+	container,
+	listBox,
+	trigger,
+	triggerContent,
+	triggerIcon,
+	placeholder: placeholderCss
+} = $derived(select({ open }));
+
+onMount(() => {
+	const elements = getListChildren();
+
+	// Focused day is the first one if no value selected
+	// Otherwise, the focused day starts at the current value
+	if (!value) {
+		focusedId = elements.at(0)?.id;
+		return;
 	}
 
-	let {
-		id,
-		children,
-		class: className,
-		containerClass,
-		name,
-		value = $bindable(),
-		placeholder = '',
-		...restProps
-	}: Props = $props();
+	if (!listBoxRef) return;
 
-	const componentId = $props.id();
+	const defaultElement =
+		elements.find(
+			(element) =>
+				element.hasAttribute("data-select-option") &&
+				element.getAttribute("data-value") === value
+		) ?? elements.at(0);
 
-	let triggerRef = $state<HTMLButtonElement>()!;
-	let listBoxRef = $state<HTMLUListElement>()!;
+	if (!defaultElement) return;
 
-	let open = $state(false);
-	let valueContent = $state<string | undefined>();
+	focusedId = defaultElement.id;
+	value = defaultElement.getAttribute("data-value")!;
+	valueContent = defaultElement.textContent;
+});
 
-	let focusedId = $state<string>();
+$effect(() => {
+	return on(window, "click", (event) => {
+		const target = event.target;
 
-	const {
-		container,
-		listBox,
-		trigger,
-		triggerContent,
-		triggerIcon,
-		placeholder: placeholderCss
-	} = $derived(select({ open }));
-
-	onMount(() => {
-		const elements = getListChildren();
-
-		// Focused day is the first one if no value selected
-		// Otherwise, the focused day starts at the current value
-		if (!value) {
-			focusedId = elements.at(0)?.id;
+		if (!target || !(target instanceof HTMLElement) || target === triggerRef) {
 			return;
 		}
 
+		if (listBoxRef !== target && !listBoxRef.contains(target)) {
+			open = false;
+			return;
+		}
+
+		if (
+			!target.hasAttribute("data-select-option") ||
+			target.getAttribute("data-disabled") === "true"
+		) {
+			return;
+		}
+
+		value = target.getAttribute("data-value")!;
+		valueContent = target.textContent;
+
+		open = false;
+	});
+});
+
+$effect(() => {
+	if (!open) return;
+
+	if (value) {
+		const elements = getListChildren();
+
+		const defaultElement =
+			elements.find(
+				(element) =>
+					element.hasAttribute("data-select-option") &&
+					element.getAttribute("data-value") === value
+			) ?? elements.at(0);
+
+		if (defaultElement) {
+			focusedId = defaultElement.id;
+		}
+	}
+
+	return on(window, "keydown", (event) => {
+		event.preventDefault();
+
+		if (!focusedId) return;
+		if (event.key === "Escape") {
+			open = false;
+		}
+
+		const child = getChildById(focusedId);
+		if (!child) return;
+
+		if (event.key === "ArrowUp") {
+			if (!child.previousElementSibling) return;
+
+			focusedId = child.previousElementSibling.id;
+		} else if (event.key === "ArrowDown") {
+			if (!child.nextElementSibling) return;
+
+			focusedId = child.nextElementSibling.id;
+		} else if (event.key === "Enter" || event.key === " ") {
+			value = child.getAttribute("data-value")!;
+			valueContent = child.textContent;
+
+			open = false;
+		}
+	});
+});
+
+$effect(() => {
+	if (open) return;
+
+	const elements = getListChildren();
+
+	if (!value) {
+		focusedId = elements.at(0)?.id;
+		return;
+	} else {
 		if (!listBoxRef) return;
 
 		const defaultElement =
 			elements.find(
 				(element) =>
-					element.hasAttribute('data-select-option') && element.getAttribute('data-value') === value
+					element.hasAttribute("data-select-option") &&
+					element.getAttribute("data-value") === value
 			) ?? elements.at(0);
 
 		if (!defaultElement) return;
 
 		focusedId = defaultElement.id;
-		value = defaultElement.getAttribute('data-value')!;
-		valueContent = defaultElement.textContent;
-	});
-
-	$effect(() => {
-		return on(window, 'click', (event) => {
-			const target = event.target;
-
-			if (!target || !(target instanceof HTMLElement) || target === triggerRef) {
-				return;
-			}
-
-			if (listBoxRef !== target && !listBoxRef.contains(target)) {
-				open = false;
-				return;
-			}
-
-			if (
-				!target.hasAttribute('data-select-option') ||
-				target.getAttribute('data-disabled') === 'true'
-			) {
-				return;
-			}
-
-			value = target.getAttribute('data-value')!;
-			valueContent = target.textContent;
-
-			open = false;
-		});
-	});
-
-	$effect(() => {
-		if (!open) return;
-
-		if (value) {
-			const elements = getListChildren();
-
-			const defaultElement =
-				elements.find(
-					(element) =>
-						element.hasAttribute('data-select-option') &&
-						element.getAttribute('data-value') === value
-				) ?? elements.at(0);
-
-			if (defaultElement) {
-				focusedId = defaultElement.id;
-			}
-		}
-
-		return on(window, 'keydown', (event) => {
-			event.preventDefault();
-
-			if (!focusedId) return;
-			if (event.key === 'Escape') {
-				open = false;
-			}
-
-			const child = getChildById(focusedId);
-			if (!child) return;
-
-			if (event.key === 'ArrowUp') {
-				if (!child.previousElementSibling) return;
-
-				focusedId = child.previousElementSibling.id;
-			} else if (event.key === 'ArrowDown') {
-				if (!child.nextElementSibling) return;
-
-				focusedId = child.nextElementSibling.id;
-			} else if (event.key === 'Enter' || event.key === ' ') {
-				value = child.getAttribute('data-value')!;
-				valueContent = child.textContent;
-
-				open = false;
-			}
-		});
-	});
-
-	$effect(() => {
-		if (open) return;
-
-		const elements = getListChildren();
-
-		if (!value) {
-			focusedId = elements.at(0)?.id;
-			return;
-		} else {
-			if (!listBoxRef) return;
-
-			const defaultElement =
-				elements.find(
-					(element) =>
-						element.hasAttribute('data-select-option') &&
-						element.getAttribute('data-value') === value
-				) ?? elements.at(0);
-
-			if (!defaultElement) return;
-
-			focusedId = defaultElement.id;
-		}
-	});
-
-	function getListChildren() {
-		return Array.from(listBoxRef.children) as HTMLLIElement[];
 	}
+});
 
-	function getChildById(id: string) {
-		const elements = getListChildren();
+function getListChildren() {
+	return Array.from(listBoxRef.children) as HTMLLIElement[];
+}
 
-		return elements.find((element) => element.id === id);
-	}
+function getChildById(id: string) {
+	const elements = getListChildren();
+
+	return elements.find((element) => element.id === id);
+}
 </script>
 
 <!--

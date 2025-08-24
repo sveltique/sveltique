@@ -1,2 +1,2 @@
-export { default as Separator } from './Separator.svelte';
-export { separator, type SeparatorVariants } from './variants.js';
+export { default as Separator } from "./Separator.svelte";
+export { type SeparatorVariants, separator } from "./variants.js";

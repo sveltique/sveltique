@@ -1,29 +1,24 @@
 <script lang="ts">
-	import { field } from './variants.js';
-	import type { Snippet } from 'svelte';
-	import type { ClassNameValue } from 'tailwind-merge';
+import type { Snippet } from "svelte";
+import type { ClassNameValue } from "tailwind-merge";
+import { field } from "./variants.js";
 
-	type InputSnippet = Snippet<
-		[{ id: string; 'aria-invalid': boolean; 'aria-describedby': string | undefined }]
-	>;
+type InputSnippet = Snippet<
+	[{ id: string; "aria-invalid": boolean; "aria-describedby": string | undefined }]
+>;
 
-	interface Props {
-		input: InputSnippet;
-		class?: ClassNameValue;
-		error?: string | undefined;
-		label?: string | undefined;
-	}
+interface Props {
+	input: InputSnippet;
+	class?: ClassNameValue;
+	error?: string | undefined;
+	label?: string | undefined;
+}
 
-	let {
-		class: className = undefined,
-		input,
-		error = undefined,
-		label = undefined
-	}: Props = $props();
+let { class: className = undefined, input, error = undefined, label = undefined }: Props = $props();
 
-	const id = $props.id();
+const id = $props.id();
 
-	const { container, error: errorCss, label: labelCss, icon } = $derived(field());
+const { container, error: errorCss, label: labelCss, icon } = $derived(field());
 </script>
 
 <!--

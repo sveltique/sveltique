@@ -1,5 +1,5 @@
-import type { MaybeGetter } from '$lib/types.js';
-import { on } from 'svelte/events';
+import { on } from "svelte/events";
+import type { MaybeGetter } from "$lib/types.js";
 
 interface OnKeyOptions {
 	/** @default window */
@@ -13,7 +13,7 @@ export function onKeyUp(
 	callback: (event: KeyboardEvent) => void,
 	options: OnKeyOptions = {}
 ) {
-	_onKey('keyup', key, callback, options);
+	_onKey("keyup", key, callback, options);
 }
 
 export function onKeyDown(
@@ -21,7 +21,7 @@ export function onKeyDown(
 	callback: (event: KeyboardEvent) => void,
 	options: OnKeyOptions = {}
 ) {
-	_onKey('keydown', key, callback, options);
+	_onKey("keydown", key, callback, options);
 }
 
 function _onKey(
@@ -32,8 +32,8 @@ function _onKey(
 ) {
 	const { element = window, preventDefault = false } = options;
 
-	let _keys = $derived(Array.isArray(key) ? key : [key]);
-	let _element = $derived(typeof element === 'function' ? element() : element);
+	const _keys = $derived(Array.isArray(key) ? key : [key]);
+	const _element = $derived(typeof element === "function" ? element() : element);
 
 	$effect(() => {
 		if (!_element) return;

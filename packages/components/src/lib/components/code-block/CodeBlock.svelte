@@ -1,58 +1,58 @@
 <script lang="ts">
-	import { Separator } from '../separator/index.js';
-	import { assembleLines, parseNumberRanges, transformHTMLEntities } from './code-block.js';
-	import { getIcon } from './icons.js';
-	import { codeBlock } from './variants.js';
-	import type { BundledLanguage, BundledTheme, HighlighterGeneric } from 'shiki';
-	import type { TWMergeClass } from '$lib/types.js';
-	import { Button } from '../button/index.js';
-	import { Tooltip } from '../tooltip/index.js';
+import type { BundledLanguage, BundledTheme, HighlighterGeneric } from "shiki";
+import type { TWMergeClass } from "$lib/types.js";
+import { Button } from "../button/index.js";
+import { Separator } from "../separator/index.js";
+import { Tooltip } from "../tooltip/index.js";
+import { assembleLines, parseNumberRanges, transformHTMLEntities } from "./code-block.js";
+import { getIcon } from "./icons.js";
+import { codeBlock } from "./variants.js";
 
-	export interface CodeBlockProps extends TWMergeClass {
-		code: string;
-		lang: BundledLanguage;
-		theme: BundledTheme;
-		highlighter: HighlighterGeneric<BundledLanguage, BundledTheme>;
-		/** @default false */
-		showLineNumbers?: boolean;
-		/** @default '' */
-		highlightedLines?: string;
-		filename?: string;
-	}
+export interface CodeBlockProps extends TWMergeClass {
+	code: string;
+	lang: BundledLanguage;
+	theme: BundledTheme;
+	highlighter: HighlighterGeneric<BundledLanguage, BundledTheme>;
+	/** @default false */
+	showLineNumbers?: boolean;
+	/** @default '' */
+	highlightedLines?: string;
+	filename?: string;
+}
 
-	let {
-		class: className,
-		code,
-		lang,
-		theme,
-		showLineNumbers = false,
-		highlightedLines = '',
-		highlighter,
-		filename
-	}: CodeBlockProps = $props();
+let {
+	class: className,
+	code,
+	lang,
+	theme,
+	showLineNumbers = false,
+	highlightedLines = "",
+	highlighter,
+	filename
+}: CodeBlockProps = $props();
 
-	let isCopied = $state(false);
+let isCopied = $state(false);
 
-	let { code: codeCss, container, pre, header, filename: filenameCss } = $derived(codeBlock());
+let { code: codeCss, container, pre, header, filename: filenameCss } = $derived(codeBlock());
 
-	let iconSnippet = $derived(isCopied ? copiedIcon : copyIcon);
-	let parsedLines = $derived(parseNumberRanges(highlightedLines));
-	let tokensResult = $derived.by(() => {
-		return highlighter.codeToTokens(transformHTMLEntities(code), { lang, theme });
-	});
+let iconSnippet = $derived(isCopied ? copiedIcon : copyIcon);
+let parsedLines = $derived(parseNumberRanges(highlightedLines));
+let tokensResult = $derived.by(() => {
+	return highlighter.codeToTokens(transformHTMLEntities(code), { lang, theme });
+});
 
-	$effect(() => {
-		if (!isCopied) return;
+$effect(() => {
+	if (!isCopied) return;
 
-		const timeout = setTimeout(() => (isCopied = false), 3000);
+	const timeout = setTimeout(() => (isCopied = false), 3000);
 
-		return () => clearTimeout(timeout);
-	});
+	return () => clearTimeout(timeout);
+});
 
-	async function copy() {
-		await navigator.clipboard.writeText(transformHTMLEntities(code));
-		isCopied = true;
-	}
+async function copy() {
+	await navigator.clipboard.writeText(transformHTMLEntities(code));
+	isCopied = true;
+}
 </script>
 
 <div style="color: {tokensResult.fg}; background-color: {tokensResult.bg}" class={container()}>

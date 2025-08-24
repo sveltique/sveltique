@@ -1,21 +1,21 @@
 <script lang="ts">
-	import { paper, type PaperVariants } from './variants.js';
-	import type { HTMLAttributes } from 'svelte/elements';
-	import type { ClassNameValue } from 'tailwind-merge';
+import type { HTMLAttributes } from "svelte/elements";
+import type { ClassNameValue } from "tailwind-merge";
+import { type PaperVariants, paper } from "./variants.js";
 
-	interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'class'>, PaperVariants {
-		class?: ClassNameValue;
-	}
+interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "class">, PaperVariants {
+	class?: ClassNameValue;
+}
 
-	let {
-		children,
-		class: className = undefined,
-		elevation = 1,
-		variant = 'shadow',
-		...restProps
-	}: Props = $props();
+let {
+	children,
+	class: className = undefined,
+	elevation = 1,
+	variant = "shadow",
+	...restProps
+}: Props = $props();
 
-	let _elevation = $derived(variant === 'outline' ? 0 : elevation);
+let _elevation = $derived(variant === "outline" ? 0 : elevation);
 </script>
 
 <!--

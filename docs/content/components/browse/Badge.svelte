@@ -1,26 +1,26 @@
 <script>
-	import { badge, Badge } from '@sveltique/components';
-	import Playground from '$components/Playground.svelte';
-	import { script } from '$utils/playground';
-	import IconCircleDashedCheck from '@tabler/icons-svelte/icons/circle-dashed-check';
-	import IconTrash from '@tabler/icons-svelte/icons/trash';
+import { Badge, badge } from "@sveltique/components";
+import IconCircleDashedCheck from "@tabler/icons-svelte/icons/circle-dashed-check";
+import IconTrash from "@tabler/icons-svelte/icons/trash";
+import Playground from "$components/Playground.svelte";
+import { script } from "$utils/playground";
 
-	const basicUsagecode = {
-		short: '<Badge>Groceries</Badge>',
-		expanded: `${script('import { Badge } from "@sveltique/components";')}
+const basicUsagecode = {
+	short: "<Badge>Groceries</Badge>",
+	expanded: `${script('import { Badge } from "@sveltique/components";')}
         
 <Badge>Contained</Badge>
 <Badge variant="outline">Outline</Badge>
 <Badge variant="danger">Danger</Badge>`
-	};
+};
 
-	const numberCode = `${script('import { Badge } from "@sveltique/components";')}
+const numberCode = `${script('import { Badge } from "@sveltique/components";')}
     
 <Badge number>1</Badge>
 <Badge variant="outline" number>15</Badge>
 <Badge variant="danger" number>99+</Badge>`;
 
-	const iconWithTextCode = `${script(`import { Badge } from '@sveltique/components';
+const iconWithTextCode = `${script(`import { Badge } from '@sveltique/components';
     import IconCircleDashedCheck from '@tabler/icons-svelte/icons/circle-dashed-check';
     import IconTrash from '@tabler/icons-svelte/icons/trash';`)}
     
@@ -33,7 +33,7 @@
     Delete
 </Badge>`;
 
-	const interactiveBadgeCode = `${script("import { badge } from '@sveltique/components';")}
+const interactiveBadgeCode = `${script("import { badge } from '@sveltique/components';")}
 
 <a href="/" class={badge()}>Link</a>
 <button class={badge({ variant: 'danger' })}>Button</button>`;

@@ -1,16 +1,16 @@
 <script lang="ts">
-	import Playground from '$components/Playground.svelte';
-	import { Badge, NumberInput } from '@sveltique/components';
+import { Badge, NumberInput } from "@sveltique/components";
+import Playground from "$components/Playground.svelte";
 
-	const code = {
-		short: `<NumberInput
+const code = {
+	short: `<NumberInput
     step={5}
     value={50}
     min={0}
     max={100}
     containerClass="w-3xs"
 />`,
-		expanded: `&lt;script lang="ts"&gt;
+	expanded: `&lt;script lang="ts"&gt;
     import { NumberInput } from '@sveltique/components';
 &lt;/script&gt;
 
@@ -29,7 +29,7 @@ containerClass : caps the input width
     max={100}
     containerClass="w-3xs"
 />`
-	};
+};
 </script>
 
 <h1>Number Input</h1>

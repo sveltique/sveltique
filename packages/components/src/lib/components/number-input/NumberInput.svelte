@@ -1,57 +1,57 @@
 <script lang="ts">
-	import { numberInput } from './variants.js';
-	import type { HTMLInputAttributes } from 'svelte/elements';
-	import type { ClassNameValue } from 'tailwind-merge';
+import type { HTMLInputAttributes } from "svelte/elements";
+import type { ClassNameValue } from "tailwind-merge";
+import { numberInput } from "./variants.js";
 
-	interface Props extends Omit<HTMLInputAttributes, 'class' | 'step' | 'min' | 'max' | 'value'> {
-		containerClass?: string | undefined;
-		class?: ClassNameValue;
-		value?: number | null;
-		/** @default 1 */
-		step?: number | undefined;
-		min?: number | undefined;
-		max?: number | undefined;
+interface Props extends Omit<HTMLInputAttributes, "class" | "step" | "min" | "max" | "value"> {
+	containerClass?: string | undefined;
+	class?: ClassNameValue;
+	value?: number | null;
+	/** @default 1 */
+	step?: number | undefined;
+	min?: number | undefined;
+	max?: number | undefined;
+}
+
+let {
+	id,
+	containerClass,
+	class: className,
+	value = $bindable(),
+	step = 1,
+	min,
+	max,
+	...restProps
+}: Props = $props();
+
+let ref = $state<HTMLInputElement>();
+const { container, input, decrement, increment, icon } = $derived(numberInput());
+
+$effect(() => {
+	ref!.value = value?.toString() ?? "";
+});
+
+function changeValue(v: string | number) {
+	if (!isNumber(v)) {
+		value = null;
+		ref!.value = "";
+		return;
 	}
 
-	let {
-		id,
-		containerClass,
-		class: className,
-		value = $bindable(),
-		step = 1,
-		min,
-		max,
-		...restProps
-	}: Props = $props();
+	const newValue = Number(v);
 
-	let ref = $state<HTMLInputElement>();
-	const { container, input, decrement, increment, icon } = $derived(numberInput());
-
-	$effect(() => {
-		ref!.value = value?.toString() ?? '';
-	});
-
-	function changeValue(v: string | number) {
-		if (!isNumber(v)) {
-			value = null;
-			ref!.value = '';
-			return;
-		}
-
-		const newValue = Number(v);
-
-		if (min !== undefined && newValue < min) {
-			value = min;
-		} else if (max !== undefined && newValue > max) {
-			value = max;
-		} else {
-			value = newValue;
-		}
+	if (min !== undefined && newValue < min) {
+		value = min;
+	} else if (max !== undefined && newValue > max) {
+		value = max;
+	} else {
+		value = newValue;
 	}
+}
 
-	function isNumber(value: unknown) {
-		return value !== null && value !== '' && !isNaN(Number(String(value)));
-	}
+function isNumber(value: unknown) {
+	return value !== null && value !== "" && !isNaN(Number(String(value)));
+}
 </script>
 
 <!--

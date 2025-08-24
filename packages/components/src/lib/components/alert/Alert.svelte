@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { alert, type AlertVariants } from './variants.js';
-	import type { Snippet } from 'svelte';
-	import type { ClassNameValue } from 'tailwind-merge';
+import type { Snippet } from "svelte";
+import type { ClassNameValue } from "tailwind-merge";
+import { type AlertVariants, alert } from "./variants.js";
 
-	interface Props extends AlertVariants {
-		children?: Snippet;
-		class?: ClassNameValue;
-	}
+interface Props extends AlertVariants {
+	children?: Snippet;
+	class?: ClassNameValue;
+}
 
-	let { children, class: className = '', type = 'info' }: Props = $props();
+let { children, class: className = "", type = "info" }: Props = $props();
 
-	const { container, icon } = $derived(alert({ type, className }));
+const { container, icon } = $derived(alert({ type, className }));
 </script>
 
 <!--

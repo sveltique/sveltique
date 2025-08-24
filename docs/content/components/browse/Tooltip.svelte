@@ -1,12 +1,12 @@
 <script>
-	import { Alert, Badge, Button, Tooltip } from '@sveltique/components';
-	import Playground from '$components/Playground.svelte';
-	import CodeBlock from '$components/CodeBlock.svelte';
-	import { script } from '$utils/playground';
-	import IconEdit from '@tabler/icons-svelte/icons/edit';
+import { Alert, Badge, Button, Tooltip } from "@sveltique/components";
+import IconEdit from "@tabler/icons-svelte/icons/edit";
+import CodeBlock from "$components/CodeBlock.svelte";
+import Playground from "$components/Playground.svelte";
+import { script } from "$utils/playground";
 
-	const code = {
-		short: `<Tooltip title="Edit post">
+const code = {
+	short: `<Tooltip title="Edit post">
     {#snippet children({ props, ref })}
         <Button
             bind:ref={ref.current}
@@ -17,7 +17,7 @@
         </Button>
     {/snippet}
 </Tooltip>`,
-		expanded: `${script("import { Button, Tooltip } from '@sveltique/components';")}
+	expanded: `${script("import { Button, Tooltip } from '@sveltique/components';")}
 
 <Tooltip title="Edit post">
     {#snippet children({ props, ref })}
@@ -30,15 +30,15 @@
         </Button>
     {/snippet}
 </Tooltip>`
-	};
+};
 
-	const customComponentCode = `<Tooltip title="Edit post">
+const customComponentCode = `<Tooltip title="Edit post">
     {#snippet children({ ref })}
         <div bind:this={ref.current}>...</div>
     {/snippet}
 </Tooltip>`;
 
-	const accessibleCode = `<Tooltip title="Edit post">
+const accessibleCode = `<Tooltip title="Edit post">
     <!-- props : { 'aria-describedby': string } -->
     {#snippet children({ props, ref })}
         <Button
@@ -51,7 +51,7 @@
     {/snippet}
 </Tooltip>`;
 
-	const placementCode = `${script("import { Button, Tooltip } from '@sveltique/components';")}
+const placementCode = `${script("import { Button, Tooltip } from '@sveltique/components';")}
     
 <Tooltip title="I'm a bottom tooltip">
     {#snippet children({ props, ref })}

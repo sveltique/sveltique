@@ -3,7 +3,7 @@ export function useMutationObserver(
 	callback: MutationCallback,
 	options?: MutationObserverInit
 ) {
-	let _target = $derived(target());
+	const _target = $derived(target());
 
 	$effect(() => {
 		if (!_target) return;

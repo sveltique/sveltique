@@ -1,13 +1,12 @@
 <script lang="ts">
-	import Playground from '$components/Playground.svelte';
-	import { Paper, Separator } from '@sveltique/components';
+import { Paper, Separator } from "@sveltique/components";
+import IconPlayerPauseFilled from "@tabler/icons-svelte/icons/player-pause-filled";
+import IconPlayerSkipBackFilled from "@tabler/icons-svelte/icons/player-skip-back-filled";
+import IconPlayerSkipForwardFilled from "@tabler/icons-svelte/icons/player-skip-forward-filled";
+import Playground from "$components/Playground.svelte";
 
-	import IconPlayerPauseFilled from '@tabler/icons-svelte/icons/player-pause-filled';
-	import IconPlayerSkipBackFilled from '@tabler/icons-svelte/icons/player-skip-back-filled';
-	import IconPlayerSkipForwardFilled from '@tabler/icons-svelte/icons/player-skip-forward-filled';
-
-	const code = {
-		short: `<Paper variant="outline" class="flex w-[360px]">
+const code = {
+	short: `<Paper variant="outline" class="flex w-[360px]">
     <div class="relative flex w-2/3 flex-col">
         <div class="px-6 py-3">
             <p class="text-xs">Shawn Mendes</p>
@@ -29,7 +28,7 @@
         />
     </div>
 </Paper>`,
-		expanded: `&lt;script lang="ts"&gt;
+	expanded: `&lt;script lang="ts"&gt;
     import { Paper, Separator } from '@sveltique/components';
     import {
         IconPlayerPauseFilled,
@@ -60,7 +59,7 @@
         />
     </div>
 </Paper>`
-	};
+};
 </script>
 
 <h1>Separator</h1>

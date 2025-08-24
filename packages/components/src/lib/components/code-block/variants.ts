@@ -1,12 +1,12 @@
-import { tv, type VariantProps } from 'tailwind-variants';
+import { tv, type VariantProps } from "tailwind-variants";
 
 export const codeBlock = tv({
 	slots: {
-		container: 'relative w-full text-sm rounded-2xl',
-		header: 'relative w-full flex items-center justify-between px-5 py-2.5',
-		filename: 'font-codeblock',
-		pre: 'code-block group relative w-full flex flex-col overflow-x-auto',
-		code: 'contents flex flex-col flex-nowrap py-5 font-codeblock'
+		container: "relative w-full text-sm rounded-2xl",
+		header: "relative w-full flex items-center justify-between px-5 py-2.5",
+		filename: "font-codeblock",
+		pre: "code-block group relative w-full flex flex-col overflow-x-auto",
+		code: "contents flex flex-col flex-nowrap py-5 font-codeblock"
 	}
 });
 

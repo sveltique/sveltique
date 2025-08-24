@@ -1,20 +1,20 @@
 <script>
-	import Playground from '$components/Playground.svelte';
-	import { script } from '$utils/playground';
-	import { Alert, Switch } from '@sveltique/components';
+import { Alert, Switch } from "@sveltique/components";
+import Playground from "$components/Playground.svelte";
+import { script } from "$utils/playground";
 
-	const code = {
-		short: `<Switch />
+const code = {
+	short: `<Switch />
 <Switch checked />
 <Switch disabled />
 <Switch checked disabled />`,
-		expanded: `${script("import { Switch } from '@sveltique/components';")}
+	expanded: `${script("import { Switch } from '@sveltique/components';")}
 
 <Switch />
 <Switch checked />
 <Switch disabled />
 <Switch checked disabled />`
-	};
+};
 </script>
 
 <h1>Switch</h1>

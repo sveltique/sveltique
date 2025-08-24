@@ -1,26 +1,26 @@
 <script lang="ts">
-	import { Paper, Separator } from '@sveltique/components';
-	import { cnBase } from 'tailwind-variants';
-	import { cn } from '$utils/cn.js';
-	import CodeBlock from './CodeBlock.svelte';
-	import type { Snippet } from 'svelte';
-	import type { ClassNameValue } from 'tailwind-merge';
+import { Paper, Separator } from "@sveltique/components";
+import type { Snippet } from "svelte";
+import type { ClassNameValue } from "tailwind-merge";
+import { cnBase } from "tailwind-variants";
+import { cn } from "$utils/cn.js";
+import CodeBlock from "./CodeBlock.svelte";
 
-	type Code = {
-		short: string;
-		expanded: string;
-	};
+type Code = {
+	short: string;
+	expanded: string;
+};
 
-	interface Props {
-		children?: Snippet;
-		controls?: Snippet;
-		class?: ClassNameValue;
-		code?: string | Code;
-	}
+interface Props {
+	children?: Snippet;
+	controls?: Snippet;
+	class?: ClassNameValue;
+	code?: string | Code;
+}
 
-	let { children, controls, class: className, code }: Props = $props();
+let { children, controls, class: className, code }: Props = $props();
 
-	let showCode = $state(false);
+let showCode = $state(false);
 </script>
 
 <div data-playground class="relative mb-4 flex w-full flex-col items-start gap-2.5">

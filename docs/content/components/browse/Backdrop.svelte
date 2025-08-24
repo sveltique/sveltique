@@ -1,15 +1,15 @@
 <script>
-	import { Backdrop, Button } from '@sveltique/components';
-	import Playground from '$components/Playground.svelte';
-	import { onKeyUp } from '$utils/on-key-up.svelte';
-	import { script } from '$utils/playground';
+import { Backdrop, Button } from "@sveltique/components";
+import Playground from "$components/Playground.svelte";
+import { onKeyUp } from "$utils/on-key-up.svelte";
+import { script } from "$utils/playground";
 
-	let showBackdrop = $state(false);
+let showBackdrop = $state(false);
 
-	onKeyUp('Escape', () => (showBackdrop = false));
+onKeyUp("Escape", () => (showBackdrop = false));
 
-	const code = {
-		short: `<Button onclick={() => (showBackdrop = true)}>
+const code = {
+	short: `<Button onclick={() => (showBackdrop = true)}>
     Show backdrop
 </Button>
 
@@ -19,7 +19,7 @@
         z={1000}
     />
 {/if}`,
-		expanded: `${script(`import { Backdrop, Button } from '@sveltique/components';
+	expanded: `${script(`import { Backdrop, Button } from '@sveltique/components';
 
     let showBackdrop = $state(false);`)}
 
@@ -33,7 +33,7 @@
         z={1000}
     />
 {/if}`
-	};
+};
 </script>
 
 <h1>Backdrop</h1>

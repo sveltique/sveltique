@@ -1,20 +1,20 @@
 <script lang="ts">
-	import Playground from '$components/Playground.svelte';
-	import { toTitleCase } from '$utils/string.js';
-	import { Field, TextInput, NumberInput, Select } from '@sveltique/components';
+import { Field, NumberInput, Select, TextInput } from "@sveltique/components";
+import Playground from "$components/Playground.svelte";
+import { toTitleCase } from "$utils/string.js";
 
-	type Input = 'text' | 'number' | 'select';
+type Input = "text" | "number" | "select";
 
-	let type = $state<Input>('text');
-	let age = $state(16);
-	let ageError = $derived.by(() => {
-		if (age < 18) {
-			return 'You must be at least 18 years old to participate.';
-		}
-	});
+let type = $state<Input>("text");
+let age = $state(16);
+let ageError = $derived.by(() => {
+	if (age < 18) {
+		return "You must be at least 18 years old to participate.";
+	}
+});
 
-	const ageCode = {
-		short: `<Field label="Age" error={ageError} class="w-[240px]">
+const ageCode = {
+	short: `<Field label="Age" error={ageError} class="w-[240px]">
     {#snippet input(props)}
         <NumberInput
             bind:value={age}
@@ -24,7 +24,7 @@
         />
     {/snippet}
 </Field>`,
-		expanded: `&lt;script&gt;
+	expanded: `&lt;script&gt;
     import { Field, NumberInput } from '@sveltique/components';
 
     let age = $state(18);
@@ -45,7 +45,7 @@
         />
     {/snippet}
 </Field>`
-	};
+};
 </script>
 
 <h1>Field</h1>

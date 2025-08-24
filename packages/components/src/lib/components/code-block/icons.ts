@@ -58,7 +58,7 @@ const icons: Record<string, string> = {
 };
 
 export function getIcon(filename: string) {
-	const extension = filename.split('.').at(-1)!;
+	const extension = filename.split(".").at(-1)!;
 
-	return icons[extension] ?? icons['text'];
+	return icons[extension] ?? icons["text"];
 }

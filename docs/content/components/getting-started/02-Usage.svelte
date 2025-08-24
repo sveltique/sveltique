@@ -1,18 +1,18 @@
 <script>
-	import CodeBlock from '$components/CodeBlock.svelte';
-	import Playground from '$components/Playground.svelte';
-	import { script } from '$utils/playground';
-	import { Button, Link, Tooltip } from '@sveltique/components';
+import { Button, Link, Tooltip } from "@sveltique/components";
+import CodeBlock from "$components/CodeBlock.svelte";
+import Playground from "$components/Playground.svelte";
+import { script } from "$utils/playground";
 
-	const code = {
-		short: `<Tooltip title="Sveltique is awesome">
+const code = {
+	short: `<Tooltip title="Sveltique is awesome">
     {#snippet children({ props, ref })}
         <Button bind:ref={ref.current} {...props}>
             Hover me !
         </Button>
     {/snippet}
 </Tooltip>`,
-		expanded: `${script("import { Button, Tooltip } from '@sveltique/components';")}
+	expanded: `${script("import { Button, Tooltip } from '@sveltique/components';")}
 
 <Tooltip title="Sveltique is awesome">
     {#snippet children({ props, ref })}
@@ -21,7 +21,7 @@
         </Button>
     {/snippet}
 </Tooltip>`
-	};
+};
 </script>
 
 <svelte:head>

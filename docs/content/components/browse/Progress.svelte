@@ -1,28 +1,28 @@
 <script lang="ts">
-	import { tick } from 'svelte';
-	import { Badge, Field, NumberInput, Progress } from '@sveltique/components';
-	import { normalizeProgress } from '@sveltique/components/utils';
-	import CodeBlock from '$components/CodeBlock.svelte';
-	import Playground from '$components/Playground.svelte';
-	import { script } from '$utils/playground';
+import { Badge, Field, NumberInput, Progress } from "@sveltique/components";
+import { normalizeProgress } from "@sveltique/components/utils";
+import { tick } from "svelte";
+import CodeBlock from "$components/CodeBlock.svelte";
+import Playground from "$components/Playground.svelte";
+import { script } from "$utils/playground";
 
-	let intervalValue = $state(100);
-	let step = $state(1);
-	let value = $state(0);
+let intervalValue = $state(100);
+let step = $state(1);
+let value = $state(0);
 
-	$effect(() => {
-		const interval = setInterval(async () => {
-			if (value >= 100) {
-				value = 0;
-				return tick();
-			}
+$effect(() => {
+	const interval = setInterval(async () => {
+		if (value >= 100) {
+			value = 0;
+			return tick();
+		}
 
-			value = Math.min(value + step, 100);
-			await tick();
-		}, intervalValue);
+		value = Math.min(value + step, 100);
+		await tick();
+	}, intervalValue);
 
-		return () => clearInterval(interval);
-	});
+	return () => clearInterval(interval);
+});
 </script>
 
 <h1>Progress</h1>

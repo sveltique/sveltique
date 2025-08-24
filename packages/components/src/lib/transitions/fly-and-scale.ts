@@ -1,5 +1,5 @@
-import { cubicOut } from 'svelte/easing';
-import type { TransitionConfig } from 'svelte/transition';
+import { cubicOut } from "svelte/easing";
+import type { TransitionConfig } from "svelte/transition";
 
 type FlyAndScaleParams = {
 	y?: number;
@@ -12,7 +12,7 @@ export function styleToString(style: Record<string, number | string | undefined>
 	return Object.keys(style).reduce((str, key) => {
 		if (style[key] === undefined) return str;
 		return `${str}${key}:${style[key]};`;
-	}, '');
+	}, "");
 }
 
 export function flyAndScale(
@@ -20,9 +20,13 @@ export function flyAndScale(
 	params: FlyAndScaleParams = { y: -8, x: 0, start: 0.95, duration: 150 }
 ): TransitionConfig {
 	const style = getComputedStyle(node);
-	const transform = style.transform === 'none' ? '' : style.transform;
+	const transform = style.transform === "none" ? "" : style.transform;
 
-	const scaleConversion = (valueA: number, scaleA: [number, number], scaleB: [number, number]) => {
+	const scaleConversion = (
+		valueA: number,
+		scaleA: [number, number],
+		scaleB: [number, number]
+	) => {
 		const [minA, maxA] = scaleA;
 		const [minB, maxB] = scaleB;
 
