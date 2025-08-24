@@ -11,6 +11,10 @@
 @theme {
 	--font-cascadia-code: 'Cascadia Code', sans-serif;
 
+	/* Generic colors */
+	--color-black: #000;
+	--color-white: #fff;
+
 	/* Background color */
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);

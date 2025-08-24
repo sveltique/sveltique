@@ -20,7 +20,7 @@ export const button = tv({
 			large: 'text-lg px-6 py-3'
 		},
 		disabled: {
-			true: 'cursor-not-allowed opacity-50'
+			true: 'cursor-not-allowed opacity-50' // TODO : add custom disabled color on each button...
 		},
 		color: {
 			primary: 'focus:ring-primary',
@@ -66,7 +66,7 @@ export const button = tv({
 		{
 			variant: 'contained',
 			color: 'primary',
-			class: 'bg-primary text-primary-foreground not-disabled:hover:bg-primary/90'
+			class: 'bg-primary text-primary-foreground not-disabled:hover:bg-primary-muted'
 		},
 		{
 			variant: 'outline',
@@ -81,12 +81,12 @@ export const button = tv({
 		{
 			variant: 'contained',
 			color: 'danger',
-			class: 'bg-danger text-primary-foreground not-disabled:hover:bg-danger/90'
+			class: 'bg-danger text-white not-disabled:hover:bg-danger-muted'
 		},
 		{
 			variant: 'outline',
 			color: 'danger',
-			class: 'bg-transparent text-danger border border-muted not-disabled:hover:bg-danger-light'
+			class: 'bg-transparent text-danger border border-muted not-disabled:hover:bg-muted'
 		},
 		{
 			variant: 'text',
