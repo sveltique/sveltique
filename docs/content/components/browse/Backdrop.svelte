@@ -36,13 +36,13 @@ const code = {
 };
 </script>
 
-<h1>Backdrop</h1>
+<h1 id="backdrop">Backdrop</h1>
 <p>
 	Narrows the user's focus to a particular element on the screen by adding a dimmed layer over your
 	application.
 </p>
 
-<h2>Basic Usage</h2>
+<h2 id="basic-usage">Basic Usage</h2>
 <Playground {code}>
 	<Button onclick={() => (showBackdrop = true)}>Show backdrop</Button>
 

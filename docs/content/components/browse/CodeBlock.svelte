@@ -80,7 +80,7 @@ const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } 
 />`;
 </script>
 
-<h1>Code Block</h1>
+<h1 id="code-block">Code Block</h1>
 <p>
 	Display syntax-highlighted code snippets. Ideal anywhere you need clear, readable code examples
 	(like on this website !).
@@ -89,7 +89,7 @@ const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } 
 	>You must have <Link href="https://shiki.style" external>shiki</Link> installed to use this component.</Alert
 >
 
-<h2>Basic Usage</h2>
+<h2 id="basic-usage">Basic Usage</h2>
 <p>
 	The <code>{'<CodeBlock />'}</code> component highlights the given code synchronously. As such, you
 	need to provide a <Badge>highlighter</Badge> object.
@@ -118,7 +118,7 @@ const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } 
 	/>
 </Playground>
 
-<h3>Showing Line Numbers</h3>
+<h3 id="showing-line-numbers">Showing Line Numbers</h3>
 <p>
 	You can show line numbers with the <Badge>showLineNumbers</Badge> attribute.
 </p>
@@ -139,7 +139,7 @@ const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } 
 	/>
 </Playground>
 
-<h3>Highlighting lines</h3>
+<h3 id="highlighting-lines">Highlighting lines</h3>
 <p>
 	You can highlight certain lines by passing a list of number (starting from one) using the <Badge
 		>highlightedLines</Badge
@@ -167,7 +167,7 @@ const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } 
 	/>
 </Playground>
 
-<h3>Filename</h3>
+<h3 id="filename">Filename</h3>
 <p>You can add a filename via the <Badge>filename</Badge> attribute.</p>
 <Playground>
 	<CodeBlock
@@ -182,7 +182,7 @@ const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } 
 	/>
 </Playground>
 
-<h2>Wrapper component</h2>
+<h2 id="wrapper-component">Wrapper component</h2>
 <p>
 	The <code>{'<CodeBlock />'}</code> component, while useful on its own, requires you to pass many
 	parameters (such as the <Badge>highlighter</Badge> and theme) every time.
@@ -196,7 +196,7 @@ const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } 
 	evey code block or add your own logic (light/dark for example), setting fonts and more.
 </p>
 
-<h3>Implementation Example</h3>
+<h3 id="implementation-example">Implementation Example</h3>
 <p>
 	Here is an implementation example with some added defaults. Feel free to adapt it to your needs :
 </p>
@@ -220,7 +220,7 @@ const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } 
 	showLineNumbers
 />
 
-<h3>Usage</h3>
+<h3 id="usage">Usage</h3>
 <CodeBlock
 	code={'<CodeBlock code="<p>My own CodeBlock wrapper with defaults!</p>" />'}
 	{highlighter}

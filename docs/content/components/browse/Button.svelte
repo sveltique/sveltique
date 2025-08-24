@@ -140,10 +140,10 @@ const disabledCode = {
 };
 </script>
 
-<h1>Button</h1>
+<h1 id="button">Button</h1>
 <p>Buttons allow users to take actions, and make choices, with a single tap.</p>
 
-<h2>Basic Usage</h2>
+<h2 id="basic-usage">Basic Usage</h2>
 <p>A button has three variants: contained (default), outline, and text.</p>
 <Playground code={basicCode} class="flex-col md:flex-row">
 	<Button>CONTAINED</Button>
@@ -151,9 +151,9 @@ const disabledCode = {
 	<Button variant="text">TEXT</Button>
 </Playground>
 
-<h2>Customization</h2>
+<h2 id="customization">Customization</h2>
 
-<h3>Shape</h3>
+<h3 id="shape">Shape</h3>
 <p>A button can have three different shapes: rectangle (default), square, and circle.</p>
 <Playground code={shapeCode}>
 	<Button>Add an item</Button>
@@ -165,7 +165,7 @@ const disabledCode = {
 	</Button>
 </Playground>
 
-<h3>Size</h3>
+<h3 id="size">Size</h3>
 <p>A button can have three different sizes : medium (default), small, and large.</p>
 <Playground code={sizeCode} class="flex-col">
 	<div class="relative flex w-full items-center justify-center gap-5">
@@ -199,7 +199,7 @@ const disabledCode = {
 	</div>
 </Playground>
 
-<h3>Color</h3>
+<h3 id="color">Color</h3>
 <p>The <Badge>color</Badge> prop changes the button's color theme :</p>
 <ul class="list-disc pl-5">
 	<li><strong>primary</strong> : the default color scheme for main actions</li>
@@ -221,7 +221,7 @@ const disabledCode = {
 	</div>
 </Playground>
 
-<h3>Disabled</h3>
+<h3 id="disabled">Disabled</h3>
 <p>
 	When a button is disabled via the <Badge>disabled</Badge> prop, it reduces its opacity and disables
 	pointer events to indicate it is inactive and not clickable.

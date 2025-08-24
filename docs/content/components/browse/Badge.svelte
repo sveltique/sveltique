@@ -39,17 +39,17 @@ const interactiveBadgeCode = `${script("import { badge } from '@sveltique/compon
 <button class={badge({ variant: 'danger' })}>Button</button>`;
 </script>
 
-<h1>Badge</h1>
+<h1 id="badge">Badge</h1>
 <p>A small badge with rounded corners.</p>
 
-<h2>Basic Usage</h2>
+<h2 id="basic-usage">Basic Usage</h2>
 <Playground code={basicUsagecode}>
 	<Badge>Contained</Badge>
 	<Badge variant="outline">Outline</Badge>
 	<Badge variant="danger">Danger</Badge>
 </Playground>
 
-<h3>Number</h3>
+<h3 id="number">Number</h3>
 <p>
 	If you want to use the badge with a number, you can set the <Badge>number</Badge> attribute to true.
 	It will fully round the badge.
@@ -60,9 +60,9 @@ const interactiveBadgeCode = `${script("import { badge } from '@sveltique/compon
 	<Badge variant="danger" number>99+</Badge>
 </Playground>
 
-<h2>Examples</h2>
+<h2 id="examples">Examples</h2>
 
-<h3>Icon with text</h3>
+<h3 id="icon-with-text">Icon with text</h3>
 <Playground code={iconWithTextCode}>
 	<Badge>
 		<IconCircleDashedCheck aria-hidden="true" class="size-4" />
@@ -74,7 +74,7 @@ const interactiveBadgeCode = `${script("import { badge } from '@sveltique/compon
 	</Badge>
 </Playground>
 
-<h3>Interactive badge</h3>
+<h3 id="interactive-badge">Interactive badge</h3>
 <p>You can make an interactive badge by using the <Badge>badge()</Badge> helper.</p>
 <Playground code={interactiveBadgeCode}>
 	<a href="/" class={badge()}>Link</a>

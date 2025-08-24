@@ -45,16 +45,16 @@ const externalCode = {
 };
 </script>
 
-<h1>Link</h1>
+<h1 id="link">Link</h1>
 <p>A styled and accessible link.</p>
 
-<h2>Basic Usage</h2>
+<h2 id="basic-usage">Basic Usage</h2>
 <p>You can use the {'<Link />'} component as a drop-in replacement for anchor elements.</p>
 <Playground code={basicUsageCode}>
 	<Link href="#basic-usage">Go to the "Basic Usage" section</Link>
 </Playground>
 
-<h3>Underline</h3>
+<h3 id="underline">Underline</h3>
 <p>
 	By default, links are underlined to conform with <Link
 		href="https://webaim.org/blog/wcag-2-0-and-link-colors/"
@@ -67,7 +67,7 @@ const externalCode = {
 	<Link href="#" underline="none">underline="none"</Link>
 </Playground>
 
-<h2>External links</h2>
+<h2 id="external-links">External links</h2>
 <p>
 	For external links, you can set the <Badge>external</Badge> attribute. It handles setting <Badge
 		>target="_blank"</Badge

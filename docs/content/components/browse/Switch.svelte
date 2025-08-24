@@ -17,10 +17,10 @@ const code = {
 };
 </script>
 
-<h1>Switch</h1>
+<h1 id="switch">Switch</h1>
 <p>A switch-style element for displaying on/off states.</p>
 
-<h2>Basic Usage</h2>
+<h2 id="basic-usage">Basic Usage</h2>
 <Alert type="info" class="mb-4">Under the hood, it behaves like a checkbox.</Alert>
 <Playground {code}>
 	<Switch />

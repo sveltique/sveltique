@@ -48,9 +48,10 @@ const ageCode = {
 };
 </script>
 
-<h1>Field</h1>
+<h1 id="field">Field</h1>
 <p>Text fields allow users to enter text into a UI.</p>
-<h2>Basic Usage</h2>
+
+<h2 id="basic-usage">Basic Usage</h2>
 <p>
 	A field is composable, including a label and an error message when provided. It accepts any input
 	element, or custom ones such as <a href="/docs/components/inputs/text-input">{'<TextInput />'}</a
@@ -78,7 +79,8 @@ const ageCode = {
 		</Field>
 	{/snippet}
 </Playground>
-<h2>Error</h2>
+
+<h2 id="error">Error</h2>
 <p>You can show an error message under the field by setting the error property.</p>
 <p class="text-sm italic text-zinc-500 dark:text-blue-600">
 	Tip : Try setting the age above 18 to make the error disappear.

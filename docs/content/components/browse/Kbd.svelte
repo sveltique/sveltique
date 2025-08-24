@@ -37,10 +37,10 @@ const code = {
 };
 </script>
 
-<h1>Kbd</h1>
+<h1 id="kbd">Kbd</h1>
 <p>Denotes textual user input from a keyboard, voice input, or any other text entry device.</p>
 
-<h2>Basic Usage</h2>
+<h2 id="basic-usage">Basic Usage</h2>
 <Playground {code} class="flex-col">
 	<div class="flex items-center gap-2.5">
 		<Kbd>Esc</Kbd>

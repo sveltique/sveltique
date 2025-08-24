@@ -62,10 +62,10 @@ const code = {
 };
 </script>
 
-<h1>Separator</h1>
+<h1 id="separator">Separator</h1>
 <p>A visible, thin line to visually divide two items.</p>
 
-<h2>Basic Usage</h2>
+<h2 id="basic-usage">Basic Usage</h2>
 <p>The separator can either be vertical or horizontal.</p>
 <Playground {code} class="flex-col">
 	<Paper variant="outline" class="flex w-[360px]">

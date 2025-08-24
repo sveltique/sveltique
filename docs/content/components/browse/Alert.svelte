@@ -19,12 +19,13 @@ const code = `${script('import { Alert } from "@sveltique/components";')}
 </Alert>`;
 </script>
 
-<h1>Alert</h1>
+<h1 id="alert">Alert</h1>
 <p>
 	A visual message box used to communicate contextual feedback to users, such as information,
 	success, warnings, or errors.
 </p>
-<h2>Basic Usage</h2>
+
+<h2 id="basic-usage">Basic Usage</h2>
 <p>
 	An alert renders a different color and icon based on its type : info (default), success, warning,
 	and danger.

@@ -12,13 +12,13 @@ const code = `${script("import { Skeleton } from '@sveltique/components';")}
 </div>`;
 </script>
 
-<h1>Skeleton</h1>
+<h1 id="skeleton">Skeleton</h1>
 <p>
 	Placeholder components used to indicate that content is loading. They give users a sense of the
 	structure of the page while reducing perceived wait times.
 </p>
 
-<h2>Basic Usage</h2>
+<h2 id="basic-usage">Basic Usage</h2>
 <p>
 	When using a <code>{'<Skeleton />'}</code>, you must provide explicit their <strong>width</strong>
 	and <strong>height</strong>.
@@ -31,7 +31,7 @@ const code = `${script("import { Skeleton } from '@sveltique/components';")}
 	</div>
 </Playground>
 
-<h3>Animation</h3>
+<h3 id="animation">Animation</h3>
 <p>
 	By default, skeletons include a subtle pulse animation to indicate activity. If you prefer a
 	static placeholder, you can disable this by setting <Badge>animation="none"</Badge>.

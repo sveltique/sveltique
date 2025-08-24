@@ -17,10 +17,10 @@ const code = {
 };
 </script>
 
-<h1>Checkbox</h1>
+<h1 id="checkbox">Checkbox</h1>
 <p>Checkboxes allow the user to select one or more items from a set.</p>
 
-<h2>Basic Usage</h2>
+<h2 id="basic-usage">Basic Usage</h2>
 <Playground {code}>
 	<Checkbox />
 	<Checkbox checked />

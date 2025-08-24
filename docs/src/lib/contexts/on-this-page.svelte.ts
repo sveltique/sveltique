@@ -1,5 +1,6 @@
-import { getContext, setContext } from "svelte";
-import { slugify } from "$utils/string.js";
+import { page } from "$app/state";
+import { getContext, setContext, untrack } from "svelte";
+import { on } from "svelte/events";
 
 const KEY = Symbol("onThisPageContext");
 
@@ -23,11 +24,28 @@ type Heading = FlatHeading & {
 class OnThisPageContext {
 	public current = $state<Heading[]>([]);
 
-	public getFromDOM(): void {
+	constructor() {
+		$effect.root(() => {
+			$effect(() => {
+				return on(window, "DOMContentLoaded", (event) => {
+					this._updateCurrent();
+				});
+			});
+
+			$effect(() => {
+				page.url.pathname;
+
+				console.log("hello");
+
+				untrack(() => this._updateCurrent());
+			});
+		});
+	}
+
+	private _updateCurrent() {
 		this.current = Array.from(document.querySelectorAll<HTMLHeadingElement>("h2, h3"))
 			.filter((heading) => !heading.closest("[data-playground]"))
 			.map((node) => {
-				node.id = slugify(node.textContent);
 				const level = Number(node.tagName.substring(1)) as 2 | 3;
 
 				return {

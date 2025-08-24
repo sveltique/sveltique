@@ -78,10 +78,10 @@ const placementCode = `${script("import { Button, Tooltip } from '@sveltique/com
 </Tooltip>`;
 </script>
 
-<h1>Tooltip</h1>
+<h1 id="tooltip">Tooltip</h1>
 <p>Display informative text when users hover over, focus on, or tap an element.</p>
 
-<h2>Basic Usage</h2>
+<h2 id="basic-usage">Basic Usage</h2>
 <Playground {code}>
 	<Tooltip title="Edit post">
 		{#snippet children({ props, ref })}
@@ -92,14 +92,14 @@ const placementCode = `${script("import { Button, Tooltip } from '@sveltique/com
 	</Tooltip>
 </Playground>
 
-<h3>Custom children</h3>
+<h3 id="custom-children">Custom children</h3>
 <p>
 	You can use a custom component as the children of the tooltip as long as you can bind to an HTML
 	element.
 </p>
 <CodeBlock code={customComponentCode} />
 
-<h3>Placement</h3>
+<h3 id="placement">Placement</h3>
 <p>A tooltip can be placed on two sides : bottom (default) and top.</p>
 <Playground code={placementCode}>
 	<Tooltip title="I'm a bottom tooltip">
@@ -115,7 +115,7 @@ const placementCode = `${script("import { Button, Tooltip } from '@sveltique/com
 	</Tooltip>
 </Playground>
 
-<h2>Accessibility</h2>
+<h2 id="accessibility">Accessibility</h2>
 <p>
 	To make the tooltip accessible, it must be linked to the item it describes. For this, pass down
 	the tooltip's ID by using the <Badge>props</Badge> parameter.

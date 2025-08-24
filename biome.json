@@ -272,7 +272,11 @@
 			"includes": ["**/*.svelte"],
 			"linter": {
 				"rules": {
-					"correctness": { "noUnusedImports": "off", "noUnusedVariables": "off" },
+					"correctness": {
+						"noUnusedImports": "off",
+						"noUndeclaredVariables": "off",
+						"noUnusedVariables": "off"
+					},
 					"style": { "useConst": "off", "useImportType": "off" }
 				}
 			}

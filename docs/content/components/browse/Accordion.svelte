@@ -109,9 +109,10 @@ export const metadata = {
 </Accordion.Root>`;
 </script>
 
-<h1>Accordion</h1>
+<h1 id="accordion">Accordion</h1>
 <p>Lets users show and hide sections of related content on a page.</p>
-<h2>Basic Usage</h2>
+
+<h2 id="basic-usage">Basic Usage</h2>
 <p>
 	An accordion is made of two items, a container {'<Accordion />'} and one or many items {'<AccordionItem />'}.
 </p>
@@ -140,7 +141,7 @@ export const metadata = {
 	</Accordion.Root>
 </Playground>
 
-<h3>Expand Icon</h3>
+<h3 id="expand-icon">Expand Icon</h3>
 <p>You can customize the expand icon by passing an <Badge>Icon</Badge> property.</p>
 <Playground code={expandIconCode}>
 	<Accordion.Root class="max-w-md">
@@ -168,7 +169,7 @@ export const metadata = {
 	</Accordion.Root>
 </Playground>
 
-<h3>Expand by default</h3>
+<h3 id="expand-by-default">Expand by default</h3>
 <p>You can expand the first item by default via the <Badge>defaultExpand</Badge> attribute.</p>
 <Playground code={defaultExpandCode}>
 	<Accordion.Root defaultExpand class="max-w-md">
@@ -195,8 +196,8 @@ export const metadata = {
 	</Accordion.Root>
 </Playground>
 
-<h2>Customization</h2>
-<h3>Only expand one at a time</h3>
+<h2 id="customization">Customization</h2>
+<h3 id="only-expand-one-at-a-time">Only expand one at a time</h3>
 <p>
 	If you wish to keep only one accordion open at a time, you can set <Badge
 		>{'multiple={false}'}</Badge
@@ -227,7 +228,7 @@ export const metadata = {
 	</Accordion.Root>
 </Playground>
 
-<h3>Heading level</h3>
+<h3 id="heading-level">Heading level</h3>
 <p>
 	By default, accordion items use an <Badge>h3</Badge> element for the header.
 </p>
