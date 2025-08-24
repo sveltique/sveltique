@@ -20,8 +20,6 @@
 		variant = 'contained',
 		...restProps
 	}: Props = $props();
-
-	console.log(ref);
 </script>
 
 <!--
