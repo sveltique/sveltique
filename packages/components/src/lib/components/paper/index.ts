@@ -1,2 +1,2 @@
-export { default as Paper } from './Paper.svelte';
-export { paper, type PaperVariants } from './variants.js';
+export { default as Paper } from "./Paper.svelte";
+export { type PaperVariants, paper } from "./variants.js";

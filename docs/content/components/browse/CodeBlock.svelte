@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { Alert, Badge, CodeBlock, Link } from '@sveltique/components';
-	import { replaceEntities } from '$utils/html.js';
-	import Playground from '$components/Playground.svelte';
-	import { script } from '$utils/playground';
-	import { highlighter } from '$utils/shiki';
-	import { theme } from '$lib/contexts/theme.svelte';
+import { Alert, Badge, CodeBlock, Link } from "@sveltique/components";
+import Playground from "$components/Playground.svelte";
+import { theme } from "$lib/contexts/theme.svelte";
+import { replaceEntities } from "$utils/html.js";
+import { script } from "$utils/playground";
+import { highlighter } from "$utils/shiki";
 
-	const basicUsageCode = `${script(`import { CodeBlock } from '@sveltique/components';
+const basicUsageCode = `${script(`import { CodeBlock } from '@sveltique/components';
     import { highlighter } from '$utils/my-highlighter';
 
     const code = \`&lt;div class="card"&gt;
@@ -21,7 +21,7 @@
     theme="catppuccin-latte"
 />`;
 
-	const showLineNumbersCode = `${script(`import { CodeBlock } from '@sveltique/components';
+const showLineNumbersCode = `${script(`import { CodeBlock } from '@sveltique/components';
 
     const code = \`&lt;script&gt;
     let a = $state(5);
@@ -40,7 +40,7 @@
     showLineNumbers
 />`;
 
-	const highlightingLinesCode = `${script(`import { CodeBlock } from '@sveltique/components';
+const highlightingLinesCode = `${script(`import { CodeBlock } from '@sveltique/components';
 
     const code = \`&lt;script&gt;
     let a = $state(5);
@@ -59,7 +59,7 @@
     highlightedLines="2-3,5,8"
 />`;
 
-	const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } from "@sveltique/components";
+const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } from "@sveltique/components";
 
     // Adapt these imports
     import { highlighter } from "path/to/highlighter";

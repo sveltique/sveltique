@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { CodeBlock, type CodeBlockProps } from '@sveltique/components';
-	import { theme } from '$lib/contexts/theme.svelte';
-	import { highlighter } from '$utils/shiki';
+import { CodeBlock, type CodeBlockProps } from "@sveltique/components";
+import { theme } from "$lib/contexts/theme.svelte";
+import { highlighter } from "$utils/shiki";
 
-	interface Props extends Omit<CodeBlockProps, 'highlighter' | 'lang' | 'theme'> {
-		/** @default 'svelte' */
-		lang?: CodeBlockProps['lang'];
-	}
+interface Props extends Omit<CodeBlockProps, "highlighter" | "lang" | "theme"> {
+	/** @default 'svelte' */
+	lang?: CodeBlockProps["lang"];
+}
 
-	let { lang = 'svelte', ...restProps }: Props = $props();
+let { lang = "svelte", ...restProps }: Props = $props();
 </script>
 
 <CodeBlock

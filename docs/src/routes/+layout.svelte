@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { theme } from '$lib/contexts/theme.svelte';
-	import { Button } from '@sveltique/components';
-	import '../app.css';
-	import IconMenuDeep from '@tabler/icons-svelte/icons/menu-deep';
-	import IconSunFilled from '@tabler/icons-svelte/icons/sun-filled';
-	import IconMoonFilled from '@tabler/icons-svelte/icons/moon-filled';
+import { Button } from "@sveltique/components";
+import { theme } from "$lib/contexts/theme.svelte";
+import "../app.css";
+import IconMenuDeep from "@tabler/icons-svelte/icons/menu-deep";
+import IconMoonFilled from "@tabler/icons-svelte/icons/moon-filled";
+import IconSunFilled from "@tabler/icons-svelte/icons/sun-filled";
 
-	let { children } = $props();
+let { children } = $props();
 
-	let showMenu = $state(false);
-	let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
+let showMenu = $state(false);
+let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
 </script>
 
 <div class="relative w-full">

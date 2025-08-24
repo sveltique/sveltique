@@ -1,3 +1,3 @@
 export function replaceEntities(html: string) {
-	return html.replaceAll('&lt;', '<').replaceAll('&gt;', '>');
+	return html.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
 }

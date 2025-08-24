@@ -1,7 +1,7 @@
 <script>
-	import CodeBlock from '$components/CodeBlock.svelte';
+import CodeBlock from "$components/CodeBlock.svelte";
 
-	const introductionCode = `@custom-variant dark (&:where(.dark, .dark *));
+const introductionCode = `@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
     /* Fonts */

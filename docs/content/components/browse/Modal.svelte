@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { Alert, Badge, Button, Kbd, Link, Modal } from '@sveltique/components';
-	import Playground from '$components/Playground.svelte';
-	import { script } from '$utils/playground.js';
+import { Alert, Badge, Button, Kbd, Link, Modal } from "@sveltique/components";
+import IconEdit from "@tabler/icons-svelte/icons/edit";
+import IconTrash from "@tabler/icons-svelte/icons/trash";
 
-	import IconX from '@tabler/icons-svelte/icons/x';
-	import IconEdit from '@tabler/icons-svelte/icons/edit';
-	import IconTrash from '@tabler/icons-svelte/icons/trash';
+import IconX from "@tabler/icons-svelte/icons/x";
+import Playground from "$components/Playground.svelte";
+import { script } from "$utils/playground.js";
 
-	let isOpen = $state(false);
+let isOpen = $state(false);
 
-	const code = {
-		short: `<Modal>
+const code = {
+	short: `<Modal>
     {#snippet trigger({ open })}
         <Button onclick={open}>Show modal</Button>
     {/snippet}
@@ -23,7 +23,7 @@
         <Button onclick={close} color="danger">Log Out</Button>
     {/snippet}
 </Modal>`,
-		expanded: `${script('import { Button, Modal } from "@sveltique/components";')}
+	expanded: `${script('import { Button, Modal } from "@sveltique/components";')}
 
 <Modal>
     {#snippet trigger({ open })}
@@ -38,10 +38,10 @@
         <Button onclick={close} color="danger">Log Out</Button>
     {/snippet}
 </Modal>`
-	};
+};
 
-	const controlledStateCode = {
-		short: `<Modal bind:isOpen>
+const controlledStateCode = {
+	short: `<Modal bind:isOpen>
     {#snippet trigger()}
         <Button onclick={() => (isOpen = true)}>Show modal</Button>
     {/snippet}
@@ -74,7 +74,7 @@
         </p>
     </div>
 </Modal>`,
-		expanded: `${script(`import { Button, Modal } from "@sveltique/components";
+	expanded: `${script(`import { Button, Modal } from "@sveltique/components";
     
     let isOpen = $state(false);`)}
 
@@ -111,7 +111,7 @@
         </p>
     </div>
 </Modal>`
-	};
+};
 </script>
 
 <h1>Modal</h1>

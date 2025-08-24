@@ -1,15 +1,15 @@
-import { createHighlighter, type BundledLanguage } from 'shiki';
+import { type BundledLanguage, createHighlighter } from "shiki";
 
 const registeredLangs = [
-	'bash',
-	'json',
-	'svelte',
-	'css',
-	'ts'
+	"bash",
+	"json",
+	"svelte",
+	"css",
+	"ts"
 ] as const satisfies BundledLanguage[];
 
 export const highlighter = await createHighlighter({
-	themes: ['catppuccin-latte', 'one-dark-pro'],
+	themes: ["catppuccin-latte", "one-dark-pro"],
 	langs: registeredLangs
 });
 
@@ -22,10 +22,10 @@ export type StyleOptions = {
 
 /** Style HTML with shiki. */
 export function style(html: string, options: StyleOptions = {}) {
-	const { lang = 'svelte', dark = false } = options;
+	const { lang = "svelte", dark = false } = options;
 
 	return highlighter.codeToHtml(html, {
 		lang,
-		theme: dark ? 'one-dark-pro' : 'catppuccin-latte'
+		theme: dark ? "one-dark-pro" : "catppuccin-latte"
 	});
 }

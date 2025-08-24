@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { Badge, Skeleton } from '@sveltique/components';
-	import Playground from '$components/Playground.svelte';
-	import { script } from '$utils/playground.js';
+import { Badge, Skeleton } from "@sveltique/components";
+import Playground from "$components/Playground.svelte";
+import { script } from "$utils/playground.js";
 
-	const code = `${script("import { Skeleton } from '@sveltique/components';")}
+const code = `${script("import { Skeleton } from '@sveltique/components';")}
 
 <div class="relative w-full max-w-3xs flex flex-col items-start gap-2.5">
     <Skeleton class="h-32 w-full" />

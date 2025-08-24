@@ -1,153 +1,153 @@
 <script lang="ts">
-	import { onMount, type Snippet } from 'svelte';
-	import { on } from 'svelte/events';
-	import { accordion } from './variants.js';
-	import { onKeyDown, onKeyUp } from '$utils/on-key.svelte.js';
-	import type { HTMLAttributes } from 'svelte/elements';
-	import type { ReplaceWithTWMergeClass } from '$lib/types.js';
-	import { getActiveElement } from '$utils/use-active-element.svelte.js';
+import { onMount, type Snippet } from "svelte";
+import type { HTMLAttributes } from "svelte/elements";
+import { on } from "svelte/events";
+import type { ReplaceWithTWMergeClass } from "$lib/types.js";
+import { onKeyDown, onKeyUp } from "$utils/on-key.svelte.js";
+import { getActiveElement } from "$utils/use-active-element.svelte.js";
+import { accordion } from "./variants.js";
 
-	interface Props extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>> {
-		children?: Snippet;
-		/**
-		 * Whether to make the first item expanded by default.
-		 * @default false
-		 * @see https://sveltique.dev/docs/components/browse/accordion#expand-by-default
-		 */
-		defaultExpand?: boolean;
-		/**
-		 * Which level heading to use for the accordion summaries.
-		 * @default "h3"
-		 * @see https://sveltique.dev/docs/components/browse/accordion#heading-level
-		 */
-		headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-		/**
-		 * Whether to allow one or multiple items expanded at a time.
-		 * @default true
-		 * @see https://sveltique.dev/docs/components/browse/accordion#only-expand-one-at-a-time
-		 */
-		multiple?: boolean;
-	}
+interface Props extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>> {
+	children?: Snippet;
+	/**
+	 * Whether to make the first item expanded by default.
+	 * @default false
+	 * @see https://sveltique.dev/docs/components/browse/accordion#expand-by-default
+	 */
+	defaultExpand?: boolean;
+	/**
+	 * Which level heading to use for the accordion summaries.
+	 * @default "h3"
+	 * @see https://sveltique.dev/docs/components/browse/accordion#heading-level
+	 */
+	headingLevel?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+	/**
+	 * Whether to allow one or multiple items expanded at a time.
+	 * @default true
+	 * @see https://sveltique.dev/docs/components/browse/accordion#only-expand-one-at-a-time
+	 */
+	multiple?: boolean;
+}
 
-	let {
-		children,
-		class: className,
-		defaultExpand = false,
-		headingLevel = 'h3',
-		multiple = true
-	}: Props = $props();
+let {
+	children,
+	class: className,
+	defaultExpand = false,
+	headingLevel = "h3",
+	multiple = true
+}: Props = $props();
 
-	let ref = $state<HTMLDivElement>();
-	let values = $state<string[]>([]);
+let ref = $state<HTMLDivElement>();
+let values = $state<string[]>([]);
 
-	const activeElement = getActiveElement();
+const activeElement = getActiveElement();
 
-	onMount(() => {
-		if (!ref || !defaultExpand) return;
-		if (!ref.firstElementChild?.firstElementChild) return;
+onMount(() => {
+	if (!ref || !defaultExpand) return;
+	if (!ref.firstElementChild?.firstElementChild) return;
 
-		values = [ref.firstElementChild.firstElementChild.id];
+	values = [ref.firstElementChild.firstElementChild.id];
+});
+
+$effect(() => {
+	if (!ref) return;
+
+	return on(ref, "click", (event) => {
+		const target = event.target;
+
+		if (
+			!target ||
+			!(target instanceof HTMLElement) ||
+			!target.hasAttribute("data-accordion-item")
+		) {
+			return;
+		}
+
+		const newValue = target.getAttribute("data-value")!;
+
+		if (multiple) {
+			if (values.includes(newValue)) {
+				values = values.filter((v) => v !== newValue);
+			} else {
+				values.push(newValue);
+			}
+		} else {
+			values = values.includes(newValue) ? [] : [newValue];
+		}
 	});
+});
 
-	$effect(() => {
+onKeyDown(["ArrowUp", "ArrowDown"], preventArrowScroll, { preventDefault: true });
+
+onKeyDown(
+	["ArrowUp", "ArrowDown"],
+	(event) => {
 		if (!ref) return;
 
-		return on(ref, 'click', (event) => {
-			const target = event.target;
-
-			if (
-				!target ||
-				!(target instanceof HTMLElement) ||
-				!target.hasAttribute('data-accordion-item')
-			) {
-				return;
-			}
-
-			const newValue = target.getAttribute('data-value')!;
-
-			if (multiple) {
-				if (values.includes(newValue)) {
-					values = values.filter((v) => v !== newValue);
-				} else {
-					values.push(newValue);
-				}
-			} else {
-				values = values.includes(newValue) ? [] : [newValue];
-			}
-		});
-	});
-
-	onKeyDown(['ArrowUp', 'ArrowDown'], preventArrowScroll, { preventDefault: true });
-
-	onKeyDown(
-		['ArrowUp', 'ArrowDown'],
-		(event) => {
-			if (!ref) return;
-
-			if (event.key === 'ArrowUp') {
-				focusPrevious(ref);
-			} else if (event.key === 'ArrowDown') {
-				focusNext(ref);
-			}
-		},
-		{
-			element: () => ref
+		if (event.key === "ArrowUp") {
+			focusPrevious(ref);
+		} else if (event.key === "ArrowDown") {
+			focusNext(ref);
 		}
+	},
+	{
+		element: () => ref
+	}
+);
+
+function preventArrowScroll(event: Event) {
+	if (!ref) return;
+
+	if (ref === activeElement.current || ref.contains(activeElement.current)) {
+		event.preventDefault();
+	}
+}
+
+function focusPrevious(container: HTMLElement) {
+	if (!activeElement.current) return;
+
+	const selector = [
+		'a[href]:not([tabindex="-1"])',
+		'button:not([disabled]):not([tabindex="-1"])',
+		'input:not([disabled]):not([tabindex="-1"])',
+		'select:not([disabled]):not([tabindex="-1"])',
+		'textarea:not([disabled]):not([tabindex="-1"])',
+		'[tabindex]:not([tabindex="-1"])'
+	].join(",");
+
+	const tabbables = Array.from(container.querySelectorAll<HTMLElement>(selector)).filter(
+		(el) => el.offsetParent !== null
 	);
 
-	function preventArrowScroll(event: Event) {
-		if (!ref) return;
-
-		if (ref === activeElement.current || ref.contains(activeElement.current)) {
-			event.preventDefault();
-		}
+	const idx = tabbables.indexOf(activeElement.current);
+	if (idx >= 0) {
+		const previous = tabbables.at(idx - 1);
+		previous?.focus();
 	}
+}
 
-	function focusPrevious(container: HTMLElement) {
-		if (!activeElement.current) return;
+function focusNext(container: HTMLElement) {
+	if (!activeElement.current) return;
 
-		const selector = [
-			'a[href]:not([tabindex="-1"])',
-			'button:not([disabled]):not([tabindex="-1"])',
-			'input:not([disabled]):not([tabindex="-1"])',
-			'select:not([disabled]):not([tabindex="-1"])',
-			'textarea:not([disabled]):not([tabindex="-1"])',
-			'[tabindex]:not([tabindex="-1"])'
-		].join(',');
+	const selector = [
+		'a[href]:not([tabindex="-1"])',
+		'button:not([disabled]):not([tabindex="-1"])',
+		'input:not([disabled]):not([tabindex="-1"])',
+		'select:not([disabled]):not([tabindex="-1"])',
+		'textarea:not([disabled]):not([tabindex="-1"])',
+		'[tabindex]:not([tabindex="-1"])'
+	].join(",");
 
-		const tabbables = Array.from(container.querySelectorAll<HTMLElement>(selector)).filter(
-			(el) => el.offsetParent !== null
-		);
+	const tabbables = Array.from(container.querySelectorAll<HTMLElement>(selector)).filter(
+		(el) => el.offsetParent !== null
+	);
 
-		const idx = tabbables.indexOf(activeElement.current);
-		if (idx >= 0) {
-			const previous = tabbables.at(idx - 1);
-			previous?.focus();
-		}
+	const idx = tabbables.indexOf(activeElement.current);
+	if (idx >= 0) {
+		const next = tabbables.at((idx + 1) % tabbables.length);
+		next?.focus();
 	}
-
-	function focusNext(container: HTMLElement) {
-		if (!activeElement.current) return;
-
-		const selector = [
-			'a[href]:not([tabindex="-1"])',
-			'button:not([disabled]):not([tabindex="-1"])',
-			'input:not([disabled]):not([tabindex="-1"])',
-			'select:not([disabled]):not([tabindex="-1"])',
-			'textarea:not([disabled]):not([tabindex="-1"])',
-			'[tabindex]:not([tabindex="-1"])'
-		].join(',');
-
-		const tabbables = Array.from(container.querySelectorAll<HTMLElement>(selector)).filter(
-			(el) => el.offsetParent !== null
-		);
-
-		const idx = tabbables.indexOf(activeElement.current);
-		if (idx >= 0) {
-			const next = tabbables.at((idx + 1) % tabbables.length);
-			next?.focus();
-		}
-	}
+}
 </script>
 
 <div

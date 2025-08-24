@@ -2,7 +2,7 @@
 
 @theme {
 	/* Fonts */
-	--font-codeblock: 'Cascadia Code', sans-serif; /* Ensure you have imported the font before */
+	--font-codeblock: "Cascadia Code", sans-serif; /* Ensure you have imported the font before */
 
 	/* Generic colors */
 	--color-black: #000;

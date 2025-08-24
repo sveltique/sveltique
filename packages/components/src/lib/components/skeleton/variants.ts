@@ -1,15 +1,15 @@
-import { tv, type VariantProps } from 'tailwind-variants';
+import { tv, type VariantProps } from "tailwind-variants";
 
 export const skeleton = tv({
-	base: 'rounded-2xl bg-muted',
+	base: "rounded-2xl bg-muted",
 	variants: {
 		animation: {
-			pulse: 'animate-pulse',
-			none: ''
+			pulse: "animate-pulse",
+			none: ""
 		}
 	},
 	defaultVariants: {
-		animation: 'pulse'
+		animation: "pulse"
 	}
 });
 

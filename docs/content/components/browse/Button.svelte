@@ -1,22 +1,22 @@
 <script>
-	import Playground from '$components/Playground.svelte';
-	import { Badge, Button } from '@sveltique/components';
-	import IconPlus from '@tabler/icons-svelte/icons/plus';
-	import { script } from '$utils/playground';
+import { Badge, Button } from "@sveltique/components";
+import IconPlus from "@tabler/icons-svelte/icons/plus";
+import Playground from "$components/Playground.svelte";
+import { script } from "$utils/playground";
 
-	const basicCode = {
-		short: `<Button>CONTAINED</Button>
+const basicCode = {
+	short: `<Button>CONTAINED</Button>
 <Button variant="outline">OUTLINE</Button>
 <Button variant="text">TEXT</Button>`,
-		expanded: `${script('import { Button } from "@sveltique/components";')}
+	expanded: `${script('import { Button } from "@sveltique/components";')}
 
 <Button>CONTAINED</Button>
 <Button variant="outline">OUTLINE</Button>
 <Button variant="text">TEXT</Button>`
-	};
+};
 
-	const shapeCode = {
-		short: `<Button>
+const shapeCode = {
+	short: `<Button>
     Add an item
 </Button>
 <Button shape="square">
@@ -25,7 +25,7 @@
 <Button shape="circle">
     <IconPlus />
 </Button>`,
-		expanded: `${script('import { Button } from "@sveltique/components";')}
+	expanded: `${script('import { Button } from "@sveltique/components";')}
 
 <Button>
     Add an item
@@ -36,10 +36,10 @@
 <Button shape="circle">
     <IconPlus />
 </Button>`
-	};
+};
 
-	const sizeCode = {
-		short: `<div class="relative flex w-full items-center justify-center gap-5">
+const sizeCode = {
+	short: `<div class="relative flex w-full items-center justify-center gap-5">
     <Button size="small">Add an item</Button>
     <Button>Add an item</Button>
     <Button size="large">Add an item</Button>
@@ -68,7 +68,7 @@
         <IconPlus />
     </Button>
 </div>`,
-		expanded: `${script('import { Button } from "@sveltique/components";')}
+	expanded: `${script('import { Button } from "@sveltique/components";')}
 
 <div class="relative flex w-full items-center justify-center gap-5">
     <Button size="small">Add an item</Button>
@@ -99,10 +99,10 @@
         <IconPlus />
     </Button>
 </div>`
-	};
+};
 
-	const colorCode = {
-		short: `<div class="relative flex w-full items-center justify-center gap-5">
+const colorCode = {
+	short: `<div class="relative flex w-full items-center justify-center gap-5">
     <Button color="primary">Primary</Button>
     <Button color="primary" variant="outline">Primary Outline</Button>
     <Button color="primary" variant="text">Primary Text</Button>
@@ -113,7 +113,7 @@
     <Button color="danger" variant="outline">Danger Outline</Button>
     <Button color="danger" variant="text">Danger Text</Button>
 </div>`,
-		expanded: `${script('import { Button } from "@sveltique/components";')}
+	expanded: `${script('import { Button } from "@sveltique/components";')}
 
 <div class="relative flex w-full items-center justify-center gap-5">
     <Button color="primary">Primary</Button>
@@ -126,18 +126,18 @@
     <Button color="danger" variant="outline">Danger Outline</Button>
     <Button color="danger" variant="text">Danger Text</Button>
 </div>`
-	};
+};
 
-	const disabledCode = {
-		short: `<Button disabled>Disabled Contained</Button>
+const disabledCode = {
+	short: `<Button disabled>Disabled Contained</Button>
 <Button disabled variant="outline">Disabled Outline</Button>
 <Button disabled variant="text">Disabled Text</Button>`,
-		expanded: `${script('import { Button } from "@sveltique/components";')}
+	expanded: `${script('import { Button } from "@sveltique/components";')}
 
 <Button disabled>Disabled Contained</Button>
 <Button disabled variant="outline">Disabled Outline</Button>
 <Button disabled variant="text">Disabled Text</Button>`
-	};
+};
 </script>
 
 <h1>Button</h1>

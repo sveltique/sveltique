@@ -1,35 +1,35 @@
-import type { ThemedToken } from 'shiki';
+import type { ThemedToken } from "shiki";
 
 export function assembleLines(tokens: ThemedToken[][], parsedLines: number[]) {
 	return tokens
 		.map((t, idx) => {
 			const isHighlighted = parsedLines.includes(idx + 1);
 			const styles = isHighlighted
-				? 'background-color: color-mix(in srgb, currentColor 12%, transparent);'
-				: '';
+				? "background-color: color-mix(in srgb, currentColor 12%, transparent);"
+				: "";
 
 			return `<span data-code-line style="${styles}">${assembleTokens(t)}</span>`;
 		})
-		.join('');
+		.join("");
 }
 
 export function assembleTokens(tokens: ThemedToken[]) {
 	let lineHtml = tokens
 		.map((token) => {
-			const color = token.color ? `color:${token.color}` : '';
-			const bgColor = token.bgColor ? `background-color:${token.bgColor}` : '';
+			const color = token.color ? `color:${token.color}` : "";
+			const bgColor = token.bgColor ? `background-color:${token.bgColor}` : "";
 
 			let content = escapeHTML(token.content);
 			if (content.length === 0) {
-				content = '    ';
+				content = "    ";
 			}
 
 			return `<span style="${color};${bgColor}">${content}</span>`;
 		})
-		.join('');
+		.join("");
 
 	if (lineHtml.length === 0) {
-		lineHtml = '    ';
+		lineHtml = "    ";
 	}
 
 	return lineHtml;
@@ -37,20 +37,20 @@ export function assembleTokens(tokens: ThemedToken[]) {
 
 export function transformHTMLEntities(str: string) {
 	return str
-		.replaceAll('&amp;', '&')
-		.replaceAll('&lt;', '<')
-		.replaceAll('&gt;', '>')
-		.replaceAll('&quot;', '"')
-		.replaceAll('&#39;', "'");
+		.replaceAll("&amp;", "&")
+		.replaceAll("&lt;", "<")
+		.replaceAll("&gt;", ">")
+		.replaceAll("&quot;", '"')
+		.replaceAll("&#39;", "'");
 }
 
 export function escapeHTML(str: string) {
 	return str
-		.replaceAll('&', '&amp;')
-		.replaceAll('<', '&lt;')
-		.replaceAll('>', '&gt;')
-		.replaceAll('"', '&quot;')
-		.replaceAll("'", '&#39;');
+		.replaceAll("&", "&amp;")
+		.replaceAll("<", "&lt;")
+		.replaceAll(">", "&gt;")
+		.replaceAll('"', "&quot;")
+		.replaceAll("'", "&#39;");
 }
 
 /**
@@ -66,7 +66,7 @@ export function parseNumberRanges(ranges: string): number[] {
 		if (/^\d+$/.test(curr)) {
 			acc.add(Number(curr));
 		} else if (/^\d+-\d+$/.test(curr)) {
-			let [start, end] = curr.split('-').map(Number);
+			let [start, end] = curr.split("-").map(Number);
 
 			if (start > end) {
 				[start, end] = [end, start];
@@ -82,7 +82,7 @@ export function parseNumberRanges(ranges: string): number[] {
 
 	return [
 		...ranges
-			.split(',')
+			.split(",")
 			.map((range) => range.trim())
 			.reduce(reducer, new Set<number>())
 	].sort((a, b) => a - b);

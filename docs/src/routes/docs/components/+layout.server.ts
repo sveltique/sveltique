@@ -1,4 +1,4 @@
-import { sidebarConfig } from '$lib/configs/sidebar.server';
+import { sidebarConfig } from "$lib/configs/sidebar.server";
 
 export async function load() {
 	return {

@@ -1,13 +1,11 @@
 <script lang="ts">
-	import { skeleton, type SkeletonVariants } from './variants.js';
-	import type { HTMLAttributes } from 'svelte/elements';
-	import type { ReplaceWithTWMergeClass } from '$lib/types.js';
+import type { HTMLAttributes } from "svelte/elements";
+import type { ReplaceWithTWMergeClass } from "$lib/types.js";
+import { type SkeletonVariants, skeleton } from "./variants.js";
 
-	interface Props
-		extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
-			SkeletonVariants {}
+interface Props extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>, SkeletonVariants {}
 
-	let { animation = 'pulse', class: className, ...restProps }: Props = $props();
+let { animation = "pulse", class: className, ...restProps }: Props = $props();
 </script>
 
 <!--

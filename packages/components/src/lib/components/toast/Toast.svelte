@@ -1,29 +1,29 @@
 <script lang="ts">
-	import { toast, type ToastVariants } from './variants.js';
-	import Button from '../button/Button.svelte';
-	import type { Snippet } from 'svelte';
-	import type { TWMergeClass } from '$lib/types.js';
+import type { Snippet } from "svelte";
+import type { TWMergeClass } from "$lib/types.js";
+import Button from "../button/Button.svelte";
+import { type ToastVariants, toast } from "./variants.js";
 
-	interface Props extends TWMergeClass, ToastVariants {
-		closeAriaLabel?: string;
-		/** If passed, renders a close button. */
-		onClose?: () => void;
-		action?: Snippet;
-		children: Snippet;
-		open?: boolean;
-	}
+interface Props extends TWMergeClass, ToastVariants {
+	closeAriaLabel?: string;
+	/** If passed, renders a close button. */
+	onClose?: () => void;
+	action?: Snippet;
+	children: Snippet;
+	open?: boolean;
+}
 
-	let {
-		action,
-		children,
-		class: className,
-		closeAriaLabel,
-		open = $bindable(true),
-		type = 'info',
-		onClose
-	}: Props = $props();
+let {
+	action,
+	children,
+	class: className,
+	closeAriaLabel,
+	open = $bindable(true),
+	type = "info",
+	onClose
+}: Props = $props();
 
-	let { container, icon, content, closeButton, closeIcon } = $derived(toast({ type }));
+let { container, icon, content, closeButton, closeIcon } = $derived(toast({ type }));
 </script>
 
 {#if open}

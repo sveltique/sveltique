@@ -1,2 +1,2 @@
-export { default as Kbd } from './Kbd.svelte';
-export { kbd } from './variants.js';
+export { default as Kbd } from "./Kbd.svelte";
+export { kbd } from "./variants.js";

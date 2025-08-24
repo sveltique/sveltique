@@ -1,10 +1,10 @@
 <script>
-	import Playground from '$components/Playground.svelte';
-	import { script } from '$utils/playground';
-	import { Kbd } from '@sveltique/components';
+import { Kbd } from "@sveltique/components";
+import Playground from "$components/Playground.svelte";
+import { script } from "$utils/playground";
 
-	const code = {
-		short: `<div class="flex items-center gap-2.5">
+const code = {
+	short: `<div class="flex items-center gap-2.5">
     <Kbd>Esc</Kbd>
     <Kbd>Alt</Kbd>
     <Kbd>Shift</Kbd>
@@ -18,7 +18,7 @@
         <Kbd>Ctrl</Kbd> + <Kbd>V</Kbd>
     </div>
 </div>`,
-		expanded: `${script("import { Kbd } from '@sveltique/components';")}
+	expanded: `${script("import { Kbd } from '@sveltique/components';")}
 
 <div class="flex items-center gap-2.5">
     <Kbd>Esc</Kbd>
@@ -34,7 +34,7 @@
         <Kbd>Ctrl</Kbd> + <Kbd>V</Kbd>
     </div>
 </div>`
-	};
+};
 </script>
 
 <h1>Kbd</h1>

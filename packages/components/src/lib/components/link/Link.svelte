@@ -1,37 +1,37 @@
 <script lang="ts">
-	import { link, type LinkVariants } from './variants.js';
-	import type { HTMLAnchorAttributes } from 'svelte/elements';
-	import type { ReplaceWithTWMergeClass } from '$lib/types.js';
-	import type { Component, ComponentType } from 'svelte';
+import type { Component, ComponentType } from "svelte";
+import type { HTMLAnchorAttributes } from "svelte/elements";
+import type { ReplaceWithTWMergeClass } from "$lib/types.js";
+import { type LinkVariants, link } from "./variants.js";
 
-	interface Props extends ReplaceWithTWMergeClass<HTMLAnchorAttributes>, LinkVariants {
-		/**
-		 * Shorthand for setting `target="_blank"` and `rel="noreferrer"`.
-		 * @note Passing target and/or rel overrides the values set by `external`.
-		 * @default false
-		 */
-		external?: boolean;
-		/** @default "always" */
-		underline?: 'always' | 'hover' | 'none';
-		/** The icon to use for external links. */
-		Icon?: ComponentType | Component;
-	}
+interface Props extends ReplaceWithTWMergeClass<HTMLAnchorAttributes>, LinkVariants {
+	/**
+	 * Shorthand for setting `target="_blank"` and `rel="noreferrer"`.
+	 * @note Passing target and/or rel overrides the values set by `external`.
+	 * @default false
+	 */
+	external?: boolean;
+	/** @default "always" */
+	underline?: "always" | "hover" | "none";
+	/** The icon to use for external links. */
+	Icon?: ComponentType | Component;
+}
 
-	let {
-		children,
-		class: className,
-		external = false,
-		href,
-		rel,
-		target,
-		underline = 'always',
-		Icon,
-		...restProps
-	}: Props = $props();
+let {
+	children,
+	class: className,
+	external = false,
+	href,
+	rel,
+	target,
+	underline = "always",
+	Icon,
+	...restProps
+}: Props = $props();
 
-	let _target = $derived(target ?? (external ? '_blank' : undefined));
-	let _rel = $derived(rel ?? (external ? 'noreferrer' : undefined));
-	let { container, icon } = $derived(link({ underline }));
+let _target = $derived(target ?? (external ? "_blank" : undefined));
+let _rel = $derived(rel ?? (external ? "noreferrer" : undefined));
+let { container, icon } = $derived(link({ underline }));
 </script>
 
 <a {href} target={_target} rel={_rel} class={container({ className })} {...restProps}>

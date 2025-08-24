@@ -1,41 +1,40 @@
 <script lang="ts">
-	import { untrack } from 'svelte';
-	import { fly } from 'svelte/transition';
-	import { page } from '$app/state';
-	import { cnBase } from 'tailwind-variants';
-	import { Backdrop, Button, button, Separator } from '@sveltique/components';
-	import { setOnThisPageContext } from '$lib/contexts/on-this-page.svelte.js';
+import { Backdrop, Button, button, Separator } from "@sveltique/components";
+import IconChevronDown from "@tabler/icons-svelte/icons/chevron-down";
+import IconChevronRight from "@tabler/icons-svelte/icons/chevron-right";
+import IconHelp from "@tabler/icons-svelte/icons/help";
+import IconMenuDeep from "@tabler/icons-svelte/icons/menu-deep";
+import IconSettingsCheck from "@tabler/icons-svelte/icons/settings-check";
+import IconTable from "@tabler/icons-svelte/icons/table";
+import { untrack } from "svelte";
+import { fly } from "svelte/transition";
+import { cnBase } from "tailwind-variants";
+import { page } from "$app/state";
+import { setOnThisPageContext } from "$lib/contexts/on-this-page.svelte.js";
 
-	import IconMenuDeep from '@tabler/icons-svelte/icons/menu-deep';
-	import IconChevronRight from '@tabler/icons-svelte/icons/chevron-right';
-	import IconChevronDown from '@tabler/icons-svelte/icons/chevron-down';
-	import IconSettingsCheck from '@tabler/icons-svelte/icons/settings-check';
-	import IconHelp from '@tabler/icons-svelte/icons/help';
-	import IconTable from '@tabler/icons-svelte/icons/table';
+let { children, data } = $props();
 
-	let { children, data } = $props();
+const headings = setOnThisPageContext();
 
-	const headings = setOnThisPageContext();
+let showMenu = $state(false);
+let showOnThisPage = $state(false);
+let showComponentsMenu = $state(page.url.pathname.startsWith("/docs/components/browse/"));
 
-	let showMenu = $state(false);
-	let showOnThisPage = $state(false);
-	let showComponentsMenu = $state(page.url.pathname.startsWith('/docs/components/browse/'));
+$effect(() => {
+	document.body.style.overflow = showMenu ? "hidden" : "auto";
+});
 
-	$effect(() => {
-		document.body.style.overflow = showMenu ? 'hidden' : 'auto';
-	});
+$effect(() => {
+	page.url.pathname && headings.getFromDOM();
+});
 
-	$effect(() => {
-		page.url.pathname && headings.getFromDOM();
-	});
-
-	$effect(() => {
-		if (showMenu) {
-			untrack(() => (showOnThisPage = false));
-		} else if (showOnThisPage) {
-			untrack(() => (showMenu = false));
-		}
-	});
+$effect(() => {
+	if (showMenu) {
+		untrack(() => (showOnThisPage = false));
+	} else if (showOnThisPage) {
+		untrack(() => (showMenu = false));
+	}
+});
 </script>
 
 <div class="relative flex min-h-[100vh] w-full flex-col lg:flex-row">

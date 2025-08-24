@@ -1,15 +1,15 @@
-import { tv, type VariantProps } from 'tailwind-variants';
+import { tv, type VariantProps } from "tailwind-variants";
 
 export const separator = tv({
-	base: 'relative bg-muted',
+	base: "relative bg-muted",
 	variants: {
 		orientation: {
-			horizontal: 'h-px w-full',
-			vertical: 'self-stretch w-px'
+			horizontal: "h-px w-full",
+			vertical: "self-stretch w-px"
 		}
 	},
 	defaultVariants: {
-		orientation: 'horizontal'
+		orientation: "horizontal"
 	}
 });
 

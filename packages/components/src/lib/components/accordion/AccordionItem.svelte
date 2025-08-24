@@ -1,55 +1,55 @@
 <script lang="ts">
-	import { slide } from 'svelte/transition';
-	import { onMount, type Component, type ComponentType, type Snippet } from 'svelte';
-	import { accordionItem } from './variants.js';
-	import { useMutationObserver } from '$utils/use-mutation-observer.svelte.js';
-	import type { TWMergeClass } from '$lib/types.js';
+import { type Component, type ComponentType, onMount, type Snippet } from "svelte";
+import { slide } from "svelte/transition";
+import type { TWMergeClass } from "$lib/types.js";
+import { useMutationObserver } from "$utils/use-mutation-observer.svelte.js";
+import { accordionItem } from "./variants.js";
 
-	interface Props extends TWMergeClass {
-		children: Snippet;
-		header: Snippet;
-		value?: string;
-		Icon?: ComponentType | Component;
-	}
+interface Props extends TWMergeClass {
+	children: Snippet;
+	header: Snippet;
+	value?: string;
+	Icon?: ComponentType | Component;
+}
 
-	let { children, class: className, header, value, Icon: CustomIcon }: Props = $props();
+let { children, class: className, header, value, Icon: CustomIcon }: Props = $props();
 
-	const uid = $props.id();
+const uid = $props.id();
 
-	let ref = $state<HTMLDivElement>();
-	let parent = $state<HTMLDivElement>();
+let ref = $state<HTMLDivElement>();
+let parent = $state<HTMLDivElement>();
 
-	let open = $state(false);
-	let headingLevel = $state<string>()!;
+let open = $state(false);
+let headingLevel = $state<string>()!;
 
-	let _value = $derived(value ?? uid);
+let _value = $derived(value ?? uid);
 
-	let {
-		container,
-		icon,
-		iconContainer,
-		panel,
-		header: headerCss,
-		trigger
-	} = $derived(accordionItem({ open }));
+let {
+	container,
+	icon,
+	iconContainer,
+	panel,
+	header: headerCss,
+	trigger
+} = $derived(accordionItem({ open }));
 
-	onMount(() => {
-		parent = ref?.parentElement as HTMLDivElement;
-		headingLevel = parent.getAttribute('data-heading-level')!;
-		updateOpen();
-	});
+onMount(() => {
+	parent = ref?.parentElement as HTMLDivElement;
+	headingLevel = parent.getAttribute("data-heading-level")!;
+	updateOpen();
+});
 
-	useMutationObserver(() => parent, updateOpen, {
-		attributes: true,
-		attributeFilter: ['data-open-values']
-	});
+useMutationObserver(() => parent, updateOpen, {
+	attributes: true,
+	attributeFilter: ["data-open-values"]
+});
 
-	function updateOpen() {
-		if (!parent) return;
+function updateOpen() {
+	if (!parent) return;
 
-		const openValues = parent.getAttribute('data-open-values')!.split(',');
-		open = openValues.includes(_value);
-	}
+	const openValues = parent.getAttribute("data-open-values")!.split(",");
+	open = openValues.includes(_value);
+}
 </script>
 
 <div bind:this={ref} class={container({ className })}>

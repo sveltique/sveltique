@@ -1,7 +1,7 @@
-import Root from './Accordion.svelte';
-import Item from './AccordionItem.svelte';
+import Root from "./Accordion.svelte";
+import Item from "./AccordionItem.svelte";
 
-export { accordion, accordionItem, type AccordionItemVariants } from './variants.js';
+export { type AccordionItemVariants, accordion, accordionItem } from "./variants.js";
 export const Accordion = {
 	/**
 	 * The root component of an accordion.

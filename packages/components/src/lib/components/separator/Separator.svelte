@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { separator, type SeparatorVariants } from './variants.js';
-	import type { ClassNameValue } from 'tailwind-merge';
+import type { ClassNameValue } from "tailwind-merge";
+import { type SeparatorVariants, separator } from "./variants.js";
 
-	interface Props extends SeparatorVariants {
-		class?: ClassNameValue;
-	}
+interface Props extends SeparatorVariants {
+	class?: ClassNameValue;
+}
 
-	let { class: className = undefined, orientation = 'horizontal' }: Props = $props();
+let { class: className = undefined, orientation = "horizontal" }: Props = $props();
 </script>
 
 <!--

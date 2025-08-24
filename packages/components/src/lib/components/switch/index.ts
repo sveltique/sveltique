@@ -1,2 +1,2 @@
-export { default as Switch } from './Switch.svelte';
-export { switchTv, type SwitchVariants } from './variants.js';
+export { default as Switch } from "./Switch.svelte";
+export { type SwitchVariants, switchTv } from "./variants.js";

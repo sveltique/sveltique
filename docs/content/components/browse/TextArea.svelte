@@ -1,14 +1,14 @@
 <script>
-	import Playground from '$components/Playground.svelte';
-	import { script } from '$utils/playground';
-	import { TextArea } from '@sveltique/components';
+import { TextArea } from "@sveltique/components";
+import Playground from "$components/Playground.svelte";
+import { script } from "$utils/playground";
 
-	const code = {
-		short: '<TextArea placeholder="Enter your message here..." />',
-		expanded: `${script("import { TextArea } from '@sveltique/components';")}
+const code = {
+	short: '<TextArea placeholder="Enter your message here..." />',
+	expanded: `${script("import { TextArea } from '@sveltique/components';")}
         
 <TextArea placeholder="Enter your message here..." />`
-	};
+};
 </script>
 
 <h1>TextArea</h1>

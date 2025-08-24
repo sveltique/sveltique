@@ -1,7 +1,7 @@
-import { pathToFileURL } from 'node:url';
-import path from 'node:path';
-import { slugify } from './utils/string';
-import type { ExtendedSidebarItem, RootSidebarItem, SidebarConfigData, SidebarItem } from './types';
+import path from "node:path";
+import { pathToFileURL } from "node:url";
+import type { ExtendedSidebarItem, RootSidebarItem, SidebarConfigData, SidebarItem } from "./types";
+import { slugify } from "./utils/string";
 
 export class SidebarConfig {
 	#docsRoot: string;
@@ -33,9 +33,9 @@ export class SidebarConfig {
 	}
 
 	/** Loads a `sidebar.config.ts` file starting from root. */
-	public static async load(filePath: string = 'sidebar.config.ts') {
-		const absolutePath = path.resolve('./', filePath);
-		const { docsRoot = '', sidebar }: SidebarConfigData<SidebarItem> = (
+	public static async load(filePath: string = "sidebar.config.ts") {
+		const absolutePath = path.resolve("./", filePath);
+		const { docsRoot = "", sidebar }: SidebarConfigData<SidebarItem> = (
 			await import(/* @vite-ignore */ pathToFileURL(absolutePath).href)
 		).default;
 
@@ -50,7 +50,7 @@ export class SidebarConfig {
 	}
 
 	public static fromJSON(json: SidebarConfigData<SidebarItem>): SidebarConfig {
-		return new SidebarConfig(json.docsRoot ?? '', json.sidebar);
+		return new SidebarConfig(json.docsRoot ?? "", json.sidebar);
 	}
 
 	#createExtendedSidebar(docsRoot: string, sidebar: RootSidebarItem<SidebarItem>[]) {
@@ -65,10 +65,10 @@ export class SidebarConfig {
 					return {
 						...item,
 						slug,
-						slugPath: [...item.path.replaceAll('\\', '/').split('/').slice(0, -1), slug]
-							.join('/')
-							.replaceAll('\\', '/')
-							.replace(new RegExp('^' + docsRoot + '/'), '')
+						slugPath: [...item.path.replaceAll("\\", "/").split("/").slice(0, -1), slug]
+							.join("/")
+							.replaceAll("\\", "/")
+							.replace(new RegExp("^" + docsRoot + "/"), "")
 					};
 				}) satisfies ExtendedSidebarItem[]
 			};

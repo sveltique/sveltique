@@ -1,6 +1,6 @@
 export function slugify(str: string) {
 	return str
-		.split(' ')
+		.split(" ")
 		.map((word) => word.toLowerCase())
-		.join('-');
+		.join("-");
 }

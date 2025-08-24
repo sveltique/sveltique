@@ -1,7 +1,7 @@
 <script>
-	import Playground from '$components/Playground.svelte';
-	import { script } from '$utils/playground';
-	import { Badge, Button, Toast } from '@sveltique/components';
+import { Badge, Button, Toast } from "@sveltique/components";
+import Playground from "$components/Playground.svelte";
+import { script } from "$utils/playground";
 </script>
 
 <h1>Toast</h1>

@@ -1,6 +1,6 @@
 <script>
-	import CodeBlock from '$components/CodeBlock.svelte';
-	import { Badge, Link } from '@sveltique/components';
+import { Badge, Link } from "@sveltique/components";
+import CodeBlock from "$components/CodeBlock.svelte";
 </script>
 
 <svelte:head>

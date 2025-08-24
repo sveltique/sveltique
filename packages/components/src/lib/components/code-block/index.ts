@@ -1,2 +1,2 @@
-export { default as CodeBlock, type CodeBlockProps } from './CodeBlock.svelte';
-export { codeBlock, type CodeBlockVariants } from './variants.js';
+export { type CodeBlockProps, default as CodeBlock } from "./CodeBlock.svelte";
+export { type CodeBlockVariants, codeBlock } from "./variants.js";

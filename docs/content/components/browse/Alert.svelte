@@ -1,9 +1,9 @@
 <script>
-	import Playground from '$components/Playground.svelte';
-	import { script } from '$utils/playground';
-	import { Alert } from '@sveltique/components';
+import { Alert } from "@sveltique/components";
+import Playground from "$components/Playground.svelte";
+import { script } from "$utils/playground";
 
-	const code = `${script('import { Alert } from "@sveltique/components";')}
+const code = `${script('import { Alert } from "@sveltique/components";')}
 
 <Alert type="info">
     This is an informational message. You can safely ignore it.

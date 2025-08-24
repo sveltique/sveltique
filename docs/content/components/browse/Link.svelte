@@ -1,39 +1,39 @@
 <script lang="ts">
-	import { Badge, Link } from '@sveltique/components';
-	import Playground from '$components/Playground.svelte';
-	import { script } from '$utils/playground';
+import { Badge, Link } from "@sveltique/components";
+import Playground from "$components/Playground.svelte";
+import { script } from "$utils/playground";
 
-	const basicUsageCode = {
-		short: `<Link href="#basic-usage">
+const basicUsageCode = {
+	short: `<Link href="#basic-usage">
     Go to the "Basic Usage" section
 </Link>`,
-		expanded: `${script('import { Link } from "@sveltique/components";')}
+	expanded: `${script('import { Link } from "@sveltique/components";')}
     
 <Link href="#basic-usage">
     Go to the "Basic Usage" section
 </Link>`
-	};
+};
 
-	const underlineCode = {
-		short: `<Link href="#">underline="always"</Link>
+const underlineCode = {
+	short: `<Link href="#">underline="always"</Link>
 <Link href="#" underline="hover">underline="hover"</Link>
 <Link href="#" underline="none">underline="none"</Link>`,
-		expanded: `${script('import { Link } from "@sveltique/components";')}
+	expanded: `${script('import { Link } from "@sveltique/components";')}
 
 <Link href="#">underline="always"</Link>
 <Link href="#" underline="hover">underline="hover"</Link>
 <Link href="#" underline="none">underline="none"</Link>`
-	};
+};
 
-	const externalCode = {
-		short: `<Link
+const externalCode = {
+	short: `<Link
     href="https://developer.mozilla.org"
     external
     title="To read more, see the MDN docs in a new tab."
 >
     See the MDN docs
 </Link>`,
-		expanded: `${script('import { Link } from "@sveltique/components";')}
+	expanded: `${script('import { Link } from "@sveltique/components";')}
 
 <Link
     href="https://developer.mozilla.org"
@@ -42,7 +42,7 @@
 >
     See the MDN docs
 </Link>`
-	};
+};
 </script>
 
 <h1>Link</h1>

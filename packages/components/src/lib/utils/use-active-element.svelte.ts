@@ -1,4 +1,4 @@
-import { on } from 'svelte/events';
+import { on } from "svelte/events";
 
 type GetActiveElementOptions = {
 	/**
@@ -15,8 +15,8 @@ export function getActiveElement(options: GetActiveElementOptions = {}) {
 
 	$effect(() => {
 		const fns = [
-			on(window, 'blur', onBlur, { capture: true }),
-			on(window, 'focus', onFocus, { capture: true })
+			on(window, "blur", onBlur, { capture: true }),
+			on(window, "focus", onFocus, { capture: true })
 		];
 
 		return () => fns.forEach((fn) => fn());

@@ -1,76 +1,76 @@
 <script lang="ts">
-	import { onMount, type Snippet } from 'svelte';
-	import { on } from 'svelte/events';
-	import { flyAndScale } from '../../transitions/fly-and-scale.js';
-	import { modal } from './variants.js';
-	import Backdrop, { type BackdropProps } from '../backdrop/Backdrop.svelte';
-	import type { HTMLAttributes } from 'svelte/elements';
-	import type { ReplaceWithTWMergeClass } from '$lib/types.js';
+import { onMount, type Snippet } from "svelte";
+import type { HTMLAttributes } from "svelte/elements";
+import { on } from "svelte/events";
+import type { ReplaceWithTWMergeClass } from "$lib/types.js";
+import { flyAndScale } from "../../transitions/fly-and-scale.js";
+import Backdrop, { type BackdropProps } from "../backdrop/Backdrop.svelte";
+import { modal } from "./variants.js";
 
-	type ChildrenSnippet = Snippet<
-		[
-			{
-				close: VoidFunction;
-				labelProps: { id: string };
-				descriptionProps: { id: string };
-			}
-		]
-	>;
+type ChildrenSnippet = Snippet<
+	[
+		{
+			close: VoidFunction;
+			labelProps: { id: string };
+			descriptionProps: { id: string };
+		}
+	]
+>;
 
-	export interface ModalProps
-		extends ReplaceWithTWMergeClass<Omit<HTMLAttributes<HTMLElement>, 'children'>> {
-		actions?: Snippet<[{ close: VoidFunction }]>;
-		children: ChildrenSnippet;
-		trigger: Snippet<[{ open: VoidFunction }]>;
-		/**
-		 * Whether to close the modal if the overlay is clicked.
-		 *
-		 * This should only be enabled for low-stake modals.
-		 * @default false
-		 */
-		closeOnOverlayClick?: boolean;
-		/** @default false */
-		isOpen?: boolean;
-		/**
-		 * Customize the backdrop component directly.
-		 * @default {}
-		 */
-		backdropProps?: Omit<BackdropProps, 'onClick'>;
-	}
+export interface ModalProps
+	extends ReplaceWithTWMergeClass<Omit<HTMLAttributes<HTMLElement>, "children">> {
+	actions?: Snippet<[{ close: VoidFunction }]>;
+	children: ChildrenSnippet;
+	trigger: Snippet<[{ open: VoidFunction }]>;
+	/**
+	 * Whether to close the modal if the overlay is clicked.
+	 *
+	 * This should only be enabled for low-stake modals.
+	 * @default false
+	 */
+	closeOnOverlayClick?: boolean;
+	/** @default false */
+	isOpen?: boolean;
+	/**
+	 * Customize the backdrop component directly.
+	 * @default {}
+	 */
+	backdropProps?: Omit<BackdropProps, "onClick">;
+}
 
-	let {
-		actions,
-		children,
-		trigger,
-		class: className = undefined,
-		closeOnOverlayClick = false,
-		isOpen = $bindable(false),
-		backdropProps = {},
-		...restProps
-	}: ModalProps = $props();
+let {
+	actions,
+	children,
+	trigger,
+	class: className = undefined,
+	closeOnOverlayClick = false,
+	isOpen = $bindable(false),
+	backdropProps = {},
+	...restProps
+}: ModalProps = $props();
 
-	const uid = $props.id();
-	let { actions: actionsCss, dialog } = $derived(modal());
+const uid = $props.id();
+let { actions: actionsCss, dialog } = $derived(modal());
 
-	onMount(() => {
-		return on(
-			window,
-			'keyup',
-			(event) => {
-				if (event.key !== 'Escape') return;
+onMount(() => {
+	return on(
+		window,
+		"keyup",
+		(event) => {
+			if (event.key !== "Escape") return;
 
-				isOpen = false;
-			},
-			{ passive: true }
-		);
-	});
+			isOpen = false;
+		},
+		{ passive: true }
+	);
+});
 
-	$effect(() => {
-		document.body.style.overflow = isOpen ? 'hidden' : 'auto';
-	});
+$effect(() => {
+	document.body.style.overflow = isOpen ? "hidden" : "auto";
+});
 
-	const open = () => (isOpen = true);
-	const close = () => (isOpen = false);
+const open = () => (isOpen = true);
+const close = () => (isOpen = false);
 </script>
 
 <!--
