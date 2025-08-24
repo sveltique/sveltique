@@ -50,6 +50,32 @@
         </Button>
     {/snippet}
 </Tooltip>`;
+
+	const placementCode = `${script("import { Button, Tooltip } from '@sveltique/components';")}
+    
+<Tooltip title="I'm a bottom tooltip">
+    {#snippet children({ props, ref })}
+        <Button
+            bind:ref={ref.current}
+            size="small"
+            {...props}
+        >
+            Bottom
+        </Button>
+    {/snippet}
+</Tooltip>
+
+<Tooltip title="I'm a top tooltip" placement="top">
+    {#snippet children({ props, ref })}
+        <Button
+            bind:ref={ref.current}
+            size="small"
+            {...props}
+        >
+            Top
+        </Button>
+    {/snippet}
+</Tooltip>`;
 </script>
 
 <h1>Tooltip</h1>
@@ -72,6 +98,22 @@
 	element.
 </p>
 <CodeBlock code={customComponentCode} />
+
+<h3>Placement</h3>
+<p>A tooltip can be placed on two sides : bottom (default) and top.</p>
+<Playground code={placementCode}>
+	<Tooltip title="I'm a bottom tooltip">
+		{#snippet children({ props, ref })}
+			<Button bind:ref={ref.current} size="small" {...props}>Bottom</Button>
+		{/snippet}
+	</Tooltip>
+
+	<Tooltip title="I'm a top tooltip" placement="top">
+		{#snippet children({ props, ref })}
+			<Button bind:ref={ref.current} size="small" {...props}>Top</Button>
+		{/snippet}
+	</Tooltip>
+</Playground>
 
 <h2>Accessibility</h2>
 <p>
