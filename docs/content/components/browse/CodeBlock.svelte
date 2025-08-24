@@ -65,7 +65,6 @@
 		lang="svelte"
 		theme="catppuccin-latte"
 		{highlighter}
-		class="**:font-cascadia-code"
 	/>
 </Playground>
 
@@ -115,7 +114,6 @@
 		theme="catppuccin-latte"
 		{highlighter}
 		showLineNumbers
-		class="**:font-cascadia-code"
 	/>
 </Playground>
 
@@ -172,7 +170,6 @@
 		theme="catppuccin-latte"
 		{highlighter}
 		highlightedLines="2-3,5,8"
-		class="data-[code-block]:**:font-cascadia-code"
 	/>
 </Playground>
 
@@ -204,11 +201,6 @@
 	<li>
 		<p>Default language is <Badge>svelte</Badge></p>
 	</li>
-	<li>
-		<p>
-			Uses <Link href="https://github.com/microsoft/cascadia-code">Cascadia Code</Link> as the font
-		</p>
-	</li>
 </ul>
 
 <CodeBlock
@@ -223,19 +215,17 @@
 		lang?: CodeBlockProps['lang'];
 	}
 
-    let { class: className, lang = "svelte", ...restProps }: Props = $props();`)}
+    let { lang = "svelte", ...restProps }: Props = $props();`)}
 
 <CodeBlock
     {highlighter}
     {lang}
     theme={theme.isDark ? "one-dark-pro" : "catppuccin-latte"}
-    class={[className, "**:font-cascadia-code"]}
     {...restProps}
 />`}
 	{highlighter}
 	lang="svelte"
 	theme={theme.isDark ? 'one-dark-pro' : 'catppuccin-latte'}
-	class="**:font-cascadia-code"
 	showLineNumbers
 />
 
@@ -245,6 +235,5 @@
 	{highlighter}
 	lang="svelte"
 	theme={theme.isDark ? 'one-dark-pro' : 'catppuccin-latte'}
-	class="**:font-cascadia-code"
 	showLineNumbers
 />
