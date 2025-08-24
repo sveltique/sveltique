@@ -1,6 +1,12 @@
 import { createHighlighter, type BundledLanguage } from 'shiki';
 
-const registeredLangs = ['bash', 'json', 'svelte', 'ts'] as const satisfies BundledLanguage[];
+const registeredLangs = [
+	'bash',
+	'json',
+	'svelte',
+	'css',
+	'ts'
+] as const satisfies BundledLanguage[];
 
 export const highlighter = await createHighlighter({
 	themes: ['catppuccin-latte', 'one-dark-pro'],

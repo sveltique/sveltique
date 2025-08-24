@@ -43,6 +43,10 @@
 			@apply mb-4 mt-8 scroll-mt-20 text-xl font-bold dark:text-zinc-100;
 		}
 
+		& > h4 {
+			@apply mb-4 mt-8 scroll-mt-20 text-lg font-bold dark:text-zinc-100;
+		}
+
 		& > p {
 			@apply my-4 dark:text-zinc-100;
 		}
