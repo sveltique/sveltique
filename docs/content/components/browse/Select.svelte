@@ -29,10 +29,10 @@ const code = {
 };
 </script>
 
-<h1>Select</h1>
+<h1 id="select">Select</h1>
 <p>A dropdown.</p>
 
-<h2>Basic Usage</h2>
+<h2 id="basic-usage">Basic Usage</h2>
 <p>
 	It is meant to be used as a drop-in replacement for the native select element, and ensures the
 	styles are uniform through the different browsers.

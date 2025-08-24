@@ -3,7 +3,7 @@ import { Paper } from "@sveltique/components";
 import Playground from "$components/Playground.svelte";
 </script>
 
-<h1>Paper</h1>
+<h1 id="paper">Paper</h1>
 <p>A surface to display content and actions.</p>
 <Playground>
 	<Paper class="flex flex-col gap-3 p-6">

@@ -25,13 +25,13 @@ $effect(() => {
 });
 </script>
 
-<h1>Progress</h1>
+<h1 id="progress">Progress</h1>
 <p>
 	A visual indicator of progress toward completing a task or reaching a limit, such as file uploads,
 	onboarding steps, or usage quotas.
 </p>
 
-<h2>Basic Usage</h2>
+<h2 id="basic-usage">Basic Usage</h2>
 <p>Simply set the current value.</p>
 <Playground
 	code={{
@@ -44,7 +44,7 @@ $effect(() => {
 	<Progress value={73} />
 </Playground>
 
-<h3>Updating the value</h3>
+<h3 id="updating-the-value">Updating the value</h3>
 <Playground
 	code={{
 		short: '<Progress {value} />',
@@ -91,7 +91,7 @@ $effect(() => {
 	{/snippet}
 </Playground>
 
-<h2>Non-standard ranges</h2>
+<h2 id="non-standard-ranges">Non-standard ranges</h2>
 <p>
 	The progress bar is meant to be used for values between 0 and 100. If your min and/or max is
 	outside that range, you have to use <Badge>normalizeProgress()</Badge> to use it with the progress
@@ -111,8 +111,9 @@ $effect(() => {
 	<Progress value={normalizeProgress(203, 47, 296)} />
 </Playground>
 
-<h2>Limitations</h2>
-<h3>High frequency updates</h3>
+<h2 id="limitations">Limitations</h2>
+
+<h3 id="high-frequency-updates">High frequency updates</h3>
 <p>
 	If you update the value very frequently, the transition of 200ms might interfere with the
 	re-rendering process. In that case, you should disable the transition.

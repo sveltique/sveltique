@@ -4,10 +4,10 @@ import Playground from "$components/Playground.svelte";
 import { script } from "$utils/playground";
 </script>
 
-<h1>Toast</h1>
+<h1 id="toast">Toast</h1>
 <p>Brief notifications of processes that have been or will be performed.</p>
 
-<h2>Basic Usage</h2>
+<h2 id="basic-usage">Basic Usage</h2>
 <Playground
 	code={{
 		short: `<Toast type="success" class="max-w-96">
@@ -23,7 +23,7 @@ import { script } from "$utils/playground";
 	<Toast type="success" class="max-w-96">Post added successfully.</Toast>
 </Playground>
 
-<h3>Action</h3>
+<h3 id="action">Action</h3>
 <p>
 	To add a close button, you can simply pass an <Badge>onClose</Badge> function. Otherwise, you can use
 	the <Badge>action</Badge> snippet to add a custom action.
@@ -65,6 +65,6 @@ import { script } from "$utils/playground";
 	</Toast>
 </Playground>
 
-<h2>Programmatic calls</h2>
+<h2 id="programmatic-calls">Programmatic calls</h2>
 <p>Toasts by themselves are nice, but it would be even better to create them programmatically.</p>
 <p>Here's a basic implementation.</p>

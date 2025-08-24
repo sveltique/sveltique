@@ -72,10 +72,10 @@ const introductionCode = `@custom-variant dark (&:where(.dark, .dark *));
 }`;
 </script>
 
-<h1>Theming</h1>
+<h1 id="theming">Theming</h1>
 <p>Learn how to make your own theme for Sveltique.</p>
 
-<h2>Introduction</h2>
+<h2 id="introduction">Introduction</h2>
 <p>
 	Theming in Sveltique is done via css variables. By changing them, you can change your whole site's
 	design.
@@ -98,7 +98,7 @@ const introductionCode = `@custom-variant dark (&:where(.dark, .dark *));
 	showLineNumbers
 />
 
-<h2>Customizing</h2>
+<h2 id="customizing">Customizing</h2>
 <p>
 	You can simply edit and/or tweak any values to your liking. Here's an example replicating [FIND AN
 	EXAMPLE] :

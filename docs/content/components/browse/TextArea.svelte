@@ -11,10 +11,10 @@ const code = {
 };
 </script>
 
-<h1>TextArea</h1>
+<h1 id="text-area">Text Area</h1>
 <p>A styled text area.</p>
 
-<h2>Basic Usage</h2>
+<h2 id="basic-usage">Basic Usage</h2>
 <p>You can use it as a drop-in replacement for text areas.</p>
 <Playground {code}>
 	<TextArea placeholder="Enter your message here..." />

@@ -114,12 +114,13 @@ const controlledStateCode = {
 };
 </script>
 
-<h1>Modal</h1>
+<h1 id="modal">Modal</h1>
 <p>
 	A dialog component that interrupts the user flow to capture attention. Displays content in a
 	centered overlay with a dimmed backdrop.
 </p>
-<h2>Basic Usage</h2>
+
+<h2 id="basic-usage">Basic Usage</h2>
 <p>
 	A modal is composed of three elements : a trigger, the modals' content and the modal's actions.
 </p>
@@ -140,7 +141,7 @@ const controlledStateCode = {
 	</Modal>
 </Playground>
 
-<h3>Without <Badge>actions</Badge> snippet</h3>
+<h3 id="without-actions-snippet">Without <Badge>actions</Badge> snippet</h3>
 <p>
 	Maybe you don't want actions at the bottom of the modal. If so, you can use the <Badge
 		>children</Badge
@@ -184,7 +185,7 @@ const controlledStateCode = {
 	</Modal>
 </Playground>
 
-<h2>Controlling open/closed state</h2>
+<h2 id="controlling-open-closed-state">Controlling open/closed state</h2>
 <p>
 	If you need to control the open/closed state of the modal outside of the markup, you can bind to
 	it.
@@ -225,10 +226,10 @@ const controlledStateCode = {
 	</Modal>
 </Playground>
 
-<h2>Accessiblity</h2>
+<h2 id="accessiblity">Accessiblity</h2>
 <p>Some notes on accessibility.</p>
 
-<h3>Re-focus the trigger on exit</h3>
+<h3 id="re-focus-the-trigger-on-exit">Re-focus the trigger on exit</h3>
 <p>
 	The trigger snippet also passes a ref to get the trigger element. It is used to focus it when the
 	modal is exited.
@@ -256,7 +257,7 @@ const controlledStateCode = {
 	</Modal>
 </Playground>
 
-<h3>Allow overlay click</h3>
+<h3 id="allow-overlay-click">Allow overlay click</h3>
 <p>
 	You should only set <Badge>closeOnOverlayClick</Badge> for low-stakes interactions where accidentally
 	closing the modal will not cause loss of important data or irreversible actions. See the
@@ -280,7 +281,7 @@ const controlledStateCode = {
 	</Modal>
 </Playground>
 
-<h3>Passing aria</h3>
+<h3 id="passing-aria">Passing aria</h3>
 <p>
 	As per aria, you should link a modal label and description. The <Badge>children</Badge> snippet also
 	contains spreadable label and description props that you can use.
@@ -305,7 +306,7 @@ const controlledStateCode = {
 	</Modal>
 </Playground>
 
-<h3>Autofocus</h3>
+<h3 id="autofocus">Autofocus</h3>
 <p>
 	You should have one element that is focused using the <Badge>autofocus</Badge> attribute.
 </p>

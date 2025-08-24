@@ -4,15 +4,7 @@ import CodeBlock from "$components/CodeBlock.svelte";
 import Playground from "$components/Playground.svelte";
 import { script } from "$utils/playground";
 
-const code = {
-	short: `<Tooltip title="Sveltique is awesome">
-    {#snippet children({ props, ref })}
-        <Button bind:ref={ref.current} {...props}>
-            Hover me !
-        </Button>
-    {/snippet}
-</Tooltip>`,
-	expanded: `${script("import { Button, Tooltip } from '@sveltique/components';")}
+const code = `${script("import { Button, Tooltip } from '@sveltique/components';")}
 
 <Tooltip title="Sveltique is awesome">
     {#snippet children({ props, ref })}
@@ -20,33 +12,32 @@ const code = {
             Hover me !
         </Button>
     {/snippet}
-</Tooltip>`
-};
+</Tooltip>`;
 </script>
 
 <svelte:head>
-	<title>Usage - sveltique/components</title>
+    <title>Usage - sveltique/components</title>
 </svelte:head>
 
-<h1>Usage</h1>
+<h1 id="usage">Usage</h1>
 <p>Learn the basics of Sveltique components to use them in your project.</p>
 
-<h2>Quickstart</h2>
+<h2 id="quick-start">Quick start</h2>
 <p>
-	After <Link href="/docs/components/installation">installation</Link>, you can start importing
-	Sveltique components in your project. It's that simple !
+    After <Link href="/docs/components/installation">installation</Link>, you can start importing
+    Sveltique components in your project. It's that simple !
 </p>
 <Playground {code}>
-	<Tooltip title="Sveltique is awesome">
-		{#snippet children({ props, ref })}
-			<Button bind:ref={ref.current} size="small" {...props}>Hover me !</Button>
-		{/snippet}
-	</Tooltip>
+    <Tooltip title="Sveltique is awesome">
+        {#snippet children({ props, ref })}
+            <Button bind:ref={ref.current} size="small" {...props}>Hover me !</Button>
+        {/snippet}
+    </Tooltip>
 </Playground>
 
-<h2>Tree Shaking</h2>
+<h2 id="tree-shaking">Tree shaking</h2>
 <p>
-	To reduce your bundle, you can import each component individually instead of using the root
-	import.
+    To reduce your bundle, you can import each component individually instead of using the root
+    import.
 </p>
 <CodeBlock code={'import { Alert } from "@sveltique/components/alert";'} lang="ts" />
