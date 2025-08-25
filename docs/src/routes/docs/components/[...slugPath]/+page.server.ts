@@ -11,3 +11,7 @@ export function load({ params, parent }) {
 		path: path.join("../../../../..", item.path).replaceAll("\\", "/")
 	};
 }
+
+export function entries() {
+	return sidebarConfig.flatChildren.map(({ slugPath }) => ({ slugPath }));
+}

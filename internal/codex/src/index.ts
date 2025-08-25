@@ -22,18 +22,30 @@ export class SidebarConfig {
 		return this.#sidebar;
 	}
 
-	public getFirstItem(): ExtendedSidebarItem {
+	/** Get all children as an array. */
+	get flatChildren() {
+		return this.#sidebar.flatMap(({ children }) => children);
+	}
+
+	getFirstItem(): ExtendedSidebarItem {
 		return this.#sidebar.at(0)!.children.at(0)!;
 	}
 
-	public findBySlugPath(slugPath: string): ExtendedSidebarItem | undefined {
+	findBySlugPath(slugPath: string): ExtendedSidebarItem | undefined {
 		return this.#sidebar
 			.flatMap((root) => root.children)
 			.find((item) => item.slugPath === slugPath);
 	}
 
+	toJSON(): SidebarConfigData<SidebarItem> {
+		return {
+			docsRoot: this.#docsRoot,
+			sidebar: this.#originalSidebar
+		};
+	}
+
 	/** Loads a `sidebar.config.ts` file starting from root. */
-	public static async load(filePath: string = "sidebar.config.ts") {
+	static async load(filePath: string = "sidebar.config.ts") {
 		const absolutePath = path.resolve("./", filePath);
 		const { docsRoot = "", sidebar }: SidebarConfigData<SidebarItem> = (
 			await import(/* @vite-ignore */ pathToFileURL(absolutePath).href)
@@ -42,14 +54,7 @@ export class SidebarConfig {
 		return new SidebarConfig(docsRoot, sidebar);
 	}
 
-	public toJSON(): SidebarConfigData<SidebarItem> {
-		return {
-			docsRoot: this.#docsRoot,
-			sidebar: this.#originalSidebar
-		};
-	}
-
-	public static fromJSON(json: SidebarConfigData<SidebarItem>): SidebarConfig {
+	static fromJSON(json: SidebarConfigData<SidebarItem>): SidebarConfig {
 		return new SidebarConfig(json.docsRoot ?? "", json.sidebar);
 	}
 
