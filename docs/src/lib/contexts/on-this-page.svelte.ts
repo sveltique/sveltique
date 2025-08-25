@@ -27,22 +27,14 @@ class OnThisPageContext {
 	constructor() {
 		$effect.root(() => {
 			$effect(() => {
-				return on(window, "DOMContentLoaded", (event) => {
-					this._updateCurrent();
-				});
-			});
-
-			$effect(() => {
 				page.url.pathname;
 
-				console.log("hello");
-
-				untrack(() => this._updateCurrent());
+				untrack(() => this.update());
 			});
 		});
 	}
 
-	private _updateCurrent() {
+	public update() {
 		this.current = Array.from(document.querySelectorAll<HTMLHeadingElement>("h2, h3"))
 			.filter((heading) => !heading.closest("[data-playground]"))
 			.map((node) => {

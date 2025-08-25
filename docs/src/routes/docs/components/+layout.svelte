@@ -1,11 +1,7 @@
 <script lang="ts">
-import { Backdrop, Button, button, Separator } from "@sveltique/components";
-import IconChevronDown from "@tabler/icons-svelte/icons/chevron-down";
+import { Backdrop, button } from "@sveltique/components";
 import IconChevronRight from "@tabler/icons-svelte/icons/chevron-right";
-import IconHelp from "@tabler/icons-svelte/icons/help";
 import IconMenuDeep from "@tabler/icons-svelte/icons/menu-deep";
-import IconSettingsCheck from "@tabler/icons-svelte/icons/settings-check";
-import IconTable from "@tabler/icons-svelte/icons/table";
 import { untrack } from "svelte";
 import { fly } from "svelte/transition";
 import { cnBase } from "tailwind-variants";
@@ -18,7 +14,6 @@ const headings = setOnThisPageContext();
 
 let showMenu = $state(false);
 let showOnThisPage = $state(false);
-let showComponentsMenu = $state(page.url.pathname.startsWith("/docs/components/browse/"));
 
 $effect(() => {
 	document.body.style.overflow = showMenu ? "hidden" : "auto";
@@ -37,13 +32,7 @@ $effect(() => {
 	{@render componentsBar()}
 	<div class="md:px-18 relative w-full px-6 sm:px-12 lg:px-12 xl:px-32">
 		<div data-content class="lg:w-xl xl:w-2xl relative mx-auto pt-12">
-			<svelte:boundary>
-				{@render children()}
-
-				{#snippet pending()}
-					<p>loading...</p>
-				{/snippet}
-			</svelte:boundary>
+            {@render children()}
 		</div>
 	</div>
 	{@render onThisPageBar()}
