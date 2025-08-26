@@ -1,5 +1,10 @@
 <script>
 import { DateInput } from "@sveltique/components";
+import Playground from "$components/Playground.svelte";
 </script>
 
-<DateInput modalProps={{ closeOnOverlayClick: true, backdropProps: { z: 1000 } }} />
+<h1>Date Input</h1>
+<p>An input for dates, built with accessibility and uniformity across browsers.</p>
+<Playground>
+    <DateInput />
+</Playground>

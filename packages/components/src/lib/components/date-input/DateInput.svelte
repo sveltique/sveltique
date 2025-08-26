@@ -142,45 +142,7 @@ function isSameDate(date: Date, other: Date) {
         aria-hidden={!open}
         class={cnBase("hidden absolute top-[calc(100%+8px)] left-0 p-6 shadow-md flex-col gap-3", open && "flex")}
     >
-        <div class="relative w-full flex justify-between items-center gap-6">
-            <div class="relative flex items-center gap-1">
-                <Button
-                    onclick={() => value.setFullYear(value.getFullYear() - 1)}
-                    variant="text"
-                    shape="square"
-                    size="small"
-                >
-                    {@render chevronsLeft()}
-                </Button>
-                <Button
-                    onclick={() => value.setMonth(value.getMonth() - 1)}
-                    variant="text"
-                    shape="square"
-                    size="small"
-                >
-                    {@render chevronLeft()}
-                </Button>
-            </div>
-            <div class="w-32 text-center">{currentMonth} {currentYear}</div>
-            <div class="relative flex items-center gap-1">
-                <Button
-                    onclick={() => value.setMonth(value.getMonth() + 1)}
-                    variant="text"
-                    shape="square"
-                    size="small"
-                >
-                    {@render chevronRight()}
-                </Button>
-                <Button
-                    onclick={() => value.setFullYear(value.getFullYear() + 1)}
-                    variant="text"
-                    shape="square"
-                    size="small"
-                >
-                    {@render chevronsRight()}
-                </Button>
-            </div>
-        </div>
+        {@render header()}
         <div class="relative w-full grid grid-cols-7 gap-1">
             {#each WEEK_DAYS.map(d => d.slice(0, 2)) as weekDay, index (index)}
                 <span class="text-sm text-muted-foreground w-9 grid place-items-center">
@@ -194,6 +156,7 @@ function isSameDate(date: Date, other: Date) {
                     variant="text"
                     shape="square"
                     size="small"
+                    tabindex={isSameDate(focusedDate, date) ? 0 : "-1"}
                     class={cnBase(
                         "w-9 aspect-square",
                         !isSameMonth && "text-muted-foreground",
@@ -206,6 +169,48 @@ function isSameDate(date: Date, other: Date) {
         </div>
     </Paper>
 </div>
+
+{#snippet header()}
+    <div class="relative w-full flex justify-between items-center gap-6">
+        <div class="relative flex items-center gap-1">
+            <Button
+                onclick={() => value.setFullYear(value.getFullYear() - 1)}
+                variant="text"
+                shape="square"
+                size="small"
+            >
+                {@render chevronsLeft()}
+            </Button>
+            <Button
+                onclick={() => value.setMonth(value.getMonth() - 1)}
+                variant="text"
+                shape="square"
+                size="small"
+            >
+                {@render chevronLeft()}
+            </Button>
+        </div>
+        <div class="w-32 text-center">{currentMonth} {currentYear}</div>
+        <div class="relative flex items-center gap-1">
+            <Button
+                onclick={() => value.setMonth(value.getMonth() + 1)}
+                variant="text"
+                shape="square"
+                size="small"
+            >
+                {@render chevronRight()}
+            </Button>
+            <Button
+                onclick={() => value.setFullYear(value.getFullYear() + 1)}
+                variant="text"
+                shape="square"
+                size="small"
+            >
+                {@render chevronsRight()}
+            </Button>
+        </div>
+    </div>
+{/snippet}
 
 {#snippet chevronLeft()}
     <svg 
