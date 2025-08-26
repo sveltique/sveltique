@@ -1,257 +1,282 @@
 <script lang="ts">
+import { on } from "svelte/events";
 import { SvelteDate } from "svelte/reactivity";
 import { cnBase } from "tailwind-variants";
+import { toTitleCase } from "$utils/string.js";
 import Button from "../button/Button.svelte";
-import Modal, { type ModalProps } from "../modal/Modal.svelte";
-import { Select } from "../select/index.js";
-import { dateInput } from "./variants.js";
-
-const DAYS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+import Paper from "../paper/Paper.svelte";
+import TextInput from "../text-input/TextInput.svelte";
+import { WEEK_DAYS } from "./constants.js";
 
 interface Props {
-	value?: Date | null;
-	/** @default "default" */
-	locale?: string;
-	min?: Date;
-	max?: Date;
-	/**
-	 * Customize the modal component directly.
-	 * @default {}
-	 */
-	modalProps?: Omit<ModalProps, "children" | "trigger" | "actions">;
+	id?: string;
+	name?: string;
+	open?: boolean;
+	value?: Date;
 }
 
-let { max, min, value = $bindable(), modalProps = {} }: Props = $props();
+let { id, name, open = $bindable(false), value = $bindable(new SvelteDate()) }: Props = $props();
 
-let isOpen = $state(false);
-let anchorButton: HTMLButtonElement | null = $state(null);
-let dialogEl: HTMLDivElement | null = $state(null);
+let inputRef = $state<HTMLElement>();
+let pickerRef = $state<HTMLElement>();
 
-let viewDate = $state(new SvelteDate(value));
-let formattedDate = $derived.by(() => {
-	if (!value) return "--/--/----";
+let focusedDate = $derived(value);
+
+let currentMonth = $derived.by(() => {
+	return toTitleCase(value.toLocaleString(navigator.language, { month: "long" }));
+});
+
+let currentYear = $derived.by(() => {
+	return value.toLocaleString(navigator.language, { year: "numeric" });
+});
+
+let formattedValue = $derived.by(() => {
+	if (!value) return "-- / -- / ----";
 
 	const day = value.getDate().toString().padStart(2, "0");
 	const month = (value.getMonth() + 1).toString().padStart(2, "0");
 	const year = value.getFullYear();
 
-	return `${day}/${month}/${year}`;
+	return `${day} / ${month} / ${year}`;
 });
 
-const { grid, input } = $derived(dateInput());
+$effect(() => {
+	if (!inputRef || !pickerRef) return;
 
-/** Truncate time from date to compare only Y-M-D. */
-const normalize = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+	return on(window, "click", (event) => {
+		const target = event.target as Node | null;
 
-function isSameDay(a?: Date | null, b?: Date | null) {
-	if (!a || !b) return false;
+		if (!target) return;
+		if (inputRef === target || pickerRef!.contains(target)) return;
+
+		open = false;
+	});
+});
+
+function prepareDates() {
+	return [...getPreviousMonthDates(), ...getDatesInCurrentMonth(), ...getNextMonthDates()];
+}
+
+function getDatesInCurrentMonth(): Date[] {
+	return getDatesInMonth(value.getMonth(), value.getFullYear());
+}
+
+function getDatesInMonth(month: number, year: number): Date[] {
+	const date = new Date(year, month, 1);
+	const days = [];
+
+	while (date.getMonth() === month) {
+		days.push(new Date(date));
+		date.setDate(date.getDate() + 1);
+	}
+
+	return days;
+}
+
+function getPreviousMonthDates() {
+	let dayOfWeekIndex = getDatesInCurrentMonth().at(0)!.getDay();
+
+	if (dayOfWeekIndex === 1) {
+		return [];
+	} else if (dayOfWeekIndex === 0) {
+		dayOfWeekIndex = 7;
+	}
+
+	const clonedDate = new Date(value);
+	clonedDate.setMonth(clonedDate.getMonth() - 1);
+
+	const previousMonthDates = getDatesInMonth(clonedDate.getMonth(), clonedDate.getFullYear());
+
+	return previousMonthDates.slice(-dayOfWeekIndex + 1);
+}
+
+function getNextMonthDates() {
+	let dayOfWeekIndex = getDatesInCurrentMonth().at(-1)!.getDay();
+
+	if (dayOfWeekIndex === 0) {
+		return [];
+	}
+
+	const clonedDate = new Date(value);
+	clonedDate.setMonth(clonedDate.getMonth() + 1);
+
+	const nextMonthDates = getDatesInMonth(clonedDate.getMonth(), clonedDate.getFullYear());
+
+	return nextMonthDates.slice(0, 7 - dayOfWeekIndex);
+}
+
+function selectDate(date: Date) {
+	value.setDate(date.getDate());
+	value.setMonth(date.getMonth());
+	value.setFullYear(date.getFullYear());
+
+	open = false;
+}
+
+function isSameDate(date: Date, other: Date) {
 	return (
-		a.getFullYear() === b.getFullYear() &&
-		a.getMonth() === b.getMonth() &&
-		a.getDate() === b.getDate()
+		date.getFullYear() === other.getFullYear() &&
+		date.getMonth() === other.getMonth() &&
+		date.getDate() === other.getDate()
 	);
 }
 
-function getMonthStart(date: Date) {
-	return new Date(date.getFullYear(), date.getMonth(), 1);
-}
-function getMonthEnd(date: Date) {
-	return new Date(date.getFullYear(), date.getMonth() + 1, 0);
-}
+/* function isToday(date: Date) {
+	const today = new Date();
 
-function getDaysInMonth(date: Date) {
-	return getMonthEnd(date).getDate();
-}
-
-function openPicker() {
-	isOpen = true;
-	dialogEl?.focus();
-}
-
-function closePicker() {
-	isOpen = false;
-	anchorButton?.focus();
-}
-
-function selectDay(day: number) {
-	const d = new Date(viewDate.getFullYear(), viewDate.getMonth(), day);
-
-	if ((min && normalize(d) < normalize(min)) || (max && normalize(d) > normalize(max))) {
-		return;
-	}
-
-	value = d;
-}
-
-function monthMatrix(d: Date) {
-	const first = getMonthStart(d);
-	const startWeekday = first.getDay();
-	const dni = getDaysInMonth(d);
-	const rows = [];
-	let current = 1 - startWeekday; // may be negative -> days from previous month as blanks
-	while (current <= dni) {
-		const week: (number | null)[] = [];
-		for (let i = 0; i < 7; i++) {
-			if (current < 1 || current > dni) week.push(null);
-			else week.push(current);
-			current++;
-		}
-		rows.push(week);
-	}
-	return rows;
-}
-
-function isDisabledDay(day: number | null) {
-	if (day === null) return true;
-	const d = new Date(viewDate.getFullYear(), viewDate.getMonth(), day);
-	if (min && normalize(d) < normalize(min)) return true;
-	if (max && normalize(d) > normalize(max)) return true;
-	return false;
-}
-
-function years() {
-	const currentYear = new Date().getFullYear();
-
-	let yearsArr = [];
-	for (let i = -100; i < 10; i++) {
-		yearsArr.push(currentYear + i);
-	}
-
-	return yearsArr;
-}
+	return (
+		today.getFullYear() === date.getFullYear() &&
+		today.getMonth() === date.getMonth() &&
+		today.getDate() === date.getDate()
+	);
+} */
 </script>
 
-<Modal bind:isOpen {...modalProps}>
-	{#snippet trigger()}
-		<button
-			bind:this={anchorButton}
-			aria-haspopup="dialog"
-			aria-expanded={isOpen}
-			aria-label="Choose date"
-			onclick={openPicker}
-			class={input()}
-		>
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="24"
-				height="24"
-				viewBox="0 0 24 24"
-				fill="currentColor"
-				class="icon icon-tabler icons-tabler-filled icon-tabler-clock h-5 w-5 text-zinc-500"
-			>
-				<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-				<path
-					d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-5 2.66a1 1 0 0 0 -.993 .883l-.007 .117v5l.009 .131a1 1 0 0 0 .197 .477l.087 .1l3 3l.094 .082a1 1 0 0 0 1.226 0l.094 -.083l.083 -.094a1 1 0 0 0 0 -1.226l-.083 -.094l-2.707 -2.708v-4.585l-.007 -.117a1 1 0 0 0 -.993 -.883z"
-				/>
-			</svg>
-			<span>{formattedDate}</span>
-		</button>
-	{/snippet}
+<div class="relative">
+    <input type="date" {id} {name} value={value.toUTCString()} aria-hidden="true" class="hidden" />
+    <TextInput bind:ref={inputRef} onclick={() => open = !open} value={formattedValue} readonly class="cursor-pointer" />
 
-	<div class="flex items-center justify-between gap-2">
-		<button aria-label="Previous month" onclick={() => viewDate.setMonth(viewDate.getMonth() - 1)}>
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="24"
-				height="24"
-				viewBox="0 0 24 24"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="2"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"
-			>
-				<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-				<path d="M15 6l-6 6l6 6" />
-			</svg>
-		</button>
-		<Select.Root
-			bind:value={() => MONTHS[viewDate.getMonth()], (v) => viewDate.setMonth(Number(v))}
-		>
-			{#each MONTHS as month, index (index)}
-				<Select.Option value={index.toString()}>{month}</Select.Option>
-			{/each}
-		</Select.Root>
-		<Select.Root
-			bind:value={() => viewDate.getFullYear().toString(), (v) => viewDate.setFullYear(Number(v))}
-		>
-			{#each years() as year, index (index)}
-				<Select.Option value={year.toString()}>{year}</Select.Option>
-			{/each}
-		</Select.Root>
-		<button aria-label="Next month" onclick={() => viewDate.setMonth(viewDate.getMonth() + 1)}>
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="24"
-				height="24"
-				viewBox="0 0 24 24"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="2"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"
-			>
-				<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-				<path d="M9 6l6 6l-6 6" />
-			</svg>
-		</button>
-	</div>
+    <Paper
+        bind:ref={pickerRef}
+        variant="outline"
+        aria-hidden={!open}
+        class={cnBase("hidden absolute top-[calc(100%+8px)] left-0 p-6 shadow-md flex-col gap-3", open && "flex")}
+    >
+        <div class="relative w-full flex justify-between items-center gap-6">
+            <div class="relative flex items-center gap-1">
+                <Button
+                    onclick={() => value.setFullYear(value.getFullYear() - 1)}
+                    variant="text"
+                    shape="square"
+                    size="small"
+                >
+                    {@render chevronsLeft()}
+                </Button>
+                <Button
+                    onclick={() => value.setMonth(value.getMonth() - 1)}
+                    variant="text"
+                    shape="square"
+                    size="small"
+                >
+                    {@render chevronLeft()}
+                </Button>
+            </div>
+            <div class="w-32 text-center">{currentMonth} {currentYear}</div>
+            <div class="relative flex items-center gap-1">
+                <Button
+                    onclick={() => value.setMonth(value.getMonth() + 1)}
+                    variant="text"
+                    shape="square"
+                    size="small"
+                >
+                    {@render chevronRight()}
+                </Button>
+                <Button
+                    onclick={() => value.setFullYear(value.getFullYear() + 1)}
+                    variant="text"
+                    shape="square"
+                    size="small"
+                >
+                    {@render chevronsRight()}
+                </Button>
+            </div>
+        </div>
+        <div class="relative w-full grid grid-cols-7 gap-1">
+            {#each WEEK_DAYS.map(d => d.slice(0, 2)) as weekDay, index (index)}
+                <span class="text-sm text-muted-foreground w-9 grid place-items-center">
+                    {weekDay}
+                </span>
+            {/each}
+            {#each prepareDates() as date, index (index)}
+                {@const isSameMonth = date.getMonth() === value.getMonth()}
+                <Button
+                    onclick={() => selectDate(date)}
+                    variant="text"
+                    shape="square"
+                    size="small"
+                    class={cnBase(
+                        "w-9 aspect-square",
+                        !isSameMonth && "text-muted-foreground",
+                        isSameDate(focusedDate, date) && "not-hover:bg-primary-muted not-hover:text-background"
+                    )}
+                >
+                    {date.getDate()}
+                </Button>
+            {/each}
+        </div>
+    </Paper>
+</div>
 
-	<!-- day headings -->
-	<div class={grid({ className: 'mt-3' })} aria-hidden="true">
-		{#each DAYS as d}
-			<div class="text-center text-xs text-[#6b7280]">{d}</div>
-		{/each}
-	</div>
+{#snippet chevronLeft()}
+    <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        width="24" 
+        height="24" 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" 
+        class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"
+    >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M15 6l-6 6l6 6" />
+    </svg>
+{/snippet}
 
-	<!-- day cells -->
-	<div class={grid()} role="grid" aria-label="Calendar">
-		{#each monthMatrix(viewDate) as week}
-			{#each week as day}
-				<!-- svelte-ignore a11y_click_events_have_key_events -->
-				<div
-					role="gridcell"
-					tabindex={day ? 0 : -1}
-					class={cnBase(
-						'cursor-pointer select-none rounded-[6px] px-[0.35rem] py-[0.4rem] text-center',
-						'focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2',
-						isSameDay(value, new Date(viewDate.getFullYear(), viewDate.getMonth(), day || 0)) &&
-							'bg-blue-700 text-white',
-						isSameDay(
-							new Date(),
-							new Date(viewDate.getFullYear(), viewDate.getMonth(), day || 0)
-						) && 'shadow-[inset_0_0_0_1px_#c7d2fe]',
-						isDisabledDay(day) && 'cursor-not-allowed opacity-35'
-					)}
-					onclick={() => day && !isDisabledDay(day) && selectDay(day)}
-					aria-disabled={isDisabledDay(day)}
-					aria-selected={isSameDay(
-						value,
-						new Date(viewDate.getFullYear(), viewDate.getMonth(), day || 0)
-					)}
-				>
-					{#if day}
-						<span>{day}</span>
-					{/if}
-				</div>
-			{/each}
-		{/each}
-	</div>
+{#snippet chevronsLeft()}
+    <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        width="24" 
+        height="24" 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" 
+        class="icon icon-tabler icons-tabler-outline icon-tabler-chevrons-left"
+    >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M11 7l-5 5l5 5" />
+        <path d="M17 7l-5 5l5 5" />
+    </svg>
+{/snippet}
 
-	<div class="mt-2 flex justify-end gap-2">
-		<Button
-			onclick={() => {
-				value = null;
-				closePicker();
-			}}
-			variant="text"
-			size="small"
-		>
-			Clear
-		</Button>
-		<Button onclick={closePicker} size="small">Confirm</Button>
-	</div>
-</Modal>
+{#snippet chevronRight()}
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"
+    >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M9 6l6 6l-6 6" />
+    </svg>
+{/snippet}
+
+{#snippet chevronsRight()}
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-chevrons-right"
+    >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M7 7l5 5l-5 5" />
+        <path d="M13 7l5 5l-5 5" />
+    </svg>
+{/snippet}
