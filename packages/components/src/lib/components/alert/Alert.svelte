@@ -1,14 +1,15 @@
 <script lang="ts">
 import type { Snippet } from "svelte";
 import type { ClassNameValue } from "tailwind-merge";
+import type { WithRef } from "$lib/types.js";
 import { type AlertVariants, alert } from "./variants.js";
 
-interface Props extends AlertVariants {
+interface Props extends AlertVariants, WithRef<HTMLElement | HTMLDivElement> {
 	children?: Snippet;
 	class?: ClassNameValue;
 }
 
-let { children, class: className = "", type = "info" }: Props = $props();
+let { children, class: className = "", ref = $bindable(), type = "info" }: Props = $props();
 
 const { container, icon } = $derived(alert({ type, className }));
 </script>
@@ -18,7 +19,7 @@ const { container, icon } = $derived(alert({ type, className }));
 A visual message box used to communicate contextual feedback to users, such as information, success, warnings, or errors.
 -->
 
-<div role="alert" class={container({ className })}>
+<div bind:this={ref} role="alert" class={container({ className })}>
 	{@render alertIcon()}
 	<span>{@render children?.()}</span>
 </div>
