@@ -14,6 +14,10 @@ export interface SidebarItem {
 export interface ExtendedSidebarItem extends SidebarItem {
 	slug: string;
 	slugPath: string;
+	metadata: {
+		previous: ExtendedSidebarItem | null;
+		next: ExtendedSidebarItem | null;
+	};
 }
 
 export interface SidebarConfigData<T> {

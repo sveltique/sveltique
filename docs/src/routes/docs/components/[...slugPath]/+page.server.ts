@@ -8,7 +8,8 @@ export function load({ params, parent }) {
 
 	return {
 		name: item.name,
-		path: path.join("../../../../..", item.path).replaceAll("\\", "/")
+		path: path.join("../../../../..", item.path).replaceAll("\\", "/"),
+		...item.metadata
 	};
 }
 
