@@ -44,7 +44,7 @@ let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
 	</header>
 
 	<header
-		class="relative left-0 top-0 z-50 h-16 w-full border-b border-zinc-300 bg-white lg:hidden dark:border-zinc-700 dark:bg-zinc-900"
+		class="relative left-0 top-0 z-50 h-16 w-full border-b border-muted bg-background lg:hidden"
 	>
 		<nav class="relative flex h-full w-full items-center justify-between px-6">
 			<a href="/" class="text-xl font-black dark:text-zinc-100">C</a>
@@ -56,7 +56,7 @@ let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
 
 	{#if showMenu}
 		<div class="fixed top-16 flex w-full flex-col">
-			<a href="/docs/components/browse">Components</a>
+			<a href="/docs/components/browse"><!-- Components --></a>
 		</div>
 	{/if}
 {/snippet}

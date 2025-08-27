@@ -35,7 +35,9 @@ class OnThisPageContext {
 	}
 
 	public update() {
-		this.current = Array.from(document.querySelectorAll<HTMLHeadingElement>("h2, h3"))
+		this.current = Array.from(
+			document.getElementById("content")!.querySelectorAll<HTMLHeadingElement>("h2, h3")
+		)
 			.filter((heading) => !heading.closest("[data-playground]"))
 			.map((node) => {
 				const level = Number(node.tagName.substring(1)) as 2 | 3;

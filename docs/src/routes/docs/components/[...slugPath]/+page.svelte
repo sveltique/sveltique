@@ -14,7 +14,7 @@ let { data } = $props();
         <data.Component />
     </div>
     <Separator />
-    <div class="relative w-full flex items-center gap-6">
+    <div class="relative w-full flex flex-col sm:flex-row items-center gap-6">
         {#if data.previous}
             <Paper variant="outline" class="w-full duration-150 hover:bg-muted">
                 <a
