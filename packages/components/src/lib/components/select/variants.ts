@@ -6,14 +6,17 @@ export const select = tv({
 		container: "relative",
 		trigger: paper({
 			variant: "outline",
-			class: "flex w-full cursor-pointer items-center gap-3 px-4 h-11 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-background"
+			class: [
+				"flex w-full cursor-pointer items-center gap-3 px-4 h-11",
+				"focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-background"
+			]
 		}),
 		triggerContent: "pointer-events-none grow text-start text-sm",
 		triggerIcon: "pointer-events-none size-4 text-muted-foreground duration-150 ease-in-out",
 		placeholder: "text-muted-foreground",
 		listBox: paper({
 			elevation: 4,
-			class: "absolute p-2 top-[calc(100%+0.625rem)] z-10 left-0 hidden w-full flex-col gap-1 min-w-max shadow-md"
+			class: "absolute p-2 top-[calc(100%+10px)] z-10 left-0 hidden w-full flex-col gap-1 min-w-max shadow-md"
 		})
 	},
 	variants: {

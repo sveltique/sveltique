@@ -7,6 +7,7 @@
 	/* Generic colors */
 	--color-black: #000;
 	--color-white: #fff;
+	--color-transparent: transparent;
 
 	/* Background color */
 	--color-background: var(--background);
