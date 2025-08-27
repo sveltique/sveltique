@@ -1,48 +1,54 @@
 <script lang="ts">
 import { Badge, Link } from "@sveltique/components";
+import IconArrowUpRight from "@tabler/icons-svelte/icons/arrow-up-right";
+import IconExternalLink from "@tabler/icons-svelte/icons/external-link";
 import Playground from "$components/Playground.svelte";
 import { script } from "$utils/playground";
 
-const basicUsageCode = {
-	short: `<Link href="#basic-usage">
-    Go to the "Basic Usage" section
-</Link>`,
-	expanded: `${script('import { Link } from "@sveltique/components";')}
+const basicUsageCode = `${script('import { Link } from "@sveltique/components";')}
     
 <Link href="#basic-usage">
     Go to the "Basic Usage" section
-</Link>`
-};
+</Link>`;
 
-const underlineCode = {
-	short: `<Link href="#">underline="always"</Link>
-<Link href="#" underline="hover">underline="hover"</Link>
-<Link href="#" underline="none">underline="none"</Link>`,
-	expanded: `${script('import { Link } from "@sveltique/components";')}
-
-<Link href="#">underline="always"</Link>
-<Link href="#" underline="hover">underline="hover"</Link>
-<Link href="#" underline="none">underline="none"</Link>`
-};
-
-const externalCode = {
-	short: `<Link
-    href="https://developer.mozilla.org"
-    external
-    title="To read more, see the MDN docs in a new tab."
->
-    See the MDN docs
-</Link>`,
-	expanded: `${script('import { Link } from "@sveltique/components";')}
+const externalCode = `${script('import { Link } from "@sveltique/components";')}
 
 <Link
     href="https://developer.mozilla.org"
-    external
     title="To read more, see the MDN docs in a new tab."
+    external
 >
     See the MDN docs
-</Link>`
-};
+</Link>`;
+
+const iconCode = `${script(`import { Link } from "@sveltique/components";
+    import IconExternalLink from "@tabler/icons-svelte/icons/external-link";`)}
+
+<Link
+    href="https://developer.mozilla.org"
+    title="To read more, see the MDN docs in a new tab."
+    external
+>
+    See the MDN docs
+
+    {#snippet icon({ css })}
+        <IconExternalLink class={css} />
+    {/snippet}
+</Link>
+<Link
+    href="https://developer.mozilla.org"
+    title="To read more, see the MDN docs in a new tab."
+    external
+    icon={false}
+>
+    See the MDN docs
+</Link>`;
+
+const underlineCode = `${script('import { Link } from "@sveltique/components";')}
+
+<Link href="#">underline="always"</Link>
+<Link href="#" underline="hover">underline="hover"</Link>
+<Link href="#" underline="none">underline="none"</Link>`;
 </script>
 
 <h1 id="link">Link</h1>
@@ -53,6 +59,50 @@ const externalCode = {
 <Playground code={basicUsageCode}>
 	<Link href="#basic-usage">Go to the "Basic Usage" section</Link>
 </Playground>
+
+<h3 id="external-links">External links</h3>
+<p>
+	For external links, you can set the <Badge>external</Badge> attribute. It handles setting <Badge
+		>target="_blank"</Badge
+	>, <Badge>rel="noreferrer"</Badge>, and adds a small top right arrow icon (<IconArrowUpRight class="inline w-5 aspect-square" />).
+</p>
+<p>You can override the target and rel attributes individually if you need to.</p>
+<Playground code={externalCode}>
+	<Link
+		href="https://developer.mozilla.org"
+		title="To read more, see the MDN docs in a new tab."
+		external
+	>
+		See the MDN docs
+	</Link>
+</Playground>
+
+<h3>Icon</h3>
+<p>By default, external links include an up right arrow icon. You can use the <Badge>icon</Badge> snippet to customize or remove it.</p>
+<Playground code={iconCode}>
+    <Link
+		href="https://developer.mozilla.org"
+		title="To read more, see the MDN docs in a new tab."
+		external
+	>
+		See the MDN docs
+
+        {#snippet icon({ css })}
+            <IconExternalLink class={css} />
+        {/snippet}
+	</Link>
+    <Link
+		href="https://developer.mozilla.org"
+		title="To read more, see the MDN docs in a new tab."
+		external
+        icon={false}
+	>
+		See the MDN docs
+	</Link>
+</Playground>
+
+<h2>Accessbility</h2>
+<p>Some notes on accessibility.</p>
 
 <h3 id="underline">Underline</h3>
 <p>
@@ -65,21 +115,4 @@ const externalCode = {
 	<Link href="#">underline="always"</Link>
 	<Link href="#" underline="hover">underline="hover"</Link>
 	<Link href="#" underline="none">underline="none"</Link>
-</Playground>
-
-<h2 id="external-links">External links</h2>
-<p>
-	For external links, you can set the <Badge>external</Badge> attribute. It handles setting <Badge
-		>target="_blank"</Badge
-	>, <Badge>rel="noreferrer"</Badge>, and adds a small top right arrow icon (↗).
-</p>
-<p>You can override them individually if you need to.</p>
-<Playground code={externalCode}>
-	<Link
-		href="https://developer.mozilla.org"
-		external
-		title="To read more, see the MDN docs in a new tab."
-	>
-		See the MDN docs
-	</Link>
 </Playground>
