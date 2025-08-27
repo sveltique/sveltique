@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Paper, Separator } from "@sveltique/components";
+import { Link, Paper, Separator } from "@sveltique/components";
 import IconPlayerPauseFilled from "@tabler/icons-svelte/icons/player-pause-filled";
 import IconPlayerSkipBackFilled from "@tabler/icons-svelte/icons/player-skip-back-filled";
 import IconPlayerSkipForwardFilled from "@tabler/icons-svelte/icons/player-skip-forward-filled";
@@ -92,9 +92,11 @@ const code = {
 		</div>
 	</Paper>
 	<p class="text-sm italic text-zinc-500">
-		Image from <a
+		Image from <Link
 			href="https://www.last.fm/music/Shawn+Mendes/Lost+in+Japan/+images"
-			target="_blank">last.fm</a
-		>
+            title="See all artworks related to Lost in Japan on last.fm."
+			external
+            icon={false}
+        >last.fm</Link>
 	</p>
 </Playground>

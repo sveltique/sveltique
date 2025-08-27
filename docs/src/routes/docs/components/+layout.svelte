@@ -53,8 +53,8 @@ $effect(() => {
 								class={cnBase(
 									'py-1',
 									page.url.pathname.endsWith(item.slugPath)
-										? 'text-blue-700 dark:text-blue-300'
-										: 'text-zinc-500 dark:text-zinc-500'
+										? 'text-primary'
+										: 'text-muted-foreground'
 								)}
 							>
 								{item.name}
@@ -63,77 +63,6 @@ $effect(() => {
 					</div>
 				</div>
 			{/each}
-			<!-- <a
-				href="/docs/components/installation"
-				class={button({
-					variant: 'text',
-					size: 'small',
-					class: [
-						'justify-start font-bold',
-						page.url.pathname === '/docs/components/installation' ? 'text-black' : 'text-zinc-500'
-					]
-				})}
-			>
-				<IconSettingsCheck /> Installation
-			</a>
-			<a
-				href="/docs/components/usage"
-				class={button({
-					variant: 'text',
-					size: 'small',
-					class: [
-						'justify-start font-bold',
-						page.url.pathname === '/docs/components/usage' ? 'text-black' : 'text-zinc-500'
-					]
-				})}
-			>
-				<IconHelp /> Usage
-			</a>
-			<Button
-				onclick={() => (showComponentsMenu = !showComponentsMenu)}
-				variant="text"
-				size="small"
-				class={['justify-between font-bold', showComponentsMenu ? 'text-black' : 'text-zinc-500']}
-			>
-				<div class="flex items-center gap-5">
-					<IconTable /> Components
-				</div>
-				<IconChevronDown
-					class={cnBase(
-						'aspect-square h-5 shrink-0 duration-150',
-						showComponentsMenu && 'rotate-180'
-					)}
-				/>
-			</Button>
-			{#if showComponentsMenu}
-				<div class="flex flex-col gap-1 pl-[60px] text-sm">
-					<a
-						href="/docs/components/browse"
-						class={cnBase(
-							'py-1',
-							page.url.pathname === '/docs/components/browse'
-								? 'text-blue-700 dark:text-blue-300'
-								: 'text-zinc-600 dark:text-zinc-400'
-						)}
-					>
-						All components
-					</a>
-					<Separator class="my-2" />
-					{#each data.sidebarConfig as rootItem, index (index)}
-						<a
-							href="/docs/components/browse/{name}"
-							class={cnBase(
-								'py-1',
-								page.url.pathname.endsWith(name)
-									? 'text-blue-700 dark:text-blue-300'
-									: 'text-zinc-600 dark:text-zinc-400'
-							)}
-						>
-							{capitalize(name)}
-						</a>
-					{/each}
-				</div>
-			{/if} -->
 		</nav>
 	</aside>
 
@@ -221,17 +150,17 @@ $effect(() => {
 
 {#snippet onThisPageBar()}
 	<aside
-		class="sticky right-0 top-28 z-50 hidden h-full w-full border-l border-zinc-300 px-6 py-3 xl:block dark:border-zinc-700"
+		class="sticky right-0 top-28 z-50 hidden h-full w-full border-l border-muted px-6 py-3 xl:block"
 	>
 		<nav class="relative flex h-full flex-col gap-2.5 text-sm font-medium">
-			<div role="heading" aria-level="2" class="font-bold dark:text-zinc-100">On This Page</div>
+			<div role="heading" aria-level="2" class="font-bold text-foreground">On This Page</div>
 			{#each headings.current as { id, label, items } (id)}
-				<a href="#{id}" class="text-zinc-600 dark:text-zinc-400">{label}</a>
+				<a href="#{id}" class="text-muted-foreground">{label}</a>
 
 				{#if items.length > 0}
 					<div class="relative flex w-full flex-col gap-2.5 pl-5">
 						{#each items as item (item.label)}
-							<a href="#{item.id}" class="text-zinc-600 dark:text-zinc-400">{item.label}</a>
+							<a href="#{item.id}" class="text-muted-foreground">{item.label}</a>
 						{/each}
 					</div>
 				{/if}

@@ -22,7 +22,7 @@ let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
 
 {#snippet navigation()}
 	<header
-		class="sticky left-0 top-0 z-50 hidden h-16 w-full border-b border-zinc-300 bg-white lg:block dark:border-zinc-700 dark:bg-zinc-900"
+		class="sticky left-0 top-0 z-50 hidden h-16 w-full border-b border-muted bg-background lg:block"
 	>
 		<nav
 			class="relative flex h-full w-full items-center justify-between gap-5 px-20 dark:text-zinc-100"

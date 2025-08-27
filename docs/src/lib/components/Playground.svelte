@@ -29,7 +29,7 @@ let showCode = $state(false);
 			onclick={() => (showCode = false)}
 			class={cnBase(
 				'cursor-pointer px-2 py-2 text-sm font-bold',
-				!showCode ? 'dark:text-zinc-100' : 'text-zinc-500'
+				!showCode ? 'text-foreground' : 'text-muted-foreground'
 			)}
 		>
 			Preview
@@ -38,7 +38,7 @@ let showCode = $state(false);
 			onclick={() => (showCode = true)}
 			class={cnBase(
 				'cursor-pointer px-2 py-2 text-sm font-bold',
-				showCode ? 'dark:text-zinc-100' : 'text-zinc-500'
+				showCode ? 'text-foreground' : 'text-muted-foreground'
 			)}
 		>
 			Code

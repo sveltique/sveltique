@@ -1,6 +1,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+    --color-*: initial;
+
 	/* Fonts */
 	--font-codeblock: "Cascadia Code", sans-serif; /* Ensure you have imported the font before */
 
