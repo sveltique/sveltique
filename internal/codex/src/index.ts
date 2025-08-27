@@ -58,25 +58,57 @@ export class SidebarConfig {
 		return new SidebarConfig(json.docsRoot ?? "", json.sidebar);
 	}
 
-	#createExtendedSidebar(docsRoot: string, sidebar: RootSidebarItem<SidebarItem>[]) {
+	#createExtendedSidebar(
+		docsRoot: string,
+		sidebar: RootSidebarItem<SidebarItem>[]
+	): RootSidebarItem<ExtendedSidebarItem>[] {
 		const clone = structuredClone(sidebar);
 
-		return clone.map((root) => {
+		const withSlugs = clone.map((root) => {
 			return {
 				name: root.name,
-				children: root.children.map((item) => {
+				children: root.children.map((item, i) => {
 					const slug = item.slug ?? slugify(item.name);
+					const slugPath = [
+						...item.path.replaceAll("\\", "/").split("/").slice(0, -1),
+						slug
+					]
+						.join("/")
+						.replaceAll("\\", "/")
+						.replace(new RegExp("^" + docsRoot + "/"), "");
 
 					return {
 						...item,
 						slug,
-						slugPath: [...item.path.replaceAll("\\", "/").split("/").slice(0, -1), slug]
-							.join("/")
-							.replaceAll("\\", "/")
-							.replace(new RegExp("^" + docsRoot + "/"), "")
-					};
-				}) satisfies ExtendedSidebarItem[]
+						slugPath
+					} as ExtendedSidebarItem;
+				})
 			};
-		}) satisfies RootSidebarItem<ExtendedSidebarItem>[];
+		});
+
+		for (const [i, root] of withSlugs.entries()) {
+			for (const [j, item] of root.children.entries()) {
+				// @ts-ignore
+				item.metadata = {};
+
+				if (j > 0) {
+					item.metadata.previous = root.children[j - 1];
+				} else if (i > 0) {
+					item.metadata.previous = withSlugs[i - 1].children.at(-1)!;
+				} else {
+					item.metadata.previous = null;
+				}
+
+				if (j < root.children.length - 1) {
+					item.metadata.next = root.children[j + 1];
+				} else if (i < withSlugs.length - 1) {
+					item.metadata.next = withSlugs[i + 1].children[0];
+				} else {
+					item.metadata.next = null;
+				}
+			}
+		}
+
+		return withSlugs;
 	}
 }

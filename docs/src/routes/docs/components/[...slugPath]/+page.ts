@@ -11,6 +11,8 @@ const modules = import.meta.glob<
 export async function load({ data }) {
 	return {
 		name: data.name,
+		previous: data.previous,
+		next: data.next,
 		...(await loadComponent(data.path))
 	};
 }

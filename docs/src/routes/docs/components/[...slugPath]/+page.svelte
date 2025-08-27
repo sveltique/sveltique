@@ -1,4 +1,6 @@
 <script lang="ts">
+import { Paper, Separator } from "@sveltique/components";
+
 let { data } = $props();
 </script>
 
@@ -7,8 +9,39 @@ let { data } = $props();
 	<meta name="description" content={data.metadata?.description} />
 </svelte:head>
 
-<div id="content" class="relative w-full pb-16">
-    <data.Component />
+<div class="relative w-full pb-16 flex flex-col gap-12">
+    <div id="content" class="relative w-full">
+        <data.Component />
+    </div>
+    <Separator />
+    <div class="relative w-full flex items-center gap-6">
+        {#if data.previous}
+            <Paper variant="outline" class="w-full duration-150 hover:bg-muted">
+                <a
+                    href="/docs/components/{data.previous.slugPath}"
+                    class="relative w-full px-4 py-3 rounded-2xl flex flex-col items-start gap-1"
+                >
+                    <span class="text-muted-foreground font-medium text-xs">Previous page</span>
+                    <span class="text-primary font-bold">{data.previous.name}</span>
+                </a>
+            </Paper>
+        {:else}
+            <div class="w-full"></div>
+        {/if}
+        {#if data.next}
+            <Paper variant="outline" class="w-full duration-150 hover:bg-muted">
+                <a
+                    href="/docs/components/{data.next.slugPath}"
+                    class="relative w-full px-4 py-3 rounded-2xl flex flex-col items-end gap-1"
+                >
+                    <span class="text-muted-foreground font-medium text-xs">Next page</span>
+                    <span class="text-primary font-bold">{data.next.name}</span>
+                </a>
+            </Paper>
+        {:else}
+            <div class="w-full"></div>
+        {/if}
+    </div>
 </div>
 
 <style lang="postcss">
