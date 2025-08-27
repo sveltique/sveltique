@@ -42,7 +42,7 @@ $effect(() => {
 	<aside
 		class="sticky left-0 top-16 z-50 hidden h-[calc(100vh-4rem)] items-start justify-end overflow-auto bg-zinc-50 p-6 lg:flex xl:w-full dark:bg-zinc-800"
 	>
-		<nav class="relative flex min-w-[240px] flex-col gap-5 text-sm font-bold">
+		<nav class="relative flex min-w-[240px] flex-col gap-5 text-sm font-semibold">
 			{#each data.sidebar as rootItem, index (index)}
 				<div class="relative flex w-full flex-col gap-2.5">
 					<span>{rootItem.name}</span>
@@ -67,10 +67,10 @@ $effect(() => {
 	</aside>
 
 	<header
-		class="sticky left-0 top-0 z-50 h-12 w-full border-b border-zinc-300 bg-white lg:hidden dark:border-zinc-700 dark:bg-zinc-900"
+		class="sticky left-0 top-0 z-50 h-12 w-full border-b border-muted bg-background lg:hidden"
 	>
 		<nav
-			class="relative flex h-full w-full items-center justify-between px-6 text-sm font-medium text-zinc-600 dark:text-zinc-400"
+			class="relative flex h-full w-full items-center justify-between px-6 text-sm font-medium text-muted-foreground"
 		>
 			<button
 				onclick={() => (showMenu = true)}
@@ -97,19 +97,32 @@ $effect(() => {
 		>
 			<nav
 				transition:fly={{ x: -100, duration: 150 }}
-				class="relative flex h-[100vh] w-60 flex-col items-start justify-start overflow-auto bg-white p-6 shadow-[0_0_12px_4px_rgba(0,0,0,0.15)] dark:bg-zinc-800"
+				class={cnBase([
+                    "relative flex h-[100vh] w-4/5 flex-col items-start justify-start gap-5 overflow-auto bg-background",
+                    "p-6 shadow-[0_0_12px_4px_rgba(0,0,0,0.15)] text-sm"
+                ])}
 			>
-				<!-- {#each data.componentNames as name, index (index)}
-					<a
-						href="/docs/components/browse/{name}"
-						class={cnBase(
-							'py-1',
-							page.url.pathname.endsWith(name) ? 'text-blue-700' : 'text-zinc-600'
-						)}
-					>
-						{capitalize(name)}
-					</a>
-				{/each} -->
+				{#each data.sidebar as rootItem, index (index)}
+                    <div class="relative flex w-full flex-col gap-2.5">
+                        <span class="font-bold">{rootItem.name}</span>
+                        <div class="relative flex w-full flex-col">
+                            {#each rootItem.children as item (item.name)}
+                                <a
+                                    href="/docs/components/{item.slugPath}"
+                                    onclick={() => (showMenu = false)}
+                                    class={cnBase(
+                                        'py-1 font-semibold',
+                                        page.url.pathname.endsWith(item.slugPath)
+                                            ? 'text-primary'
+                                            : 'text-muted-foreground'
+                                    )}
+                                >
+                                    {item.name}
+                                </a>
+                            {/each}
+                        </div>
+                    </div>
+                {/each}
 			</nav>
 		</Backdrop>
 	{/if}
@@ -122,25 +135,38 @@ $effect(() => {
 		>
 			<nav
 				transition:fly={{ x: 100, duration: 150 }}
-				class="relative flex h-[100vh] w-60 flex-col items-start justify-between bg-white p-6 shadow-[0_0_12px_4px_rgba(0,0,0,0.15)] dark:bg-zinc-800"
+				class="relative flex h-[100vh] w-4/5 flex-col items-start justify-between bg-white p-6 shadow-[0_0_12px_4px_rgba(0,0,0,0.15)] dark:bg-zinc-800"
 			>
 				<div
 					class="relative flex h-full w-full flex-col items-start justify-start gap-2.5 text-sm font-medium"
 				>
 					<div role="heading" aria-level="2" class="font-bold">On This Page</div>
 					{#each headings.current as { id, label, items } (id)}
-						<a href="#{id}" class="text-zinc-600 dark:text-zinc-400">{label}</a>
+						<a href="#{id}" onclick={() => (showOnThisPage = false)} class="text-muted-foreground">
+                            {label}
+                        </a>
+
 						{#if items.length > 0}
 							<div class="relative flex w-full flex-col gap-2.5 pl-5">
 								{#each items as item (item.id)}
-									<a href="#{item.id}" class="text-zinc-600 dark:text-zinc-400">{item.label}</a>
+									<a
+                                        href="#{item.id}"
+                                        onclick={() => (showOnThisPage = false)}
+                                        class="text-muted-foreground"
+                                    >
+                                        {item.label}
+                                    </a>
 								{/each}
 							</div>
 						{/if}
 					{/each}
 				</div>
 				<!-- svelte-ignore a11y_invalid_attribute -->
-				<a href="#" class={button({ variant: 'text', class: 'w-full self-end text-blue-700' })}>
+				<a
+                    href="#"
+                    onclick={() => (showOnThisPage = false)}
+                    class={button({ variant: 'outline', class: 'w-full self-end text-sm' })}
+                >
 					Return to top
 				</a>
 			</nav>
@@ -153,7 +179,7 @@ $effect(() => {
 		class="sticky right-0 top-28 z-50 hidden h-full w-full border-l border-muted px-6 py-3 xl:block"
 	>
 		<nav class="relative flex h-full flex-col gap-2.5 text-sm font-medium">
-			<div role="heading" aria-level="2" class="font-bold text-foreground">On This Page</div>
+			<h2 class="font-bold text-foreground">On This Page</h2>
 			{#each headings.current as { id, label, items } (id)}
 				<a href="#{id}" class="text-muted-foreground">{label}</a>
 
