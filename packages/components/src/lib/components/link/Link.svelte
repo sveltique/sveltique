@@ -50,7 +50,7 @@ let { container, icon: iconCss } = $derived(link({ underline }));
 <a {href} target={_target} rel={_rel} class={container({ className })} {...restProps}>
 	{@render children?.()}
 
-    {#if icon !== false}
+    {#if external && icon !== false}
         {@render icon({ css: iconCss() })}
     {/if}
 </a>
