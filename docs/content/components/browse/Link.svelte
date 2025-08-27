@@ -108,7 +108,7 @@ const underlineCode = `${script('import { Link } from "@sveltique/components";')
 <p>
 	By default, links are underlined to conform with <Link
 		href="https://webaim.org/blog/wcag-2-0-and-link-colors/"
-		external>accessbility guidelines</Link
+		external>accessibility guidelines</Link
 	>. However, you can change this behavior using the <Badge>underline</Badge> attribute.
 </p>
 <Playground code={underlineCode}>
