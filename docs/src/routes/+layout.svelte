@@ -1,7 +1,8 @@
 <script lang="ts">
-import { Button } from "@sveltique/components";
+import { Button, Separator } from "@sveltique/components";
 import { theme } from "$lib/contexts/theme.svelte";
 import "../app.css";
+import IconBrandGithub from "@tabler/icons-svelte/icons/brand-github";
 import IconMenuDeep from "@tabler/icons-svelte/icons/menu-deep";
 import IconMoonFilled from "@tabler/icons-svelte/icons/moon-filled";
 import IconSunFilled from "@tabler/icons-svelte/icons/sun-filled";
@@ -30,9 +31,15 @@ let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
 				<a href="/" class="font-bold">SVELTIQUE</a>
 				<a href="/docs/components">Components</a>
 			</div>
-			<Button onclick={() => theme.switch()} variant="text" shape="square">
-				<ThemeIcon class="h-5 w-5" />
-			</Button>
+			<div class="flex items-center gap-6 py-4">
+                <a href="https://github.com/sveltique/sveltique" title="Go to Github repository">
+                    <IconBrandGithub />
+                </a>
+                <Separator orientation="vertical" />
+                <Button onclick={() => theme.switch()} variant="text" shape="square">
+                    <ThemeIcon class="h-5 w-5" />
+                </Button>
+            </div>
 		</nav>
 	</header>
 
