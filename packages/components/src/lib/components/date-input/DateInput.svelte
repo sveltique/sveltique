@@ -2,6 +2,7 @@
 import { on } from "svelte/events";
 import { SvelteDate } from "svelte/reactivity";
 import { cnBase } from "tailwind-variants";
+import { onKeyDown } from "$utils/on-key.svelte.js";
 import { toTitleCase } from "$utils/string.js";
 import Button from "../button/Button.svelte";
 import Paper from "../paper/Paper.svelte";
@@ -17,17 +18,19 @@ interface Props {
 
 let { id, name, open = $bindable(false), value = $bindable(new SvelteDate()) }: Props = $props();
 
+let containerRef = $state<HTMLElement>();
 let inputRef = $state<HTMLElement>();
 let pickerRef = $state<HTMLElement>();
 
-let focusedDate = $derived(value);
+let viewDate = new SvelteDate(value);
+let focusedDate = new SvelteDate(value);
 
 let currentMonth = $derived.by(() => {
-	return toTitleCase(value.toLocaleString(navigator.language, { month: "long" }));
+	return toTitleCase(viewDate.toLocaleString(navigator.language, { month: "long" }));
 });
 
 let currentYear = $derived.by(() => {
-	return value.toLocaleString(navigator.language, { year: "numeric" });
+	return viewDate.toLocaleString(navigator.language, { year: "numeric" });
 });
 
 let formattedValue = $derived.by(() => {
@@ -53,12 +56,56 @@ $effect(() => {
 	});
 });
 
+$effect(() => {
+	if (viewDate.getMonth() !== focusedDate.getMonth()) {
+		viewDate.setMonth(focusedDate.getMonth());
+	}
+});
+
+onKeyDown(["ArrowUp", "ArrowDown"], preventArrowScroll, { preventDefault: true });
+
+onKeyDown(
+	["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"],
+	(event) => {
+		if (!containerRef) return;
+
+		/* activeElement.current && activeElement.current.blur(); */
+
+		if (event.key === "ArrowUp") {
+			focusedDate.setDate(focusedDate.getDate() - 7);
+		} else if (event.key === "ArrowDown") {
+			focusedDate.setDate(focusedDate.getDate() + 7);
+		} else if (event.key === "ArrowRight") {
+			focusedDate.setDate(focusedDate.getDate() + 1);
+		} else if (event.key === "ArrowLeft") {
+			focusedDate.setDate(focusedDate.getDate() - 1);
+		}
+	},
+	{
+		element: () => containerRef
+	}
+);
+
+onKeyDown(["Space", "Enter"], () => (open = !open), {
+	element: () => inputRef
+});
+
+onKeyDown(["Space", "Enter"], () => open && selectDate(focusedDate), {
+	element: () => containerRef
+});
+
+function preventArrowScroll(event: Event) {
+	if (open) {
+		event.preventDefault();
+	}
+}
+
 function prepareDates() {
 	return [...getPreviousMonthDates(), ...getDatesInCurrentMonth(), ...getNextMonthDates()];
 }
 
 function getDatesInCurrentMonth(): Date[] {
-	return getDatesInMonth(value.getMonth(), value.getFullYear());
+	return getDatesInMonth(viewDate.getMonth(), viewDate.getFullYear());
 }
 
 function getDatesInMonth(month: number, year: number): Date[] {
@@ -82,7 +129,7 @@ function getPreviousMonthDates() {
 		dayOfWeekIndex = 7;
 	}
 
-	const clonedDate = new Date(value);
+	const clonedDate = new Date(viewDate);
 	clonedDate.setMonth(clonedDate.getMonth() - 1);
 
 	const previousMonthDates = getDatesInMonth(clonedDate.getMonth(), clonedDate.getFullYear());
@@ -97,7 +144,7 @@ function getNextMonthDates() {
 		return [];
 	}
 
-	const clonedDate = new Date(value);
+	const clonedDate = new Date(viewDate);
 	clonedDate.setMonth(clonedDate.getMonth() + 1);
 
 	const nextMonthDates = getDatesInMonth(clonedDate.getMonth(), clonedDate.getFullYear());
@@ -132,7 +179,7 @@ function isSameDate(date: Date, other: Date) {
 } */
 </script>
 
-<div class="relative">
+<div bind:this={containerRef} class="relative">
     <input type="date" {id} {name} value={value.toUTCString()} aria-hidden="true" class="hidden" />
     <TextInput bind:ref={inputRef} onclick={() => open = !open} value={formattedValue} readonly class="cursor-pointer" />
 
@@ -150,7 +197,7 @@ function isSameDate(date: Date, other: Date) {
                 </span>
             {/each}
             {#each prepareDates() as date, index (index)}
-                {@const isSameMonth = date.getMonth() === value.getMonth()}
+                {@const isSameMonth = date.getMonth() === viewDate.getMonth()}
                 <Button
                     onclick={() => selectDate(date)}
                     variant="text"
@@ -174,7 +221,7 @@ function isSameDate(date: Date, other: Date) {
     <div class="relative w-full flex justify-between items-center gap-6">
         <div class="relative flex items-center gap-1">
             <Button
-                onclick={() => value.setFullYear(value.getFullYear() - 1)}
+                onclick={() => viewDate.setFullYear(viewDate.getFullYear() - 1)}
                 variant="text"
                 shape="square"
                 size="small"
@@ -182,7 +229,7 @@ function isSameDate(date: Date, other: Date) {
                 {@render chevronsLeft()}
             </Button>
             <Button
-                onclick={() => value.setMonth(value.getMonth() - 1)}
+                onclick={() => viewDate.setMonth(viewDate.getMonth() - 1)}
                 variant="text"
                 shape="square"
                 size="small"
@@ -193,7 +240,7 @@ function isSameDate(date: Date, other: Date) {
         <div class="w-32 text-center">{currentMonth} {currentYear}</div>
         <div class="relative flex items-center gap-1">
             <Button
-                onclick={() => value.setMonth(value.getMonth() + 1)}
+                onclick={() => viewDate.setMonth(viewDate.getMonth() + 1)}
                 variant="text"
                 shape="square"
                 size="small"
@@ -201,7 +248,7 @@ function isSameDate(date: Date, other: Date) {
                 {@render chevronRight()}
             </Button>
             <Button
-                onclick={() => value.setFullYear(value.getFullYear() + 1)}
+                onclick={() => viewDate.setFullYear(viewDate.getFullYear() + 1)}
                 variant="text"
                 shape="square"
                 size="small"
