@@ -30,7 +30,7 @@ const code = `${script("import { Button, Tooltip } from '@sveltique/components';
 <Playground {code}>
     <Tooltip title="Sveltique is awesome">
         {#snippet children({ props, ref })}
-            <Button bind:ref={ref.current} size="small" {...props}>Hover me !</Button>
+            <Button bind:ref={ref.current} {...props}>Hover me !</Button>
         {/snippet}
     </Tooltip>
 </Playground>

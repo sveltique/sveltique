@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Button, Separator } from "@sveltique/components";
+import { button, Button, Separator, Tooltip } from "@sveltique/components";
 import { theme } from "$lib/contexts/theme.svelte";
 import "../app.css";
 import IconBrandGithub from "@tabler/icons-svelte/icons/brand-github";
@@ -32,13 +32,35 @@ let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
 				<a href="/docs/components">Components</a>
 			</div>
 			<div class="flex items-center gap-6 py-4">
-                <a href="https://github.com/sveltique/sveltique" title="Go to Github repository">
-                    <IconBrandGithub />
-                </a>
+                <Tooltip title="Go to the Github repository">
+                    {#snippet children({ props, ref })}
+                        <a
+                            bind:this={ref.current}
+                            href="https://github.com/sveltique/sveltique"
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label="See the Github repository in another tab."
+                            class={button({ variant: "text", shape: "square" })}
+                            {...props}
+                        >
+                            <IconBrandGithub class="h-5 w-5" />
+                        </a>
+                    {/snippet}
+                </Tooltip>
                 <Separator orientation="vertical" />
-                <Button onclick={() => theme.switch()} variant="text" shape="square">
-                    <ThemeIcon class="h-5 w-5" />
-                </Button>
+                <Tooltip title="Switch to {theme.isDark ? "light" : "dark"} mode">
+                    {#snippet children({ props, ref })}
+                        <Button
+                            bind:ref={ref.current}
+                            onclick={() => theme.switch()}
+                            variant="text"
+                            shape="square"
+                            {...props}
+                        >
+                            <ThemeIcon class="h-5 w-5" />
+                        </Button>
+                    {/snippet}
+                </Tooltip>
             </div>
 		</nav>
 	</header>

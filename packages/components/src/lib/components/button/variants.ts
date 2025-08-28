@@ -17,9 +17,9 @@ export const button = tv({
 			square: "rounded-2xl"
 		},
 		size: {
-			small: "text-sm px-3 py-1.5",
-			medium: "px-4 py-2",
-			large: "text-lg px-6 py-3"
+			small: "px-3 py-1.5 text-xs",
+			medium: "px-4 py-2 text-sm",
+			large: "px-6 py-3 text-base"
 		},
 		disabled: {
 			true: "cursor-not-allowed opacity-50" // TODO : add custom disabled color on each button...
