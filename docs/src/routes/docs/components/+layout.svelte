@@ -124,12 +124,12 @@ $effect(() => {
                     class="absolute top-[calc(100%-8px)] left-4 right-4 flex w-[calc(100%-2rem)] p-6 shadow-md"
                 >
                     <nav
-                        class="relative w-full flex-col items-start justify-between"
+                        class="relative w-full flex flex-col items-start justify-between gap-6"
                     >
                         <div
-                            class="relative flex h-full w-full flex-col items-start justify-start gap-2.5 text-sm font-medium"
+                            class="relative flex w-full flex-col items-start justify-start gap-2.5 text-sm font-medium"
                         >
-                            <div role="heading" aria-level="2" class="font-bold">On This Page</div>
+                            <h2 class="font-bold">On This Page</h2>
                             {#each headings.current as { id, label, items } (id)}
                                 <a href="#{id}" onclick={() => (showOnThisPage = false)} class="text-muted-foreground">
                                     {label}
