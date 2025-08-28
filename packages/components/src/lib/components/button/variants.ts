@@ -14,8 +14,7 @@ export const button = tv({
 		},
 		shape: {
 			rectangle: "rounded-lg",
-			square: "rounded-2xl",
-			circle: "rounded-full"
+			square: "rounded-2xl"
 		},
 		size: {
 			small: "text-sm px-3 py-1.5",
@@ -50,21 +49,6 @@ export const button = tv({
 			shape: "square",
 			size: "large",
 			class: "p-3 rounded-2xl"
-		},
-		{
-			shape: "circle",
-			size: "small",
-			class: "p-1 rounded-full"
-		},
-		{
-			shape: "circle",
-			size: "medium",
-			class: "p-2 rounded-full"
-		},
-		{
-			shape: "circle",
-			size: "large",
-			class: "p-3 rounded-full"
 		},
 		{
 			variant: "contained",
