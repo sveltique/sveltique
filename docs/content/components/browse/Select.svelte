@@ -1,3 +1,10 @@
+<script module>
+export const metadata = {
+	description:
+		"A styled, accessible dropdown replacement for the native select element, ensuring consistent appearance and behavior across browsers."
+};
+</script>
+
 <script lang="ts">
 import { Alert, Badge, Select } from "@sveltique/components";
 import Playground from "$components/Playground.svelte";
@@ -30,17 +37,15 @@ const code = {
 </script>
 
 <h1 id="select">Select</h1>
-<p>A dropdown.</p>
+<p>
+    A styled, accessible dropdown replacement for the native <code>select</code> element, ensuring
+	consistent appearance and behavior across browsers.
+</p>
 
 <h2 id="basic-usage">Basic Usage</h2>
-<p>
-	It is meant to be used as a drop-in replacement for the native select element, and ensures the
-	styles are uniform through the different browsers.
-</p>
 <Alert type="info" class="mb-4">
-	To prevent the select from changing size, set a fixed width on the container using <Badge
-		>containerClass
-	</Badge>.
+	To prevent the select from changing size when choosing options with different length, set a fixed
+    width on the container using <Badge>containerClass</Badge>.
 </Alert>
 <Playground {code}>
 	<Select.Root placeholder="Select a fruit" containerClass="w-40">

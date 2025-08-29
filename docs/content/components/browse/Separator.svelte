@@ -1,3 +1,9 @@
+<script module>
+export const metadata = {
+	description: "A thin, visible line used to separate content and create visual grouping."
+};
+</script>
+
 <script lang="ts">
 import { Link, Paper, Separator } from "@sveltique/components";
 import IconPlayerPauseFilled from "@tabler/icons-svelte/icons/player-pause-filled";
@@ -63,10 +69,10 @@ const code = {
 </script>
 
 <h1 id="separator">Separator</h1>
-<p>A visible, thin line to visually divide two items.</p>
+<p>A thin, visible line used to separate content and create visual grouping.</p>
 
 <h2 id="basic-usage">Basic Usage</h2>
-<p>The separator can either be vertical or horizontal.</p>
+<p>A separator can have two different orientations : horizontal (default), or vertical.</p>
 <Playground {code} class="flex-col">
 	<Paper variant="outline" class="flex w-[360px] overflow-hidden">
 		<div class="relative flex w-2/3 flex-col">

@@ -4,6 +4,11 @@ import CodeBlock from "$components/CodeBlock.svelte";
 import { script } from "$utils/playground";
 </script>
 
+<svelte:head>
+    <title>Ref - sveltique/components</title>
+    <meta name="description" content="Learn about the global ref attribute." />
+</svelte:head>
+
 <h1>Ref</h1>
 <p>Learn about the global ref attribute.</p>
 

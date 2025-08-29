@@ -1,3 +1,10 @@
+<script module>
+export const metadata = {
+	description:
+		"A visual message box used to communicate contextual feedback to users, such as information, success, warnings, or errors."
+};
+</script>
+
 <script>
 import { Alert } from "@sveltique/components";
 import Playground from "$components/Playground.svelte";

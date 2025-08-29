@@ -1,3 +1,9 @@
+<script module>
+export const metadata = {
+	description: "Brief notifications of processes that have been or will be performed."
+};
+</script>
+
 <script>
 import { Badge, Button, Toast } from "@sveltique/components";
 import Playground from "$components/Playground.svelte";

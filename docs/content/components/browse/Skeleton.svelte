@@ -1,3 +1,10 @@
+<script module>
+export const metadata = {
+	description:
+		"Placeholder used to indicate that content is loading, giving users a sense of the structure of the page while reducing perceived wait times."
+};
+</script>
+
 <script lang="ts">
 import { Badge, Skeleton } from "@sveltique/components";
 import Playground from "$components/Playground.svelte";
@@ -14,14 +21,14 @@ const code = `${script("import { Skeleton } from '@sveltique/components';")}
 
 <h1 id="skeleton">Skeleton</h1>
 <p>
-	Placeholder components used to indicate that content is loading. They give users a sense of the
+	Placeholder used to indicate that content is loading, giving users a sense of the
 	structure of the page while reducing perceived wait times.
 </p>
 
 <h2 id="basic-usage">Basic Usage</h2>
 <p>
-	When using a <code>{'<Skeleton />'}</code>, you must provide explicit their <strong>width</strong>
-	and <strong>height</strong>.
+	When using a <code>{'<Skeleton />'}</code>, you must explicitly provide their <Badge>width</Badge>
+	and <Badge>height</Badge>.
 </p>
 <Playground {code}>
 	<div class="max-w-3xs relative flex w-full flex-col items-start gap-2.5">

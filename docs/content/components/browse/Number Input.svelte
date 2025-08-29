@@ -1,3 +1,11 @@
+<script module>
+export const metadata = {
+	description:
+		"An JS-enhanced input for numbers, with increment/decrement buttons and built-in min/max enforcement."
+};
+</script>
+
+
 <script lang="ts">
 import { Badge, NumberInput } from "@sveltique/components";
 import Playground from "$components/Playground.svelte";
@@ -13,14 +21,6 @@ const code = {
 	expanded: `&lt;script lang="ts"&gt;
     import { NumberInput } from '@sveltique/components';
 &lt;/script&gt;
-
-<!--
-step : increment/decrement buttons use this
-value : a bindable starting value
-min : enforces a min value with JS
-max : enforces a max value with JS
-containerClass : caps the input width
--->
 
 <NumberInput
     step={5}

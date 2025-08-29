@@ -1,3 +1,9 @@
+<script module>
+export const metadata = {
+	description: "A styled and accessible replacement for the native anchor element."
+};
+</script>
+
 <script lang="ts">
 import { Badge, Link } from "@sveltique/components";
 import IconArrowUpRight from "@tabler/icons-svelte/icons/arrow-up-right";
@@ -52,10 +58,9 @@ const underlineCode = `${script('import { Link } from "@sveltique/components";')
 </script>
 
 <h1 id="link">Link</h1>
-<p>A styled and accessible link.</p>
+<p>A styled and accessible replacement for the native <code>a</code> element.</p>
 
 <h2 id="basic-usage">Basic Usage</h2>
-<p>You can use the {'<Link />'} component as a drop-in replacement for anchor elements.</p>
 <Playground code={basicUsageCode}>
 	<Link href="#basic-usage">Go to the "Basic Usage" section</Link>
 </Playground>

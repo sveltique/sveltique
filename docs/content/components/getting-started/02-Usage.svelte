@@ -17,6 +17,7 @@ const code = `${script("import { Button, Tooltip } from '@sveltique/components';
 
 <svelte:head>
     <title>Usage - sveltique/components</title>
+    <meta name="description" content="Learn the basics of Sveltique components to use them in your project." />
 </svelte:head>
 
 <h1 id="usage">Usage</h1>

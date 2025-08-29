@@ -1,3 +1,9 @@
+<script module>
+export const metadata = {
+	description: "Buttons allow users to take actions, and make choices, with a single tap."
+};
+</script>
+
 <script>
 import { Badge, Button } from "@sveltique/components";
 import IconPlus from "@tabler/icons-svelte/icons/plus";
@@ -71,7 +77,7 @@ const disabledCode = `${script('import { Button } from "@sveltique/components";'
 <h2 id="customization">Customization</h2>
 
 <h3 id="shape">Shape</h3>
-<p>A button can have three different shapes: rectangle (default), and square.</p>
+<p>A button can have two different shapes: rectangle (default), and square.</p>
 <Playground code={shapeCode}>
 	<Button>Add an item</Button>
 	<Button shape="square">
@@ -80,7 +86,7 @@ const disabledCode = `${script('import { Button } from "@sveltique/components";'
 </Playground>
 
 <h3 id="size">Size</h3>
-<p>A button can have three different sizes : medium (default), or small.</p>
+<p>A button can have two different sizes : medium (default), or small.</p>
 <Playground code={sizeCode} class="flex-col">
 	<div class="relative flex w-full items-center justify-center gap-5">
 		<Button size="small">Add an item</Button>

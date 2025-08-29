@@ -72,6 +72,11 @@ const introductionCode = `@custom-variant dark (&:where(.dark, .dark *));
 }`;
 </script>
 
+<svelte:head>
+    <title>Usage - sveltique/components</title>
+    <meta name="description" content="Learn how to make your own theme for Sveltique." />
+</svelte:head>
+
 <h1 id="theming">Theming</h1>
 <p>Learn how to make your own theme for Sveltique.</p>
 

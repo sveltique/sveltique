@@ -1,3 +1,10 @@
+<script module>
+export const metadata = {
+	description:
+		"Display syntax-highlighted code snippets. Ideal anywhere you need clear, readable code examples."
+};
+</script>
+
 <script lang="ts">
 import { Alert, Badge, CodeBlock, Link } from "@sveltique/components";
 import Playground from "$components/Playground.svelte";

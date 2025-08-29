@@ -1,3 +1,9 @@
+<script module>
+export const metadata = {
+	description: "Display informative text when users hover over, focus on, or tap an element."
+};
+</script>
+
 <script>
 import { Alert, Badge, Button, Tooltip } from "@sveltique/components";
 import IconEdit from "@tabler/icons-svelte/icons/edit";
@@ -5,19 +11,7 @@ import CodeBlock from "$components/CodeBlock.svelte";
 import Playground from "$components/Playground.svelte";
 import { script } from "$utils/playground";
 
-const code = {
-	short: `<Tooltip title="Edit post">
-    {#snippet children({ props, ref })}
-        <Button
-            bind:ref={ref.current}
-            shape="square"
-            {...props}
-        >
-            <IconEdit />
-        </Button>
-    {/snippet}
-</Tooltip>`,
-	expanded: `${script("import { Button, Tooltip } from '@sveltique/components';")}
+const code = `${script("import { Button, Tooltip } from '@sveltique/components';")}
 
 <Tooltip title="Edit post">
     {#snippet children({ props, ref })}
@@ -30,7 +24,6 @@ const code = {
         </Button>
     {/snippet}
 </Tooltip>`
-};
 
 const customComponentCode = `<Tooltip title="Edit post">
     {#snippet children({ ref })}

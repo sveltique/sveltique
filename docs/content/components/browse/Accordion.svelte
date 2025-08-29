@@ -1,6 +1,6 @@
 <script module>
 export const metadata = {
-	description: "haha"
+	description: "Lets users show and hide sections of related content on a page."
 };
 </script>
 
@@ -114,7 +114,8 @@ export const metadata = {
 
 <h2 id="basic-usage">Basic Usage</h2>
 <p>
-	An accordion is made of two items, a container {'<Accordion />'} and one or many items {'<AccordionItem />'}.
+	An accordion is made of two items, a container <code>{'<Accordion.Root />'}</code> and one or many
+    items <code>{'<Accordion.Item />'}</code>.
 </p>
 <Playground code={basicCode}>
 	<Accordion.Root class="max-w-md">

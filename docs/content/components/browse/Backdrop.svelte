@@ -1,3 +1,10 @@
+<script module>
+export const metadata = {
+	description:
+		"Narrows the user's focus to a particular element on the screen by adding a dimmed layer over your application."
+};
+</script>
+
 <script>
 import { Backdrop, Button } from "@sveltique/components";
 import Playground from "$components/Playground.svelte";
@@ -8,18 +15,7 @@ let showBackdrop = $state(false);
 
 onKeyUp("Escape", () => (showBackdrop = false));
 
-const code = {
-	short: `<Button onclick={() => (showBackdrop = true)}>
-    Show backdrop
-</Button>
-
-{#if showBackdrop}
-    <Backdrop
-        onClick={() => (showBackdrop = false)}
-        z={1000}
-    />
-{/if}`,
-	expanded: `${script(`import { Backdrop, Button } from '@sveltique/components';
+const code = `${script(`import { Backdrop, Button } from '@sveltique/components';
 
     let showBackdrop = $state(false);`)}
 
@@ -32,8 +28,7 @@ const code = {
         onClick={() => (showBackdrop = false)}
         z={1000}
     />
-{/if}`
-};
+{/if}`;
 </script>
 
 <h1 id="backdrop">Backdrop</h1>

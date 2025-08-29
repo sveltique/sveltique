@@ -5,6 +5,7 @@ import CodeBlock from "$components/CodeBlock.svelte";
 
 <svelte:head>
     <title>Installation - sveltique/components</title>
+    <meta name="description" content="Install Sveltique components library." />
 </svelte:head>
 
 <h1 id="installation" class="text-3xl font-bold">Installation</h1>

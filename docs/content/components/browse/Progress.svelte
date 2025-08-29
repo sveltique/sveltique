@@ -1,3 +1,10 @@
+<script module>
+export const metadata = {
+	description:
+		"A visual indicator of progress toward completing a task or reaching a limit, such as file uploads, onboarding steps, or usage quotas."
+};
+</script>
+
 <script lang="ts">
 import { Badge, Field, NumberInput, Progress } from "@sveltique/components";
 import { normalizeProgress } from "@sveltique/components/utils";

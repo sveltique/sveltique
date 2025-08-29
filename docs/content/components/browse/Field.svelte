@@ -1,5 +1,12 @@
+<script module>
+export const metadata = {
+	description:
+		"Provides a consistent structure for form controls, by including a label and an error message when provided."
+};
+</script>
+
 <script lang="ts">
-import { Field, NumberInput, Select, TextInput } from "@sveltique/components";
+import { Field, Link, NumberInput, Select, TextInput } from "@sveltique/components";
 import Playground from "$components/Playground.svelte";
 import { toTitleCase } from "$utils/string.js";
 
@@ -49,14 +56,15 @@ const ageCode = {
 </script>
 
 <h1 id="field">Field</h1>
-<p>Text fields allow users to enter text into a UI.</p>
+<p>Provides a consistent structure for form controls, by including a label and an error message when provided.</p>
 
 <h2 id="basic-usage">Basic Usage</h2>
 <p>
-	A field is composable, including a label and an error message when provided. It accepts any input
-	element, or custom ones such as <a href="/docs/components/inputs/text-input">{'<TextInput />'}</a
-	>, <a href="/docs/components/inputs/number-input">{'<NumberInput />'}</a> or
-	<a href="/docs/components/inputs/select">{'<Select />'}</a>.
+	The <code>{'<Field />'}</code> accepts any input element, or custom ones such as <Link href="/docs/components/browse/text-input">
+        {'<TextInput />'}
+    </Link>, <Link href="/docs/components/browse/number-input">{'<NumberInput />'}</Link> or <Link href="/docs/components/browse/select">
+        {'<Select />'}
+    </Link>.
 </p>
 <Playground>
 	{#if type === 'text'}

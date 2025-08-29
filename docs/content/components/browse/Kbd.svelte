@@ -1,3 +1,10 @@
+<script module>
+export const metadata = {
+	description:
+		"Denotes textual user input from a keyboard, voice input, or any other text entry device."
+};
+</script>
+
 <script>
 import { Kbd } from "@sveltique/components";
 import Playground from "$components/Playground.svelte";

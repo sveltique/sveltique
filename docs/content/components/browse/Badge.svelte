@@ -1,3 +1,9 @@
+<script module>
+export const metadata = {
+	description: "A small badge with rounded corners."
+};
+</script>
+
 <script>
 import { Badge, badge } from "@sveltique/components";
 import IconCircleDashedCheck from "@tabler/icons-svelte/icons/circle-dashed-check";

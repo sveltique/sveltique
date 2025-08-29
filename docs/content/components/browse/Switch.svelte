@@ -1,3 +1,9 @@
+<script module>
+export const metadata = {
+	description: "A binary on/off state in a more visual, accessible way than a standard checkbox."
+};
+</script>
+
 <script>
 import { Alert, Switch } from "@sveltique/components";
 import Playground from "$components/Playground.svelte";
@@ -18,10 +24,9 @@ const code = {
 </script>
 
 <h1 id="switch">Switch</h1>
-<p>A switch-style element for displaying on/off states.</p>
+<p>A binary on/off state in a more visual, accessible way than a standard checkbox.</p>
 
 <h2 id="basic-usage">Basic Usage</h2>
-<Alert type="info" class="mb-4">Under the hood, it behaves like a checkbox.</Alert>
 <Playground {code}>
 	<Switch />
 	<Switch checked />
