@@ -1,10 +1,19 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --color-*: initial;
+	--color-\*: initial;
+	--radius-\*: initial;
 
 	/* Fonts */
 	--font-codeblock: "Cascadia Code", sans-serif; /* Ensure you have imported the font before */
+
+	/* Radius */
+	--radius: 0.5rem;
+
+	/* DERIVED RADIUS */
+	--radius-small: calc(var(--radius) / 2);
+	--radius-large: calc(var(--radius) * 2);
+	--radius-full: 9999px;
 
 	/* Generic colors */
 	--color-black: #000;
@@ -25,7 +34,7 @@
 	--color-warning: var(--warning);
 	--color-danger: var(--danger);
 
-	/* DERIVED COLORS, SHOULD NOT BE MODIFIED */
+	/* DERIVED COLORS */
 	--color-muted: color-mix(in oklch, var(--background), var(--foreground) 10%);
 	--color-muted-foreground: color-mix(in oklch, var(--background), var(--foreground) 50%);
 

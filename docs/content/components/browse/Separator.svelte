@@ -68,7 +68,7 @@ const code = {
 <h2 id="basic-usage">Basic Usage</h2>
 <p>The separator can either be vertical or horizontal.</p>
 <Playground {code} class="flex-col">
-	<Paper variant="outline" class="flex w-[360px]">
+	<Paper variant="outline" class="flex w-[360px] overflow-hidden">
 		<div class="relative flex w-2/3 flex-col">
 			<div class="px-6 py-3">
 				<p class="text-xs">Shawn Mendes</p>

@@ -3,7 +3,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 export const toast = tv({
 	slots: {
 		container:
-			"relative flex w-full items-center gap-4 overflow-hidden rounded-lg px-4 py-3 shadow-md bg-background border border-muted",
+			"relative flex w-full items-center gap-4 overflow-hidden rounded px-4 py-3 shadow-md bg-background border border-muted",
 		icon: "size-6 shrink-0",
 		content: "flex-grow text-sm",
 		closeButton: "cursor-pointer border-none bg-transparent",

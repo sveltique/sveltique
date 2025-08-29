@@ -13,13 +13,12 @@ export const button = tv({
 			text: ""
 		},
 		shape: {
-			rectangle: "rounded-lg",
-			square: "rounded-2xl"
+			rectangle: "rounded",
+			square: "rounded"
 		},
 		size: {
 			small: "px-3 py-1.5 text-xs",
-			medium: "px-4 py-2 text-sm",
-			large: "px-6 py-3 text-base"
+			medium: "px-4 py-2 text-sm"
 		},
 		disabled: {
 			true: "cursor-not-allowed opacity-50" // TODO : add custom disabled color on each button...
@@ -33,22 +32,17 @@ export const button = tv({
 		{
 			shape: "rectangle",
 			size: "small",
-			class: "rounded-sm"
+			class: "rounded-small"
 		},
 		{
 			shape: "square",
 			size: "small",
-			class: "p-1 rounded-sm"
+			class: "p-1 rounded-small"
 		},
 		{
 			shape: "square",
 			size: "medium",
-			class: "p-2 rounded-lg"
-		},
-		{
-			shape: "square",
-			size: "large",
-			class: "p-3 rounded-2xl"
+			class: "p-2 rounded"
 		},
 		{
 			variant: "contained",
