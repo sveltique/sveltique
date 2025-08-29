@@ -1,15 +1,13 @@
 import type { ToastVariants } from "@sveltique/components";
 
-interface ToastData {
-	id: string;
-	type: ToastVariants["type"];
-	content: string;
-}
-
 interface AddData {
 	/** @default 'info' */
 	type?: ToastVariants["type"];
 	content: string;
+}
+
+interface ToastData extends Required<AddData> {
+	id: string;
 }
 
 class Toasts {

@@ -10,7 +10,7 @@ import { toasts } from "$lib/contexts/toast.svelte";
 <div
     role="status"
 	aria-live="polite"
-	class="fixed right-6 bottom-6 z-[1000] flex w-[calc(100%-3rem)] md:max-w-xs flex-col justify-center gap-2"
+	class="fixed right-6 bottom-6 z-[1000] flex w-[calc(100%-3rem)] sm:max-w-xs flex-col justify-center gap-2"
 >
 	{#each toasts.current as { id, type, content } (id)}
 		<div animate:flip={{ duration: 150 }} transition:fly={{ x: 50, duration: 200 }}>

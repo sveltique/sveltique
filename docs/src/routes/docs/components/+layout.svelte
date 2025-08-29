@@ -69,28 +69,28 @@ $effect(() => {
 	<aside
 		class="sticky left-0 top-16 z-50 hidden h-[calc(100vh-4rem)] items-start justify-end overflow-auto p-6 lg:flex lg:pl-24 xl:pl-6 xl:w-full"
 	>
-		<nav class="relative w-80 flex flex-col gap-5 text-sm font-semibold">
-			{#each data.sidebar as rootItem, index (index)}
-				<div class="relative flex w-full flex-col gap-2.5">
-					<span>{rootItem.name}</span>
-					<div class="relative flex w-full flex-col">
-						{#each rootItem.children as item (item.name)}
-							<a
-								href="/docs/components/{item.slugPath}"
-								class={cnBase(
-									'py-1',
-									page.url.pathname.endsWith(item.slugPath)
-										? 'text-primary'
-										: 'text-muted-foreground'
-								)}
-							>
-								{item.name}
-							</a>
-						{/each}
-					</div>
-				</div>
-			{/each}
-		</nav>
+        <nav class="relative w-60 flex flex-col gap-5 text-sm font-semibold">
+            {#each data.sidebar as rootItem, index (index)}
+                <div class="relative flex w-full flex-col gap-2.5">
+                    <span>{rootItem.name}</span>
+                    <div class="relative flex w-full flex-col">
+                        {#each rootItem.children as item (item.name)}
+                            <a
+                                href="/docs/components/{item.slugPath}"
+                                class={cnBase(
+                                    'py-1',
+                                    page.url.pathname.endsWith(item.slugPath)
+                                        ? 'text-primary'
+                                        : 'text-muted-foreground'
+                                )}
+                            >
+                                {item.name}
+                            </a>
+                        {/each}
+                    </div>
+                </div>
+            {/each}
+        </nav>
 	</aside>
 
 	<header

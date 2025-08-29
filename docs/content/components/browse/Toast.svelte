@@ -42,31 +42,34 @@ const actionCode = `${script("import { Button, Toast } from '@sveltique/componen
 const programmaticCallsCode = {
     logic: `import type { ToastVariants } from "@sveltique/components";
 
-interface ToastData {
-	id: string;
-	/** @default 'info' */
-	type?: ToastVariants["type"];
-	content: string;
+interface AddData {
+    /** @default 'info' */
+    type?: ToastVariants["type"];
+    content: string;
+}
+
+interface ToastData extends Required<AddData> {
+    id: string;
 }
 
 class Toasts {
-	private _current = $state<ToastData[]>([]);
+    private _current = $state<ToastData[]>([]);
 
-	get current() {
-		return this._current;
-	}
+    get current() {
+        return this._current;
+    }
 
-	public add(data: Omit<ToastData, "id">) {
-		const { type = "info", content } = data;
+    public add(data: AddData) {
+        const { type = "info", content } = data;
 
-		const id = crypto.randomUUID();
+        const id = crypto.randomUUID();
 
-		this._current.push({ id, type, content });
+        this._current.push({ id, type, content });
 
-		setTimeout(() => {
-			this._current = this._current.filter((toast) => toast.id !== id);
-		}, 3000);
-	}
+        setTimeout(() => {
+            this._current = this._current.filter((toast) => toast.id !== id);
+        }, 3000);
+    }
 }
 
 export const toasts = new Toasts();`,
@@ -77,10 +80,10 @@ ${script(`import { Toast } from "@sveltique/components";
 
 <div
     role="status"
-	aria-live="polite"
-	class="fixed right-6 bottom-6 z-[1000] flex w-[calc(100%-3rem)] md:max-w-xs flex-col justify-center gap-2"
+    aria-live="polite"
+    class="fixed right-6 bottom-6 z-[1000] flex w-[calc(100%-3rem)] sm:max-w-xs flex-col justify-center gap-2"
 >
-	{#each toasts.current as { id, type, content } (id)}
+    {#each toasts.current as { id, type, content } (id)}
         <div
             animate:flip={{ duration: 150 }}
             transition:fly={{ x: 50, duration: 200 }}
@@ -89,7 +92,7 @@ ${script(`import { Toast } from "@sveltique/components";
                 {content}
             </Toast>
         </div>
-	{/each}
+    {/each}
 </div>`,
     usage: `${script(`import { Button } from "@sveltique/components";
     import ToastContainer from "$components/toast/ToastContainer.svelte";
@@ -149,11 +152,11 @@ ${script(`import { Toast } from "@sveltique/components";
     First, we have to handle the logic. We are going to make a class that stores the list of current
     toasts, a method to add them and a timeout after 3 seconds.
 </p>
-<CodeBlock code={programmaticCallsCode.logic} lang="ts" />
+<CodeBlock code={programmaticCallsCode.logic} lang="ts" showLineNumbers />
 
 <h3 id="root-container">Root container</h3>
 <p>Next, we need a root container, which will be responsible for displaying the toasts.</p>
-<CodeBlock code={programmaticCallsCode.rootContainer} />
+<CodeBlock code={programmaticCallsCode.rootContainer} showLineNumbers />
 
 <h3 id="usage">Usage</h3>
 <p>Finally, we can start using our <Badge>toasts</Badge> object to create toasts programmatically.</p>
