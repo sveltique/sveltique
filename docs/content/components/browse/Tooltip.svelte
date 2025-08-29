@@ -57,7 +57,6 @@ const placementCode = `${script("import { Button, Tooltip } from '@sveltique/com
     {#snippet children({ props, ref })}
         <Button
             bind:ref={ref.current}
-            size="small"
             {...props}
         >
             Bottom
@@ -69,7 +68,6 @@ const placementCode = `${script("import { Button, Tooltip } from '@sveltique/com
     {#snippet children({ props, ref })}
         <Button
             bind:ref={ref.current}
-            size="small"
             {...props}
         >
             Top
@@ -104,13 +102,13 @@ const placementCode = `${script("import { Button, Tooltip } from '@sveltique/com
 <Playground code={placementCode}>
 	<Tooltip title="I'm a bottom tooltip">
 		{#snippet children({ props, ref })}
-			<Button bind:ref={ref.current} size="small" {...props}>Bottom</Button>
+			<Button bind:ref={ref.current} {...props}>Bottom</Button>
 		{/snippet}
 	</Tooltip>
 
 	<Tooltip title="I'm a top tooltip" placement="top">
 		{#snippet children({ props, ref })}
-			<Button bind:ref={ref.current} size="small" {...props}>Top</Button>
+			<Button bind:ref={ref.current} {...props}>Top</Button>
 		{/snippet}
 	</Tooltip>
 </Playground>
