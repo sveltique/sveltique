@@ -1,11 +1,12 @@
 <script lang="ts">
-import { button, Button, Separator, Tooltip } from "@sveltique/components";
-import { theme } from "$lib/contexts/theme.svelte";
-import "../app.css";
+import { Button, button, Separator, Tooltip } from "@sveltique/components";
 import IconBrandGithub from "@tabler/icons-svelte/icons/brand-github";
 import IconMenuDeep from "@tabler/icons-svelte/icons/menu-deep";
 import IconMoonFilled from "@tabler/icons-svelte/icons/moon-filled";
 import IconSunFilled from "@tabler/icons-svelte/icons/sun-filled";
+import ToastContainer from "$components/toast/ToastContainer.svelte";
+import { theme } from "$lib/contexts/theme.svelte";
+import "../app.css";
 
 let { children } = $props();
 
@@ -13,6 +14,7 @@ let showMenu = $state(false);
 let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
 </script>
 
+<ToastContainer />
 <div class="relative w-full">
 	{@render navigation()}
 	<div class="relative w-full">
