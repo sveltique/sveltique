@@ -84,7 +84,7 @@ function updateOpen() {
 {#snippet expandIcon()}
 	<div class={iconContainer()}>
 		{#if CustomIcon}
-			<CustomIcon />
+			<CustomIcon class={icon()} />
 		{:else}
 			<svg
 				xmlns="http://www.w3.org/2000/svg"

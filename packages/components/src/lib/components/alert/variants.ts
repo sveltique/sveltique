@@ -2,7 +2,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 
 export const alert = tv({
 	slots: {
-		container: "relative flex w-full items-center gap-5 rounded-2xl p-5 text-foreground",
+		container: "relative flex w-full items-center gap-5 rounded-large p-5 text-foreground",
 		icon: "min-h-6 min-w-6"
 	},
 	variants: {

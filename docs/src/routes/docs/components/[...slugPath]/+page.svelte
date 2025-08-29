@@ -19,7 +19,7 @@ let { data } = $props();
             <Paper variant="outline" class="w-full duration-150 hover:bg-muted">
                 <a
                     href="/docs/components/{data.previous.slugPath}"
-                    class="relative w-full px-4 py-3 rounded-2xl flex flex-col items-start gap-1"
+                    class="relative w-full px-4 py-3 rounded-large flex flex-col items-start gap-1"
                 >
                     <span class="text-muted-foreground font-medium text-xs">Previous page</span>
                     <span class="text-primary font-bold">{data.previous.name}</span>
@@ -32,7 +32,7 @@ let { data } = $props();
             <Paper variant="outline" class="w-full duration-150 hover:bg-muted">
                 <a
                     href="/docs/components/{data.next.slugPath}"
-                    class="relative w-full px-4 py-3 rounded-2xl flex flex-col items-end gap-1"
+                    class="relative w-full px-4 py-3 rounded-large flex flex-col items-end gap-1"
                 >
                     <span class="text-muted-foreground font-medium text-xs">Next page</span>
                     <span class="text-primary font-bold">{data.next.name}</span>

@@ -34,9 +34,6 @@ const sizeCode = `${script('import { Button } from "@sveltique/components";')}
     <Button shape="square">
         <IconPlus />
     </Button>
-    <Button size="large" shape="square">
-        <IconPlus />
-    </Button>
 </div>`;
 
 const colorCode = `${script('import { Button } from "@sveltique/components";')}
@@ -78,7 +75,7 @@ const disabledCode = `${script('import { Button } from "@sveltique/components";'
 <Playground code={shapeCode}>
 	<Button>Add an item</Button>
 	<Button shape="square">
-		<IconPlus />
+		<IconPlus class="size-5" />
 	</Button>
 </Playground>
 
@@ -88,7 +85,6 @@ const disabledCode = `${script('import { Button } from "@sveltique/components";'
 	<div class="relative flex w-full items-center justify-center gap-5">
 		<Button size="small">Add an item</Button>
 		<Button>Add an item</Button>
-		<Button size="large">Add an item</Button>
 	</div>
 
 	<div class="relative flex w-full items-center justify-center gap-5">
@@ -96,9 +92,6 @@ const disabledCode = `${script('import { Button } from "@sveltique/components";'
 			<IconPlus />
 		</Button>
 		<Button shape="square">
-			<IconPlus />
-		</Button>
-		<Button size="large" shape="square">
 			<IconPlus />
 		</Button>
 	</div>

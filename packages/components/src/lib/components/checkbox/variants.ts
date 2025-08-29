@@ -2,7 +2,7 @@ import { tv } from "tailwind-variants";
 
 export const checkbox = tv({
 	base: [
-		"relative cursor-pointer rounded-sm border-2 bg-background border-muted-foreground",
+		"relative cursor-pointer rounded-small border-2 bg-background border-muted-foreground",
 		"focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background focus:ring-primary"
 	],
 	variants: {

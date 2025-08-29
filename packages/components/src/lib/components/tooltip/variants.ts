@@ -3,7 +3,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 export const tooltip = tv({
 	slots: {
 		container: "relative",
-		tip: "absolute left-1/2 -translate-x-1/2 text-foreground whitespace-nowrap bg-background rounded-md border border-muted shadow-sm p-2 text-xs"
+		tip: "absolute left-1/2 -translate-x-1/2 text-foreground whitespace-nowrap bg-background rounded-small border border-muted shadow-sm p-2 text-xs"
 	},
 	variants: {
 		placement: {
