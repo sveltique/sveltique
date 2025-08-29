@@ -80,7 +80,7 @@ const disabledCode = `${script('import { Button } from "@sveltique/components";'
 </Playground>
 
 <h3 id="size">Size</h3>
-<p>A button can have three different sizes : medium (default), small, and large.</p>
+<p>A button can have three different sizes : medium (default), or small.</p>
 <Playground code={sizeCode} class="flex-col">
 	<div class="relative flex w-full items-center justify-center gap-5">
 		<Button size="small">Add an item</Button>

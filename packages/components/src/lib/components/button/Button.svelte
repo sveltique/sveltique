@@ -1,5 +1,7 @@
 <script lang="ts">
 import type { HTMLButtonAttributes } from "svelte/elements";
+import { on } from "svelte/events";
+import { cnBase } from "tailwind-variants";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { type ButtonVariants, button } from "./variants.js";
 
@@ -20,6 +22,20 @@ let {
 	variant = "contained",
 	...restProps
 }: Props = $props();
+
+let hasClicked = $state(false);
+
+$effect(() => {
+	if (!ref) return;
+
+	return on(ref, "click", () => {
+		hasClicked = true;
+
+		setTimeout(() => {
+			hasClicked = false;
+		}, 100);
+	});
+});
 </script>
 
 <!--
@@ -32,7 +48,7 @@ Buttons allow users to take actions, and make choices, with a single tap.
 	{type}
 	{disabled}
 	aria-disabled={disabled}
-	class={button({ shape, size, variant, color, disabled, className })}
+	class={button({ shape, size, variant, color, disabled, className: cnBase(className, hasClicked && "duration-100 scale-[97%]") })}
 	{...restProps}
 >
 	{@render children?.()}
