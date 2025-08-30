@@ -6,7 +6,7 @@ export const metadata = {
 </script>
 
 <script lang="ts">
-import { Alert, Badge, Button, Kbd, Link, Modal } from "@sveltique/components";
+import { Alert, Badge, Button, Kbd, Link, Modal, Tooltip } from "@sveltique/components";
 import IconEdit from "@tabler/icons-svelte/icons/edit";
 import IconTrash from "@tabler/icons-svelte/icons/trash";
 
@@ -81,7 +81,6 @@ const controlledStateCode = `${script(`import { Button, Modal } from "@sveltique
 <p>
 	A modal is composed of three elements : a trigger, the modals' content and the modal's actions.
 </p>
-<Alert type="info" class="mb-4">The modal closes on <Kbd>Esc</Kbd> press.</Alert>
 <Playground {code}>
 	<Modal backdropProps={{ z: 1000 }}>
 		{#snippet trigger({ open })}
@@ -100,7 +99,7 @@ const controlledStateCode = `${script(`import { Button, Modal } from "@sveltique
 
 <h3 id="without-actions-snippet">Without <Badge>actions</Badge> snippet</h3>
 <p>
-	Maybe you don't want actions at the bottom of the modal. If so, you can use the <Badge
+	What if you don't want your actions at the bottom of the modal ? In that case, you can use the <Badge
 		>children</Badge
 	> snippet to access the close function.
 </p>
@@ -112,30 +111,55 @@ const controlledStateCode = `${script(`import { Button, Modal } from "@sveltique
 
 		{#snippet children({ close })}
 			<div class="flex items-center justify-between">
-				<Button onclick={close} variant="text" shape="square" title="Close">
-					<IconX class="h-5 w-5" />
-				</Button>
+                <Tooltip title="Close" placement="top">
+                    {#snippet children({ props, ref })}
+                        <Button
+                            bind:ref={ref.current}
+                            onclick={close}
+                            variant="text"
+                            shape="square"
+                            {...props}
+                        >
+                            <IconX class="h-5 w-5" />
+                        </Button>
+                    {/snippet}
+                </Tooltip>
 
 				<div class="flex items-center gap-3">
-					<Button onclick={() => alert('Edit action')} shape="square" title="Edit">
-						<IconEdit class="h-5 w-5" />
-					</Button>
-					<Button
-						onclick={() => confirm('Delete this project?')}
-						shape="square"
-						color="danger"
-						title="Delete"
-					>
-						<IconTrash class="h-5 w-5" />
-					</Button>
+                    <Tooltip title="Edit" placement="top">
+                        {#snippet children({ props, ref })}
+                            <Button
+                                bind:ref={ref.current}
+                                onclick={close}
+                                shape="square"
+                                {...props}
+                            >
+                                <IconEdit class="h-5 w-5" />
+                            </Button>
+                        {/snippet}
+                    </Tooltip>
+                    <Tooltip title="Delete" placement="top">
+                        {#snippet children({ props, ref })}
+                            <Button
+                                bind:ref={ref.current}
+                                onclick={close}
+                                shape="square"
+                                color="danger"
+                                {...props}
+                            >
+                                <IconTrash class="h-5 w-5" />
+                            </Button>
+                        {/snippet}
+                    </Tooltip>
 				</div>
 			</div>
 
 			<div class="flex flex-col items-start gap-3">
-				<h2 class="text-xl font-bold">Project Alpha</h2>
-				<p class="text-gray-600">
-					This is an example project. You can edit details, view members, or delete it entirely
-					using the actions in the top-right corner.
+				<h2 class="text-2xl font-bold">Document Draft</h2>
+				<p class="">
+					This is a draft version of your document. You can update its content, share it
+                    with collaborators, or remove it entirely using the actions in the top-right
+                    corner.
 				</p>
 			</div>
 		{/snippet}
@@ -222,6 +246,7 @@ const controlledStateCode = `${script(`import { Button, Modal } from "@sveltique
 		accessibility guidelines
 	</Link> for more information.
 </p>
+<Alert class="mb-4">When set, the modal also closes on <Kbd>Esc</Kbd> press.</Alert>
 <Playground>
 	<Modal backdropProps={{ z: 1000 }} closeOnOverlayClick>
 		{#snippet trigger({ open })}

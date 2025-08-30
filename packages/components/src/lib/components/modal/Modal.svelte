@@ -1,10 +1,10 @@
 <script lang="ts">
-import { onMount, type Snippet } from "svelte";
+import { type Snippet } from "svelte";
 import type { HTMLAttributes } from "svelte/elements";
-import { on } from "svelte/events";
 import type { ReplaceWithTWMergeClass } from "$lib/types.js";
+import { onKeyUp } from "$utils/on-key.svelte.js";
 import { flyAndScale } from "../../transitions/fly-and-scale.js";
-import Backdrop, { type BackdropProps } from "../backdrop/Backdrop.svelte";
+import { default as Backdrop, type BackdropProps } from "../backdrop/Backdrop.svelte";
 import { modal } from "./variants.js";
 
 type ChildrenSnippet = Snippet<
@@ -52,22 +52,13 @@ let {
 const uid = $props.id();
 let { actions: actionsCss, dialog } = $derived(modal());
 
-onMount(() => {
-	return on(
-		window,
-		"keyup",
-		(event) => {
-			if (event.key !== "Escape") return;
-
-			isOpen = false;
-		},
-		{ passive: true }
-	);
-});
-
 $effect(() => {
 	document.body.style.overflow = isOpen ? "hidden" : "auto";
 });
+
+if (closeOnOverlayClick) {
+	onKeyUp("Escape", () => (isOpen = false));
+}
 
 const open = () => (isOpen = true);
 const close = () => (isOpen = false);
