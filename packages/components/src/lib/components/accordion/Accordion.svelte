@@ -44,9 +44,11 @@ const activeElement = getActiveElement();
 
 onMount(() => {
 	if (!ref || !defaultExpand) return;
-	if (!ref.firstElementChild?.firstElementChild) return;
 
-	values = [ref.firstElementChild.firstElementChild.id];
+	const firstChild = ref.querySelector("[data-accordion-item]");
+	if (!firstChild) return;
+
+	values = [firstChild.id];
 });
 
 $effect(() => {

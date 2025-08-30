@@ -17,6 +17,7 @@ type IconSnippet = Snippet<
 interface Props extends TWMergeClass {
 	children: Snippet;
 	header: Snippet;
+	// TODO : Replace with `id` as it makes more sense
 	value?: string;
 	icon?: IconSnippet;
 }
