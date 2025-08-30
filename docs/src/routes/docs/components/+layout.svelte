@@ -120,7 +120,6 @@ $effect(() => {
             <div transition:fly={{ y: -10, duration: 150 }}>
                 <Paper
                     bind:ref={showOnThisPageRef}
-                    variant="outline"
                     class="absolute top-[calc(100%-8px)] left-4 right-4 flex w-[calc(100%-2rem)] p-6 shadow-md"
                 >
                     <nav

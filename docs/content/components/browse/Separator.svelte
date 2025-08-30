@@ -12,7 +12,7 @@ import IconPlayerSkipForwardFilled from "@tabler/icons-svelte/icons/player-skip-
 import Playground from "$components/Playground.svelte";
 
 const code = {
-	short: `<Paper variant="outline" class="flex w-[360px]">
+	short: `<Paper class="flex w-[360px]">
     <div class="relative flex w-2/3 flex-col">
         <div class="px-6 py-3">
             <p class="text-xs">Shawn Mendes</p>
@@ -43,7 +43,7 @@ const code = {
      } from '@tabler/icons-svelte';
 &lt;/script&gt;
 
-<Paper variant="outline" class="flex w-[360px]">
+<Paper class="flex w-[360px]">
     <div class="relative flex w-2/3 flex-col">
         <div class="px-6 py-3">
             <p class="text-xs">Shawn Mendes</p>
@@ -74,7 +74,7 @@ const code = {
 <h2 id="basic-usage">Basic Usage</h2>
 <p>A separator can have two different orientations : horizontal (default), or vertical.</p>
 <Playground {code} class="flex-col">
-	<Paper variant="outline" class="flex w-[360px] overflow-hidden">
+	<Paper class="flex w-[360px] overflow-hidden">
 		<div class="relative flex w-2/3 flex-col">
 			<div class="px-6 py-3">
 				<p class="text-xs">Shawn Mendes</p>

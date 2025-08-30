@@ -11,16 +11,7 @@ interface Props
 	class?: ClassNameValue;
 }
 
-let {
-	children,
-	class: className = undefined,
-	elevation = 1,
-	ref = $bindable(),
-	variant = "shadow",
-	...restProps
-}: Props = $props();
-
-let _elevation = $derived(variant === "outline" ? 0 : elevation);
+let { children, class: className = undefined, ref = $bindable(), ...restProps }: Props = $props();
 </script>
 
 <!--
@@ -28,6 +19,6 @@ let _elevation = $derived(variant === "outline" ? 0 : elevation);
 A surface to display content and actions.
 -->
 
-<div bind:this={ref} data-paper class={paper({ elevation: _elevation, variant, className })} {...restProps}>
+<div bind:this={ref} data-paper class={paper({ className })} {...restProps}>
 	{@render children?.()}
 </div>

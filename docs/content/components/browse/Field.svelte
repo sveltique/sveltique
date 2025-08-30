@@ -59,7 +59,7 @@ const ageCode = `${script(`import { Field, NumberInput } from '@sveltique/compon
         {'<Select />'}
     </Link>.
 </p>
-<Playground>
+<Playground code={basicUsageCode}>
     <Field label="Full Name" class="w-[200px]">
 		{#snippet input(props)}
 			<TextInput {...props} />

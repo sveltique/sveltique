@@ -107,6 +107,31 @@ export const metadata = {
         </p>
     </Accordion.Item>
 </Accordion.Root>`;
+
+    const onlyExpandOneAtATimeCode = `${script('import { Accordion } from "@sveltique/components";')}
+    
+<Accordion.Root multiple={false} class="max-w-md">
+    <Accordion.Item>
+        {#snippet header()}
+            Accordion 1
+        {/snippet}
+
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate impedit deserunt amet
+            officia qui tenetur laboriosam consequatur incidunt, voluptatum atque.
+        </p>
+    </Accordion.Item>
+    <Accordion.Item>
+        {#snippet header()}
+            Accordion 2
+        {/snippet}
+
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos sequi consectetur dolores
+            libero tempora ducimus perferendis iste qui voluptas. Cum!
+        </p>
+    </Accordion.Item>
+</Accordion.Root>`
 </script>
 
 <h1 id="accordion">Accordion</h1>
@@ -211,7 +236,7 @@ export const metadata = {
 		>{'multiple={false}'}</Badge
 	>.
 </p>
-<Playground>
+<Playground code={onlyExpandOneAtATimeCode}>
 	<Accordion.Root multiple={false} class="max-w-md">
 		<Accordion.Item>
 			{#snippet header()}
