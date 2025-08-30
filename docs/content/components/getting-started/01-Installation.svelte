@@ -1,5 +1,5 @@
 <script>
-import { Badge, Link } from "@sveltique/components";
+import { Alert, Badge, Link } from "@sveltique/components";
 import CodeBlock from "$components/CodeBlock.svelte";
 </script>
 
@@ -10,6 +10,11 @@ import CodeBlock from "$components/CodeBlock.svelte";
 
 <h1 id="installation" class="text-3xl font-bold">Installation</h1>
 <p>Install Sveltique components library.</p>
+<Alert>
+    Until Sveltique Components reaches 1.0, there may be breaking changes between minor versions.
+    It is advised to pin your current version and manually ensure that your application is still
+    working after updating.
+</Alert>
 
 <h2 id="default-installation">Default installation</h2>
 <p>You can easily import the library via npm.</p>
