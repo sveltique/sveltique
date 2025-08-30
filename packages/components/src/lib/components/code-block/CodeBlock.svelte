@@ -74,6 +74,24 @@ async function copy() {
 			</Tooltip>
 		</div>
 		<Separator class="bg-muted-foreground" />
+    {:else}
+        <Tooltip
+            title={isCopied ? 'Copied' : 'Copy to clipboard'}
+            placement="top"
+            containerClass="absolute z-10 right-3 {tokensResult.tokens.length === 1 ? "top-1/2 -translate-y-1/2" : "top-3"}"
+        >
+            {#snippet children({ props, ref })}
+                <Button
+                    bind:ref={ref.current}
+                    onclick={copy}
+                    variant="text"
+                    shape="square"
+                    {...props}
+                >
+                    {@render iconSnippet()}
+                </Button>
+            {/snippet}
+        </Tooltip>
 	{/if}
 	<pre data-code-block-pre data-show-line-numbers={showLineNumbers} class={pre({ className })}>
         <code class={codeCss()}>

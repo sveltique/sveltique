@@ -2,6 +2,7 @@
 import type { Snippet } from "svelte";
 import { on } from "svelte/events";
 import { fade } from "svelte/transition";
+import type { ClassNameValue } from "tailwind-merge";
 import type { TWMergeClass } from "$lib/types.js";
 import { type TooltipVariants, tooltip } from "./variants.js";
 
@@ -9,13 +10,22 @@ type Ref = { current: HTMLElement | undefined };
 
 interface Props extends TWMergeClass, TooltipVariants {
 	children?: Snippet<[{ ref: Ref; props: { "aria-describedby": string } }]>;
+	containerClass?: ClassNameValue;
 	id?: string;
 	title: string;
 	/** @default 1000 */
 	z?: number;
 }
 
-let { children, id, class: className, placement = "bottom", title, z = 1000 }: Props = $props();
+let {
+	children,
+	id,
+	class: className,
+	containerClass,
+	placement = "bottom",
+	title,
+	z = 1000
+}: Props = $props();
 
 const uid = $props.id();
 
@@ -45,8 +55,9 @@ $effect(() => {
 });
 </script>
 
-<div class={container()}>
+<div class={container({ className: containerClass })}>
 	{@render children?.({ ref, props: { 'aria-describedby': _id } })}
+    
 	{#if show}
 		<div
 			transition:fade={{ duration: 150 }}

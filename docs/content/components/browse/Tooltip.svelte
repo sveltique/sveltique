@@ -111,8 +111,29 @@ const placementCode = `${script("import { Button, Tooltip } from '@sveltique/com
 	To make the tooltip accessible, it must be linked to the item it describes. For this, pass down
 	the tooltip's ID by using the <Badge>props</Badge> parameter.
 </p>
-<Alert type="info" class="mb-4">
+<Alert class="mb-4">
 	You can set a custom ID on the tooltip and the props will use it. Otherwise, it will use a
 	generated one via <Badge>$props.id()</Badge>.
 </Alert>
 <CodeBlock code={accessibleCode} />
+
+<h2 id="limitations">Limitations</h2>
+<p>
+    If you want to absolutely position the element on which to add the tooltip, you must instead
+    absolutely position the container regrouping the element and the tooltip using the
+    <Badge>containerClass</Badge> attribute.
+</p>
+<CodeBlock code={`<Tooltip
+    title="Edit post"
+    containerClass="absolute"
+>
+    {#snippet children({ props, ref })}
+        <Button
+            bind:ref={ref.current}
+            shape="square"
+            {...props}
+        >
+            <IconEdit />
+        </Button>
+    {/snippet}
+</Tooltip>`} showLineNumbers />
