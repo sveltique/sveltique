@@ -5,14 +5,23 @@ import type { TWMergeClass } from "$lib/types.js";
 import { useMutationObserver } from "$utils/use-mutation-observer.svelte.js";
 import { accordionItem } from "./variants.js";
 
+type IconSnippet = Snippet<
+	[
+		{
+			/** CSS to manage the size of the icon. */
+			css: string;
+		}
+	]
+>;
+
 interface Props extends TWMergeClass {
 	children: Snippet;
 	header: Snippet;
 	value?: string;
-	Icon?: ComponentType | Component;
+	icon?: IconSnippet;
 }
 
-let { children, class: className, header, value, Icon: CustomIcon }: Props = $props();
+let { children, class: className, header, value, icon = fallbackIcon }: Props = $props();
 
 const uid = $props.id();
 
@@ -26,7 +35,7 @@ let _value = $derived(value ?? uid);
 
 let {
 	container,
-	icon,
+	icon: iconCss,
 	iconContainer,
 	panel,
 	header: headerCss,
@@ -64,7 +73,9 @@ function updateOpen() {
 		>
 			<div class={headerCss()}>
 				<span>{@render header()}</span>
-				{@render expandIcon()}
+                <div class={iconContainer()}>
+				    {@render icon({ css: iconCss() })}
+                </div>
 			</div>
 		</button>
 	</svelte:element>
@@ -81,26 +92,20 @@ function updateOpen() {
 	{/if}
 </div>
 
-{#snippet expandIcon()}
-	<div class={iconContainer()}>
-		{#if CustomIcon}
-			<CustomIcon class={icon()} />
-		{:else}
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="24"
-				height="24"
-				viewBox="0 0 24 24"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="2"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down {icon()}"
-			>
-				<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-				<path d="M6 9l6 6l6 -6" />
-			</svg>
-		{/if}
-	</div>
+{#snippet fallbackIcon({ css }: Parameters<IconSnippet>["0"])}
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down {css}"
+    >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M6 9l6 6l6 -6" />
+    </svg>
 {/snippet}

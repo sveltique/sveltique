@@ -146,7 +146,7 @@ export const metadata = {
 <p>You can customize the expand icon by passing an <Badge>Icon</Badge> property.</p>
 <Playground code={expandIconCode}>
 	<Accordion.Root class="max-w-md">
-		<Accordion.Item Icon={IconArrowDown}>
+		<Accordion.Item>
 			{#snippet header()}
 				Accordion 1
 			{/snippet}
@@ -155,9 +155,12 @@ export const metadata = {
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate impedit deserunt amet
 				officia qui tenetur laboriosam consequatur incidunt, voluptatum atque.
 			</p>
-		</Accordion.Item>
 
-		<Accordion.Item Icon={IconCaretDownFilled}>
+            {#snippet icon({ css })}
+                <IconArrowDown class={css} />
+            {/snippet}
+		</Accordion.Item>
+		<Accordion.Item>
 			{#snippet header()}
 				Accordion 2
 			{/snippet}
@@ -166,6 +169,10 @@ export const metadata = {
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos sequi consectetur dolores
 				libero tempora ducimus perferendis iste qui voluptas. Cum!
 			</p>
+
+            {#snippet icon({ css })}
+                <IconCaretDownFilled class={css} />
+            {/snippet}
 		</Accordion.Item>
 	</Accordion.Root>
 </Playground>
