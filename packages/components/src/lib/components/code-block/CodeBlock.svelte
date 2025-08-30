@@ -1,11 +1,11 @@
 <script lang="ts">
 import type { BundledLanguage, BundledTheme, HighlighterGeneric } from "shiki";
+import type { Snippet } from "svelte";
 import type { TWMergeClass } from "$lib/types.js";
 import { Button } from "../button/index.js";
 import { Separator } from "../separator/index.js";
 import { Tooltip } from "../tooltip/index.js";
 import { assembleLines, parseNumberRanges, transformHTMLEntities } from "./code-block.js";
-import { getIcon } from "./icons.js";
 import { codeBlock } from "./variants.js";
 
 export interface CodeBlockProps extends TWMergeClass {
@@ -18,6 +18,8 @@ export interface CodeBlockProps extends TWMergeClass {
 	/** @default '' */
 	highlightedLines?: string;
 	filename?: string;
+	/** Only works if you pass in a `filename`. */
+	icon?: Snippet;
 }
 
 let {
@@ -28,7 +30,8 @@ let {
 	showLineNumbers = false,
 	highlightedLines = "",
 	highlighter,
-	filename
+	filename,
+	icon
 }: CodeBlockProps = $props();
 
 let isCopied = $state(false);
@@ -59,7 +62,7 @@ async function copy() {
 	{#if filename}
 		<div class={header()}>
 			<div class="relative flex items-center justify-start gap-2.5">
-				{@html getIcon(filename)}
+                {@render icon?.()}
 				<p class={filenameCss()}>{filename}</p>
 			</div>
 			<Tooltip title={isCopied ? 'Copied' : 'Copy to clipboard'} placement="top">
