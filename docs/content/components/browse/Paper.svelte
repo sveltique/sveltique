@@ -24,7 +24,7 @@ import Playground from "$components/Playground.svelte";
             <p class="text-sm">And yes, I prefer cats to dogs.</p>
         </div>
     </Paper>
-    <p>
+    <p class="text-sm">
         Image from <Link
             href="https://unsplash.com/photos/three-assorted-color-kittens-rplhB9mYF48"
             aria-label="See the original image of the cats from Unsplash in another tab."

@@ -4,7 +4,7 @@ export const metadata = {
 };
 </script>
 
-<script>
+<script lang="ts">
 	import { Accordion, Badge } from '@sveltique/components';
 	import Playground from '$components/Playground.svelte';
 	import CodeBlock from '$components/CodeBlock.svelte';
