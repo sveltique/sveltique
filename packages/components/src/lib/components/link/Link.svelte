@@ -7,8 +7,11 @@ import { type LinkVariants, link } from "./variants.js";
 type IconSnippet = Snippet<
 	[
 		{
-			/** CSS to manage the size of the icon. */
-			css: string;
+			props: {
+				"aria-hidden": true;
+				/** CSS to manage the size of the icon. */
+				css: string;
+			};
 		}
 	]
 >;
@@ -51,11 +54,11 @@ let { container, icon: iconCss } = $derived(link({ underline }));
 	{@render children?.()}
 
     {#if external && icon !== false}
-        {@render icon({ css: iconCss() })}
+        {@render icon({ props: { css: iconCss(), "aria-hidden": true } })}
     {/if}
 </a>
 
-{#snippet fallbackIcon({ css }: Parameters<IconSnippet>["0"])}
+{#snippet fallbackIcon({ props: { css, ...rest } }: Parameters<IconSnippet>["0"])}
     <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -67,6 +70,7 @@ let { container, icon: iconCss } = $derived(link({ underline }));
         stroke-linecap="round"
         stroke-linejoin="round"
         class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-up-right {css}"
+        {...rest}
     >
         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
         <path d="M17 7l-10 10" />

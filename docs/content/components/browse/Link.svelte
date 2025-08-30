@@ -37,8 +37,9 @@ const iconCode = `${script(`import { Link } from "@sveltique/components";
 >
     See the MDN docs
 
-    {#snippet icon({ css })}
-        <IconExternalLink class={css} />
+    <!-- { "aria-hidden": true; css: string; } -->
+    {#snippet icon({ props })}
+        <IconExternalLink {...props} />
     {/snippet}
 </Link>
 <Link
@@ -82,7 +83,7 @@ const underlineCode = `${script('import { Link } from "@sveltique/components";')
 	</Link>
 </Playground>
 
-<h3>Icon</h3>
+<h3 id="icon">Icon</h3>
 <p>By default, external links include an up right arrow icon. You can use the <Badge>icon</Badge> snippet to customize or remove it.</p>
 <Playground code={iconCode}>
     <Link
@@ -92,8 +93,8 @@ const underlineCode = `${script('import { Link } from "@sveltique/components";')
 	>
 		See the MDN docs
 
-        {#snippet icon({ css })}
-            <IconExternalLink class={css} />
+        {#snippet icon({ props })}
+            <IconExternalLink {...props} />
         {/snippet}
 	</Link>
     <Link
