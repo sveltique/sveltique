@@ -55,7 +55,7 @@ let { container, icon: iconCss } = $derived(link({ underline }));
     {/if}
 </a>
 
-{#snippet fallbackIcon({ css }: { css: string })}
+{#snippet fallbackIcon({ css }: Parameters<IconSnippet>["0"])}
     <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"

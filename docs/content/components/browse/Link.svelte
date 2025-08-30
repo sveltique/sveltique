@@ -21,7 +21,7 @@ const externalCode = `${script('import { Link } from "@sveltique/components";')}
 
 <Link
     href="https://developer.mozilla.org"
-    title="To read more, see the MDN docs in a new tab."
+    aria-label="To read more, see the MDN docs in a new tab."
     external
 >
     See the MDN docs
@@ -32,7 +32,7 @@ const iconCode = `${script(`import { Link } from "@sveltique/components";
 
 <Link
     href="https://developer.mozilla.org"
-    title="To read more, see the MDN docs in a new tab."
+    aria-label="To read more, see the MDN docs in a new tab."
     external
 >
     See the MDN docs
@@ -43,7 +43,7 @@ const iconCode = `${script(`import { Link } from "@sveltique/components";
 </Link>
 <Link
     href="https://developer.mozilla.org"
-    title="To read more, see the MDN docs in a new tab."
+    aria-label="To read more, see the MDN docs in a new tab."
     external
     icon={false}
 >
@@ -75,7 +75,7 @@ const underlineCode = `${script('import { Link } from "@sveltique/components";')
 <Playground code={externalCode}>
 	<Link
 		href="https://developer.mozilla.org"
-		title="To read more, see the MDN docs in a new tab."
+		aria-label="To read more, see the MDN docs in a new tab."
 		external
 	>
 		See the MDN docs
@@ -87,7 +87,7 @@ const underlineCode = `${script('import { Link } from "@sveltique/components";')
 <Playground code={iconCode}>
     <Link
 		href="https://developer.mozilla.org"
-		title="To read more, see the MDN docs in a new tab."
+		aria-label="To read more, see the MDN docs in a new tab."
 		external
 	>
 		See the MDN docs
@@ -98,7 +98,7 @@ const underlineCode = `${script('import { Link } from "@sveltique/components";')
 	</Link>
     <Link
 		href="https://developer.mozilla.org"
-		title="To read more, see the MDN docs in a new tab."
+		aria-label="To read more, see the MDN docs in a new tab."
 		external
         icon={false}
 	>
