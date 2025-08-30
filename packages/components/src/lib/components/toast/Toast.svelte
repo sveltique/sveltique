@@ -27,10 +27,10 @@ let { container, icon, content, closeButton, closeIcon } = $derived(toast({ type
 </script>
 
 {#if open}
-	<div role="alert" class={container({ className })}>
+	<div role="alert" data-toast class={container({ className })}>
 		{@render toastIcon()}
 
-		<p class={content()}>
+		<p data-toast-content class={content()}>
 			{@render children()}
 		</p>
 
@@ -42,6 +42,7 @@ let { container, icon, content, closeButton, closeIcon } = $derived(toast({ type
 				variant="text"
 				size="small"
 				shape="square"
+                data-toast-close
 				aria-label={closeAriaLabel}
 				class={closeButton()}
 			>

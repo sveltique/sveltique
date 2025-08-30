@@ -16,6 +16,7 @@ A visible, thin line to visually divide two items.
 
 <div
 	role="separator"
+    data-separator
 	aria-orientation={orientation}
 	aria-hidden="true"
 	class={separator({ orientation, className })}

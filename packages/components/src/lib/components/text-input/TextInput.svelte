@@ -15,4 +15,4 @@ interface Props
 let { class: className, ref = $bindable(), value = $bindable(""), ...restProps }: Props = $props();
 </script>
 
-<input bind:this={ref} bind:value type="text" class={textInput({ className })} {...restProps} />
+<input bind:this={ref} bind:value type="text" data-text-input class={textInput({ className })} {...restProps} />

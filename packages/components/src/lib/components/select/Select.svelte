@@ -187,13 +187,14 @@ A drop-in replacement for the native `select` element.
 Note : The element takes its parent's full width, so if you want to restrict it, you can do so with the `containerClass` prop.
 -->
 
-<div id={componentId} class={container({ class: containerClass })}>
+<div id={componentId} data-select class={container({ class: containerClass })}>
 	<input type="hidden" {name} {value} />
 	<button
 		bind:this={triggerRef}
 		{id}
 		onclick={() => (open = !open)}
 		role="combobox"
+        data-select-trigger
 		aria-controls="{componentId}-listbox"
 		aria-expanded={open}
 		aria-activedescendant={focusedId}
@@ -228,6 +229,7 @@ Note : The element takes its parent's full width, so if you want to restrict it,
 		id="{componentId}-listbox"
 		role="listbox"
 		tabindex="-1"
+        data-select-listbox
 		data-selected-value={value}
 		data-focused-id={focusedId}
 		class={listBox()}

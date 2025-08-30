@@ -12,4 +12,4 @@ interface Props
 let { class: className, ref = $bindable(), value = $bindable(), ...restProps }: Props = $props();
 </script>
 
-<textarea bind:value class={textArea({ className })} {...restProps}></textarea>
+<textarea bind:value data-text-area class={textArea({ className })} {...restProps}></textarea>

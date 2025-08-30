@@ -28,6 +28,7 @@ function onclick(event: MouseEvent) {
 	bind:this={ref}
 	transition:fade={{ duration: fadeDuration }}
 	{onclick}
+    data-backdrop
 	aria-hidden={true}
 	style="z-index: {z}"
 	class={backdrop({ className })}

@@ -86,6 +86,7 @@ A dialog component that interrupts the user flow to capture attention. Displays 
 			transition:flyAndScale={{ duration: 150 }}
 			id={uid}
 			role="alertdialog"
+            data-modal
 			aria-modal="true"
 			aria-labelledby="{uid}-label"
 			aria-describedby="{uid}-description"
@@ -99,7 +100,7 @@ A dialog component that interrupts the user flow to capture attention. Displays 
 			})}
 
 			{#if actions}
-				<div class={actionsCss()}>
+				<div data-modal-actions class={actionsCss()}>
 					{@render actions({ close })}
 				</div>
 			{/if}

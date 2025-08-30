@@ -47,6 +47,7 @@ Buttons allow users to take actions, and make choices, with a single tap.
 	bind:this={ref}
 	{type}
 	{disabled}
+    data-button
 	aria-disabled={disabled}
 	class={button({ shape, size, variant, color, disabled, className: cnBase(className, hasClicked && "duration-100 scale-[97%]") })}
 	{...restProps}

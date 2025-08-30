@@ -45,7 +45,7 @@ const activeElement = getActiveElement();
 onMount(() => {
 	if (!ref || !defaultExpand) return;
 
-	const firstChild = ref.querySelector("[data-accordion-item]");
+	const firstChild = ref.querySelector("[data-accordion-item-trigger]");
 	if (!firstChild) return;
 
 	values = [firstChild.id];
@@ -60,7 +60,7 @@ $effect(() => {
 		if (
 			!target ||
 			!(target instanceof HTMLElement) ||
-			!target.hasAttribute("data-accordion-item")
+			!target.hasAttribute("data-accordion-item-trigger")
 		) {
 			return;
 		}
@@ -154,6 +154,7 @@ function focusNext(container: HTMLElement) {
 
 <div
 	bind:this={ref}
+    data-accordion-root
 	data-heading-level={headingLevel}
 	data-open-values={values.join(',')}
 	class={accordion({ className })}

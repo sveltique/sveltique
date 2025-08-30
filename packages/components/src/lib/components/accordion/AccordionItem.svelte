@@ -62,11 +62,11 @@ function updateOpen() {
 }
 </script>
 
-<div bind:this={ref} class={container({ className })}>
+<div bind:this={ref} data-accordion-item class={container({ className })}>
 	<svelte:element this={headingLevel} class="contents">
 		<button
 			id={uid}
-			data-accordion-item
+			data-accordion-item-trigger
 			data-value={_value}
 			aria-controls="{uid}-panel"
 			aria-expanded={open}
@@ -85,6 +85,7 @@ function updateOpen() {
 		<div
 			transition:slide={{ duration: 150 }}
 			id="{uid}-panel"
+            data-accordion-item-panel
 			aria-labelledby={uid}
 			class={panel()}
 		>

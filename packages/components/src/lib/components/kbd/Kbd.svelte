@@ -8,6 +8,6 @@ interface Props extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLElement>> {}
 let { children, class: className, ...restProps }: Props = $props();
 </script>
 
-<kbd class={kbd()} {...restProps}>
+<kbd data-kbd class={kbd()} {...restProps}>
 	{@render children?.()}
 </kbd>

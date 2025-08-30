@@ -28,9 +28,10 @@ let { container, thumb } = $derived(switchTv({ checked, disabled, className }));
 	{disabled}
 	type="button"
 	role="switch"
+    data-switch
 	aria-checked={checked}
 	class={container({ className })}
 	{...restProps}
 >
-	<div class={thumb()}></div>
+	<div data-switch-thumb class={thumb()}></div>
 </button>

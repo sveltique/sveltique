@@ -13,4 +13,4 @@ let { animation = "pulse", class: className, ...restProps }: Props = $props();
 A placeholder component to display while the content is loading.
 -->
 
-<div class={skeleton({ animation, className })} aria-hidden="true" {...restProps}></div>
+<div class={skeleton({ animation, className })} data-skeleton aria-hidden="true" {...restProps}></div>

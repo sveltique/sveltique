@@ -58,9 +58,9 @@ async function copy() {
 }
 </script>
 
-<div style="color: {tokensResult.fg}; background-color: {tokensResult.bg}" class={container()}>
+<div data-code-block style="color: {tokensResult.fg}; background-color: {tokensResult.bg}" class={container()}>
 	{#if filename}
-		<div class={header()}>
+		<div data-code-block-header class={header()}>
 			<div class="relative flex items-center justify-start gap-2.5">
                 {@render icon?.()}
 				<p class={filenameCss()}>{filename}</p>
@@ -75,7 +75,7 @@ async function copy() {
 		</div>
 		<Separator class="bg-muted-foreground" />
 	{/if}
-	<pre data-code-block data-show-line-numbers={showLineNumbers} class={pre({ className })}>
+	<pre data-code-block-pre data-show-line-numbers={showLineNumbers} class={pre({ className })}>
         <code class={codeCss()}>
             {@html assembleLines(tokensResult.tokens, parsedLines)}
         </code>
@@ -120,7 +120,7 @@ async function copy() {
 {/snippet}
 
 <style>
-	:global(pre[data-code-block]) {
+	:global([data-code-block] pre) {
 		counter-reset: line;
 
 		& [data-code-line] {

@@ -28,6 +28,6 @@ let _elevation = $derived(variant === "outline" ? 0 : elevation);
 A surface to display content and actions.
 -->
 
-<div bind:this={ref} class={paper({ elevation: _elevation, variant, className })} {...restProps}>
+<div bind:this={ref} data-paper class={paper({ elevation: _elevation, variant, className })} {...restProps}>
 	{@render children?.()}
 </div>

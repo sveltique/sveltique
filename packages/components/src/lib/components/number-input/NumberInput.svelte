@@ -61,7 +61,7 @@ An input for numbers.
 Comes with increment/decrement buttons and built-in `min` and `max` validation.
 -->
 
-<div class={container({ class: containerClass })}>
+<div data-number-input class={container({ class: containerClass })}>
 	<button onclick={() => changeValue((value ?? 0) - step)} class={decrement()}>
 		{@render minusIcon()}
 	</button>

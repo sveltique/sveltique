@@ -47,7 +47,7 @@ let _rel = $derived(rel ?? (external ? "noreferrer" : undefined));
 let { container, icon: iconCss } = $derived(link({ underline }));
 </script>
 
-<a {href} target={_target} rel={_rel} class={container({ className })} {...restProps}>
+<a {href} target={_target} rel={_rel} data-link class={container({ className })} {...restProps}>
 	{@render children?.()}
 
     {#if external && icon !== false}

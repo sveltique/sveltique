@@ -19,7 +19,7 @@ const { container, icon } = $derived(alert({ type, className }));
 A visual message box used to communicate contextual feedback to users, such as information, success, warnings, or errors.
 -->
 
-<div bind:this={ref} role="alert" class={container({ className })}>
+<div bind:this={ref} role="alert" data-alert class={container({ className })}>
 	{@render alertIcon()}
 	<span>{@render children?.()}</span>
 </div>

@@ -26,15 +26,15 @@ const { container, error: errorCss, label: labelCss, icon } = $derived(field());
 Fields allow users to enter data into a UI.
 -->
 
-<div class={container({ className })}>
-	<label for={id} class={labelCss()}>{label}</label>
+<div data-field class={container({ className })}>
+	<label for={id} data-field-label class={labelCss()}>{label}</label>
 	{@render input({
 		id,
 		'aria-invalid': !!error,
 		'aria-describedby': error ? `${id}-error` : undefined
 	})}
 	{#if error}
-		<p id="{id}-error" role="alert" class={errorCss()}>
+		<p id="{id}-error" role="alert" data-field-error class={errorCss()}>
 			{@render errorIcon()}
 			{error}
 		</p>

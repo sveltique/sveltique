@@ -23,6 +23,6 @@ A small badge with rounded corners.
 Change the color using the `class` property.
 -->
 
-<div class={badge({ variant, number, className })}>
+<div data-badge class={badge({ variant, number, className })}>
 	{@render children?.()}
 </div>

@@ -52,8 +52,9 @@ $effect(() => {
 			transition:fade={{ duration: 150 }}
 			id={_id}
 			role="tooltip"
-			style="z-index: {z};"
 			tabindex="-1"
+            data-tooltip
+			style="z-index: {z};"
 			class={tip({ className })}
 		>
 			{title}

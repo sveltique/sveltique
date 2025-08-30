@@ -28,6 +28,7 @@ A pre-styled checkbox.
 	bind:checked
 	{disabled}
 	type="checkbox"
+    data-checkbox
 	class={checkbox({ checked, disabled, className })}
 	{...restProps}
 />
