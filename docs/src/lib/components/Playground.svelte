@@ -1,9 +1,8 @@
 <script lang="ts">
-import { Paper, Separator } from "@sveltique/components";
+import { Paper } from "@sveltique/components";
 import type { Snippet } from "svelte";
 import type { ClassNameValue } from "tailwind-merge";
 import { cnBase } from "tailwind-variants";
-import { cn } from "$utils/cn.js";
 import CodeBlock from "./CodeBlock.svelte";
 
 type Code = {
@@ -13,12 +12,11 @@ type Code = {
 
 interface Props {
 	children?: Snippet;
-	controls?: Snippet;
 	class?: ClassNameValue;
 	code?: string | Code;
 }
 
-let { children, controls, class: className, code }: Props = $props();
+let { children, class: className, code }: Props = $props();
 
 let showCode = $state(false);
 </script>
@@ -55,17 +53,9 @@ let showCode = $state(false);
 		<Paper
 			variant="outline"
 			elevation={0}
-			class="flex h-[400px] w-full flex-col items-stretch justify-between overflow-auto"
+			class={cnBase("flex h-[400px] w-full items-center justify-center overflow-auto gap-5 p-6", className)}
 		>
-			<div class={cn('relative flex grow items-center justify-center gap-5 p-6', className)}>
-				{@render children?.()}
-			</div>
-			{#if controls}
-				<Separator orientation="vertical" />
-				<div class="relative p-6">
-					{@render controls()}
-				</div>
-			{/if}
+            {@render children?.()}
 		</Paper>
 	{/if}
 </div>

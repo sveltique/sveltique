@@ -6,7 +6,7 @@ export const metadata = {
 </script>
 
 <script lang="ts">
-import { Badge, Field, NumberInput, Progress } from "@sveltique/components";
+import { Badge, Progress } from "@sveltique/components";
 import { normalizeProgress } from "@sveltique/components/utils";
 import { tick } from "svelte";
 import CodeBlock from "$components/CodeBlock.svelte";
@@ -30,32 +30,12 @@ $effect(() => {
 
 	return () => clearInterval(interval);
 });
-</script>
 
-<h1 id="progress">Progress</h1>
-<p>
-	A visual indicator of progress toward completing a task or reaching a limit, such as file uploads,
-	onboarding steps, or usage quotas.
-</p>
-
-<h2 id="basic-usage">Basic Usage</h2>
-<p>Simply set the current value.</p>
-<Playground
-	code={{
-		short: '<Progress value={73} />',
-		expanded: `${script('import { Progress } from "@sveltique/components";')}
+const basicUsageCode = `${script('import { Progress } from "@sveltique/components";')}
     
 <Progress value={73} />`
-	}}
->
-	<Progress value={73} />
-</Playground>
 
-<h3 id="updating-the-value">Updating the value</h3>
-<Playground
-	code={{
-		short: '<Progress {value} />',
-		expanded: `${script(`import { Progress } from "@sveltique/components";
+const updatingValueCode = `${script(`import { Progress } from "@sveltique/components";
     
     let value = $state(0);
     
@@ -71,31 +51,28 @@ $effect(() => {
     });`)}
     
 <Progress {value} />`
-	}}
->
+
+const nonStandardRangesCode = `${script(`import { Progress } from "@sveltique/components";
+    import { normalizeProgress } from "@sveltique/components/utils";`)}
+
+<!-- normalizeProgress(value, min, max) -->
+<Progress value={normalizeProgress(203, 47, 296)} />`
+</script>
+
+<h1 id="progress">Progress</h1>
+<p>
+	A visual indicator of progress toward completing a task or reaching a limit, such as file uploads,
+	onboarding steps, or usage quotas.
+</p>
+
+<h2 id="basic-usage">Basic Usage</h2>
+<Playground code={basicUsageCode}>
+	<Progress value={73} />
+</Playground>
+
+<h3 id="updating-the-value">Updating the value</h3>
+<Playground code={updatingValueCode}>
 	<Progress {value} />
-
-	{#snippet controls()}
-		<div class="flex flex-col gap-6">
-			<Field label="Step">
-				{#snippet input(props)}
-					<NumberInput bind:value={step} min={1} max={40} containerClass="w-40" {...props} />
-				{/snippet}
-			</Field>
-
-			<Field label="Interval speed (ms)">
-				{#snippet input(props)}
-					<NumberInput
-						bind:value={intervalValue}
-						min={40}
-						max={400}
-						containerClass="w-40"
-						{...props}
-					/>
-				{/snippet}
-			</Field>
-		</div>
-	{/snippet}
 </Playground>
 
 <h2 id="non-standard-ranges">Non-standard ranges</h2>
@@ -104,17 +81,7 @@ $effect(() => {
 	outside that range, you have to use <Badge>normalizeProgress()</Badge> to use it with the progress
 	bar.
 </p>
-<Playground
-	code={{
-		short: `<!-- normalizeProgress(value, min, max) -->
-<Progress value={normalizeProgress(203, 47, 296)} />`,
-		expanded: `${script(`import { Progress } from "@sveltique/components";
-    import { normalizeProgress } from "@sveltique/components/utils";`)}
-
-<!-- normalizeProgress(value, min, max) -->
-<Progress value={normalizeProgress(203, 47, 296)} />`
-	}}
->
+<Playground code={nonStandardRangesCode}>
 	<Progress value={normalizeProgress(203, 47, 296)} />
 </Playground>
 
