@@ -16,24 +16,35 @@ let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
 
 <ToastContainer />
 <div class="relative w-full">
-	{@render navigation()}
-	<div class="relative w-full">
-		{@render children()}
-	</div>
+    {@render navigation()}
+    <div class="relative w-full">
+        {@render children()}
+    </div>
 </div>
 
 {#snippet navigation()}
-	<header
-		class="sticky left-0 top-0 z-50 hidden h-16 w-full border-b border-muted bg-background lg:block"
-	>
-		<nav
-			class="relative flex h-full w-full items-center justify-between gap-5 px-20 dark:text-zinc-100"
-		>
-			<div class="relative flex items-center gap-10">
-				<a href="/" class="font-bold">SVELTIQUE</a>
-				<a href="/docs/components">Components</a>
-			</div>
-			<div class="flex items-center gap-6 py-4">
+    <header
+        class="sticky left-0 top-0 z-50 hidden h-16 w-full border-b border-muted bg-background lg:block"
+    >
+        <nav
+            class="relative flex h-full w-full items-center justify-between gap-5 px-20 dark:text-zinc-100"
+        >
+            <div class="relative flex items-center gap-10">
+                <Tooltip title="Go to home page">
+                    {#snippet children({ props, ref })}
+                        <a
+                            bind:this={ref.current}
+                            href="/"
+                            class="font-bold"
+                            {...props}
+                        >
+                            SVELTIQUE
+                        </a>
+                    {/snippet}
+                </Tooltip>
+                <a href="/docs/components">Components</a>
+            </div>
+            <div class="flex items-center gap-6 py-4">
                 <Tooltip title="Go to the Github repository">
                     {#snippet children({ props, ref })}
                         <a
@@ -50,7 +61,7 @@ let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
                     {/snippet}
                 </Tooltip>
                 <Separator orientation="vertical" />
-                <Tooltip title="Switch to {theme.isDark ? "light" : "dark"} mode">
+                <Tooltip title="Switch to {theme.isDark ? 'light' : 'dark'} mode">
                     {#snippet children({ props, ref })}
                         <Button
                             bind:ref={ref.current}
@@ -64,23 +75,26 @@ let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
                     {/snippet}
                 </Tooltip>
             </div>
-		</nav>
-	</header>
+        </nav>
+    </header>
 
-	<header
-		class="relative left-0 top-0 z-50 h-16 w-full border-b border-muted bg-background lg:hidden"
-	>
-		<nav class="relative flex h-full w-full items-center justify-between px-6">
-			<a href="/" class="text-xl font-black dark:text-zinc-100">C</a>
-			<button onclick={() => (showMenu = !showMenu)} class="grid h-full place-items-center">
-				<IconMenuDeep />
-			</button>
-		</nav>
-	</header>
+    <header
+        class="relative left-0 top-0 z-50 h-16 w-full border-b border-muted bg-background lg:hidden"
+    >
+        <nav class="relative flex h-full w-full items-center justify-between px-6">
+            <a href="/" class="text-xl font-black dark:text-zinc-100">C</a>
+            <button
+                onclick={() => (showMenu = !showMenu)}
+                class="grid h-full place-items-center"
+            >
+                <IconMenuDeep />
+            </button>
+        </nav>
+    </header>
 
-	{#if showMenu}
-		<div class="fixed top-16 flex w-full flex-col">
-			<a href="/docs/components/browse"><!-- Components --></a>
-		</div>
-	{/if}
+    {#if showMenu}
+        <div class="fixed top-16 flex w-full flex-col">
+            <a href="/docs/components/browse"><!-- Components --></a>
+        </div>
+    {/if}
 {/snippet}
