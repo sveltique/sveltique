@@ -1,5 +1,5 @@
 <script lang="ts">
-import { button, Paper, Separator } from "@sveltique/components";
+import { button, Separator } from "@sveltique/components";
 
 let { data } = $props();
 </script>
@@ -29,7 +29,7 @@ let { data } = $props();
         {#if data.next}
             <a
                 href="/docs/components/{data.next.slugPath}"
-                class={button({ variant: "outline", class: "w-full px-4 py-3 rounded-large flex flex-col items-start gap-1" })}
+                class={button({ variant: "outline", class: "w-full px-4 py-3 rounded-large flex flex-col items-end gap-1" })}
             >
                 <span class="text-muted-foreground font-medium text-xs">Next page</span>
                 <span class="text-primary font-bold text-base">{data.next.name}</span>
