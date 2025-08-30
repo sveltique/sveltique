@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Paper, Separator } from "@sveltique/components";
+import { button, Paper, Separator } from "@sveltique/components";
 
 let { data } = $props();
 </script>
@@ -16,28 +16,24 @@ let { data } = $props();
     <Separator />
     <div class="relative w-full flex flex-col sm:flex-row items-center gap-6">
         {#if data.previous}
-            <Paper variant="outline" class="w-full duration-150 hover:bg-muted">
-                <a
-                    href="/docs/components/{data.previous.slugPath}"
-                    class="relative w-full px-4 py-3 rounded-large flex flex-col items-start gap-1"
-                >
-                    <span class="text-muted-foreground font-medium text-xs">Previous page</span>
-                    <span class="text-primary font-bold">{data.previous.name}</span>
-                </a>
-            </Paper>
+            <a
+                href="/docs/components/{data.previous.slugPath}"
+                class={button({ variant: "outline", class: "w-full px-4 py-3 rounded-large flex flex-col items-start gap-1" })}
+            >
+                <span class="text-muted-foreground font-medium text-xs">Previous page</span>
+                <span class="text-primary font-bold text-base">{data.previous.name}</span>
+            </a>
         {:else}
             <div class="w-full"></div>
         {/if}
         {#if data.next}
-            <Paper variant="outline" class="w-full duration-150 hover:bg-muted">
-                <a
-                    href="/docs/components/{data.next.slugPath}"
-                    class="relative w-full px-4 py-3 rounded-large flex flex-col items-end gap-1"
-                >
-                    <span class="text-muted-foreground font-medium text-xs">Next page</span>
-                    <span class="text-primary font-bold">{data.next.name}</span>
-                </a>
-            </Paper>
+            <a
+                href="/docs/components/{data.next.slugPath}"
+                class={button({ variant: "outline", class: "w-full px-4 py-3 rounded-large flex flex-col items-start gap-1" })}
+            >
+                <span class="text-muted-foreground font-medium text-xs">Next page</span>
+                <span class="text-primary font-bold text-base">{data.next.name}</span>
+            </a>
         {:else}
             <div class="w-full"></div>
         {/if}
