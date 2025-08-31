@@ -83,6 +83,7 @@ const interactiveBadgeCode = `${script("import { badge } from '@sveltique/compon
 <h3 id="interactive-badge">Interactive badge</h3>
 <p>You can make an interactive badge by using the <Badge>badge()</Badge> helper.</p>
 <Playground code={interactiveBadgeCode}>
-	<a href="/" class={badge()}>Link</a>
+	<!-- svelte-ignore a11y_invalid_attribute -->
+	<a href="#interactive-badge" class={badge()}>Link</a>
 	<button class={badge({ variant: 'danger', class: 'cursor-pointer' })}>Button</button>
 </Playground>

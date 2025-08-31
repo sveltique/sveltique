@@ -42,7 +42,7 @@ export const metadata = {
 	const expandIconCode = `${script('import { Accordion } from "@sveltique/components";')}
 
 <Accordion.Root>
-    <Accordion.Item Icon={IconArrowDown}>
+    <Accordion.Item>
         {#snippet header()}
             Accordion 1
         {/snippet}
@@ -52,8 +52,12 @@ export const metadata = {
             Voluptate impedit deserunt amet officia qui tenetur
             laboriosam consequatur incidunt, voluptatum atque.
         </p>
+
+        {#snippet icon({ css })}
+            <IconArrowDown class={css} />
+        {/snippet}
     </Accordion.Item>
-    <Accordion.Item Icon={IconCaretDownFilled}>
+    <Accordion.Item>
         {#snippet header()}
             Accordion 2
         {/snippet}
@@ -63,6 +67,10 @@ export const metadata = {
             Eos sequi consectetur dolores libero tempora ducimus
             perferendis iste qui voluptas. Cum!
         </p>
+
+        {#snippet icon({ css })}
+            <IconCaretDownFilled class={css} />
+        {/snippet}
     </Accordion.Item>
 </Accordion.Root>`;
 

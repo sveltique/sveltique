@@ -67,7 +67,7 @@ $effect(() => {
 
 {#snippet componentsBar()}
 	<aside
-		class="sticky left-0 top-16 z-50 hidden h-[calc(100vh-4rem)] items-start justify-end overflow-auto p-6 lg:flex lg:pl-24 xl:pl-6 xl:w-full"
+		class="sticky left-0 top-16 z-50 hidden h-[calc(100vh-4rem)] items-start justify-end overflow-auto p-6 pt-12 lg:flex lg:pl-24 xl:pl-6 xl:w-full"
 	>
         <nav class="relative w-60 flex flex-col gap-5 text-sm font-semibold">
             {#each data.sidebar as rootItem, index (index)}
