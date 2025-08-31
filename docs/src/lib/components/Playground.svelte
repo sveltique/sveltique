@@ -50,7 +50,7 @@ let showCode = $state(false);
 			class="h-[400px]"
 		/>
 	{:else}
-		<Paper class={cnBase("flex h-[400px] w-full items-center justify-center overflow-auto gap-5 p-6", className)}>
+		<Paper class={cnBase("flex h-[400px] w-full items-center justify-center gap-5 p-6", className)}>
             {@render children?.()}
 		</Paper>
 	{/if}

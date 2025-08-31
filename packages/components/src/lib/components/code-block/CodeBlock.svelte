@@ -20,6 +20,8 @@ export interface CodeBlockProps extends TWMergeClass {
 	filename?: string;
 	/** Only works if you pass in a `filename`. */
 	icon?: Snippet;
+	/** The title of the copy button's tooltip. */
+	copyTitle?: (isCopied: boolean) => string;
 }
 
 let {
@@ -31,7 +33,8 @@ let {
 	highlightedLines = "",
 	highlighter,
 	filename,
-	icon
+	icon,
+	copyTitle = fallbackCopyTitle
 }: CodeBlockProps = $props();
 
 let isCopied = $state(false);
@@ -56,6 +59,10 @@ async function copy() {
 	await navigator.clipboard.writeText(transformHTMLEntities(code));
 	isCopied = true;
 }
+
+function fallbackCopyTitle(isCopied: boolean) {
+	return isCopied ? "Copied" : "Copy to clipboard";
+}
 </script>
 
 <!--
@@ -72,7 +79,7 @@ Display syntax-highlighted code snippets. Ideal anywhere you need clear, readabl
                 {@render icon?.()}
 				<p class={filenameCss()}>{filename}</p>
 			</div>
-			<Tooltip title={isCopied ? 'Copied' : 'Copy to clipboard'} placement="top">
+			<Tooltip title={copyTitle(isCopied)} placement="top">
 				{#snippet children({ props, ref })}
 					<Button bind:ref={ref.current} onclick={copy} variant="text" shape="square" {...props}>
 						{@render iconSnippet()}
@@ -83,7 +90,7 @@ Display syntax-highlighted code snippets. Ideal anywhere you need clear, readabl
 		<Separator class="bg-muted-foreground" />
     {:else}
         <Tooltip
-            title={isCopied ? 'Copied' : 'Copy to clipboard'}
+            title={copyTitle(isCopied)}
             placement="top"
             containerClass="absolute z-10 right-3 {tokensResult.tokens.length === 1 ? "top-1/2 -translate-y-1/2" : "top-3"}"
         >

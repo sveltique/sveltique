@@ -178,6 +178,8 @@ const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } 
 	/>
 </Playground>
 
+<h2 id="customization">Customization</h2>
+
 <h3 id="showing-line-numbers">Showing Line Numbers</h3>
 <p>
 	You can show line numbers with the <Badge>showLineNumbers</Badge> attribute.
@@ -275,6 +277,27 @@ const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } 
             </svg>
         {/snippet}
     </CodeBlock>
+</Playground>
+
+<h2 id="accessibility">Accessibility</h2>
+
+<h3 id="copy-buttons-title">Copy button's title</h3>
+<p>
+    The copy button, by default, includes a small tooltip based on whether the the code has been copied
+    in the last 3 seconds or not. However, this title is only in english.
+</p>
+<p>
+    You can customize it using the <Badge>copyTitle</Badge> function, which passes the current status of
+    <Badge>isCopied</Badge> as its parameter.
+</p>
+<Playground code={basicUsageCode}>
+	<CodeBlock
+		code="<p>My copy button's title is in french !</p>"
+		lang="svelte"
+		theme={theme.isDark ? 'one-dark-pro' : 'catppuccin-latte'}
+		{highlighter}
+        copyTitle={(isCopied) => isCopied ? "Copié" : "Copier dans le presse-papier"}
+	/>
 </Playground>
 
 <h2 id="wrapper-component">Wrapper component</h2>
