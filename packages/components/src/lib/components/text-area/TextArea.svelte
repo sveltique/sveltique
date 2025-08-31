@@ -12,4 +12,11 @@ interface Props
 let { class: className, ref = $bindable(), value = $bindable(), ...restProps }: Props = $props();
 </script>
 
+<!--
+@component
+A syled replacement for the native `textarea` element.
+@info Consider using a [\<TextInput />](https://sveltique.dev/docs/components/browse/text-input) if you only need one line.
+@see https://sveltique.dev/docs/components/browse/text-area
+-->
+
 <textarea bind:value data-text-area class={textArea({ className })} {...restProps}></textarea>

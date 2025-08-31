@@ -19,8 +19,7 @@ let {
 <!--
 @component
 A small badge with rounded corners.
-
-Change the color using the `class` property.
+@see https://sveltique.dev/docs/components/browse/badge
 -->
 
 <div data-badge class={badge({ variant, number, className })}>

@@ -56,9 +56,8 @@ function isNumber(value: unknown) {
 
 <!--
 @component
-An input for numbers.
-
-Comes with increment/decrement buttons and built-in `min` and `max` validation.
+An JS-enhanced input for numbers, with increment/decrement buttons and built-in `min` and `max` enforcement.
+@see https://sveltique.dev/docs/components/browse/number-input
 -->
 
 <div data-number-input class={container({ class: containerClass })}>

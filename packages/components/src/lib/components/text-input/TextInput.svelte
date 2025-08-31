@@ -15,4 +15,10 @@ interface Props
 let { class: className, ref = $bindable(), value = $bindable(""), ...restProps }: Props = $props();
 </script>
 
+<!--
+@component
+A styled replacement for the native text input, used for short, single-line text.
+@see https://sveltique.dev/docs/components/browse/text-input
+-->
+
 <input bind:this={ref} bind:value type="text" data-text-input class={textInput({ className })} {...restProps} />

@@ -180,13 +180,6 @@ function getChildById(id: string) {
 }
 </script>
 
-<!--
-@component
-A drop-in replacement for the native `select` element.
-
-Note : The element takes its parent's full width, so if you want to restrict it, you can do so with the `containerClass` prop.
--->
-
 <div id={componentId} data-select class={container({ class: containerClass })}>
 	<input type="hidden" {name} {value} />
 	<button

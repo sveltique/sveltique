@@ -50,6 +50,12 @@ let _rel = $derived(rel ?? (external ? "noreferrer" : undefined));
 let { container, icon: iconCss } = $derived(link({ underline }));
 </script>
 
+<!--
+@component
+A styled and accessible replacement for the native `a` element.
+@see https://sveltique.dev/docs/components/browse/link
+-->
+
 <a {href} target={_target} rel={_rel} data-link class={container({ className })} {...restProps}>
 	{@render children?.()}
 

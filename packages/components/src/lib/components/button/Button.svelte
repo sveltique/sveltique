@@ -41,6 +41,7 @@ $effect(() => {
 <!--
 @component
 Buttons allow users to take actions, and make choices, with a single tap.
+@see https://sveltique.dev/docs/components/browse/button
 -->
 
 <button

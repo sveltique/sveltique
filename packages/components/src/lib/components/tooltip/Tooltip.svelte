@@ -55,6 +55,12 @@ $effect(() => {
 });
 </script>
 
+<!--
+@component
+Display informative text when users hover over, focus on, or tap an element.
+@see https://sveltique.dev/docs/components/browse/tooltip
+-->
+
 <div class={container({ className: containerClass })}>
 	{@render children?.({ ref, props: { 'aria-describedby': _id } })}
     

@@ -17,6 +17,7 @@ const { container, icon } = $derived(alert({ type, className }));
 <!--
 @component
 A visual message box used to communicate contextual feedback to users, such as information, success, warnings, or errors.
+@see https://sveltique.dev/docs/components/browse/alert
 -->
 
 <div bind:this={ref} role="alert" data-alert class={container({ className })}>

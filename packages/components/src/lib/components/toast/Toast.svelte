@@ -26,6 +26,12 @@ let {
 let { container, icon, content, closeButton, closeIcon } = $derived(toast({ type }));
 </script>
 
+<!--
+@component
+Brief notifications of processes that have been or will be performed.
+@see https://sveltique.dev/docs/components/browse/toast
+-->
+
 {#if open}
 	<div role="alert" data-toast class={container({ className })}>
 		{@render toastIcon()}

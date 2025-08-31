@@ -23,7 +23,8 @@ const { container, error: errorCss, label: labelCss, icon } = $derived(field());
 
 <!--
 @component
-Fields allow users to enter data into a UI.
+Provides a consistent structure for form controls, by including a label and an error message when provided.
+@see https://sveltique.dev/docs/components/browse/field
 -->
 
 <div data-field class={container({ className })}>

@@ -11,7 +11,8 @@ let { class: className = undefined, orientation = "horizontal" }: Props = $props
 
 <!--
 @component
-A visible, thin line to visually divide two items.
+A thin, visible line used to separate content and create visual grouping.
+@see https://sveltique.dev/docs/components/browse/separator
 -->
 
 <div

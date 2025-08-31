@@ -10,7 +10,8 @@ let { animation = "pulse", class: className, ...restProps }: Props = $props();
 
 <!--
 @component
-A placeholder component to display while the content is loading.
+Placeholder used to indicate that content is loading, giving users a sense of the structure of the page while reducing perceived wait times.
+@see https://sveltique.dev/docs/components/browse/skeleton
 -->
 
 <div class={skeleton({ animation, className })} data-skeleton aria-hidden="true" {...restProps}></div>

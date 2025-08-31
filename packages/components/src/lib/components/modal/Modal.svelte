@@ -67,6 +67,7 @@ const close = () => (isOpen = false);
 <!--
 @component
 A dialog component that interrupts the user flow to capture attention. Displays content in a centered overlay with a dimmed backdrop.
+@see https://sveltique.dev/docs/components/browse/modal
 -->
 
 {@render trigger({ open })}

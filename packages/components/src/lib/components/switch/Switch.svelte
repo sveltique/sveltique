@@ -21,6 +21,12 @@ let {
 let { container, thumb } = $derived(switchTv({ checked, disabled, className }));
 </script>
 
+<!--
+@component
+A binary on/off state in a more visual, accessible way than a standard checkbox.
+@see https://sveltique.dev/docs/components/browse/switch
+-->
+
 <input type="checkbox" {name} {checked} aria-hidden="true" class="hidden" />
 <button
 	bind:this={ref}

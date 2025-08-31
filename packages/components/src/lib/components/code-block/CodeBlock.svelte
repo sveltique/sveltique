@@ -58,6 +58,13 @@ async function copy() {
 }
 </script>
 
+<!--
+@component
+Display syntax-highlighted code snippets. Ideal anywhere you need clear, readable code examples.
+@info You must have [shiki](https://shiki.style/) installed to use this component.
+@see https://sveltique.dev/docs/components/browse/code-block
+-->
+
 <div data-code-block style="color: {tokensResult.fg}; background-color: {tokensResult.bg}" class={container()}>
 	{#if filename}
 		<div data-code-block-header class={header()}>

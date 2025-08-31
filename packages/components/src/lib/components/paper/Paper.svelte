@@ -16,7 +16,8 @@ let { children, class: className = undefined, ref = $bindable(), ...restProps }:
 
 <!--
 @component
-A surface to display content and actions.
+A surface to organize related content and, when needed, display actions in a consistent way.
+@see https://sveltique.dev/docs/components/browse/paper
 -->
 
 <div bind:this={ref} data-paper class={paper({ className })} {...restProps}>

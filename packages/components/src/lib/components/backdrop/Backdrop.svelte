@@ -24,6 +24,12 @@ function onclick(event: MouseEvent) {
 }
 </script>
 
+<!--
+@component
+Narrows the user's focus to a particular element on the screen by adding a dimmed layer over your application.
+@see https://sveltique.dev/docs/components/browse/backdrop
+-->
+
 <div
 	bind:this={ref}
 	transition:fade={{ duration: fadeDuration }}
