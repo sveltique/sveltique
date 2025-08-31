@@ -4,7 +4,18 @@ import type { ClassNameValue } from "tailwind-merge";
 import { field } from "./variants.js";
 
 type InputSnippet = Snippet<
-	[{ id: string; "aria-invalid": boolean; "aria-describedby": string | undefined }]
+	[
+		{
+			props: {
+				/** The ID to link the label and the input. */
+				id: string;
+				/** Whether the input is invalid or not. */
+				"aria-invalid": boolean;
+				/** If invalid, the ID of the error message, undefined otherwise. */
+				"aria-describedby": string | undefined;
+			};
+		}
+	]
 >;
 
 interface Props {
@@ -30,9 +41,11 @@ Provides a consistent structure for form controls, by including a label and an e
 <div data-field class={container({ className })}>
 	<label for={id} data-field-label class={labelCss()}>{label}</label>
 	{@render input({
-		id,
-		'aria-invalid': !!error,
-		'aria-describedby': error ? `${id}-error` : undefined
+        props: {
+            id,
+            'aria-invalid': !!error,
+            'aria-describedby': error ? `${id}-error` : undefined
+        }
 	})}
 	{#if error}
 		<p id="{id}-error" role="alert" data-field-error class={errorCss()}>

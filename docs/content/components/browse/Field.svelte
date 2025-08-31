@@ -22,7 +22,8 @@ let ageError = $derived.by(() => {
 const basicUsageCode = `${script('import { Field, TextInput } from "@sveltique/components";')}
 
 <Field label="Full Name" class="w-[200px]">
-    {#snippet input(props)}
+    <!-- props: { id: string; "aria-invalid": boolean; "aria-describedby": string | undefined; } -->
+    {#snippet input({ props })}
         <TextInput {...props} />
     {/snippet}
 </Field>`
@@ -37,7 +38,7 @@ const ageCode = `${script(`import { Field, NumberInput } from '@sveltique/compon
     });`)}
 
 <Field label="Age" error={ageError} class="w-[240px]">
-    {#snippet input(props)}
+    {#snippet input({ props })}
         <NumberInput
             bind:value={age}
             min={0}
@@ -61,7 +62,7 @@ const ageCode = `${script(`import { Field, NumberInput } from '@sveltique/compon
 </p>
 <Playground code={basicUsageCode}>
     <Field label="Full Name" class="w-[200px]">
-		{#snippet input(props)}
+		{#snippet input({ props })}
 			<TextInput {...props} />
 		{/snippet}
 	</Field>
@@ -75,7 +76,7 @@ const ageCode = `${script(`import { Field, NumberInput } from '@sveltique/compon
 </Alert>
 <Playground code={ageCode} class="flex-col">
 	<Field label="Age" error={ageError} class="w-[240px]">
-		{#snippet input(props)}
+		{#snippet input({ props })}
 			<NumberInput bind:value={age} min={0} max={99} {...props} />
 		{/snippet}
 	</Field>

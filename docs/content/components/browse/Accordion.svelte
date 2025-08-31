@@ -167,8 +167,10 @@ export const metadata = {
 	</Accordion.Root>
 </Playground>
 
-<h3 id="expand-icon">Expand Icon</h3>
-<p>You can customize the expand icon by passing an <Badge>Icon</Badge> property.</p>
+<h2 id="customization">Customization</h2>
+
+<h3 id="expand-icon">Icon</h3>
+<p>You can customize the expand icon by using the <Badge>icon</Badge> snippet on the items.</p>
 <Playground code={expandIconCode}>
 	<Accordion.Root class="max-w-md">
 		<Accordion.Item>
@@ -203,7 +205,7 @@ export const metadata = {
 </Playground>
 
 <h3 id="expand-by-default">Expand by default</h3>
-<p>You can expand the first item by default via the <Badge>defaultExpand</Badge> attribute.</p>
+<p>You can expand the first item by default via the <Badge>defaultExpand</Badge> attribute on the root container.</p>
 <Playground code={defaultExpandCode}>
 	<Accordion.Root defaultExpand class="max-w-md">
 		<Accordion.Item>
@@ -229,12 +231,9 @@ export const metadata = {
 	</Accordion.Root>
 </Playground>
 
-<h2 id="customization">Customization</h2>
 <h3 id="only-expand-one-at-a-time">Only expand one at a time</h3>
 <p>
-	If you wish to keep only one accordion open at a time, you can set <Badge
-		>{'multiple={false}'}</Badge
-	>.
+	If you wish to keep only one accordion open at a time, you can set <Badge>multiple</Badge> to false.
 </p>
 <Playground code={onlyExpandOneAtATimeCode}>
 	<Accordion.Root multiple={false} class="max-w-md">
@@ -261,11 +260,14 @@ export const metadata = {
 	</Accordion.Root>
 </Playground>
 
+<h2 id="accessibility">Accessibility</h2>
+
 <h3 id="heading-level">Heading level</h3>
 <p>
 	By default, accordion items use an <Badge>h3</Badge> element for the header.
 </p>
 <p>
-	You can change this to adapt it to your document hierarchy using the <Badge>headingLevel</Badge> attribute.
+	You can change this to adapt it to your document hierarchy using the <Badge>headingLevel</Badge>
+    attribute. Permitted values are h1 to h6.
 </p>
 <CodeBlock code={headingLevelCode} />

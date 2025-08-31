@@ -169,7 +169,7 @@ const controlledStateCode = `${script(`import { Button, Modal } from "@sveltique
 <h2 id="controlling-open-closed-state">Controlling open/closed state</h2>
 <p>
 	If you need to control the open/closed state of the modal outside of the markup, you can bind to
-	it.
+	<Badge>isOpen</Badge>.
 </p>
 <Playground code={controlledStateCode}>
 	<Modal bind:isOpen backdropProps={{ z: 1000 }}>

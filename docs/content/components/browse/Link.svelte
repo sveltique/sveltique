@@ -83,6 +83,8 @@ const underlineCode = `${script('import { Link } from "@sveltique/components";')
 	</Link>
 </Playground>
 
+<h2 id="customization">Customization</h2>
+
 <h3 id="icon">Icon</h3>
 <p>By default, external links include an up right arrow icon. You can use the <Badge>icon</Badge> snippet to customize or remove it.</p>
 <Playground code={iconCode}>

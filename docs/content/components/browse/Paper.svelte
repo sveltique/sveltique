@@ -12,6 +12,8 @@ import Playground from "$components/Playground.svelte";
 
 <h1 id="paper">Paper</h1>
 <p>A surface to organize related content and, when needed, display actions in a consistent way.</p>
+
+<h2 id="basic-usage">Basic Usage</h2>
 <Playground class="flex-col">
 	<Paper class="flex flex-col rounded-xl w-xs overflow-hidden">
         <img
@@ -24,7 +26,7 @@ import Playground from "$components/Playground.svelte";
             <p class="text-sm">And yes, I prefer cats to dogs.</p>
         </div>
     </Paper>
-    <p class="text-sm">
+    <p class="text-sm italic">
         Image from <Link
             href="https://unsplash.com/photos/three-assorted-color-kittens-rplhB9mYF48"
             aria-label="See the original image of the cats from Unsplash in another tab."

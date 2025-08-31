@@ -90,6 +90,8 @@ const placementCode = `${script("import { Button, Tooltip } from '@sveltique/com
 </p>
 <CodeBlock code={customComponentCode} />
 
+<h2 id="customization">Customization</h2>
+
 <h3 id="placement">Placement</h3>
 <p>A tooltip can be placed on two sides : bottom (default) and top.</p>
 <Playground code={placementCode}>
@@ -117,7 +119,7 @@ const placementCode = `${script("import { Button, Tooltip } from '@sveltique/com
 </Alert>
 <CodeBlock code={accessibleCode} />
 
-<h2 id="limitations">Limitations</h2>
+<h2 id="caveats">Caveats</h2>
 <p>
     If you want to absolutely position the element on which to add the tooltip, you must instead
     absolutely position the container regrouping the element and the tooltip using the
