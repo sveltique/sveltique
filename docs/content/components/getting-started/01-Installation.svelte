@@ -10,10 +10,12 @@ import CodeBlock from "$components/CodeBlock.svelte";
 
 <h1 id="installation" class="text-3xl font-bold">Installation</h1>
 <p>Install Sveltique components library.</p>
-<Alert type="warning">
-    Until Sveltique Components reaches 1.0, there may be breaking changes between minor versions.
-    It is advised to pin your current version and manually ensure that your application is still
-    working after updating.
+<Alert type="warning" class="mb-4">
+    Until 1.0, there may be breaking changes between minor versions. It is advised to pin your current
+    version and manually ensure that your application is still working after updating.
+</Alert>
+<Alert type="danger">
+    This library is not suited for production-level code.
 </Alert>
 
 <h2 id="default-installation">Default installation</h2>
