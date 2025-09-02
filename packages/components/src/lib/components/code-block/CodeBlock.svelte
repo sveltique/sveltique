@@ -100,6 +100,7 @@ Display syntax-highlighted code snippets. Ideal anywhere you need clear, readabl
                     onclick={copy}
                     variant="text"
                     shape="square"
+                    class="bg-muted"
                     {...props}
                 >
                     {@render iconSnippet()}

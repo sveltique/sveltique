@@ -20,8 +20,8 @@ type ChildrenSnippet = Snippet<
 export interface ModalProps
 	extends ReplaceWithTWMergeClass<Omit<HTMLAttributes<HTMLElement>, "children">> {
 	actions?: Snippet<[{ close: VoidFunction }]>;
-	children: ChildrenSnippet;
-	trigger: Snippet<[{ open: VoidFunction }]>;
+	children?: ChildrenSnippet;
+	trigger?: Snippet<[{ open: VoidFunction }]>;
 	/**
 	 * Whether to close the modal if the overlay is clicked.
 	 *
@@ -70,7 +70,7 @@ A dialog component that interrupts the user flow to capture attention. Displays 
 @see https://sveltique.dev/docs/components/browse/modal
 -->
 
-{@render trigger({ open })}
+{@render trigger?.({ open })}
 
 {#if isOpen}
 	<Backdrop onClick={() => closeOnOverlayClick && close()} {...backdropProps}>

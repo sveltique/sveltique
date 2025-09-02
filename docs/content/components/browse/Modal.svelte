@@ -16,7 +16,7 @@ import { script } from "$utils/playground.js";
 
 let isOpen = $state(false);
 
-const code = `${script('import { Button, Modal } from "@sveltique/components";')}
+const basicUsageCode = `${script('import { Button, Modal } from "@sveltique/components";')}
 
 <Modal>
     {#snippet trigger({ open })}
@@ -32,42 +32,111 @@ const code = `${script('import { Button, Modal } from "@sveltique/components";')
     {/snippet}
 </Modal>`;
 
+const withoutActionsCode = `${script('import { Button, Modal } from "@sveltique/components";')}
+
+<Modal>
+    {#snippet trigger({ open })}
+        <Button onclick={open}>
+            Show modal
+        </Button>
+    {/snippet}
+
+    {#snippet children({ close })}
+        <div class="flex items-center justify-between">
+            <Button
+                onclick={close}
+                variant="text"
+                shape="square
+            >
+                <IconX class="h-5 w-5" />
+            </Button>
+            <div class="flex items-center gap-3">
+                <Button
+                    onclick={close}
+                    shape="square"
+                >
+                    <IconEdit class="h-5 w-5" />
+                </Button>
+                <Button
+                    onclick={close}
+                    shape="square"
+                    color="danger"
+                >
+                    <IconTrash class="h-5 w-5" />
+                </Button>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-start gap-3">
+            <h2 class="text-2xl font-bold">Document Draft</h2>
+            <p>
+                This is a draft version of your document. You can update its content, share it
+                with collaborators, or remove it entirely using the actions in the top-right
+                corner.
+            </p>
+        </div>
+    {/snippet}
+</Modal>`
+
 const controlledStateCode = `${script(`import { Button, Modal } from "@sveltique/components";
     
     let isOpen = $state(false);`)}
 
+<Button onclick={() => (isOpen = true)}>Show modal</Button>
 <Modal bind:isOpen>
-    {#snippet trigger()}
-        <Button onclick={() => (isOpen = true)}>Show modal</Button>
+    <h1 class="text-2xl font-bold">Log out</h1>
+    <p>Are you sure you want to log out? You'll need to sign in again to continue.</p>
+
+    {#snippet actions({ close })}
+        <Button
+            onclick={close}
+            variant="text"
+        >
+            Cancel
+        </Button>
+        <Button
+            onclick={close}
+            color="danger"
+        >
+            Log Out
+        </Button>
+    {/snippet}
+</Modal>`;
+
+const allowOverlayClickCode = `${script('import { Button, Modal } from "@sveltique/components";')}
+
+<Modal closeOnOverlayClick>
+    {#snippet trigger({ open })}
+        <Button onclick={open}>Show modal</Button>
     {/snippet}
 
-    <div class="flex items-center justify-between">
-        <Button onclick={() => (isOpen = false)} variant="text" shape="square" title="Close">
-            <IconX class="h-5 w-5" />
-        </Button>
+    <h2 class="text-xl font-semibold">Subscribe to our newsletter</h2>
+    <p>Join our mailing list to receive occasional updates. You can unsubscribe at any time.</p>
 
-        <div class="flex items-center gap-3">
-            <Button onclick={() => alert('Edit action')} shape="square" title="Edit">
-                <IconEdit class="h-5 w-5" />
-            </Button>
-            <Button
-                onclick={() => confirm('Delete this project?')}
-                shape="square"
-                color="danger"
-                title="Delete"
-            >
-                <IconTrash class="h-5 w-5" />
-            </Button>
-        </div>
-    </div>
+    {#snippet actions({ close })}
+        <Button onclick={close} variant="text">No thanks</Button>
+        <Button onclick={close} color="primary">Subscribe</Button>
+    {/snippet}
+</Modal>`;
 
-    <div class="flex flex-col items-start gap-3">
-        <h2 class="text-xl font-bold">Project Alpha</h2>
-        <p class="text-gray-600">
-            This is an example project. You can edit details, view members, or delete it entirely using
-            the actions in the top-right corner.
+const accessibleLabelAndDescriptionCode = `${script('import { Button, Modal } from "@sveltique/components";')}
+
+<Modal>
+    {#snippet trigger({ open })}
+        <Button onclick={open}>Show modal</Button>
+    {/snippet}
+
+    {#snippet children({ labelProps, descriptionProps })}
+        <h1 class="text-2xl font-bold" {...labelProps}>Log out</h1>
+        <p {...descriptionProps}>
+            Are you sure you want to log out? You'll need to sign in again to continue.
         </p>
-    </div>
+    {/snippet}
+
+    {#snippet actions({ close })}
+        <Button onclick={close} variant="text">Cancel</Button>
+        <Button onclick={close} color="danger">Log Out</Button>
+    {/snippet}
 </Modal>`
 </script>
 
@@ -81,7 +150,7 @@ const controlledStateCode = `${script(`import { Button, Modal } from "@sveltique
 <p>
 	A modal is composed of three elements : a trigger, the modals' content and the modal's actions.
 </p>
-<Playground {code}>
+<Playground code={basicUsageCode}>
 	<Modal backdropProps={{ z: 1000 }}>
 		{#snippet trigger({ open })}
 			<Button onclick={open}>Show modal</Button>
@@ -103,7 +172,7 @@ const controlledStateCode = `${script(`import { Button, Modal } from "@sveltique
 		>children</Badge
 	> snippet to access the close function.
 </p>
-<Playground>
+<Playground code={withoutActionsCode}>
 	<Modal backdropProps={{ z: 1000 }}>
 		{#snippet trigger({ open })}
 			<Button onclick={open}>Show modal</Button>
@@ -111,52 +180,22 @@ const controlledStateCode = `${script(`import { Button, Modal } from "@sveltique
 
 		{#snippet children({ close })}
 			<div class="flex items-center justify-between">
-                <Tooltip title="Close" placement="top">
-                    {#snippet children({ props, ref })}
-                        <Button
-                            bind:ref={ref.current}
-                            onclick={close}
-                            variant="text"
-                            shape="square"
-                            {...props}
-                        >
-                            <IconX class="h-5 w-5" />
-                        </Button>
-                    {/snippet}
-                </Tooltip>
-
+                <Button onclick={close} variant="text" shape="square">
+                    <IconX class="h-5 w-5" />
+                </Button>
 				<div class="flex items-center gap-3">
-                    <Tooltip title="Edit" placement="top">
-                        {#snippet children({ props, ref })}
-                            <Button
-                                bind:ref={ref.current}
-                                onclick={close}
-                                shape="square"
-                                {...props}
-                            >
-                                <IconEdit class="h-5 w-5" />
-                            </Button>
-                        {/snippet}
-                    </Tooltip>
-                    <Tooltip title="Delete" placement="top">
-                        {#snippet children({ props, ref })}
-                            <Button
-                                bind:ref={ref.current}
-                                onclick={close}
-                                shape="square"
-                                color="danger"
-                                {...props}
-                            >
-                                <IconTrash class="h-5 w-5" />
-                            </Button>
-                        {/snippet}
-                    </Tooltip>
+                    <Button onclick={close} shape="square">
+                        <IconEdit class="h-5 w-5" />
+                    </Button>
+                    <Button onclick={close} shape="square" color="danger">
+                        <IconTrash class="h-5 w-5" />
+                    </Button>
 				</div>
 			</div>
 
 			<div class="flex flex-col items-start gap-3">
 				<h2 class="text-2xl font-bold">Document Draft</h2>
-				<p class="">
+				<p>
 					This is a draft version of your document. You can update its content, share it
                     with collaborators, or remove it entirely using the actions in the top-right
                     corner.
@@ -172,38 +211,15 @@ const controlledStateCode = `${script(`import { Button, Modal } from "@sveltique
 	<Badge>isOpen</Badge>.
 </p>
 <Playground code={controlledStateCode}>
+    <Button onclick={() => (isOpen = true)}>Show modal</Button>
 	<Modal bind:isOpen backdropProps={{ z: 1000 }}>
-		{#snippet trigger()}
-			<Button onclick={() => (isOpen = true)}>Show modal</Button>
+		<h1 class="text-2xl font-bold">Log out</h1>
+		<p>Are you sure you want to log out? You'll need to sign in again to continue.</p>
+
+		{#snippet actions({ close })}
+			<Button onclick={close} variant="text">Cancel</Button>
+			<Button onclick={close} color="danger">Log Out</Button>
 		{/snippet}
-
-		<div class="flex items-center justify-between">
-			<Button onclick={() => (isOpen = false)} variant="text" shape="square" title="Close">
-				<IconX class="h-5 w-5" />
-			</Button>
-
-			<div class="flex items-center gap-3">
-				<Button onclick={() => alert('Edit action')} shape="square" title="Edit">
-					<IconEdit class="h-5 w-5" />
-				</Button>
-				<Button
-					onclick={() => confirm('Delete this project?')}
-					shape="square"
-					color="danger"
-					title="Delete"
-				>
-					<IconTrash class="h-5 w-5" />
-				</Button>
-			</div>
-		</div>
-
-		<div class="flex flex-col items-start gap-3">
-			<h2 class="text-xl font-bold">Project Alpha</h2>
-			<p class="text-gray-600">
-				This is an example project. You can edit details, view members, or delete it entirely using
-				the actions in the top-right corner.
-			</p>
-		</div>
 	</Modal>
 </Playground>
 
@@ -223,7 +239,7 @@ const controlledStateCode = `${script(`import { Button, Modal } from "@sveltique
 	>.
 </p>
 <Playground>
-	<Modal backdropProps={{ z: 1000 }} closeOnOverlayClick>
+	<Modal backdropProps={{ z: 1000 }}>
 		{#snippet trigger({ open })}
 			<Button onclick={open}>Show modal</Button>
 		{/snippet}
@@ -247,7 +263,7 @@ const controlledStateCode = `${script(`import { Button, Modal } from "@sveltique
 	</Link> for more information.
 </p>
 <Alert class="mb-4">When set, the modal also closes on <Kbd>Esc</Kbd> press.</Alert>
-<Playground>
+<Playground code={allowOverlayClickCode}>
 	<Modal backdropProps={{ z: 1000 }} closeOnOverlayClick>
 		{#snippet trigger({ open })}
 			<Button onclick={open}>Show modal</Button>
@@ -263,12 +279,16 @@ const controlledStateCode = `${script(`import { Button, Modal } from "@sveltique
 	</Modal>
 </Playground>
 
-<h3 id="passing-aria">Passing aria</h3>
+<h3 id="accessible-labels-and-descriptions">Accessible labels and descriptions</h3>
 <p>
-	As per aria, you should link a modal label and description. The <Badge>children</Badge> snippet also
-	contains spreadable label and description props that you can use.
+	For accessibility purposes, a modal should link a label (indicating the title of the modal), and
+    a description (describing the primary purpose of the modal).
 </p>
-<Playground>
+<p>
+    The <Badge>children</Badge> snippet contains spreadable props (respectively <Badge>labelProps</Badge>
+    and <Badge>descriptionProps</Badge>) which you can use in your markup.
+</p>
+<Playground code={accessibleLabelAndDescriptionCode}>
 	<Modal backdropProps={{ z: 1000 }}>
 		{#snippet trigger({ open })}
 			<Button onclick={open}>Show modal</Button>
