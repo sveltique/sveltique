@@ -57,9 +57,8 @@ A styled and accessible replacement for the native `a` element.
 -->
 
 <a {href} target={_target} rel={_rel} data-link class={container({ className })} {...restProps}>
-	{@render children?.()}
-
-    {#if external && icon !== false}
+    <!-- Avoid adding an unnecessary space at the end of a text link -->
+	{@render children?.()}{#if external && icon !== false}
         {@render icon({ props: { css: iconCss(), "aria-hidden": true } })}
     {/if}
 </a>

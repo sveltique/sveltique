@@ -1,4 +1,8 @@
-@custom-variant dark (&:where(.dark, .dark *));
+<script>
+import CodeBlock from "$components/CodeBlock.svelte";
+import { Alert, Badge } from "@sveltique/components";
+
+const introductionCode = `@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
 	--color-\*: initial;
@@ -81,4 +85,45 @@
 		--warning: oklch(79.5% 0.184 86.047);
 		--danger: oklch(63.7% 0.237 25.331);
 	}
-}
+}`;
+</script>
+
+<svelte:head>
+    <title>Usage - sveltique/components</title>
+    <meta name="description" content="Learn how to make your own theme for Sveltique." />
+</svelte:head>
+
+<h1 id="theming">Theming</h1>
+<p>Learn how to make your own theme for Sveltique.</p>
+
+<h2 id="introduction">Introduction</h2>
+<p>
+	Theming in Sveltique is done via CSS variables. By changing them, you can change your whole site's
+	design.
+</p>
+<p>Below, you can find the theme used for this website, which you can put in <Badge>theme.css</Badge>.</p>
+<Alert class="mb-4">
+    You can tweak any values to your liking, as long the names are left intact.
+</Alert>
+<CodeBlock code={introductionCode} filename="theme.css" lang="css" showLineNumbers />
+
+<p>Then, you can import both Sveltique's source files and your theme in your main css file.</p>
+<CodeBlock
+	code={`/* Importing Cascadia Code to use it for our codeblocks */
+@import url('https://fonts.cdnfonts.com/css/cascadia-code');
+
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+
+@source "../node_modules/@sveltique/components";
+@import './theme.css';`}
+	filename="app.css"
+	lang="css"
+	showLineNumbers
+/>
+
+<h2 id="customizing">Customizing</h2>
+<p>
+	You can simply edit and/or tweak any values to your liking. Here's an example replicating [FIND AN
+	EXAMPLE] :
+</p>
