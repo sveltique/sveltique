@@ -12,7 +12,7 @@ import CodeBlock from "$components/CodeBlock.svelte";
 <p>Install Sveltique components library.</p>
 <Alert type="warning" class="mb-4">
     Until 1.0, this library is not suited for production-level code, as there may be breaking changes
-    between minor versions.
+    between minor versions (especially in the early versions).
 </Alert>
 <Alert>
     Since the library is not finished yet, docs may be incomplete. <Link href="https://github.com/sveltique/sveltique" external>
