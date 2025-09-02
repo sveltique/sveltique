@@ -15,6 +15,7 @@ let {
 	checked = $bindable(),
 	class: className = undefined,
 	disabled,
+	ref = $bindable(),
 	...restProps
 }: Props = $props();
 </script>
@@ -27,6 +28,7 @@ Checkboxes allow the user to select one or more items from a set.
 -->
 
 <input
+    bind:this={ref}
 	bind:checked
 	{disabled}
 	type="checkbox"

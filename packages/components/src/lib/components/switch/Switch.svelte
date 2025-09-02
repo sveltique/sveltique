@@ -1,12 +1,16 @@
-<script lang="ts" generics="T">
+<script lang="ts">
 import type { HTMLButtonAttributes } from "svelte/elements";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { type SwitchVariants, switchTv } from "./variants.js";
 
 interface Props
-	extends ReplaceWithTWMergeClass<Omit<HTMLButtonAttributes, "disabled">>,
+	extends ReplaceWithTWMergeClass<
+			Omit<HTMLButtonAttributes, "disabled" | "onclick" | "ontoggle">
+		>,
 		WithRef<HTMLButtonElement>,
-		SwitchVariants {}
+		SwitchVariants {
+	ontoggle: (checked: boolean) => void;
+}
 
 let {
 	checked = $bindable(false),
@@ -15,10 +19,18 @@ let {
 	name,
 	value,
 	ref = $bindable(),
+	ontoggle,
 	...restProps
 }: Props = $props();
 
 let { container, thumb } = $derived(switchTv({ checked, disabled, className }));
+
+function onclick() {
+	if (disabled) return;
+
+	checked = !checked;
+	ontoggle(checked);
+}
 </script>
 
 <!--
@@ -27,10 +39,10 @@ A binary on/off state in a more visual, accessible way than a standard checkbox.
 @see https://sveltique.dev/docs/components/browse/switch
 -->
 
-<input type="checkbox" {name} {checked} aria-hidden="true" class="hidden" />
+<input type="checkbox" {name} bind:checked onchange={() => ontoggle(checked)} aria-hidden="true" class="hidden" />
 <button
 	bind:this={ref}
-	onclick={() => !disabled && (checked = !checked)}
+	{onclick}
 	{disabled}
 	type="button"
 	role="switch"

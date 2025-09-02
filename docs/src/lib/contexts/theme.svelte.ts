@@ -1,4 +1,4 @@
-import { onMount, untrack } from "svelte";
+import { untrack } from "svelte";
 
 type Theme = "light" | "dark";
 
@@ -23,6 +23,19 @@ class ThemeContext {
 
 	get isDark(): boolean {
 		return this._theme === "dark";
+	}
+
+	public setDarkTheme(yes: boolean) {
+		if (this._theme === "dark" && yes) return;
+
+		this._theme = yes ? "dark" : "light";
+		localStorage.theme = this._theme;
+
+		if (this._theme === "dark") {
+			document.documentElement.classList.add("dark");
+		} else {
+			document.documentElement.classList.remove("dark");
+		}
 	}
 
 	public switch() {

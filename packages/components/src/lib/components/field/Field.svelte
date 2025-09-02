@@ -1,7 +1,8 @@
 <script lang="ts">
 import type { Snippet } from "svelte";
 import type { ClassNameValue } from "tailwind-merge";
-import { field } from "./variants.js";
+import { type FieldVariants, field } from "./variants.js";
+import type { TWMergeClass } from "$lib/types.js";
 
 type InputSnippet = Snippet<
 	[
@@ -18,18 +19,29 @@ type InputSnippet = Snippet<
 	]
 >;
 
-interface Props {
+interface Props extends TWMergeClass, FieldVariants {
 	input: InputSnippet;
-	class?: ClassNameValue;
 	error?: string | undefined;
 	label?: string | undefined;
 }
 
-let { class: className = undefined, input, error = undefined, label = undefined }: Props = $props();
+let {
+	class: className = undefined,
+	input,
+	error = undefined,
+	label = undefined,
+	placement = "top"
+}: Props = $props();
 
 const id = $props.id();
 
-const { container, error: errorCss, label: labelCss, icon } = $derived(field());
+const {
+	container,
+	error: errorCss,
+	label: labelCss,
+	labelInputContainer,
+	icon
+} = $derived(field({ placement }));
 </script>
 
 <!--
@@ -39,14 +51,16 @@ Provides a consistent structure for form controls, by including a label and an e
 -->
 
 <div data-field class={container({ className })}>
-	<label for={id} data-field-label class={labelCss()}>{label}</label>
-	{@render input({
-        props: {
-            id,
-            'aria-invalid': !!error,
-            'aria-describedby': error ? `${id}-error` : undefined
-        }
-	})}
+	<div class={labelInputContainer()}>
+        <label for={id} data-field-label class={labelCss()}>{label}</label>
+        {@render input({
+                props: {
+                    id,
+                    'aria-invalid': !!error,
+                    'aria-describedby': error ? `${id}-error` : undefined
+                }
+        })}
+    </div>
 	{#if error}
 		<p id="{id}-error" role="alert" data-field-error class={errorCss()}>
 			{@render errorIcon()}

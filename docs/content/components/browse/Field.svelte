@@ -6,11 +6,10 @@ export const metadata = {
 </script>
 
 <script lang="ts">
-import { Alert, Field, Link, NumberInput, TextInput } from "@sveltique/components";
+import { Alert, Checkbox, Field, Link, NumberInput, Switch, TextInput } from "@sveltique/components";
 import Playground from "$components/Playground.svelte";
     import { script } from "$utils/playground";
-
-type Input = "text" | "number" | "select";
+    import { theme } from "$lib/contexts/theme.svelte";
 
 let age = $state(16);
 let ageError = $derived.by(() => {
@@ -45,6 +44,23 @@ const ageCode = `${script(`import { Field, NumberInput } from '@sveltique/compon
             max={99}
             {...props}
         />
+    {/snippet}
+</Field>`;
+
+const placementCode = `${script('import { Checkbox, Field, Switch } from "@sveltique/components";')}
+
+<Field label="Switch to dark theme" placement="left">
+    {#snippet input({ props })}
+        <Switch
+            checked={theme.isDark}
+            ontoggle={(checked) => theme.setDarkTheme(checked)}
+            {...props}
+        />
+    {/snippet}
+</Field>
+<Field label="I have read the Terms of Services." placement="right">
+    {#snippet input({ props })}
+        <Checkbox {...props} />
     {/snippet}
 </Field>`
 </script>
@@ -83,4 +99,30 @@ const ageCode = `${script(`import { Field, NumberInput } from '@sveltique/compon
     <p class="text-sm italic text-muted-foreground">
         Try setting the age above 18 to make the error disappear.
     </p>
+</Playground>
+
+<h2 id="customization">Customization</h2>
+
+<h3 id="placement">Placement</h3>
+<p>
+    By default, the label appears on top of the input. However, in certain cases, such as inputs, you
+    may want to place the label differently : top (default), left and right.
+</p>
+<Playground code={placementCode}>
+    <div class="relative flex flex-col items-center gap-6">
+        <Field label="Switch to dark theme" placement="left">
+            {#snippet input({ props })}
+                <Switch
+                    checked={theme.isDark}
+                    ontoggle={(checked) => theme.setDarkTheme(checked)}
+                    {...props}
+                />
+            {/snippet}
+        </Field>
+        <Field label="I have read the Terms of Services." placement="right">
+            {#snippet input({ props })}
+                <Checkbox {...props} />
+            {/snippet}
+        </Field>
+    </div>
 </Playground>
