@@ -2,6 +2,7 @@
 import { Button, button, Separator, Tooltip } from "@sveltique/components";
 import IconBrandGithub from "@tabler/icons-svelte/icons/brand-github";
 import IconMenuDeep from "@tabler/icons-svelte/icons/menu-deep";
+import IconX from "@tabler/icons-svelte/icons/x";
 import IconMoonFilled from "@tabler/icons-svelte/icons/moon-filled";
 import IconSunFilled from "@tabler/icons-svelte/icons/sun-filled";
 import ToastContainer from "$components/toast/ToastContainer.svelte";
@@ -13,6 +14,8 @@ import { cnBase } from "tailwind-variants";
 let { children } = $props();
 
 let showMenu = $state(false);
+
+let MobileMenuIcon = $derived(showMenu ? IconX : IconMenuDeep);
 let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
 </script>
 
@@ -92,18 +95,52 @@ let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
         class="relative left-0 top-0 z-50 h-16 w-full border-b border-muted bg-background lg:hidden"
     >
         <nav class="relative flex h-full w-full items-center justify-between px-6">
-            <a href="/" class="font-bold">SVELTIQUE</a>
+            <a href="/" onclick={() => (showMenu = false)} class="font-bold">
+                SVELTIQUE
+            </a>
             <button
                 onclick={() => (showMenu = !showMenu)}
                 class="grid h-full place-items-center cursor-pointer"
             >
-                <IconMenuDeep />
+                <MobileMenuIcon />
             </button>
         </nav>
 
         {#if showMenu}
-            <div class="fixed top-16 left-0 flex w-full flex-col h-[calc(100vh-4rem)] z-[100] bg-white">
-                <a href="/docs/components/browse"><!-- Components --></a>
+            <div class="fixed top-16 left-0 flex w-full flex-col h-[calc(100vh-4rem)] z-50 p-6 bg-background gap-12">
+                <menu class="relative w-full flex flex-col gap-3">
+                    <li>
+                        <a
+                            href="/docs/components"
+                            onclick={() => (showMenu = false)}
+                            class={cnBase(
+                                "px-3 py-1.5",
+                                page.url.pathname.startsWith('/docs/components') && "text-primary"
+                            )}
+                        >
+                            Components
+                        </a>
+                    </li>
+                </menu>
+                <Separator />
+                <div class="relative w-full flex justify-center items-center gap-3">
+                    <a
+                        href="https://github.com/sveltique/sveltique"
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label="See the Github repository in another tab."
+                        class={button({ variant: "text", shape: "square" })}
+                    >
+                        <IconBrandGithub class="h-5 w-5" />
+                    </a>
+                    <Button
+                        onclick={() => theme.switch()}
+                        variant="text"
+                        shape="square"
+                    >
+                        <ThemeIcon class="h-5 w-5" />
+                    </Button>
+                </div>
             </div>
         {/if}
     </header>

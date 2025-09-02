@@ -94,7 +94,7 @@ $effect(() => {
 	</aside>
 
 	<header
-		class="sticky left-0 top-0 z-50 h-12 w-full border-b border-muted bg-background lg:hidden"
+		class="sticky left-0 top-0 z-20 h-12 w-full border-b border-muted bg-background lg:hidden"
 	>
 		<nav
 			class="relative flex h-full w-full items-center justify-between px-6 text-sm font-medium text-muted-foreground"
@@ -108,7 +108,7 @@ $effect(() => {
 			</button>
 			<button
                 bind:this={showOnThisPageButtonRef}
-				onclick={() => (showOnThisPage = true)}
+				onclick={() => (showOnThisPage = !showOnThisPage)}
 				class="relative flex h-full cursor-pointer items-center gap-2.5"
 			>
 				On this page
