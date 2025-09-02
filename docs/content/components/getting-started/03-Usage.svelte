@@ -65,13 +65,19 @@ const code = `${script("import { Button, Tooltip } from '@sveltique/components';
 <p>
     Need to supercharge our components, either because we don't provide what you need or you don't have the proper variant ? Simply extend them by wrapping our components !
 </p>
-<p>Some advantages are :</p>
-<ul>
-    <li>Eliminating repetition of the same attributes or variables</li>
-    <li>Letting you define better defaults that match your project’s needs</li>
-</ul>
 <Alert>
     If you think they should be in the core library, consider <Link href="https://github.com/sveltique/sveltique" external>
         suggesting them
     </Link> !
 </Alert>
+<p>Some advantages are :</p>
+<ul>
+    <li>Eliminating repetition of the same attributes or variables</li>
+    <li>Letting you define better defaults that match your project’s needs</li>
+</ul>
+<p>
+    Certain components, such as the <Link href="/docs/components/browse/code-block#wrapper-component">CodeBlock</Link>,
+    promote the wrapper component approach, while others, such as the <Link href="/docs/components/browse/toast#programmatic-calls">
+        Toast
+    </Link>, help you create new components.
+</p>
