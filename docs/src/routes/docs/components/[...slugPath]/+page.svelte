@@ -5,7 +5,7 @@ let { data } = $props();
 </script>
 
 <svelte:head>
-	<title>{data.name} - @sveltique/components</title>
+	<title>{data.name} - sveltique/components</title>
 	<meta name="description" content={data.metadata?.description} />
 </svelte:head>
 

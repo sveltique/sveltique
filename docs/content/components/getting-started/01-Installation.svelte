@@ -10,7 +10,7 @@ import CodeBlock from "$components/CodeBlock.svelte";
 
 <h1 id="installation" class="text-3xl font-bold">Installation</h1>
 <p>Install Sveltique components library.</p>
-<Alert type="warning" class="mb-4">
+<Alert type="danger" class="mb-4">
     Until 1.0, this library is not suited for production-level code, as there may be breaking changes
     between minor versions (especially in the early versions).
 </Alert>

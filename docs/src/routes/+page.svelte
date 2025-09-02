@@ -4,6 +4,10 @@ import { button } from "@sveltique/components";
 
 <svelte:head>
     <title>Fulfill all your design-related needs - Sveltique</title>
+    <meta
+        name="description"
+        content="Build beautiful and consistent user interfaces with ready-to-use components, a cohesive design system and Tailwind's flexibility."
+    />
 </svelte:head>
 
 <div class="relative w-full flex justify-center">

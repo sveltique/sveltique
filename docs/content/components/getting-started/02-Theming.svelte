@@ -122,8 +122,11 @@ const introductionCode = `@custom-variant dark (&:where(.dark, .dark *));
 	showLineNumbers
 />
 
+<!--
+TODO : Find an example of a popular UI that can be decently replicated (improvements might be needed in core lib)
+
 <h2 id="customizing">Customizing</h2>
 <p>
 	You can simply edit and/or tweak any values to your liking. Here's an example replicating [FIND AN
 	EXAMPLE] :
-</p>
+</p> -->

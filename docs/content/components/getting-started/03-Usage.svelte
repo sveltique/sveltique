@@ -17,11 +17,11 @@ const code = `${script("import { Button, Tooltip } from '@sveltique/components';
 
 <svelte:head>
     <title>Usage - sveltique/components</title>
-    <meta name="description" content="Learn the basics of Sveltique components to use them in your project." />
+    <meta name="description" content="Learn the basics of using Sveltique components in your project." />
 </svelte:head>
 
 <h1 id="usage">Usage</h1>
-<p>Learn the basics of Sveltique components to use them in your project.</p>
+<p>Learn the basics of using Sveltique components in your project.</p>
 
 <h2 id="quick-start">Quick start</h2>
 <p>
