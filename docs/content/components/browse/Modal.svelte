@@ -103,6 +103,27 @@ const controlledStateCode = `${script(`import { Button, Modal } from "@sveltique
     {/snippet}
 </Modal>`;
 
+const handlingFocusOnExit = `${script('import { Button, Modal } from "@sveltique/components";')}
+
+<Modal backdropProps={{ z: 1000 }}>
+    {#snippet trigger({ ref, open })}
+        <Button
+            bind:ref={ref.current}
+            onclick={open}
+        >
+            Show modal
+        </Button>
+    {/snippet}
+
+    <h2 class="text-xl font-semibold">Subscribe to our newsletter</h2>
+    <p>Join our mailing list to receive occasional updates. You can unsubscribe at any time.</p>
+
+    {#snippet actions({ close })}
+        <Button onclick={close} variant="text">No thanks</Button>
+        <Button onclick={close} color="primary">Subscribe</Button>
+    {/snippet}
+</Modal>`
+
 const allowOverlayClickCode = `${script('import { Button, Modal } from "@sveltique/components";')}
 
 <Modal closeOnOverlayClick>
@@ -223,25 +244,18 @@ const accessibleLabelAndDescriptionCode = `${script('import { Button, Modal } fr
 	</Modal>
 </Playground>
 
-<h2 id="accessiblity">Accessiblity</h2>
-<p>Some notes on accessibility.</p>
+<h2 id="accessiblity">Accessibility</h2>
+<p>Additional notes or recommendations to improve the accessibility of your modals.</p>
 
-<h3 id="re-focus-the-trigger-on-exit">Re-focus the trigger on exit</h3>
+<h3 id="handling-focus-on-exit">Handling focus on exit</h3>
 <p>
-	The trigger snippet also passes a ref to get the trigger element. It is used to focus it when the
-	modal is exited.
+	The trigger snippet also passes a ref attribute that you can bind to the trigger element. It is used
+    to focus the trigger when the modal is exited.
 </p>
-<p class="italic">
-	Note : You cannot destructure the paramaters AND bind a value as per <Link
-		external
-		href="https://github.com/sveltejs/svelte/discussions/12688#discussioncomment-10215226"
-		aria-label="Opens the Github discussion in a new tab.">this discussion</Link
-	>.
-</p>
-<Playground>
+<Playground code={handlingFocusOnExit}>
 	<Modal backdropProps={{ z: 1000 }}>
-		{#snippet trigger({ open })}
-			<Button onclick={open}>Show modal</Button>
+		{#snippet trigger({ ref, open })}
+			<Button bind:ref={ref.current} onclick={open}>Show modal</Button>
 		{/snippet}
 
 		<h2 class="text-xl font-semibold">Subscribe to our newsletter</h2>
@@ -303,30 +317,6 @@ const accessibleLabelAndDescriptionCode = `${script('import { Button, Modal } fr
 
 		{#snippet actions({ close })}
 			<Button onclick={close} variant="text">Cancel</Button>
-			<Button onclick={close} color="danger">Log Out</Button>
-		{/snippet}
-	</Modal>
-</Playground>
-
-<h3 id="autofocus">Autofocus</h3>
-<p>
-	You should have one element that is focused using the <Badge>autofocus</Badge> attribute.
-</p>
-<Playground>
-	<Modal backdropProps={{ z: 1000 }}>
-		{#snippet trigger({ open })}
-			<Button onclick={open}>Show modal</Button>
-		{/snippet}
-
-		{#snippet children({ labelProps, descriptionProps })}
-			<h1 class="text-2xl font-bold" {...labelProps}>Log out</h1>
-			<p {...descriptionProps}>
-				Are you sure you want to log out? You'll need to sign in again to continue.
-			</p>
-		{/snippet}
-
-		{#snippet actions({ close })}
-			<Button onclick={close} variant="text" autofocus>Cancel</Button>
 			<Button onclick={close} color="danger">Log Out</Button>
 		{/snippet}
 	</Modal>

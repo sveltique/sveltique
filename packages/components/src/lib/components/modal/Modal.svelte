@@ -1,11 +1,15 @@
 <script lang="ts">
-import { type Snippet } from "svelte";
+import { untrack, type Snippet } from "svelte";
 import type { HTMLAttributes } from "svelte/elements";
 import type { ReplaceWithTWMergeClass } from "$lib/types.js";
 import { onKeyUp } from "$utils/on-key.svelte.js";
 import { flyAndScale } from "../../transitions/fly-and-scale.js";
 import { default as Backdrop, type BackdropProps } from "../backdrop/Backdrop.svelte";
 import { modal } from "./variants.js";
+
+type Ref = { current: HTMLElement | undefined };
+
+type TriggerSnippet = Snippet<[{ ref: Ref; open: VoidFunction }]>;
 
 type ChildrenSnippet = Snippet<
 	[
@@ -21,7 +25,7 @@ export interface ModalProps
 	extends ReplaceWithTWMergeClass<Omit<HTMLAttributes<HTMLElement>, "children">> {
 	actions?: Snippet<[{ close: VoidFunction }]>;
 	children?: ChildrenSnippet;
-	trigger?: Snippet<[{ open: VoidFunction }]>;
+	trigger?: TriggerSnippet;
 	/**
 	 * Whether to close the modal if the overlay is clicked.
 	 *
@@ -50,15 +54,33 @@ let {
 }: ModalProps = $props();
 
 const uid = $props.id();
+
+let ref = $state<Ref>({ current: undefined });
+let previousOpen = $state(isOpen);
+
 let { actions: actionsCss, dialog } = $derived(modal());
+
+if (closeOnOverlayClick) {
+	onKeyUp("Escape", () => (isOpen = false));
+}
 
 $effect(() => {
 	document.body.style.overflow = isOpen ? "hidden" : "auto";
 });
 
-if (closeOnOverlayClick) {
-	onKeyUp("Escape", () => (isOpen = false));
-}
+$effect(() => {
+	isOpen;
+
+	untrack(() => {
+		previousOpen = !isOpen;
+	});
+});
+
+$effect(() => {
+	if (previousOpen && !isOpen && ref.current) {
+		ref.current.focus();
+	}
+});
 
 const open = () => (isOpen = true);
 const close = () => (isOpen = false);
@@ -70,7 +92,7 @@ A dialog component that interrupts the user flow to capture attention. Displays 
 @see https://sveltique.dev/docs/components/browse/modal
 -->
 
-{@render trigger?.({ open })}
+{@render trigger?.({ ref, open })}
 
 {#if isOpen}
 	<Backdrop onClick={() => closeOnOverlayClick && close()} {...backdropProps}>
