@@ -8,7 +8,7 @@ import { button } from "@sveltique/components";
 
 <div class="relative w-full flex justify-center">
     <main class="relative w-full flex flex-col items-center gap-6">
-        <section class="relative w-full flex flex-col items-center gap-12 pt-[7.5rem] pb-24 px-6 max-w-3xl">
+        <section class="relative w-full flex flex-col items-center gap-12 pt-[7.5rem] pb-28 md:pt-40 px-6 max-w-3xl">
             <h1 class="text-5xl lg:text-7xl font-bold text-balance text-center">Fulfill all your design-related needs</h1>
             <p class="text-lg text-center">
                 Build beautiful and consistent user interfaces with ready-to-use components, a cohesive
@@ -28,7 +28,7 @@ import { button } from "@sveltique/components";
                 </a>
             </div>
         </section>
-        <section class="relative w-full flex flex-col items-center gap-12 py-24 px-6 max-w-5xl">
+        <section class="relative w-full flex flex-col items-center gap-12 py-28 px-6 max-w-5xl">
             <h2 class="text-4xl font-bold">Features</h2>
             <p class="text-lg text-center">Everything you need to build beautiful, consistent interfaces.</p>
             <div class="relative w-full flex flex-col items-start gap-12 mx-auto max-lg:max-w-lg lg:flex-row">

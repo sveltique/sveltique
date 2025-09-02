@@ -7,6 +7,8 @@ import IconSunFilled from "@tabler/icons-svelte/icons/sun-filled";
 import ToastContainer from "$components/toast/ToastContainer.svelte";
 import { theme } from "$lib/contexts/theme.svelte";
 import "../app.css";
+import { page } from "$app/state";
+import { cnBase } from "tailwind-variants";
 
 let { children } = $props();
 
@@ -27,7 +29,7 @@ let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
         class="sticky left-0 top-0 z-50 hidden h-16 w-full border-b border-muted bg-background lg:block"
     >
         <nav
-            class="relative flex h-full w-full items-center justify-between gap-5 px-20 dark:text-zinc-100"
+            class="relative flex h-full w-full items-center justify-between gap-6 px-6 max-w-[94rem] mx-auto dark:text-zinc-100"
         >
             <div class="relative flex items-center gap-10">
                 <Tooltip title="Go to home page">
@@ -42,9 +44,18 @@ let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
                         </a>
                     {/snippet}
                 </Tooltip>
-                <a href="/docs/components">Components</a>
             </div>
-            <div class="flex items-center gap-6 py-4">
+            <div class="flex items-center gap-3 py-4">
+                <a
+                    href="/docs/components"
+                    class={cnBase(
+                        "text-sm px-3 py-1.5 duration-150 hover:text-primary",
+                        page.url.pathname.startsWith('/docs/components') && "text-primary"
+                    )}
+                >
+                    Components
+                </a>
+                <Separator orientation="vertical" />
                 <Tooltip title="Go to the Github repository">
                     {#snippet children({ props, ref })}
                         <a
@@ -60,7 +71,6 @@ let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
                         </a>
                     {/snippet}
                 </Tooltip>
-                <Separator orientation="vertical" />
                 <Tooltip title="Switch to {theme.isDark ? 'light' : 'dark'} mode">
                     {#snippet children({ props, ref })}
                         <Button
@@ -82,19 +92,19 @@ let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
         class="relative left-0 top-0 z-50 h-16 w-full border-b border-muted bg-background lg:hidden"
     >
         <nav class="relative flex h-full w-full items-center justify-between px-6">
-            <a href="/" class="text-xl font-black dark:text-zinc-100">C</a>
+            <a href="/" class="font-bold">SVELTIQUE</a>
             <button
                 onclick={() => (showMenu = !showMenu)}
-                class="grid h-full place-items-center"
+                class="grid h-full place-items-center cursor-pointer"
             >
                 <IconMenuDeep />
             </button>
         </nav>
-    </header>
 
-    {#if showMenu}
-        <div class="fixed top-16 flex w-full flex-col">
-            <a href="/docs/components/browse"><!-- Components --></a>
-        </div>
-    {/if}
+        {#if showMenu}
+            <div class="fixed top-16 left-0 flex w-full flex-col h-[calc(100vh-4rem)] z-[100] bg-white">
+                <a href="/docs/components/browse"><!-- Components --></a>
+            </div>
+        {/if}
+    </header>
 {/snippet}

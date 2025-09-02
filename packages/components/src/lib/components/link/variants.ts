@@ -2,8 +2,8 @@ import { tv, type VariantProps } from "tailwind-variants";
 
 export const link = tv({
 	slots: {
-		container: "text-primary inline-flex gap-1",
-		icon: "aspect-square w-5 shrink-0"
+		container: "text-primary",
+		icon: "inline aspect-square w-5 shrink-0 ml-1"
 	},
 	variants: {
 		underline: {

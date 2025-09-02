@@ -10,9 +10,14 @@ import CodeBlock from "$components/CodeBlock.svelte";
 
 <h1 id="installation" class="text-3xl font-bold">Installation</h1>
 <p>Install Sveltique components library.</p>
-<Alert type="warning">
+<Alert type="warning" class="mb-4">
     Until 1.0, this library is not suited for production-level code, as there may be breaking changes
     between minor versions.
+</Alert>
+<Alert>
+    Since the library is not finished yet, docs may be incomplete. <Link href="https://github.com/sveltique/sveltique" external>
+        Help us improve them !
+    </Link> Any suggestions are welcome.
 </Alert>
 
 <h2 id="default-installation">Default installation</h2>

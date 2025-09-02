@@ -1,5 +1,5 @@
 <script>
-import { Button, Link, Tooltip } from "@sveltique/components";
+import { Alert, Button, Link, Tooltip } from "@sveltique/components";
 import CodeBlock from "$components/CodeBlock.svelte";
 import Playground from "$components/Playground.svelte";
 import { script } from "$utils/playground";
@@ -25,7 +25,7 @@ const code = `${script("import { Button, Tooltip } from '@sveltique/components';
 
 <h2 id="quick-start">Quick start</h2>
 <p>
-    After <Link href="/docs/components/installation">installation</Link>, you can start importing
+    After <Link href="/docs/components/getting-started/installation">installation</Link>, you can start importing
     Sveltique components in your project. It's that simple !
 </p>
 <Playground {code}>
@@ -41,4 +41,8 @@ const code = `${script("import { Button, Tooltip } from '@sveltique/components';
     To reduce your bundle, you can import each component individually instead of using the root
     import.
 </p>
+<Alert class="mb-4">
+    To keep the imports brief in the code examples, we will use the root import but it is not recommended
+    in production. Though, the more components you use, the less it will impact you.
+</Alert>
 <CodeBlock code={'import { Alert } from "@sveltique/components/alert";'} lang="ts" />
