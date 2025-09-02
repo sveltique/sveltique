@@ -8,45 +8,64 @@ export const metadata = {
 	import { Accordion, Badge } from '@sveltique/components';
 	import Playground from '$components/Playground.svelte';
 	import CodeBlock from '$components/CodeBlock.svelte';
+	import IconAerialLiftFilled from '@tabler/icons-svelte/icons/aerial-lift-filled';
 	import IconArrowDown from '@tabler/icons-svelte/icons/arrow-down';
 	import IconCaretDownFilled from '@tabler/icons-svelte/icons/caret-down-filled';
+	import IconLockFilled from '@tabler/icons-svelte/icons/lock-filled';
 	import { script } from '$utils/playground';
 
 	const basicCode = `${script('import { Accordion } from "@sveltique/components";')}
 
 <Accordion.Root>
-    <Accordion.Item>
-        {#snippet header()}
-            Accordion 1
-        {/snippet}
-
+    <Accordion.Item header="Accordion 1">
         <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Voluptate impedit deserunt amet officia qui tenetur
             laboriosam consequatur incidunt, voluptatum atque.
         </p>
     </Accordion.Item>
-    <Accordion.Item>
-        {#snippet header()}
-            Accordion 2
-        {/snippet}
-
+    <Accordion.Item header="Accordion 2">
         <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Eos sequi consectetur dolores libero tempora ducimus
-            perferendis iste qui voluptas. Cum!
+            perferendis iste qui voluptas.
         </p>
     </Accordion.Item>
 </Accordion.Root>`;
 
+    const complexHeadersCode = `${script('import { Accordion } from "@sveltique/components";')}
+    
+<Accordion.Root class="max-w-md">
+    <Accordion.Item>
+        {#snippet header()}
+            <div class="relative flex items-center gap-3">
+                <IconLockFilled /> Accordion 1
+            </div>
+        {/snippet}
+
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate impedit deserunt amet
+            officia qui tenetur laboriosam consequatur incidunt, voluptatum atque.
+        </p>
+    </Accordion.Item>
+    <Accordion.Item>
+        {#snippet header()}
+            <div class="relative flex items-center gap-3">
+                <IconAerialLiftFilled /> Accordion 2
+            </div>
+        {/snippet}
+
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos sequi consectetur dolores
+            libero tempora ducimus perferendis iste qui voluptas.
+        </p>
+    </Accordion.Item>
+</Accordion.Root>`
+
 	const expandIconCode = `${script('import { Accordion } from "@sveltique/components";')}
 
 <Accordion.Root>
-    <Accordion.Item>
-        {#snippet header()}
-            Accordion 1
-        {/snippet}
-
+    <Accordion.Item header="Accordion 1">
         <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Voluptate impedit deserunt amet officia qui tenetur
@@ -57,15 +76,11 @@ export const metadata = {
             <IconArrowDown class={css} />
         {/snippet}
     </Accordion.Item>
-    <Accordion.Item>
-        {#snippet header()}
-            Accordion 2
-        {/snippet}
-
+    <Accordion.Item header="Accordion 2">
         <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Eos sequi consectetur dolores libero tempora ducimus
-            perferendis iste qui voluptas. Cum!
+            perferendis iste qui voluptas.
         </p>
 
         {#snippet icon({ css })}
@@ -77,41 +92,18 @@ export const metadata = {
 	const defaultExpandCode = `${script('import { Accordion } from "@sveltique/components";')}
 
 <Accordion.Root defaultExpand>
-    <Accordion.Item>
-        {#snippet header()}
-            Accordion 1
-        {/snippet}
-
+    <Accordion.Item header="Accordion 1">
         <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Voluptate impedit deserunt amet officia qui tenetur
             laboriosam consequatur incidunt, voluptatum atque.
         </p>
     </Accordion.Item>
-    <Accordion.Item>
-        {#snippet header()}
-            Accordion 2
-        {/snippet}
-
+    <Accordion.Item header="Accordion 2">
         <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Eos sequi consectetur dolores libero tempora ducimus
-            perferendis iste qui voluptas. Cum!
-        </p>
-    </Accordion.Item>
-</Accordion.Root>`;
-
-	const headingLevelCode = `<!-- The headers will now use an h4 element -->
-<Accordion.Root headingLevel="h4">
-    <Accordion.Item>
-        {#snippet header()}
-            Accordion 1
-        {/snippet}
-
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Voluptate impedit deserunt amet officia qui tenetur
-            laboriosam consequatur incidunt, voluptatum atque.
+            perferendis iste qui voluptas.
         </p>
     </Accordion.Item>
 </Accordion.Root>`;
@@ -119,27 +111,30 @@ export const metadata = {
     const onlyExpandOneAtATimeCode = `${script('import { Accordion } from "@sveltique/components";')}
     
 <Accordion.Root multiple={false} class="max-w-md">
-    <Accordion.Item>
-        {#snippet header()}
-            Accordion 1
-        {/snippet}
-
+    <Accordion.Item header="Accordion 1">
         <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate impedit deserunt amet
             officia qui tenetur laboriosam consequatur incidunt, voluptatum atque.
         </p>
     </Accordion.Item>
-    <Accordion.Item>
-        {#snippet header()}
-            Accordion 2
-        {/snippet}
-
+    <Accordion.Item header="Accordion 2">
         <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos sequi consectetur dolores
-            libero tempora ducimus perferendis iste qui voluptas. Cum!
+            libero tempora ducimus perferendis iste qui voluptas.
         </p>
     </Accordion.Item>
-</Accordion.Root>`
+</Accordion.Root>`;
+
+	const headingLevelCode = `<!-- The headers will now use an h4 element -->
+<Accordion.Root headingLevel="h4">
+    <Accordion.Item header="Accordion 1">
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Voluptate impedit deserunt amet officia qui tenetur
+            laboriosam consequatur incidunt, voluptatum atque.
+        </p>
+    </Accordion.Item>
+</Accordion.Root>`;
 </script>
 
 <h1 id="accordion">Accordion</h1>
@@ -152,9 +147,30 @@ export const metadata = {
 </p>
 <Playground code={basicCode}>
 	<Accordion.Root class="max-w-md">
+		<Accordion.Item header="Accordion 1">
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate impedit deserunt amet
+				officia qui tenetur laboriosam consequatur incidunt, voluptatum atque.
+			</p>
+		</Accordion.Item>
+		<Accordion.Item header="Accordion 2">
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos sequi consectetur dolores
+				libero tempora ducimus perferendis iste qui voluptas.
+			</p>
+		</Accordion.Item>
+	</Accordion.Root>
+</Playground>
+
+<h3 id="complex-headers">Complex headers</h3>
+<p>If your accordion header doesn't only contain text, you can pass a header snippet instead.</p>
+<Playground code={complexHeadersCode}>
+	<Accordion.Root class="max-w-md">
 		<Accordion.Item>
-			{#snippet header()}
-				Accordion 1
+            {#snippet header()}
+				<div class="relative flex items-center gap-3">
+                    <IconLockFilled /> Accordion 1
+                </div>
 			{/snippet}
 
 			<p>
@@ -163,13 +179,15 @@ export const metadata = {
 			</p>
 		</Accordion.Item>
 		<Accordion.Item>
-			{#snippet header()}
-				Accordion 2
+            {#snippet header()}
+                <div class="relative flex items-center gap-3">
+				    <IconAerialLiftFilled /> Accordion 2
+                </div>
 			{/snippet}
 
 			<p>
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos sequi consectetur dolores
-				libero tempora ducimus perferendis iste qui voluptas. Cum!
+				libero tempora ducimus perferendis iste qui voluptas.
 			</p>
 		</Accordion.Item>
 	</Accordion.Root>
@@ -181,11 +199,7 @@ export const metadata = {
 <p>You can customize the expand icon by using the <Badge>icon</Badge> snippet on the items.</p>
 <Playground code={expandIconCode}>
 	<Accordion.Root class="max-w-md">
-		<Accordion.Item>
-			{#snippet header()}
-				Accordion 1
-			{/snippet}
-
+		<Accordion.Item header="Accordion 1">
 			<p>
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate impedit deserunt amet
 				officia qui tenetur laboriosam consequatur incidunt, voluptatum atque.
@@ -195,14 +209,10 @@ export const metadata = {
                 <IconArrowDown class={css} />
             {/snippet}
 		</Accordion.Item>
-		<Accordion.Item>
-			{#snippet header()}
-				Accordion 2
-			{/snippet}
-
+		<Accordion.Item header="Accordion 2">
 			<p>
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos sequi consectetur dolores
-				libero tempora ducimus perferendis iste qui voluptas. Cum!
+				libero tempora ducimus perferendis iste qui voluptas.
 			</p>
 
             {#snippet icon({ css })}
@@ -216,24 +226,16 @@ export const metadata = {
 <p>You can expand the first item by default via the <Badge>defaultExpand</Badge> attribute on the root container.</p>
 <Playground code={defaultExpandCode}>
 	<Accordion.Root defaultExpand class="max-w-md">
-		<Accordion.Item>
-			{#snippet header()}
-				Accordion 1
-			{/snippet}
-
+		<Accordion.Item header="Accordion 1">
 			<p>
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate impedit deserunt amet
 				officia qui tenetur laboriosam consequatur incidunt, voluptatum atque.
 			</p>
 		</Accordion.Item>
-		<Accordion.Item>
-			{#snippet header()}
-				Accordion 2
-			{/snippet}
-
+		<Accordion.Item header="Accordion 2">
 			<p>
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos sequi consectetur dolores
-				libero tempora ducimus perferendis iste qui voluptas. Cum!
+				libero tempora ducimus perferendis iste qui voluptas.
 			</p>
 		</Accordion.Item>
 	</Accordion.Root>
@@ -245,24 +247,16 @@ export const metadata = {
 </p>
 <Playground code={onlyExpandOneAtATimeCode}>
 	<Accordion.Root multiple={false} class="max-w-md">
-		<Accordion.Item>
-			{#snippet header()}
-				Accordion 1
-			{/snippet}
-
+		<Accordion.Item header="Accordion 1">
 			<p>
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate impedit deserunt amet
 				officia qui tenetur laboriosam consequatur incidunt, voluptatum atque.
 			</p>
 		</Accordion.Item>
-		<Accordion.Item>
-			{#snippet header()}
-				Accordion 2
-			{/snippet}
-
+		<Accordion.Item header="Accordion 2">
 			<p>
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos sequi consectetur dolores
-				libero tempora ducimus perferendis iste qui voluptas. Cum!
+				libero tempora ducimus perferendis iste qui voluptas.
 			</p>
 		</Accordion.Item>
 	</Accordion.Root>

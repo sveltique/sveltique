@@ -1,5 +1,5 @@
 <script lang="ts">
-import { type Component, type ComponentType, onMount, type Snippet } from "svelte";
+import { onMount, type Snippet } from "svelte";
 import { slide } from "svelte/transition";
 import type { TWMergeClass } from "$lib/types.js";
 import { useMutationObserver } from "$utils/use-mutation-observer.svelte.js";
@@ -8,6 +8,7 @@ import { accordionItem } from "./variants.js";
 type IconSnippet = Snippet<
 	[
 		{
+			"aria-hidden": true;
 			/** CSS to manage the size of the icon. */
 			css: string;
 		}
@@ -16,7 +17,7 @@ type IconSnippet = Snippet<
 
 interface Props extends TWMergeClass {
 	children: Snippet;
-	header: Snippet;
+	header: string | Snippet;
 	// TODO : Replace with `id` as it makes more sense
 	value?: string;
 	icon?: IconSnippet;
@@ -37,7 +38,6 @@ let _value = $derived(value ?? uid);
 let {
 	container,
 	icon: iconCss,
-	iconContainer,
 	panel,
 	header: headerCss,
 	trigger
@@ -73,10 +73,13 @@ function updateOpen() {
 			class={trigger()}
 		>
 			<div class={headerCss()}>
-				<span>{@render header()}</span>
-                <div class={iconContainer()}>
-				    {@render icon({ css: iconCss() })}
-                </div>
+                {#if typeof header === "string"}
+                    {header}
+                {:else}
+                    {@render header()}
+                {/if}
+
+                {@render icon({ "aria-hidden": true, css: iconCss() })}
 			</div>
 		</button>
 	</svelte:element>
@@ -94,7 +97,7 @@ function updateOpen() {
 	{/if}
 </div>
 
-{#snippet fallbackIcon({ css }: Parameters<IconSnippet>["0"])}
+{#snippet fallbackIcon({ css, ...props }: Parameters<IconSnippet>["0"])}
     <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -106,6 +109,7 @@ function updateOpen() {
         stroke-linecap="round"
         stroke-linejoin="round"
         class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down {css}"
+        {...props}
     >
         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
         <path d="M6 9l6 6l6 -6" />
