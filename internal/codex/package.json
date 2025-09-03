@@ -5,8 +5,8 @@
 	"main": "index.js",
 	"private": true,
 	"scripts": {
-		"build": "tsup src/**/*.ts --dts --format esm",
-		"dev": "tsup src/**/*.ts --dts --format esm --watch",
+		"build": "tsup src/index.ts src/config.ts --dts --format cjs,esm",
+		"dev": "tsup src/index.ts src/config.ts --dts --format cjs,esm --watch",
 		"format": "npx @biomejs/biome format --write",
 		"lint": "npx @biomejs/biome lint --write"
 	},
