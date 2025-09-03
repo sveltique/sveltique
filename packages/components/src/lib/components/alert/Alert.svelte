@@ -1,17 +1,26 @@
 <script lang="ts">
 import type { Snippet } from "svelte";
-import type { ClassNameValue } from "tailwind-merge";
-import type { WithRef } from "$lib/types.js";
+import type { TWMergeClass, WithRef } from "$lib/types.js";
 import { type AlertVariants, alert } from "./variants.js";
 
-interface Props extends AlertVariants, WithRef<HTMLElement | HTMLDivElement> {
+type IconSnippet = Snippet<
+	[
+		{
+			"aria-hidden": true;
+			/** CSS to manage the size of the icon. */
+			css: string;
+		}
+	]
+>;
+
+interface Props extends TWMergeClass, AlertVariants, WithRef<HTMLElement | HTMLDivElement> {
 	children?: Snippet;
-	class?: ClassNameValue;
+	icon?: IconSnippet;
 }
 
-let { children, class: className = "", ref = $bindable(), type = "info" }: Props = $props();
+let { children, class: className = "", icon = fallbackIcon, ref = $bindable(), type = "info" }: Props = $props();
 
-const { container, icon } = $derived(alert({ type, className }));
+const { container, icon: iconCss } = $derived(alert({ type, className }));
 </script>
 
 <!--
@@ -21,11 +30,11 @@ A visual message box used to communicate contextual feedback to users, such as i
 -->
 
 <div bind:this={ref} role="alert" data-alert class={container({ className })}>
-	{@render alertIcon()}
+	{@render icon({ "aria-hidden": true, css: iconCss() })}
 	<span>{@render children?.()}</span>
 </div>
 
-{#snippet alertIcon()}
+{#snippet fallbackIcon({ css, ...props }: Parameters<IconSnippet>[0])}
 	{#if type === 'success'}
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +42,8 @@ A visual message box used to communicate contextual feedback to users, such as i
 			height="24"
 			viewBox="0 0 24 24"
 			fill="currentColor"
-			class="icon icon-tabler icons-tabler-filled icon-tabler-circle-check {icon()}"
+			class="icon icon-tabler icons-tabler-filled icon-tabler-circle-check {css}"
+			{...props}
 		>
 			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 			<path
@@ -47,7 +57,8 @@ A visual message box used to communicate contextual feedback to users, such as i
 			height="24"
 			viewBox="0 0 24 24"
 			fill="currentColor"
-			class="icon icon-tabler icons-tabler-filled icon-tabler-info-circle {icon()}"
+			class="icon icon-tabler icons-tabler-filled icon-tabler-info-circle {css}"
+			{...props}
 		>
 			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 			<path
@@ -61,7 +72,8 @@ A visual message box used to communicate contextual feedback to users, such as i
 			height="24"
 			viewBox="0 0 24 24"
 			fill="currentColor"
-			class="icon icon-tabler icons-tabler-filled icon-tabler-alert-triangle {icon()}"
+			class="icon icon-tabler icons-tabler-filled icon-tabler-alert-triangle {css}"
+			{...props}
 		>
 			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 
@@ -76,7 +88,8 @@ A visual message box used to communicate contextual feedback to users, such as i
 			height="24"
 			viewBox="0 0 24 24"
 			fill="currentColor"
-			class="icon icon-tabler icons-tabler-filled icon-tabler-exclamation-circle {icon()}"
+			class="icon icon-tabler icons-tabler-filled icon-tabler-exclamation-circle {css}"
+			{...props}
 		>
 			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 			<path
