@@ -10,10 +10,14 @@
 		"codex.install": "npm --prefix ./internal/codex install",
 		"codex.dev": "npm --prefix ./internal/codex run dev",
 		"install": "concurrently 'npm:components.install' 'npm:codex.install' 'npm:docs.install'",
-		"dev": "concurrently 'npm:components.dev' 'npm:codex.dev' 'npm:docs.dev'"
+		"dev": "concurrently 'npm:components.dev' 'npm:codex.dev' 'npm:docs.dev'",
+		"changeset:release": "changeset publish"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.2.2",
+		"@changesets/changelog-github": "^0.5.1",
+		"@changesets/cli": "^2.29.6",
 		"concurrently": "^9.2.0"
-	}
+	},
+	"workspaces": ["packages/*"]
 }
