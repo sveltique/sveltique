@@ -1,11 +1,13 @@
 <script lang="ts">
 import type { HTMLAttributes } from "svelte/elements";
-import type { ReplaceWithTWMergeClass } from "$lib/types.js";
+import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { kbd } from "./variants.js";
 
-interface Props extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLElement>> {}
+interface Props
+	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLElement>>,
+		WithRef<HTMLElement> {}
 
-let { children, class: className, ...restProps }: Props = $props();
+let { children, class: className, ref = $bindable(), ...restProps }: Props = $props();
 </script>
 
 <!--
@@ -14,6 +16,6 @@ Denotes textual user input from a keyboard, voice input, or any other text entry
 @see https://sveltique.dev/docs/components/browse/kbd
 -->
 
-<kbd data-kbd class={kbd()} {...restProps}>
+<kbd bind:this={ref} data-kbd class={kbd()} {...restProps}>
 	{@render children?.()}
 </kbd>

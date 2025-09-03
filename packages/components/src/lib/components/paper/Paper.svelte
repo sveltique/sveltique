@@ -1,15 +1,13 @@
 <script lang="ts">
 import type { HTMLAttributes } from "svelte/elements";
-import type { ClassNameValue } from "tailwind-merge";
-import type { WithRef } from "$lib/types.js";
+import type { TWMergeClass, WithRef } from "$lib/types.js";
 import { type PaperVariants, paper } from "./variants.js";
 
 interface Props
 	extends Omit<HTMLAttributes<HTMLDivElement>, "class">,
+		TWMergeClass,
 		PaperVariants,
-		WithRef<HTMLElement | HTMLDivElement> {
-	class?: ClassNameValue;
-}
+		WithRef<HTMLElement | HTMLDivElement> {}
 
 let { children, class: className = undefined, ref = $bindable(), ...restProps }: Props = $props();
 </script>

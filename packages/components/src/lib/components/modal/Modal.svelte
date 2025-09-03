@@ -1,5 +1,5 @@
 <script lang="ts">
-import { untrack, type Snippet } from "svelte";
+import { type Snippet, untrack } from "svelte";
 import type { HTMLAttributes } from "svelte/elements";
 import type { ReplaceWithTWMergeClass } from "$lib/types.js";
 import { onKeyUp } from "$utils/on-key.svelte.js";

@@ -7,7 +7,7 @@ interface Props
 	extends ReplaceWithTWMergeClass<
 			Omit<HTMLButtonAttributes, "disabled" | "onclick" | "ontoggle">
 		>,
-		WithRef<HTMLButtonElement>,
+		WithRef<HTMLElement | HTMLButtonElement>,
 		SwitchVariants {
 	ontoggle: (checked: boolean) => void;
 }

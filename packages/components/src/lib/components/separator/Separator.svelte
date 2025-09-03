@@ -1,12 +1,14 @@
 <script lang="ts">
-import type { ClassNameValue } from "tailwind-merge";
+import type { TWMergeClass, WithRef } from "$lib/types.js";
 import { type SeparatorVariants, separator } from "./variants.js";
 
-interface Props extends SeparatorVariants {
-	class?: ClassNameValue;
-}
+interface Props extends TWMergeClass, WithRef<HTMLElement | HTMLDivElement>, SeparatorVariants {}
 
-let { class: className = undefined, orientation = "horizontal" }: Props = $props();
+let {
+	class: className = undefined,
+	orientation = "horizontal",
+	ref = $bindable()
+}: Props = $props();
 </script>
 
 <!--
@@ -16,6 +18,7 @@ A thin, visible line used to separate content and create visual grouping.
 -->
 
 <div
+    bind:this={ref}
 	role="separator"
     data-separator
 	aria-orientation={orientation}

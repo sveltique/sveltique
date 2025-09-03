@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { Snippet } from "svelte";
 import type { HTMLAnchorAttributes } from "svelte/elements";
-import type { ReplaceWithTWMergeClass } from "$lib/types.js";
+import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { type LinkVariants, link } from "./variants.js";
 
 type IconSnippet = Snippet<
@@ -16,7 +16,10 @@ type IconSnippet = Snippet<
 	]
 >;
 
-interface Props extends ReplaceWithTWMergeClass<HTMLAnchorAttributes>, LinkVariants {
+interface Props
+	extends ReplaceWithTWMergeClass<HTMLAnchorAttributes>,
+		WithRef<HTMLElement | HTMLAnchorElement>,
+		LinkVariants {
 	/**
 	 * Shorthand for setting `target="_blank"` and `rel="noreferrer"`.
 	 * @note Passing target and/or rel overrides the values set by `external`.
@@ -38,10 +41,11 @@ let {
 	class: className,
 	external = false,
 	href,
+	icon = fallbackIcon,
+	ref = $bindable(),
 	rel,
 	target,
 	underline = "always",
-	icon = fallbackIcon,
 	...restProps
 }: Props = $props();
 
@@ -56,7 +60,7 @@ A styled and accessible replacement for the native `a` element.
 @see https://sveltique.dev/docs/components/browse/link
 -->
 
-<a {href} target={_target} rel={_rel} data-link class={container({ className })} {...restProps}>
+<a bind:this={ref} {href} target={_target} rel={_rel} data-link class={container({ className })} {...restProps}>
     <!-- Avoid adding an unnecessary space at the end of a text link -->
 	{@render children?.()}{#if external && icon !== false}
         {@render icon({ props: { css: iconCss(), "aria-hidden": true } })}

@@ -6,7 +6,7 @@ import { checkbox } from "./variants.js";
 interface Props
 	extends Omit<HTMLInputAttributes, "checked" | "class" | "disabled" | "type">,
 		TWMergeClass,
-		WithRef<HTMLInputElement> {
+		WithRef<HTMLElement | HTMLInputElement> {
 	checked?: boolean;
 	disabled?: boolean;
 }

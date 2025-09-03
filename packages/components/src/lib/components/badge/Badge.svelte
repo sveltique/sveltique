@@ -1,18 +1,18 @@
 <script lang="ts">
 import type { Snippet } from "svelte";
-import type { ClassNameValue } from "tailwind-merge";
+import type { TWMergeClass, WithRef } from "$lib/types.js";
 import { type BadgeVariants, badge } from "./variants.js";
 
-interface Props extends BadgeVariants {
+interface Props extends BadgeVariants, TWMergeClass, WithRef<HTMLElement | HTMLDivElement> {
 	children?: Snippet;
-	class?: ClassNameValue;
 }
 
 let {
 	children,
 	class: className = undefined,
 	variant = "contained",
-	number = false
+	number = false,
+	ref = $bindable()
 }: Props = $props();
 </script>
 
@@ -22,6 +22,6 @@ A small badge with rounded corners.
 @see https://sveltique.dev/docs/components/browse/badge
 -->
 
-<div data-badge class={badge({ variant, number, className })}>
+<div bind:this={ref} data-badge class={badge({ variant, number, className })}>
 	{@render children?.()}
 </div>

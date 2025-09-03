@@ -51,7 +51,7 @@ const code = `${script("import { Button, Tooltip } from '@sveltique/components';
 <h2>Best practices</h2>
 <p>Some best practices when using Sveltique.</p>
 
-<h3>Theming</h3>
+<h3 id="theming">Theming</h3>
 <p>
     Ideally, your theme should be the single source of truth for customization, to ensure that your
     entire UI feels cohesive and unified.
@@ -61,7 +61,7 @@ const code = `${script("import { Button, Tooltip } from '@sveltique/components';
     minimum to make it easier to maintain and debug in the future.
 </p>
 
-<h3>Extend</h3>
+<h3 id="extend">Extend</h3>
 <p>
     Need to supercharge our components, either because we don't provide what you need or you don't have the proper variant ? Simply extend them by wrapping our components !
 </p>

@@ -5,7 +5,7 @@ import { textArea } from "./variants.js";
 
 interface Props
 	extends ReplaceWithTWMergeClass<Omit<HTMLTextareaAttributes, "value">>,
-		WithRef<HTMLTextAreaElement> {
+		WithRef<HTMLElement | HTMLTextAreaElement> {
 	value?: string;
 }
 
@@ -19,4 +19,10 @@ A syled replacement for the native `textarea` element.
 @see https://sveltique.dev/docs/components/browse/text-area
 -->
 
-<textarea bind:value data-text-area class={textArea({ className })} {...restProps}></textarea>
+<textarea
+    bind:this={ref}
+    bind:value
+    data-text-area
+    class={textArea({ className })}
+    {...restProps}
+></textarea>
