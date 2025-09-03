@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
+	"private": true,
 	"scripts": {
 		"build": "tsup src/**/*.ts --dts --format esm",
 		"dev": "tsup src/**/*.ts --dts --format esm --watch",

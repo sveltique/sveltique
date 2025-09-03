@@ -22,5 +22,5 @@
 		"@changesets/cli": "^2.29.6",
 		"concurrently": "^9.2.0"
 	},
-	"workspaces": ["packages/*"]
+	"workspaces": ["packages/*", "internal/*"]
 }
