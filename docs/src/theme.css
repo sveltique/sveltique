@@ -27,17 +27,17 @@
 	--color-danger: var(--danger);
 
 	/* DERIVED COLORS */
-	--color-muted: color-mix(in oklch, var(--background), var(--foreground) 10%);
-	--color-muted-foreground: color-mix(in oklch, var(--background), var(--foreground) 50%);
+	--color-muted: color-mix(in oklab, var(--background), var(--foreground) 10%);
+	--color-muted-foreground: color-mix(in oklab, var(--background), var(--foreground) 50%);
 
-	--color-primary-muted: color-mix(in oklch, var(--primary), var(--background) 10%);
-	--color-primary-disabled: color-mix(in oklch, var(--primary), var(--background) 50%);
+	--color-primary-muted: color-mix(in oklab, var(--primary), var(--background) 10%);
+	--color-primary-disabled: color-mix(in oklab, var(--primary), var(--background) 50%);
 
-	--color-info-light: color-mix(in oklch, var(--info), var(--background) 90%);
-	--color-success-light: color-mix(in oklch, var(--success), var(--background) 90%);
-	--color-warning-light: color-mix(in oklch, var(--warning), var(--background) 90%);
-	--color-danger-light: color-mix(in oklch, var(--danger), var(--background) 90%);
-	--color-danger-muted: color-mix(in oklch, var(--danger), var(--background) 10%);
+	--color-info-light: color-mix(in oklab, var(--info), var(--background) 90%);
+	--color-success-light: color-mix(in oklab, var(--success), var(--background) 90%);
+	--color-warning-light: color-mix(in oklab, var(--warning), var(--background) 90%);
+	--color-danger-light: color-mix(in oklab, var(--danger), var(--background) 90%);
+	--color-danger-muted: color-mix(in oklab, var(--danger), var(--background) 10%);
 
 	/* Radius and DERIVED RADIUS */
 	--radius: var(--base-radius);
