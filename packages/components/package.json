@@ -1,30 +1,20 @@
 {
 	"name": "@sveltique/components",
 	"version": "0.1.0",
-	"keywords": [
-		"svelte",
-		"components",
-		"ui",
-		"sveltekit",
-		"tailwindcss"
-	],
+	"keywords": ["svelte", "components", "ui", "sveltekit", "tailwindcss"],
 	"scripts": {
 		"build": "npm run prepack",
+		"build:watch": "npm run prepack:watch",
 		"prepare": "svelte-kit sync || echo ''",
-		"prepack": "svelte-kit sync && svelte-package --watch && publint",
+		"prepack": "svelte-kit sync && svelte-package && publint",
+		"prepack:watch": "svelte-kit sync && svelte-package --watch && publint",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "npx @biomejs/biome format --write",
 		"lint": "npx @biomejs/biome lint --write"
 	},
-	"files": [
-		"dist",
-		"!dist/**/*.test.*",
-		"!dist/**/*.spec.*"
-	],
-	"sideEffects": [
-		"**/*.css"
-	],
+	"files": ["dist", "!dist/**/*.test.*", "!dist/**/*.spec.*"],
+	"sideEffects": ["**/*.css"],
 	"svelte": "./dist/components/index.js",
 	"types": "./dist/components/index.d.ts",
 	"type": "module",
