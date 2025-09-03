@@ -1,7 +1,7 @@
 <script lang="ts">
 import { type Snippet, untrack } from "svelte";
 import type { HTMLAttributes } from "svelte/elements";
-import type { ReplaceWithTWMergeClass } from "$lib/types.js";
+import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { onKeyUp } from "$utils/on-key.svelte.js";
 import { flyAndScale } from "../../transitions/fly-and-scale.js";
 import { default as Backdrop, type BackdropProps } from "../backdrop/Backdrop.svelte";
@@ -22,7 +22,8 @@ type ChildrenSnippet = Snippet<
 >;
 
 export interface ModalProps
-	extends ReplaceWithTWMergeClass<Omit<HTMLAttributes<HTMLElement>, "children">> {
+	extends ReplaceWithTWMergeClass<Omit<HTMLAttributes<HTMLElement>, "children">>,
+		WithRef<HTMLElement | HTMLDivElement> {
 	actions?: Snippet<[{ close: VoidFunction }]>;
 	children?: ChildrenSnippet;
 	trigger?: TriggerSnippet;
@@ -46,16 +47,17 @@ let {
 	actions,
 	children,
 	trigger,
+	backdropProps = {},
 	class: className = undefined,
 	closeOnOverlayClick = false,
 	isOpen = $bindable(false),
-	backdropProps = {},
+	ref = $bindable(),
 	...restProps
 }: ModalProps = $props();
 
 const uid = $props.id();
 
-let ref = $state<Ref>({ current: undefined });
+let triggerRef = $state<Ref>({ current: undefined });
 let previousOpen = $state(isOpen);
 
 let { actions: actionsCss, dialog } = $derived(modal());
@@ -77,8 +79,8 @@ $effect(() => {
 });
 
 $effect(() => {
-	if (previousOpen && !isOpen && ref.current) {
-		ref.current.focus();
+	if (previousOpen && !isOpen && triggerRef.current) {
+		triggerRef.current.focus();
 	}
 });
 
@@ -92,11 +94,12 @@ A dialog component that interrupts the user flow to capture attention. Displays 
 @see https://sveltique.dev/docs/components/browse/modal
 -->
 
-{@render trigger?.({ ref, open })}
+{@render trigger?.({ ref: triggerRef, open })}
 
 {#if isOpen}
 	<Backdrop onClick={() => closeOnOverlayClick && close()} {...backdropProps}>
 		<div
+            bind:this={ref}
 			transition:flyAndScale={{ duration: 150 }}
 			id={uid}
 			role="alertdialog"

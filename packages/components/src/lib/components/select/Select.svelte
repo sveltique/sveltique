@@ -2,9 +2,10 @@
 import { onMount, type Snippet } from "svelte";
 import { on } from "svelte/events";
 import type { ClassNameValue } from "tailwind-merge";
+import type { WithRef } from "$lib/types.js";
 import { select } from "./variants.js";
 
-interface Props {
+interface Props extends WithRef<HTMLElement | HTMLDivElement> {
 	id?: string;
 	children?: Snippet;
 	class?: ClassNameValue;
@@ -17,13 +18,14 @@ interface Props {
 }
 
 let {
-	id,
 	children,
 	class: className,
 	containerClass,
+	id,
 	name,
-	value = $bindable(),
 	placeholder = "",
+	ref = $bindable(),
+	value = $bindable(),
 	...restProps
 }: Props = $props();
 
@@ -180,7 +182,7 @@ function getChildById(id: string) {
 }
 </script>
 
-<div id={componentId} data-select class={container({ class: containerClass })}>
+<div bind:this={ref} id={componentId} data-select class={container({ class: containerClass })}>
 	<input type="hidden" {name} {value} />
 	<button
 		bind:this={triggerRef}

@@ -1,8 +1,7 @@
 <script lang="ts">
 import type { Snippet } from "svelte";
-import type { ClassNameValue } from "tailwind-merge";
+import type { TWMergeClass, WithRef } from "$lib/types.js";
 import { type FieldVariants, field } from "./variants.js";
-import type { TWMergeClass } from "$lib/types.js";
 
 type InputSnippet = Snippet<
 	[
@@ -19,7 +18,7 @@ type InputSnippet = Snippet<
 	]
 >;
 
-interface Props extends TWMergeClass, FieldVariants {
+interface Props extends TWMergeClass, WithRef<HTMLElement | HTMLDivElement>, FieldVariants {
 	input: InputSnippet;
 	error?: string | undefined;
 	label?: string | undefined;
@@ -30,7 +29,8 @@ let {
 	input,
 	error = undefined,
 	label = undefined,
-	placement = "top"
+	placement = "top",
+	ref = $bindable()
 }: Props = $props();
 
 const id = $props.id();
@@ -50,7 +50,7 @@ Provides a consistent structure for form controls, by including a label and an e
 @see https://sveltique.dev/docs/components/browse/field
 -->
 
-<div data-field class={container({ className })}>
+<div bind:this={ref} data-field class={container({ className })}>
 	<div class={labelInputContainer()}>
         <label for={id} data-field-label class={labelCss()}>{label}</label>
         {@render input({

@@ -1,10 +1,10 @@
 <script lang="ts">
 import type { Snippet } from "svelte";
-import type { TWMergeClass } from "$lib/types.js";
+import type { TWMergeClass, WithRef } from "$lib/types.js";
 import Button from "../button/Button.svelte";
 import { type ToastVariants, toast } from "./variants.js";
 
-interface Props extends TWMergeClass, ToastVariants {
+interface Props extends TWMergeClass, WithRef<HTMLElement | HTMLDivElement>, ToastVariants {
 	closeAriaLabel?: string;
 	/** If passed, renders a close button. */
 	onClose?: () => void;
@@ -19,6 +19,7 @@ let {
 	class: className,
 	closeAriaLabel,
 	open = $bindable(true),
+	ref = $bindable(),
 	type = "info",
 	onClose
 }: Props = $props();
@@ -33,7 +34,7 @@ Brief notifications of processes that have been or will be performed.
 -->
 
 {#if open}
-	<div role="alert" data-toast class={container({ className })}>
+	<div bind:this={ref} role="alert" data-toast class={container({ className })}>
 		{@render toastIcon()}
 
 		<p data-toast-content class={content()}>

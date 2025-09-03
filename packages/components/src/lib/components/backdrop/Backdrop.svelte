@@ -1,26 +1,34 @@
 <script lang="ts">
 import type { Snippet } from "svelte";
 import { fade } from "svelte/transition";
-import type { TWMergeClass } from "$lib/types.js";
+import type { TWMergeClass, WithRef } from "$lib/types.js";
 import { backdrop } from "./variants.js";
 
-export interface BackdropProps extends TWMergeClass {
+export interface BackdropProps extends TWMergeClass, WithRef<HTMLElement | HTMLDivElement> {
 	children?: Snippet;
 	/** @default 150 */
 	fadeDuration?: number;
 	/** @default 10 */
 	z?: number;
+	/** @deprecated Use `onclick` instead. */
 	onClick?: () => void;
+	onclick?: () => void;
 }
 
-let { children, class: className, fadeDuration = 150, z = 10, onClick }: BackdropProps = $props();
+let {
+	children,
+	class: className,
+	fadeDuration = 150,
+	onclick,
+	onClick,
+	ref = $bindable(),
+	z = 10
+}: BackdropProps = $props();
 
-let ref = $state<HTMLDivElement>();
-
-function onclick(event: MouseEvent) {
+function onBackdropClick(event: MouseEvent) {
 	if (event.target !== ref) return;
 
-	onClick?.();
+	(onclick ?? onClick)?.();
 }
 </script>
 
@@ -33,7 +41,7 @@ Narrows the user's focus to a particular element on the screen by adding a dimme
 <div
 	bind:this={ref}
 	transition:fade={{ duration: fadeDuration }}
-	{onclick}
+	onclick={onBackdropClick}
     data-backdrop
 	aria-hidden={true}
 	style="z-index: {z}"

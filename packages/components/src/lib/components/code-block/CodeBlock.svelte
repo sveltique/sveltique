@@ -1,14 +1,14 @@
 <script lang="ts">
 import type { BundledLanguage, BundledTheme, HighlighterGeneric } from "shiki";
 import type { Snippet } from "svelte";
-import type { TWMergeClass } from "$lib/types.js";
+import type { TWMergeClass, WithRef } from "$lib/types.js";
 import { Button } from "../button/index.js";
 import { Separator } from "../separator/index.js";
 import { Tooltip } from "../tooltip/index.js";
 import { assembleLines, parseNumberRanges, transformHTMLEntities } from "./code-block.js";
 import { codeBlock } from "./variants.js";
 
-export interface CodeBlockProps extends TWMergeClass {
+export interface CodeBlockProps extends TWMergeClass, WithRef<HTMLElement | HTMLDivElement> {
 	code: string;
 	lang: BundledLanguage;
 	theme: BundledTheme;
@@ -33,6 +33,7 @@ let {
 	highlightedLines = "",
 	highlighter,
 	filename,
+	ref = $bindable(),
 	icon,
 	copyTitle = fallbackCopyTitle
 }: CodeBlockProps = $props();
@@ -72,7 +73,7 @@ Display syntax-highlighted code snippets. Ideal anywhere you need clear, readabl
 @see https://sveltique.dev/docs/components/browse/code-block
 -->
 
-<div data-code-block style="color: {tokensResult.fg}; background-color: {tokensResult.bg}" class={container()}>
+<div bind:this={ref} data-code-block style="color: {tokensResult.fg}; background-color: {tokensResult.bg}" class={container()}>
 	{#if filename}
 		<div data-code-block-header class={header()}>
 			<div class="relative flex items-center justify-start gap-2.5">
