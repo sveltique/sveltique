@@ -1,0 +1,21 @@
+@import "tailwindcss";
+@plugin '@tailwindcss/forms';
+
+@source "../node_modules/@sveltique/components";
+@import "./theme.css";
+
+body {
+	width: 100%;
+	height: 100vh;
+	scroll-behavior: smooth;
+	font-family: "Nunito", sans-serif;
+	font-optical-sizing: auto;
+}
+
+.dark body {
+	background-color: oklch(20.5% 0 0);
+}
+
+.dark {
+	color: oklch(96.7% 0.001 286.375);
+}

@@ -1,0 +1,108 @@
+<script module>
+export const metadata = {
+	description: "A thin, visible line used to separate content and create visual grouping."
+};
+</script>
+
+<script lang="ts">
+import { Link, Paper, Separator } from "@sveltique/components";
+import IconPlayerPauseFilled from "@tabler/icons-svelte/icons/player-pause-filled";
+import IconPlayerSkipBackFilled from "@tabler/icons-svelte/icons/player-skip-back-filled";
+import IconPlayerSkipForwardFilled from "@tabler/icons-svelte/icons/player-skip-forward-filled";
+import Playground from "$components/Playground.svelte";
+
+const code = {
+	short: `<Paper class="flex w-[360px]">
+    <div class="relative flex w-2/3 flex-col">
+        <div class="px-6 py-3">
+            <p class="text-xs">Shawn Mendes</p>
+            <p class="text-lg font-bold">Lost in Japan</p>
+        </div>
+        <Separator />
+        <div class="relative flex w-full items-center justify-center gap-3 px-6 py-3">
+            <IconPlayerSkipBackFilled />
+            <IconPlayerPauseFilled />
+            <IconPlayerSkipForwardFilled />
+        </div>
+    </div>
+    <Separator orientation="vertical" />
+    <div class="relative aspect-square w-1/3">
+        <img
+            src="/images/lost-in-japan.jpg"
+            alt="Lost In Japan cover image"
+            class="object-cover h-full w-full"
+        />
+    </div>
+</Paper>`,
+	expanded: `&lt;script lang="ts"&gt;
+    import { Paper, Separator } from '@sveltique/components';
+    import {
+        IconPlayerPauseFilled,
+        IconPlayerSkipBackFilled,
+        IconPlayerSkipForwardFilled
+     } from '@tabler/icons-svelte';
+&lt;/script&gt;
+
+<Paper class="flex w-[360px]">
+    <div class="relative flex w-2/3 flex-col">
+        <div class="px-6 py-3">
+            <p class="text-xs">Shawn Mendes</p>
+            <p class="text-lg font-bold">Lost in Japan</p>
+        </div>
+        <Separator />
+        <div class="relative flex w-full items-center justify-center gap-3 px-6 py-3">
+            <IconPlayerSkipBackFilled />
+            <IconPlayerPauseFilled />
+            <IconPlayerSkipForwardFilled />
+        </div>
+    </div>
+    <Separator orientation="vertical" />
+    <div class="relative aspect-square w-1/3">
+        <img
+            src="/images/lost-in-japan.jpg"
+            alt="Lost In Japan cover image"
+            class="object-cover h-full w-full"
+        />
+    </div>
+</Paper>`
+};
+</script>
+
+<h1 id="separator">Separator</h1>
+<p>A thin, visible line used to separate content and create visual grouping.</p>
+
+<h2 id="basic-usage">Basic Usage</h2>
+<p>A separator can have two different orientations : horizontal (default), or vertical.</p>
+<Playground {code} class="flex-col">
+	<Paper class="flex w-[360px] overflow-hidden">
+		<div class="relative flex w-2/3 flex-col">
+			<div class="px-6 py-3">
+				<p class="text-xs">Shawn Mendes</p>
+				<p class="text-lg font-bold">Lost in Japan</p>
+			</div>
+			<Separator />
+			<div class="relative flex w-full items-center justify-center gap-3 px-6 py-3">
+				<IconPlayerSkipBackFilled />
+				<IconPlayerPauseFilled />
+				<IconPlayerSkipForwardFilled />
+			</div>
+		</div>
+		<Separator orientation="vertical" />
+		<div class="relative aspect-square w-1/3">
+			<!-- svelte-ignore a11y_img_redundant_alt -->
+			<img
+				src="/images/lost-in-japan.jpg"
+				alt="Lost In Japan cover image"
+				class="h-full w-full object-cover"
+			/>
+		</div>
+	</Paper>
+	<p class="text-sm italic text-zinc-500">
+		Image from <Link
+			href="https://www.last.fm/music/Shawn+Mendes/Lost+in+Japan/+images"
+            title="See all artworks related to Lost in Japan on last.fm."
+			external
+            icon={false}
+        >last.fm</Link>
+	</p>
+</Playground>
