@@ -128,7 +128,7 @@ const disabledCode = `${script('import { Button } from "@sveltique/components";'
 	When a button is disabled via the <Badge>disabled</Badge> prop, it reduces its opacity and disables
 	pointer events to indicate it is inactive and not clickable.
 </p>
-<Playground code={disabledCode}>
+<Playground code={disabledCode} class="max-sm:flex-col">
 	<Button disabled>Disabled Contained</Button>
 	<Button disabled variant="outline">Disabled Outline</Button>
 	<Button disabled variant="text">Disabled Text</Button>
