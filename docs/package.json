@@ -30,9 +30,9 @@
 		"vite": "^7.0.4"
 	},
 	"dependencies": {
-		"@sveltique/components": "file:../packages/components",
+		"@sveltique/components": "*",
 		"@tabler/icons-svelte": "^3.34.1",
-		"codex": "file:../internal/codex",
+		"codex": "*",
 		"tailwind-merge": "^3.3.1",
 		"tailwind-variants": "^2.1.0"
 	}
