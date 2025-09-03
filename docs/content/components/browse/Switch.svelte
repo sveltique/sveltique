@@ -5,7 +5,7 @@ export const metadata = {
 </script>
 
 <script>
-import { Alert, Switch } from "@sveltique/components";
+import { Badge, Switch } from "@sveltique/components";
 import Playground from "$components/Playground.svelte";
 import { script } from "$utils/playground";
 
@@ -33,3 +33,9 @@ const code = {
 	<Switch disabled />
 	<Switch checked disabled />
 </Playground>
+
+<h3 id="toggle-event">Toggle event</h3>
+<p>
+    If you want to execute code when the switch's value changes, you can use the <Badge>ontoggle</Badge>
+    callback.
+</p>

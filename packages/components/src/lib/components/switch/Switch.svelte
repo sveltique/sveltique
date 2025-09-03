@@ -9,7 +9,7 @@ interface Props
 		>,
 		WithRef<HTMLElement | HTMLButtonElement>,
 		SwitchVariants {
-	ontoggle: (checked: boolean) => void;
+	ontoggle?: (checked: boolean) => void;
 }
 
 let {
@@ -29,7 +29,7 @@ function onclick() {
 	if (disabled) return;
 
 	checked = !checked;
-	ontoggle(checked);
+	ontoggle?.(checked);
 }
 </script>
 
@@ -39,7 +39,7 @@ A binary on/off state in a more visual, accessible way than a standard checkbox.
 @see https://sveltique.dev/docs/components/browse/switch
 -->
 
-<input type="checkbox" {name} bind:checked onchange={() => ontoggle(checked)} aria-hidden="true" class="hidden" />
+<input type="checkbox" {name} bind:checked aria-hidden="true" class="hidden" />
 <button
 	bind:this={ref}
 	{onclick}
