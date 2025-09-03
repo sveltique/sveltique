@@ -11,7 +11,7 @@
 		"codex.dev": "npm --prefix ./internal/codex run dev",
 		"codex.install": "npm --prefix ./internal/codex install",
 		"codex.build": "npm --prefix ./internal/codex run build",
-		"install": "concurrently 'npm:components.install' 'npm:codex.install' 'npm:docs.install'",
+		"install": "npm run components.install && npm run codex.install && npm run docs.install",
 		"dev": "concurrently 'npm:components.dev' 'npm:codex.dev' 'npm:docs.dev'",
 		"build": "npm run components.build && npm run codex.build && npm run docs.build",
 		"changesets:release": "changeset publish"
