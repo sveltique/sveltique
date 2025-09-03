@@ -6,9 +6,11 @@ import { type AlertVariants, alert } from "./variants.js";
 type IconSnippet = Snippet<
 	[
 		{
-			"aria-hidden": true;
-			/** CSS to manage the size of the icon. */
-			css: string;
+			props: {
+				"aria-hidden": true;
+				/** CSS to manage the size of the icon. */
+				class: string;
+			};
 		}
 	]
 >;
@@ -18,7 +20,13 @@ interface Props extends TWMergeClass, AlertVariants, WithRef<HTMLElement | HTMLD
 	icon?: IconSnippet;
 }
 
-let { children, class: className = "", icon = fallbackIcon, ref = $bindable(), type = "info" }: Props = $props();
+let {
+	children,
+	class: className = "",
+	icon = fallbackIcon,
+	ref = $bindable(),
+	type = "info"
+}: Props = $props();
 
 const { container, icon: iconCss } = $derived(alert({ type, className }));
 </script>
@@ -30,11 +38,11 @@ A visual message box used to communicate contextual feedback to users, such as i
 -->
 
 <div bind:this={ref} role="alert" data-alert class={container({ className })}>
-	{@render icon({ "aria-hidden": true, css: iconCss() })}
+	{@render icon({ props: { "aria-hidden": true, class: iconCss() } })}
 	<span>{@render children?.()}</span>
 </div>
 
-{#snippet fallbackIcon({ css, ...props }: Parameters<IconSnippet>[0])}
+{#snippet fallbackIcon({ props: { class: css, ...props } }: Parameters<IconSnippet>[0])}
 	{#if type === 'success'}
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
