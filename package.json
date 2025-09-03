@@ -8,10 +8,12 @@
 		"components.dev": "npm --prefix ./packages/components run build:watch",
 		"components.install": "npm --prefix ./packages/components install",
 		"components.build": "npm --prefix ./packages/components run build",
-		"codex.install": "npm --prefix ./internal/codex install",
 		"codex.dev": "npm --prefix ./internal/codex run dev",
+		"codex.install": "npm --prefix ./internal/codex install",
+		"codex.build": "npm --prefix ./internal/codex run build",
 		"install": "concurrently 'npm:components.install' 'npm:codex.install' 'npm:docs.install'",
 		"dev": "concurrently 'npm:components.dev' 'npm:codex.dev' 'npm:docs.dev'",
+		"build": "concurrently 'npm:components.build' 'npm:codex.build' 'npm:docs.build'",
 		"changesets:release": "changeset publish"
 	},
 	"devDependencies": {
