@@ -11,7 +11,7 @@
 		"codex.dev": "npm --prefix ./internal/codex run dev",
 		"install": "concurrently 'npm:components.install' 'npm:codex.install' 'npm:docs.install'",
 		"dev": "concurrently 'npm:components.dev' 'npm:codex.dev' 'npm:docs.dev'",
-		"changeset:release": "changeset publish"
+		"changesets:release": "changeset publish"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.2.2",
