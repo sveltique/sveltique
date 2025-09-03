@@ -8,9 +8,11 @@ import { accordionItem } from "./variants.js";
 type IconSnippet = Snippet<
 	[
 		{
-			"aria-hidden": true;
-			/** CSS to manage the size of the icon. */
-			css: string;
+			props: {
+				"aria-hidden": true;
+				/** CSS to manage the size of the icon. */
+				class: string;
+			};
 		}
 	]
 >;
@@ -18,7 +20,6 @@ type IconSnippet = Snippet<
 interface Props extends TWMergeClass {
 	children: Snippet;
 	header: string | Snippet;
-	// TODO : Replace with `id` as it makes more sense
 	value?: string;
 	icon?: IconSnippet;
 }
@@ -79,7 +80,7 @@ function updateOpen() {
                     {@render header()}
                 {/if}
 
-                {@render icon({ "aria-hidden": true, css: iconCss() })}
+                {@render icon({ props: { "aria-hidden": true, class: iconCss() } })}
 			</div>
 		</button>
 	</svelte:element>
@@ -97,7 +98,7 @@ function updateOpen() {
 	{/if}
 </div>
 
-{#snippet fallbackIcon({ css, ...props }: Parameters<IconSnippet>["0"])}
+{#snippet fallbackIcon({ props }: Parameters<IconSnippet>["0"])}
     <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -108,7 +109,6 @@ function updateOpen() {
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
-        class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down {css}"
         {...props}
     >
         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
