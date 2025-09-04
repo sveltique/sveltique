@@ -1,6 +1,7 @@
 {
 	"editor.defaultFormatter": "biomejs.biome",
 	"svelte.enable-ts-plugin": true,
+	"tailwindCSS.classAttributes": ["class", "className", "containerClass"],
 	"[svelte]": {
 		"editor.defaultFormatter": "biomejs.biome"
 	}
