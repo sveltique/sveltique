@@ -2,7 +2,7 @@
 	"name": "@sveltique/components",
 	"version": "0.1.1",
 	"keywords": ["svelte", "components", "ui", "sveltekit", "tailwindcss"],
-	"license": "./LICENSE",
+	"license": "MIT",
 	"scripts": {
 		"build": "npm run prepack",
 		"build:watch": "npm run prepack:watch",
