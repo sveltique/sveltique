@@ -37,7 +37,7 @@ const iconCode = `${script(`import { Link } from "@sveltique/components";
 >
     See the MDN docs
 
-    <!-- { "aria-hidden": true; css: string; } -->
+    <!-- { "aria-hidden": true; class: string; } -->
     {#snippet icon({ props })}
         <IconExternalLink {...props} />
     {/snippet}
