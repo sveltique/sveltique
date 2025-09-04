@@ -14,7 +14,7 @@ import { script } from "$utils/playground";
 import { highlighter } from "$utils/shiki";
 
 const basicUsageCode = `${script(`import { CodeBlock } from '@sveltique/components';
-    import { highlighter } from '$utils/my-highlighter';
+    import { highlighter } from 'path/to/highlighter';
 
     const code = \`&lt;div class="card"&gt;
     &lt;h2&gt;Hello, world!&lt;/h2&gt;
@@ -29,6 +29,7 @@ const basicUsageCode = `${script(`import { CodeBlock } from '@sveltique/componen
 />`;
 
 const showLineNumbersCode = `${script(`import { CodeBlock } from '@sveltique/components';
+    import { highlighter } from 'path/to/highlighter';
 
     const code = \`&lt;script&gt;
     let a = $state(5);
@@ -48,6 +49,7 @@ const showLineNumbersCode = `${script(`import { CodeBlock } from '@sveltique/com
 />`;
 
 const highlightingLinesCode = `${script(`import { CodeBlock } from '@sveltique/components';
+    import { highlighter } from 'path/to/highlighter';
 
     const code = \`&lt;script&gt;
     let a = $state(5);
@@ -67,6 +69,7 @@ const highlightingLinesCode = `${script(`import { CodeBlock } from '@sveltique/c
 />`;
 
 const filenameCode = `${script(`import { CodeBlock } from '@sveltique/components';
+    import { highlighter } from 'path/to/highlighter';
 
     const code = \`&lt;script&gt;
     let counter = $state(0);
@@ -79,11 +82,12 @@ const filenameCode = `${script(`import { CodeBlock } from '@sveltique/components
     {code}
     filename="Counter.svelte"
     lang="svelte"
-    theme={theme.isDark ? 'one-dark-pro' : 'catppuccin-latte'}
+    theme="catppuccin-latte"
     {highlighter}
 />`;
 
 const iconCode = `${script(`import { CodeBlock } from '@sveltique/components';
+    import { highlighter } from 'path/to/highlighter';
 
     const code = \`&lt;script&gt;
     let counter = $state(0);
@@ -96,7 +100,7 @@ const iconCode = `${script(`import { CodeBlock } from '@sveltique/components';
 	{code}
     filename="Counter.svelte"
     lang="svelte"
-    theme={theme.isDark ? 'one-dark-pro' : 'catppuccin-latte'}
+    theme="catppuccin-latte"
     {highlighter}
 >
     {#snippet icon()}
@@ -117,7 +121,18 @@ const iconCode = `${script(`import { CodeBlock } from '@sveltique/components';
             <path d="M8 17l5 -3l-.822 .496c-1.86 1.151 -4.411 .491 -5.574 -1.351a3.91 3.91 0 0 1 1.264 -5.42l5.054 -3.127c1.86 -1.15 4.311 -.59 5.474 1.252a3.91 3.91 0 0 1 -1.264 5.42l-.26 .16" />
         </svg>
     {/snippet}
-</CodeBlock>`
+</CodeBlock>`;
+
+const copyTitleCode = `${script(`import { CodeBlock } from '@sveltique/components';
+    import { highlighter } from 'path/to/highlighter';`)}
+
+<CodeBlock
+    code="<p>My copy button's title is in french !</p>"
+    lang="svelte"
+    theme="catppuccin-latte"
+    {highlighter}
+    copyTitle={(isCopied) => isCopied ? "Copié" : "Copier dans le presse-papier"}
+/>`
 
 const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } from "@sveltique/components";
 
@@ -145,9 +160,9 @@ const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } 
 	Display syntax-highlighted code snippets. Ideal anywhere you need clear, readable code examples
 	(like on this website !).
 </p>
-<Alert
-	>You must have <Link href="https://shiki.style" external>shiki</Link> installed to use this component.</Alert
->
+<Alert>
+    You must have <Link href="https://shiki.style" external>shiki</Link> installed to use this component.
+</Alert>
 
 <h2 id="basic-usage">Basic Usage</h2>
 <p>
@@ -246,7 +261,7 @@ const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } 
 
 <h3 id="icon">Icon</h3>
 <p>You can add an icon via the <Badge>icon</Badge> snippet.</p>
-<Alert class="mb-4">Note that you must have a filename for the icon to render.</Alert>
+<Alert class="mb-4">You must have a <Badge>filename</Badge> for the icon to render.</Alert>
 <Playground code={iconCode}>
 	<CodeBlock
 		code={`${script(`let counter = $state(0);`)}
@@ -284,13 +299,13 @@ const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } 
 <h3 id="copy-buttons-title">Copy button's title</h3>
 <p>
     The copy button, by default, includes a small tooltip based on whether the the code has been copied
-    in the last 3 seconds or not. However, this title is only in english.
+    in the last 3 seconds or not. However, this title is in English.
 </p>
 <p>
     You can customize it using the <Badge>copyTitle</Badge> function, which passes the current status of
     <Badge>isCopied</Badge> as its parameter.
 </p>
-<Playground code={basicUsageCode}>
+<Playground code={copyTitleCode}>
 	<CodeBlock
 		code="<p>My copy button's title is in french !</p>"
 		lang="svelte"

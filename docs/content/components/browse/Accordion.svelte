@@ -72,9 +72,9 @@ export const metadata = {
             laboriosam consequatur incidunt, voluptatum atque.
         </p>
 
-        <!-- props: { "aria-hidden": true } -->
-        {#snippet icon({ css, ...props })}
-            <IconArrowDown class={css} {...props} />
+        <!-- { "aria-hidden": true, class: string } -->
+        {#snippet icon({ props })}
+            <IconArrowDown {...props} />
         {/snippet}
     </Accordion.Item>
     <Accordion.Item header="Accordion 2">
@@ -84,9 +84,9 @@ export const metadata = {
             perferendis iste qui voluptas.
         </p>
 
-        <!-- props: { "aria-hidden": true } -->
-        {#snippet icon({ css, ...props })}
-            <IconCaretDownFilled class={css} {...props} />
+        <!-- { "aria-hidden": true, class: string } -->
+        {#snippet icon({ props })}
+            <IconCaretDownFilled {...props} />
         {/snippet}
     </Accordion.Item>
 </Accordion.Root>`;
@@ -207,8 +207,8 @@ export const metadata = {
 				officia qui tenetur laboriosam consequatur incidunt, voluptatum atque.
 			</p>
 
-            {#snippet icon({ css, ...props })}
-                <IconArrowDown class={css} {...props} />
+            {#snippet icon({ props })}
+                <IconArrowDown {...props} />
             {/snippet}
 		</Accordion.Item>
 		<Accordion.Item header="Accordion 2">
@@ -217,8 +217,8 @@ export const metadata = {
 				libero tempora ducimus perferendis iste qui voluptas.
 			</p>
 
-            {#snippet icon({ css, ...props })}
-                <IconCaretDownFilled class={css} {...props} />
+            {#snippet icon({ props })}
+                <IconCaretDownFilled {...props} />
             {/snippet}
 		</Accordion.Item>
 	</Accordion.Root>

@@ -73,6 +73,10 @@ const placementCode = `${script("import { Button, Tooltip } from '@sveltique/com
 <p>Display informative text when users hover over, focus on, or tap an element.</p>
 
 <h2 id="basic-usage">Basic Usage</h2>
+<p>
+    Surround the element on which you want to add a tooltip. Next, bind them using the <Badge>ref</Badge>
+    property.
+</p>
 <Playground {code}>
 	<Tooltip title="Edit post">
 		{#snippet children({ props, ref })}

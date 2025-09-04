@@ -76,7 +76,7 @@ export const toasts = new Toasts();`,
     rootContainer: `<svelte:options runes={true} />
 
 ${script(`import { Toast } from "@sveltique/components";
-    import { toasts } from "$lib/contexts/toast.svelte";`)}
+    import { toasts } from "path/to/toasts";`)}
 
 <div
     role="status"
@@ -96,7 +96,7 @@ ${script(`import { Toast } from "@sveltique/components";
 </div>`,
     usage: `${script(`import { Button } from "@sveltique/components";
     import ToastContainer from "$components/toast/ToastContainer.svelte";
-    import { toasts } from "$lib/contexts/toast.svelte";
+    import { toasts } from "path/to/toasts";
     
     function onclick() {
         toasts.add({
