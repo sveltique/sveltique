@@ -49,6 +49,7 @@ const interactiveBadgeCode = `${script("import { badge } from '@sveltique/compon
 <p>A small badge with rounded corners.</p>
 
 <h2 id="basic-usage">Basic Usage</h2>
+<p>A badge comes with three variants: contained (default), outline, and danger.</p>
 <Playground code={basicUsagecode}>
 	<Badge>Contained</Badge>
 	<Badge variant="outline">Outline</Badge>
