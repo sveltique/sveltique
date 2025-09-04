@@ -1,2 +1,2 @@
-export { default as Toast } from "./Toast.svelte";
+export { default as Toast, type ToastProps } from "./Toast.svelte";
 export { type ToastVariants, toast } from "./variants.js";

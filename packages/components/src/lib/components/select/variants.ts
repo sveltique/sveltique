@@ -5,7 +5,6 @@ export const select = tv({
 	slots: {
 		container: "relative",
 		trigger: paper({
-			variant: "outline",
 			class: [
 				"flex w-full cursor-pointer items-center gap-3 px-4 h-11",
 				"focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-background"
@@ -15,7 +14,6 @@ export const select = tv({
 		triggerIcon: "pointer-events-none size-4 text-muted-foreground duration-150 ease-in-out",
 		placeholder: "text-muted-foreground",
 		listBox: paper({
-			elevation: 4,
 			class: "absolute p-2 top-[calc(100%+10px)] z-10 left-0 hidden w-full flex-col gap-1 min-w-max shadow-md"
 		})
 	},
@@ -31,7 +29,7 @@ export const select = tv({
 
 export type SelectVariants = VariantProps<typeof select>;
 
-export const option = tv({
+export const selectOption = tv({
 	slots: {
 		container:
 			"cursor-pointer relative flex items-center justify-between gap-2.5 rounded py-2 px-4 text-sm",
@@ -54,4 +52,4 @@ export const option = tv({
 	}
 });
 
-export type OptionVariants = VariantProps<typeof option>;
+export type SelectOptionVariants = VariantProps<typeof selectOption>;

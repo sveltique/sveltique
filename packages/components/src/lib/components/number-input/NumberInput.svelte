@@ -1,12 +1,13 @@
 <script lang="ts">
 import type { HTMLInputAttributes } from "svelte/elements";
 import type { ClassNameValue } from "tailwind-merge";
-import { numberInput } from "./variants.js";
 import type { WithRef } from "$lib/types.js";
+import { type NumberInputVariants, numberInput } from "./variants.js";
 
-interface Props
+export interface NumberInputProps
 	extends Omit<HTMLInputAttributes, "class" | "step" | "min" | "max" | "value">,
-		WithRef<HTMLElement | HTMLDivElement> {
+		WithRef<HTMLElement | HTMLDivElement>,
+		NumberInputVariants {
 	containerClass?: string | undefined;
 	class?: ClassNameValue;
 	value?: number | null;
@@ -26,7 +27,7 @@ let {
 	step = 1,
 	value = $bindable(),
 	...restProps
-}: Props = $props();
+}: NumberInputProps = $props();
 
 let inputRef = $state<HTMLInputElement>();
 const { container, input, decrement, increment, icon } = $derived(numberInput());

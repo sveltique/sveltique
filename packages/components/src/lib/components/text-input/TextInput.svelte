@@ -3,7 +3,7 @@ import type { HTMLInputAttributes } from "svelte/elements";
 import type { TWMergeClass, WithRef } from "$lib/types.js";
 import { type TextInputVariants, textInput } from "./variants.js";
 
-interface Props
+export interface TextInputProps
 	extends Omit<HTMLInputAttributes, "class" | "value">,
 		TWMergeClass,
 		WithRef<HTMLElement | HTMLInputElement>,
@@ -11,7 +11,12 @@ interface Props
 	value?: string;
 }
 
-let { class: className, ref = $bindable(), value = $bindable(""), ...restProps }: Props = $props();
+let {
+	class: className,
+	ref = $bindable(),
+	value = $bindable(""),
+	...restProps
+}: TextInputProps = $props();
 </script>
 
 <!--

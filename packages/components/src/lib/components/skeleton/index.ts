@@ -1,2 +1,2 @@
-export { default as Skeleton } from "./Skeleton.svelte";
-export { skeleton } from "./variants.js";
+export { default as Skeleton, type SkeletonProps } from "./Skeleton.svelte";
+export { type SkeletonVariants, skeleton } from "./variants.js";

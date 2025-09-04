@@ -1,4 +1,4 @@
-import { tv } from "tailwind-variants";
+import { tv, type VariantProps } from "tailwind-variants";
 
 export const numberInput = tv({
 	slots: {
@@ -12,3 +12,5 @@ export const numberInput = tv({
 		icon: "size-4"
 	}
 });
+
+export type NumberInputVariants = VariantProps<typeof numberInput>;

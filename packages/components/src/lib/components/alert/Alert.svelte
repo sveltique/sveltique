@@ -15,7 +15,10 @@ type IconSnippet = Snippet<
 	]
 >;
 
-interface Props extends TWMergeClass, AlertVariants, WithRef<HTMLElement | HTMLDivElement> {
+export interface AlertProps
+	extends TWMergeClass,
+		AlertVariants,
+		WithRef<HTMLElement | HTMLDivElement> {
 	children?: Snippet;
 	icon?: IconSnippet;
 }
@@ -26,7 +29,7 @@ let {
 	icon = fallbackIcon,
 	ref = $bindable(),
 	type = "info"
-}: Props = $props();
+}: AlertProps = $props();
 
 const { container, icon: iconCss } = $derived(alert({ type, className }));
 </script>

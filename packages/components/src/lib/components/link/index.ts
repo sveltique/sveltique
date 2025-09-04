@@ -1,2 +1,2 @@
-export { default as Link } from "./Link.svelte";
-export { link } from "./variants.js";
+export { default as Link, type LinkProps } from "./Link.svelte";
+export { type LinkVariants, link } from "./variants.js";

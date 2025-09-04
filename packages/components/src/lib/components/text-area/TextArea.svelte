@@ -1,15 +1,21 @@
 <script lang="ts">
 import type { HTMLTextareaAttributes } from "svelte/elements";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
-import { textArea } from "./variants.js";
+import { type TextAreaVariants, textArea } from "./variants.js";
 
-interface Props
+export interface TextAreaProps
 	extends ReplaceWithTWMergeClass<Omit<HTMLTextareaAttributes, "value">>,
-		WithRef<HTMLElement | HTMLTextAreaElement> {
+		WithRef<HTMLElement | HTMLTextAreaElement>,
+		TextAreaVariants {
 	value?: string;
 }
 
-let { class: className, ref = $bindable(), value = $bindable(), ...restProps }: Props = $props();
+let {
+	class: className,
+	ref = $bindable(),
+	value = $bindable(),
+	...restProps
+}: TextAreaProps = $props();
 </script>
 
 <!--

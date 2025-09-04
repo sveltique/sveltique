@@ -5,7 +5,7 @@ import { cnBase } from "tailwind-variants";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { type ButtonVariants, button } from "./variants.js";
 
-interface Props
+export interface ButtonProps
 	extends ReplaceWithTWMergeClass<Omit<HTMLButtonAttributes, "color" | "disabled">>,
 		ButtonVariants,
 		WithRef<HTMLElement | HTMLButtonElement> {}
@@ -21,7 +21,7 @@ let {
 	size = "medium",
 	variant = "contained",
 	...restProps
-}: Props = $props();
+}: ButtonProps = $props();
 
 let hasClicked = $state(false);
 

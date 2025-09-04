@@ -3,9 +3,9 @@ import { onMount, type Snippet } from "svelte";
 import { on } from "svelte/events";
 import type { ClassNameValue } from "tailwind-merge";
 import type { WithRef } from "$lib/types.js";
-import { select } from "./variants.js";
+import { type SelectVariants, select } from "./variants.js";
 
-interface Props extends WithRef<HTMLElement | HTMLDivElement> {
+export interface SelectProps extends WithRef<HTMLElement | HTMLDivElement>, SelectVariants {
 	id?: string;
 	children?: Snippet;
 	class?: ClassNameValue;
@@ -27,7 +27,7 @@ let {
 	ref = $bindable(),
 	value = $bindable(),
 	...restProps
-}: Props = $props();
+}: SelectProps = $props();
 
 const componentId = $props.id();
 

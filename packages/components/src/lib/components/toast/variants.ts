@@ -30,4 +30,4 @@ export const toast = tv({
 	}
 });
 
-export type ToastVariants = Required<VariantProps<typeof toast>>;
+export type ToastVariants = VariantProps<typeof toast>;

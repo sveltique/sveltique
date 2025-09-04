@@ -3,7 +3,10 @@ import type { Snippet } from "svelte";
 import type { TWMergeClass, WithRef } from "$lib/types.js";
 import { type BadgeVariants, badge } from "./variants.js";
 
-interface Props extends BadgeVariants, TWMergeClass, WithRef<HTMLElement | HTMLDivElement> {
+export interface BadgeProps
+	extends BadgeVariants,
+		TWMergeClass,
+		WithRef<HTMLElement | HTMLDivElement> {
 	children?: Snippet;
 }
 
@@ -13,7 +16,7 @@ let {
 	variant = "contained",
 	number = false,
 	ref = $bindable()
-}: Props = $props();
+}: BadgeProps = $props();
 </script>
 
 <!--

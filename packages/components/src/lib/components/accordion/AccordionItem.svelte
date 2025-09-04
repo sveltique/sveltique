@@ -17,14 +17,20 @@ type IconSnippet = Snippet<
 	]
 >;
 
-interface Props extends TWMergeClass {
+export interface AccordionItemProps extends TWMergeClass {
 	children: Snippet;
 	header: string | Snippet;
 	value?: string;
 	icon?: IconSnippet;
 }
 
-let { children, class: className, header, value, icon = fallbackIcon }: Props = $props();
+let {
+	children,
+	class: className,
+	header,
+	value,
+	icon = fallbackIcon
+}: AccordionItemProps = $props();
 
 const uid = $props.id();
 

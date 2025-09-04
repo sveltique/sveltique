@@ -1,6 +1,8 @@
 import Root from "./Accordion.svelte";
 import Item from "./AccordionItem.svelte";
 
+export type { AccordionProps } from "./Accordion.svelte";
+export type { AccordionItemProps } from "./AccordionItem.svelte";
 export { type AccordionItemVariants, accordion, accordionItem } from "./variants.js";
 
 /**

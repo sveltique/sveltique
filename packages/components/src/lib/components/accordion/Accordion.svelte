@@ -7,7 +7,7 @@ import { onKeyDown, onKeyUp } from "$utils/on-key.svelte.js";
 import { getActiveElement } from "$utils/use-active-element.svelte.js";
 import { accordion } from "./variants.js";
 
-interface Props extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>> {
+export interface AccordionProps extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>> {
 	children?: Snippet;
 	/**
 	 * Whether to make the first item expanded by default.
@@ -35,7 +35,7 @@ let {
 	defaultExpand = false,
 	headingLevel = "h3",
 	multiple = true
-}: Props = $props();
+}: AccordionProps = $props();
 
 let ref = $state<HTMLDivElement>();
 let values = $state<string[]>([]);

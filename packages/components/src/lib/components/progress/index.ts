@@ -1,2 +1,2 @@
-export { default as Progress } from "./Progress.svelte";
+export { default as Progress, type ProgressProps } from "./Progress.svelte";
 export { type ProgressVariants, progress } from "./variants.js";

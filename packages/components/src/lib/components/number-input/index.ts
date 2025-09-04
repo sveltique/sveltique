@@ -1,2 +1,2 @@
-export { default as NumberInput } from "./NumberInput.svelte";
-export { numberInput } from "./variants.js";
+export { default as NumberInput, type NumberInputProps } from "./NumberInput.svelte";
+export { type NumberInputVariants, numberInput } from "./variants.js";

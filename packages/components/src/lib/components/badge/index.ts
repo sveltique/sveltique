@@ -1,2 +1,2 @@
-export { default as Badge } from "./Badge.svelte";
-export { badge } from "./variants.js";
+export { type BadgeProps, default as Badge } from "./Badge.svelte";
+export { type BadgeVariants, badge } from "./variants.js";

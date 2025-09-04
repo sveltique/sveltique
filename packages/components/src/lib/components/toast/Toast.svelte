@@ -4,7 +4,10 @@ import type { TWMergeClass, WithRef } from "$lib/types.js";
 import Button from "../button/Button.svelte";
 import { type ToastVariants, toast } from "./variants.js";
 
-interface Props extends TWMergeClass, WithRef<HTMLElement | HTMLDivElement>, ToastVariants {
+export interface ToastProps
+	extends TWMergeClass,
+		WithRef<HTMLElement | HTMLDivElement>,
+		ToastVariants {
 	closeAriaLabel?: string;
 	/** If passed, renders a close button. */
 	onClose?: () => void;
@@ -22,7 +25,7 @@ let {
 	ref = $bindable(),
 	type = "info",
 	onClose
-}: Props = $props();
+}: ToastProps = $props();
 
 let { container, icon, content, closeButton, closeIcon } = $derived(toast({ type }));
 </script>

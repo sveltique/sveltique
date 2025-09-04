@@ -1,13 +1,14 @@
 <script lang="ts">
 import type { HTMLAttributes } from "svelte/elements";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
-import { kbd } from "./variants.js";
+import { type KbdVariants, kbd } from "./variants.js";
 
-interface Props
+export interface KbdProps
 	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLElement>>,
-		WithRef<HTMLElement> {}
+		WithRef<HTMLElement>,
+		KbdVariants {}
 
-let { children, class: className, ref = $bindable(), ...restProps }: Props = $props();
+let { children, class: className, ref = $bindable(), ...restProps }: KbdProps = $props();
 </script>
 
 <!--
