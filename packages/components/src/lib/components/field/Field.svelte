@@ -18,7 +18,10 @@ type InputSnippet = Snippet<
 	]
 >;
 
-interface Props extends TWMergeClass, WithRef<HTMLElement | HTMLDivElement>, FieldVariants {
+export interface FieldProps
+	extends TWMergeClass,
+		WithRef<HTMLElement | HTMLDivElement>,
+		FieldVariants {
 	input: InputSnippet;
 	error?: string | undefined;
 	label?: string | undefined;
@@ -31,7 +34,7 @@ let {
 	label = undefined,
 	placement = "top",
 	ref = $bindable()
-}: Props = $props();
+}: FieldProps = $props();
 
 const id = $props.id();
 

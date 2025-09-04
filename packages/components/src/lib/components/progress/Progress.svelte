@@ -2,11 +2,14 @@
 import type { TWMergeClass, WithRef } from "$lib/types.js";
 import { type ProgressVariants, progress } from "./variants.js";
 
-interface Props extends TWMergeClass, ProgressVariants, WithRef<HTMLElement | HTMLDivElement> {
+export interface ProgressProps
+	extends TWMergeClass,
+		ProgressVariants,
+		WithRef<HTMLElement | HTMLDivElement> {
 	value: number;
 }
 
-let { class: className, ref = $bindable(), transition = true, value }: Props = $props();
+let { class: className, ref = $bindable(), transition = true, value }: ProgressProps = $props();
 
 let { fill, track } = $derived(progress({ transition }));
 </script>

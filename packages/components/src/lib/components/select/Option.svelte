@@ -3,9 +3,11 @@ import { onMount } from "svelte";
 import type { HTMLAttributes } from "svelte/elements";
 import type { ClassNameValue } from "tailwind-merge";
 import { useMutationObserver } from "$utils/use-mutation-observer.svelte.js";
-import { option } from "./variants.js";
+import { type SelectOptionVariants, selectOption } from "./variants.js";
 
-interface Props extends Omit<HTMLAttributes<HTMLLIElement>, "class"> {
+export interface SelectOptionProps
+	extends Omit<HTMLAttributes<HTMLLIElement>, "class">,
+		SelectOptionVariants {
 	/** @default $props.id() */
 	id?: string;
 	value: string;
@@ -24,7 +26,7 @@ let {
 	selected: _selected = false,
 	disabled = false,
 	...restProps
-}: Props = $props();
+}: SelectOptionProps = $props();
 
 const uid = $props.id();
 
@@ -35,7 +37,7 @@ let focused = $state(false);
 let selected = $derived(_selected);
 let _id = $derived(id ?? uid);
 
-const { container, icon } = $derived(option({ disabled, focused }));
+const { container, icon } = $derived(selectOption({ disabled, focused }));
 
 useMutationObserver(
 	() => parent,

@@ -16,7 +16,7 @@ type IconSnippet = Snippet<
 	]
 >;
 
-interface Props
+export interface LinkProps
 	extends ReplaceWithTWMergeClass<HTMLAnchorAttributes>,
 		WithRef<HTMLElement | HTMLAnchorElement>,
 		LinkVariants {
@@ -47,7 +47,7 @@ let {
 	target,
 	underline = "always",
 	...restProps
-}: Props = $props();
+}: LinkProps = $props();
 
 let _target = $derived(target ?? (external ? "_blank" : undefined));
 let _rel = $derived(rel ?? (external ? "noreferrer" : undefined));

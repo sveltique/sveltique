@@ -1,4 +1,4 @@
-import { tv } from "tailwind-variants";
+import { tv, type VariantProps } from "tailwind-variants";
 
 export const textArea = tv({
 	base: [
@@ -6,3 +6,5 @@ export const textArea = tv({
 		"focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-background"
 	]
 });
+
+export type TextAreaVariants = VariantProps<typeof textArea>;

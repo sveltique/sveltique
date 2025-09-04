@@ -1,2 +1,2 @@
-export { default as TextInput } from "./TextInput.svelte";
+export { default as TextInput, type TextInputProps } from "./TextInput.svelte";
 export { type TextInputVariants, textInput } from "./variants.js";

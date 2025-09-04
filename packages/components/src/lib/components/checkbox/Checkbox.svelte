@@ -1,15 +1,13 @@
 <script lang="ts">
 import type { HTMLInputAttributes } from "svelte/elements";
 import type { TWMergeClass, WithRef } from "$lib/types.js";
-import { checkbox } from "./variants.js";
+import { type CheckboxVariants, checkbox } from "./variants.js";
 
-interface Props
+export interface CheckboxProps
 	extends Omit<HTMLInputAttributes, "checked" | "class" | "disabled" | "type">,
 		TWMergeClass,
-		WithRef<HTMLElement | HTMLInputElement> {
-	checked?: boolean;
-	disabled?: boolean;
-}
+		WithRef<HTMLElement | HTMLInputElement>,
+		CheckboxVariants {}
 
 let {
 	checked = $bindable(),
@@ -17,7 +15,7 @@ let {
 	disabled,
 	ref = $bindable(),
 	...restProps
-}: Props = $props();
+}: CheckboxProps = $props();
 </script>
 
 <!--

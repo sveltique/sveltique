@@ -1,2 +1,2 @@
-export { default as Checkbox } from "./Checkbox.svelte";
-export { checkbox } from "./variants.js";
+export { type CheckboxProps, default as Checkbox } from "./Checkbox.svelte";
+export { type CheckboxVariants, checkbox } from "./variants.js";

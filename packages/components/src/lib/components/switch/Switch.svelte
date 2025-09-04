@@ -3,7 +3,7 @@ import type { HTMLButtonAttributes } from "svelte/elements";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { type SwitchVariants, switchTv } from "./variants.js";
 
-interface Props
+export interface SwitchProps
 	extends ReplaceWithTWMergeClass<
 			Omit<HTMLButtonAttributes, "disabled" | "onclick" | "ontoggle">
 		>,
@@ -21,7 +21,7 @@ let {
 	ref = $bindable(),
 	ontoggle,
 	...restProps
-}: Props = $props();
+}: SwitchProps = $props();
 
 let { container, thumb } = $derived(switchTv({ checked, disabled, className }));
 

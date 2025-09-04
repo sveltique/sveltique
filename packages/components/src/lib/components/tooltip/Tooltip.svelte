@@ -8,7 +8,10 @@ import { type TooltipVariants, tooltip } from "./variants.js";
 
 type Ref = { current: HTMLElement | undefined };
 
-interface Props extends TWMergeClass, WithRef<HTMLElement | HTMLDivElement>, TooltipVariants {
+export interface TooltipProps
+	extends TWMergeClass,
+		WithRef<HTMLElement | HTMLDivElement>,
+		TooltipVariants {
 	children?: Snippet<[{ ref: Ref; props: { "aria-describedby": string } }]>;
 	containerClass?: ClassNameValue;
 	id?: string;
@@ -26,7 +29,7 @@ let {
 	ref = $bindable(),
 	title,
 	z = 1000
-}: Props = $props();
+}: TooltipProps = $props();
 
 const uid = $props.id();
 

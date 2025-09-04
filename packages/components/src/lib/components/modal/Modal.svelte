@@ -5,7 +5,7 @@ import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { onKeyUp } from "$utils/on-key.svelte.js";
 import { flyAndScale } from "../../transitions/fly-and-scale.js";
 import { default as Backdrop, type BackdropProps } from "../backdrop/Backdrop.svelte";
-import { modal } from "./variants.js";
+import { modal, type ModalVariants } from "./variants.js";
 
 type Ref = { current: HTMLElement | undefined };
 
@@ -23,7 +23,8 @@ type ChildrenSnippet = Snippet<
 
 export interface ModalProps
 	extends ReplaceWithTWMergeClass<Omit<HTMLAttributes<HTMLElement>, "children">>,
-		WithRef<HTMLElement | HTMLDivElement> {
+		WithRef<HTMLElement | HTMLDivElement>,
+		ModalVariants {
 	actions?: Snippet<[{ close: VoidFunction }]>;
 	children?: ChildrenSnippet;
 	trigger?: TriggerSnippet;

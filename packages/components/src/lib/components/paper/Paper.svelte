@@ -3,13 +3,18 @@ import type { HTMLAttributes } from "svelte/elements";
 import type { TWMergeClass, WithRef } from "$lib/types.js";
 import { type PaperVariants, paper } from "./variants.js";
 
-interface Props
+export interface PaperProps
 	extends Omit<HTMLAttributes<HTMLDivElement>, "class">,
 		TWMergeClass,
 		PaperVariants,
 		WithRef<HTMLElement | HTMLDivElement> {}
 
-let { children, class: className = undefined, ref = $bindable(), ...restProps }: Props = $props();
+let {
+	children,
+	class: className = undefined,
+	ref = $bindable(),
+	...restProps
+}: PaperProps = $props();
 </script>
 
 <!--

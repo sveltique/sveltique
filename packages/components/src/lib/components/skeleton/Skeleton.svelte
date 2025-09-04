@@ -3,12 +3,17 @@ import type { HTMLAttributes } from "svelte/elements";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { type SkeletonVariants, skeleton } from "./variants.js";
 
-interface Props
+export interface SkeletonProps
 	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
 		WithRef<HTMLElement | HTMLDivElement>,
 		SkeletonVariants {}
 
-let { animation = "pulse", class: className, ref = $bindable(), ...restProps }: Props = $props();
+let {
+	animation = "pulse",
+	class: className,
+	ref = $bindable(),
+	...restProps
+}: SkeletonProps = $props();
 </script>
 
 <!--

@@ -2,13 +2,16 @@
 import type { TWMergeClass, WithRef } from "$lib/types.js";
 import { type SeparatorVariants, separator } from "./variants.js";
 
-interface Props extends TWMergeClass, WithRef<HTMLElement | HTMLDivElement>, SeparatorVariants {}
+export interface SeparatorProps
+	extends TWMergeClass,
+		WithRef<HTMLElement | HTMLDivElement>,
+		SeparatorVariants {}
 
 let {
 	class: className = undefined,
 	orientation = "horizontal",
 	ref = $bindable()
-}: Props = $props();
+}: SeparatorProps = $props();
 </script>
 
 <!--

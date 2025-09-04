@@ -1,4 +1,4 @@
-import { tv } from "tailwind-variants";
+import { tv, type VariantProps } from "tailwind-variants";
 
 export const modal = tv({
 	slots: {
@@ -9,3 +9,5 @@ export const modal = tv({
 		actions: "relative flex w-full flex-col gap-2.5 sm:flex-row sm:justify-end sm:gap-3"
 	}
 });
+
+export type ModalVariants = VariantProps<typeof modal>;

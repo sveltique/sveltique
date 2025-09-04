@@ -1,4 +1,4 @@
-import { tv } from "tailwind-variants";
+import { tv, type VariantProps } from "tailwind-variants";
 
 export const checkbox = tv({
 	base: [
@@ -21,3 +21,5 @@ export const checkbox = tv({
 		}
 	]
 });
+
+export type CheckboxVariants = VariantProps<typeof checkbox>;

@@ -1,2 +1,2 @@
 export { type BackdropProps, default as Backdrop } from "./Backdrop.svelte";
-export { backdrop } from "./variants.js";
+export { type BackdropVariants, backdrop } from "./variants.js";
