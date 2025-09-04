@@ -10,7 +10,7 @@ type IconSnippet = Snippet<
 			props: {
 				"aria-hidden": true;
 				/** CSS to manage the size of the icon. */
-				css: string;
+				class: string;
 			};
 		}
 	]
@@ -63,11 +63,11 @@ A styled and accessible replacement for the native `a` element.
 <a bind:this={ref} {href} target={_target} rel={_rel} data-link class={container({ className })} {...restProps}>
     <!-- Avoid adding an unnecessary space at the end of a text link -->
 	{@render children?.()}{#if external && icon !== false}
-        {@render icon({ props: { css: iconCss(), "aria-hidden": true } })}
+        {@render icon({ props: { class: iconCss(), "aria-hidden": true } })}
     {/if}
 </a>
 
-{#snippet fallbackIcon({ props: { css, ...rest } }: Parameters<IconSnippet>["0"])}
+{#snippet fallbackIcon({ props }: Parameters<IconSnippet>["0"])}
     <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -78,8 +78,7 @@ A styled and accessible replacement for the native `a` element.
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
-        class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-up-right {css}"
-        {...rest}
+        {...props}
     >
         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
         <path d="M17 7l-10 10" />
