@@ -1,5 +1,11 @@
 # @sveltique/components
 
+## 0.2.1
+
+### Patch Changes
+
+- [#10](https://github.com/sveltique/sveltique/pull/10) [`5f98a42`](https://github.com/sveltique/sveltique/commit/5f98a423ae4a5e55db953522e33957010ddd7570) Thanks [@novaotp](https://github.com/novaotp)! - `CodeBlock` now supports the `containerClass` attribute for styling the outer container
+
 ## 0.2.0
 
 ### Minor Changes
