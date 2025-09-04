@@ -48,7 +48,7 @@ const code = `${script("import { Button, Tooltip } from '@sveltique/components';
 </Alert>
 <CodeBlock code={'import { Alert } from "@sveltique/components/alert";'} lang="ts" />
 
-<h2>Best practices</h2>
+<h2 id="best-practices">Best practices</h2>
 <p>Some best practices when using Sveltique.</p>
 
 <h3 id="theming">Theming</h3>
@@ -63,7 +63,8 @@ const code = `${script("import { Button, Tooltip } from '@sveltique/components';
 
 <h3 id="extend">Extend</h3>
 <p>
-    Need to supercharge our components, either because we don't provide what you need or you don't have the proper variant ? Simply extend them by wrapping our components !
+    Need to supercharge our components, either because we don't provide what you need or you don't have
+    the proper variant ? Simply extend them by wrapping our components !
 </p>
 <Alert>
     If you think they should be in the core library, consider <Link href="https://github.com/sveltique/sveltique" external>
