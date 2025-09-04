@@ -1,5 +1,9 @@
 # Design
 
+![Release status](https://github.com/sveltique/sveltique/actions/workflows/release.yml/badge.svg?event=push)
+![NPM Downloads](https://img.shields.io/npm/dm/@sveltique/components)
+![License](https://img.shields.io/github/license/sveltique/sveltique)
+
 The monorepo for design-related stuff.
 
 ## Getting Started
