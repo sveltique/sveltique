@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { BundledLanguage, BundledTheme, HighlighterGeneric } from "shiki";
 import type { Snippet } from "svelte";
+import type { ClassNameValue } from "tailwind-merge";
 import type { TWMergeClass, WithRef } from "$lib/types.js";
 import { Button } from "../button/index.js";
 import { Separator } from "../separator/index.js";
@@ -10,6 +11,7 @@ import { codeBlock } from "./variants.js";
 
 export interface CodeBlockProps extends TWMergeClass, WithRef<HTMLElement | HTMLDivElement> {
 	code: string;
+	containerClass?: ClassNameValue;
 	lang: BundledLanguage;
 	theme: BundledTheme;
 	highlighter: HighlighterGeneric<BundledLanguage, BundledTheme>;
@@ -26,6 +28,7 @@ export interface CodeBlockProps extends TWMergeClass, WithRef<HTMLElement | HTML
 
 let {
 	class: className,
+	containerClass,
 	code,
 	lang,
 	theme,
@@ -40,7 +43,13 @@ let {
 
 let isCopied = $state(false);
 
-let { code: codeCss, container, pre, header, filename: filenameCss } = $derived(codeBlock());
+let {
+	code: codeCss,
+	container,
+	pre,
+	header: headerCss,
+	filename: filenameCss
+} = $derived(codeBlock());
 
 let iconSnippet = $derived(isCopied ? copiedIcon : copyIcon);
 let parsedLines = $derived(parseNumberRanges(highlightedLines));
@@ -73,41 +82,16 @@ Display syntax-highlighted code snippets. Ideal anywhere you need clear, readabl
 @see https://sveltique.dev/docs/components/browse/code-block
 -->
 
-<div bind:this={ref} data-code-block style="color: {tokensResult.fg}; background-color: {tokensResult.bg}" class={container()}>
+<div
+    bind:this={ref}
+    data-code-block
+    style="color: {tokensResult.fg}; background-color: {tokensResult.bg}"
+    class={container({ class: containerClass })}
+>
 	{#if filename}
-		<div data-code-block-header class={header()}>
-			<div class="relative flex items-center justify-start gap-2.5">
-                {@render icon?.()}
-				<p class={filenameCss()}>{filename}</p>
-			</div>
-			<Tooltip title={copyTitle(isCopied)} placement="top">
-				{#snippet children({ props, ref })}
-					<Button bind:ref={ref.current} onclick={copy} variant="text" shape="square" {...props}>
-						{@render iconSnippet()}
-					</Button>
-				{/snippet}
-			</Tooltip>
-		</div>
-		<Separator class="bg-muted-foreground" />
+		{@render header()}
     {:else}
-        <Tooltip
-            title={copyTitle(isCopied)}
-            placement="top"
-            containerClass="absolute z-10 right-3 {tokensResult.tokens.length === 1 ? "top-1/2 -translate-y-1/2" : "top-3"}"
-        >
-            {#snippet children({ props, ref })}
-                <Button
-                    bind:ref={ref.current}
-                    onclick={copy}
-                    variant="text"
-                    shape="square"
-                    class="bg-muted"
-                    {...props}
-                >
-                    {@render iconSnippet()}
-                </Button>
-            {/snippet}
-        </Tooltip>
+        {@render copyButton()}
 	{/if}
 	<pre data-code-block-pre data-show-line-numbers={showLineNumbers} class={pre({ className })}>
         <code class={codeCss()}>
@@ -115,6 +99,44 @@ Display syntax-highlighted code snippets. Ideal anywhere you need clear, readabl
         </code>
     </pre>
 </div>
+
+{#snippet header()}
+    <div data-code-block-header class={headerCss()}>
+        <div class="relative flex items-center justify-start gap-2.5">
+            {@render icon?.()}
+            <p class={filenameCss()}>{filename}</p>
+        </div>
+        <Tooltip title={copyTitle(isCopied)} placement="top">
+            {#snippet children({ props, ref })}
+                <Button bind:ref={ref.current} onclick={copy} variant="text" shape="square" {...props}>
+                    {@render iconSnippet()}
+                </Button>
+            {/snippet}
+        </Tooltip>
+    </div>
+    <Separator class="bg-muted-foreground" />
+{/snippet}
+
+{#snippet copyButton()}
+    <Tooltip
+        title={copyTitle(isCopied)}
+        placement="top"
+        containerClass="absolute z-10 right-3 {tokensResult.tokens.length === 1 ? "top-1/2 -translate-y-1/2" : "top-3"}"
+    >
+        {#snippet children({ props, ref })}
+            <Button
+                bind:ref={ref.current}
+                onclick={copy}
+                variant="text"
+                shape="square"
+                class="bg-muted"
+                {...props}
+            >
+                {@render iconSnippet()}
+            </Button>
+        {/snippet}
+    </Tooltip>
+{/snippet}
 
 {#snippet copyIcon()}
 	<svg
