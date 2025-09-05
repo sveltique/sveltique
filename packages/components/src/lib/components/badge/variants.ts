@@ -5,6 +5,7 @@ export const badge = tv({
 	variants: {
 		variant: {
 			contained: "bg-primary text-primary-foreground",
+			secondary: "bg-muted text-foreground",
 			outline: "bg-background text-foreground border border-muted",
 			danger: "bg-danger text-white"
 		},
