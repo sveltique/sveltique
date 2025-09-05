@@ -1,5 +1,15 @@
 # @sveltique/components
 
+## 0.3.0
+
+### Minor Changes
+
+- [#14](https://github.com/sveltique/sveltique/pull/14) [`e7cc0ed`](https://github.com/sveltique/sveltique/commit/e7cc0eda9002cbbcc2fc40099f6aa4902251a11a) Thanks [@novaotp](https://github.com/novaotp)! - Added `Label` component + using it in `Field`
+
+- [#13](https://github.com/sveltique/sveltique/pull/13) [`6a16709`](https://github.com/sveltique/sveltique/commit/6a167095b29f56f6ba9dfea3b44fe1c4f9860df0) Thanks [@novaotp](https://github.com/novaotp)! - `Progress` height has been reduced from 1rem to 0.75rem
+
+- [#12](https://github.com/sveltique/sveltique/pull/12) [`7924d57`](https://github.com/sveltique/sveltique/commit/7924d575bd6a88b6f2f683da0f09ae5706036952) Thanks [@novaotp](https://github.com/novaotp)! - `Badge` now includes a `secondary` variant
+
 ## 0.2.2
 
 ### Patch Changes
