@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { Snippet } from "svelte";
 import type { TWMergeClass, WithRef } from "$lib/types.js";
+import Label from "../label/Label.svelte";
 import { type FieldVariants, field } from "./variants.js";
 
 type InputSnippet = Snippet<
@@ -38,13 +39,7 @@ let {
 
 const id = $props.id();
 
-const {
-	container,
-	error: errorCss,
-	label: labelCss,
-	labelInputContainer,
-	icon
-} = $derived(field({ placement }));
+const { container, error: errorCss, labelInputContainer, icon } = $derived(field({ placement }));
 </script>
 
 <!--
@@ -55,7 +50,7 @@ Provides a consistent structure for form controls, by including a label and an e
 
 <div bind:this={ref} data-field class={container({ className })}>
 	<div class={labelInputContainer()}>
-        <label for={id} data-field-label class={labelCss()}>{label}</label>
+        <Label for={id} data-field-label>{label}</Label>
         {@render input({
                 props: {
                     id,
