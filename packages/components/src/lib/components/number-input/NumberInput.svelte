@@ -32,10 +32,6 @@ let {
 let inputRef = $state<HTMLInputElement>();
 const { container, input, decrement, increment, icon } = $derived(numberInput());
 
-$effect(() => {
-	inputRef!.value = value?.toString() ?? "";
-});
-
 function changeValue(v: string | number) {
 	if (!isNumber(v)) {
 		value = null;
@@ -47,10 +43,13 @@ function changeValue(v: string | number) {
 
 	if (min !== undefined && newValue < min) {
 		value = min;
+		inputRef!.value = min.toString();
 	} else if (max !== undefined && newValue > max) {
 		value = max;
+		inputRef!.value = max.toString();
 	} else {
 		value = newValue;
+		inputRef!.value = newValue.toString();
 	}
 }
 
@@ -61,7 +60,7 @@ function isNumber(value: unknown) {
 
 <!--
 @component
-An JS-enhanced input for numbers, with increment/decrement buttons and built-in `min` and `max` enforcement.
+An enhanced input for working with numbers. It includes increment/decrement controls and enforces `min` and `max` constraints out of the box.
 @see https://sveltique.dev/docs/components/browse/number-input
 -->
 
@@ -75,7 +74,8 @@ An JS-enhanced input for numbers, with increment/decrement buttons and built-in 
 		{min}
 		{max}
 		{step}
-		oninput={(event) => changeValue(event.currentTarget.value)}
+        {value}
+		onchange={(event) => changeValue(event.currentTarget.value)}
 		type="text"
 		inputmode="numeric"
 		pattern="[0-9]*"
