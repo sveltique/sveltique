@@ -1,5 +1,13 @@
 # @sveltique/components
 
+## 0.3.1
+
+### Patch Changes
+
+- [#16](https://github.com/sveltique/sveltique/pull/16) [`8e2c0fd`](https://github.com/sveltique/sveltique/commit/8e2c0fdf848f0984d3896d2978aa09808d96ffc6) Thanks [@novaotp](https://github.com/novaotp)! - Improved `Label` docs
+
+- [#15](https://github.com/sveltique/sveltique/pull/15) [`4307282`](https://github.com/sveltique/sveltique/commit/43072828aa854bf6e030ea1553f06bedda367901) Thanks [@novaotp](https://github.com/novaotp)! - Fixed `NumberInput`'s constraints enforcement
+
 ## 0.3.0
 
 ### Minor Changes
