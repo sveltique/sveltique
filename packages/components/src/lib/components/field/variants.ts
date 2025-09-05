@@ -4,7 +4,6 @@ export const field = tv({
 	slots: {
 		container: "relative w-full flex flex-col items-start gap-3",
 		labelInputContainer: "relative w-full flex",
-		label: "text-sm font-medium text-foreground",
 		error: "text-sm text-danger flex gap-3 items-center",
 		icon: "h-5 aspect-square shrink-0"
 	},
