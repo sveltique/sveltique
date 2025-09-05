@@ -11,18 +11,17 @@ import IconTrash from "@tabler/icons-svelte/icons/trash";
 import Playground from "$components/Playground.svelte";
 import { script } from "$utils/playground";
 
-const basicUsagecode = {
-	short: "<Badge>Groceries</Badge>",
-	expanded: `${script('import { Badge } from "@sveltique/components";')}
+const basicUsagecode = `${script('import { Badge } from "@sveltique/components";')}
         
 <Badge>Contained</Badge>
+<Badge variant="secondary">Secondary</Badge>
 <Badge variant="outline">Outline</Badge>
-<Badge variant="danger">Danger</Badge>`
-};
+<Badge variant="danger">Danger</Badge>`;
 
 const numberCode = `${script('import { Badge } from "@sveltique/components";')}
     
 <Badge number>1</Badge>
+<Badge variant="secondary" number>10</Badge>
 <Badge variant="outline" number>15</Badge>
 <Badge variant="danger" number>99+</Badge>`;
 
@@ -30,19 +29,27 @@ const iconWithTextCode = `${script(`import { Badge } from '@sveltique/components
     import IconCircleDashedCheck from '@tabler/icons-svelte/icons/circle-dashed-check';
     import IconTrash from '@tabler/icons-svelte/icons/trash';`)}
     
-<Badge>
-    <IconCircleDashedCheck class="size-4" />
+<Badge class="bg-success text-black">
+    <IconCircleDashedCheck
+        aria-hidden="true"
+        class="size-4"
+    />
     Verified
 </Badge>
 <Badge variant="danger">
-    <IconTrash class="size-4" />
+    <IconTrash
+        aria-hidden="true"
+        class="size-4"
+    />
     Delete
 </Badge>`;
 
 const interactiveBadgeCode = `${script("import { badge } from '@sveltique/components';")}
 
 <a href="/" class={badge()}>Link</a>
-<button class={badge({ variant: 'danger' })}>Button</button>`;
+<button class={badge({ variant: 'danger' })}>
+    Button
+</button>`;
 </script>
 
 <h1 id="badge">Badge</h1>
@@ -52,6 +59,7 @@ const interactiveBadgeCode = `${script("import { badge } from '@sveltique/compon
 <p>A badge comes with three variants: contained (default), outline, and danger.</p>
 <Playground code={basicUsagecode}>
 	<Badge>Contained</Badge>
+	<Badge variant="secondary">Secondary</Badge>
 	<Badge variant="outline">Outline</Badge>
 	<Badge variant="danger">Danger</Badge>
 </Playground>
@@ -63,6 +71,7 @@ const interactiveBadgeCode = `${script("import { badge } from '@sveltique/compon
 </p>
 <Playground code={numberCode}>
 	<Badge number>1</Badge>
+	<Badge variant="secondary" number>10</Badge>
 	<Badge variant="outline" number>15</Badge>
 	<Badge variant="danger" number>99+</Badge>
 </Playground>
@@ -71,7 +80,7 @@ const interactiveBadgeCode = `${script("import { badge } from '@sveltique/compon
 
 <h3 id="icon-with-text">Icon with text</h3>
 <Playground code={iconWithTextCode}>
-	<Badge>
+	<Badge class="bg-success text-black">
 		<IconCircleDashedCheck aria-hidden="true" class="size-4" />
 		Verified
 	</Badge>
