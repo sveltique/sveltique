@@ -45,7 +45,7 @@ const code = {
 <h2 id="basic-usage">Basic Usage</h2>
 <Alert type="info" class="mb-4">
 	To prevent the select from changing size when choosing options with different length, set a fixed
-    width on the container using <Badge>containerClass</Badge>.
+    width on the container using <Badge variant="secondary">containerClass</Badge>.
 </Alert>
 <Playground {code}>
 	<Select.Root placeholder="Select a fruit" containerClass="w-40">

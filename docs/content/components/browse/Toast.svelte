@@ -126,8 +126,8 @@ ${script(`import { Toast } from "@sveltique/components";
 
 <h3 id="action">Action</h3>
 <p>
-	To add a close button, you can simply pass an <Badge>onClose</Badge> function. Otherwise, you can use
-	the <Badge>action</Badge> snippet to add a custom action.
+	To add a close button, you can simply pass an <Badge variant="secondary">onClose</Badge> function. Otherwise, you can use
+	the <Badge variant="secondary">action</Badge> snippet to add a custom action.
 </p>
 <Playground code={actionCode} class="flex-col">
 	<Toast type="warning" onClose={() => {}} class="max-w-96">Your session will expire soon.</Toast>
@@ -159,7 +159,7 @@ ${script(`import { Toast } from "@sveltique/components";
 <CodeBlock code={programmaticCallsCode.rootContainer} showLineNumbers />
 
 <h3 id="usage">Usage</h3>
-<p>Finally, we can start using our <Badge>toasts</Badge> object to create toasts programmatically.</p>
+<p>Finally, we can start using our <Badge variant="secondary">toasts</Badge> object to create toasts programmatically.</p>
 <Alert class="mb-4">
     In production code, you can put your toast container at the root of your application since you
     only need to define it once.

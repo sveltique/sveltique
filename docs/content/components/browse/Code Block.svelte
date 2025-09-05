@@ -167,7 +167,7 @@ const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } 
 <h2 id="basic-usage">Basic Usage</h2>
 <p>
 	The <code>{'<CodeBlock />'}</code> component highlights the given code synchronously. As such, you
-	need to provide a <Badge>highlighter</Badge> object.
+	need to provide a <Badge variant="secondary">highlighter</Badge> object.
 </p>
 <p>
 	You can create one by following the <Link
@@ -177,7 +177,7 @@ const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } 
 </p>
 
 <p>
-	Then, wrap your code in a <code>&lt;CodeBlock&gt;</code> component, give it your <Badge
+	Then, wrap your code in a <code>&lt;CodeBlock&gt;</code> component, give it your <Badge variant="secondary"
 		>highlighter</Badge
 	>, set the language and the theme, and you're done.
 </p>
@@ -197,7 +197,7 @@ const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } 
 
 <h3 id="showing-line-numbers">Showing Line Numbers</h3>
 <p>
-	You can show line numbers with the <Badge>showLineNumbers</Badge> attribute.
+	You can show line numbers with the <Badge variant="secondary">showLineNumbers</Badge> attribute.
 </p>
 <Playground code={showLineNumbersCode}>
 	<CodeBlock
@@ -218,7 +218,7 @@ const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } 
 
 <h3 id="highlighting-lines">Highlighting lines</h3>
 <p>
-	You can highlight certain lines by passing a list of number (starting from one) using the <Badge
+	You can highlight certain lines by passing a list of number (starting from one) using the <Badge variant="secondary"
 		>highlightedLines</Badge
 	> attribute.
 </p>
@@ -245,7 +245,7 @@ const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } 
 </Playground>
 
 <h3 id="filename">Filename</h3>
-<p>You can add a filename via the <Badge>filename</Badge> attribute.</p>
+<p>You can add a filename via the <Badge variant="secondary">filename</Badge> attribute.</p>
 <Playground code={filenameCode}>
 	<CodeBlock
 		code={`${script(`let counter = $state(0);`)}
@@ -260,8 +260,8 @@ const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } 
 </Playground>
 
 <h3 id="icon">Icon</h3>
-<p>You can add an icon via the <Badge>icon</Badge> snippet.</p>
-<Alert class="mb-4">You must have a <Badge>filename</Badge> for the icon to render.</Alert>
+<p>You can add an icon via the <Badge variant="secondary">icon</Badge> snippet.</p>
+<Alert class="mb-4">You must have a <Badge variant="secondary">filename</Badge> for the icon to render.</Alert>
 <Playground code={iconCode}>
 	<CodeBlock
 		code={`${script(`let counter = $state(0);`)}
@@ -302,8 +302,8 @@ const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } 
     in the last 3 seconds or not. However, this title is in English.
 </p>
 <p>
-    You can customize it using the <Badge>copyTitle</Badge> function, which passes the current status of
-    <Badge>isCopied</Badge> as its parameter.
+    You can customize it using the <Badge variant="secondary">copyTitle</Badge> function, which passes the current status of
+    <Badge variant="secondary">isCopied</Badge> as its parameter.
 </p>
 <Playground code={copyTitleCode}>
 	<CodeBlock
@@ -318,7 +318,7 @@ const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } 
 <h2 id="wrapper-component">Wrapper component</h2>
 <p>
 	The <code>{'<CodeBlock />'}</code> component, while useful on its own, requires you to pass many
-	parameters (such as the <Badge>highlighter</Badge> and theme) every time.
+	parameters (such as the <Badge variant="secondary">highlighter</Badge> and theme) every time.
 </p>
 <p>
 	However, if you often use the same values/defaults, it can get repetitive pretty quickly, so we
@@ -335,13 +335,13 @@ const implementationCode = `${script(`import { CodeBlock, type CodeBlockProps } 
 </p>
 <ul>
 	<li>
-		<p><Badge>highlighter</Badge> is passed automatically</p>
+		<p><Badge variant="secondary">highlighter</Badge> is passed automatically</p>
 	</li>
 	<li>
 		<p>Theme is based on light/dark mode</p>
 	</li>
 	<li>
-		<p>Default language is <Badge>svelte</Badge></p>
+		<p>Default language is <Badge variant="secondary">svelte</Badge></p>
 	</li>
 </ul>
 

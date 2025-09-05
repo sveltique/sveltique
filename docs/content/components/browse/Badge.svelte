@@ -66,7 +66,7 @@ const interactiveBadgeCode = `${script("import { badge } from '@sveltique/compon
 
 <h3 id="number">Number</h3>
 <p>
-	If you want to use the badge with a number, you can set the <Badge>number</Badge> attribute to true.
+	If you want to use the badge with a number, you can set the <Badge variant="secondary">number</Badge> attribute to true.
 	It will fully round the badge.
 </p>
 <Playground code={numberCode}>
@@ -91,7 +91,7 @@ const interactiveBadgeCode = `${script("import { badge } from '@sveltique/compon
 </Playground>
 
 <h3 id="interactive-badge">Interactive badge</h3>
-<p>You can make an interactive badge by using the <Badge>badge()</Badge> helper.</p>
+<p>You can make an interactive badge by using the <Badge variant="secondary">badge()</Badge> helper.</p>
 <Playground code={interactiveBadgeCode}>
 	<!-- svelte-ignore a11y_invalid_attribute -->
 	<a href="#interactive-badge" class={badge()}>Link</a>

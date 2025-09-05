@@ -27,8 +27,8 @@ const code = `${script("import { Skeleton } from '@sveltique/components';")}
 
 <h2 id="basic-usage">Basic Usage</h2>
 <p>
-	When using a <code>{'<Skeleton />'}</code>, you must explicitly provide their <Badge>width</Badge>
-	and <Badge>height</Badge>.
+	When using a <code>{'<Skeleton />'}</code>, you must explicitly provide their <Badge variant="secondary">width</Badge>
+	and <Badge variant="secondary">height</Badge>.
 </p>
 <Playground {code}>
 	<div class="max-w-3xs relative flex w-full flex-col items-start gap-2.5">
@@ -41,7 +41,7 @@ const code = `${script("import { Skeleton } from '@sveltique/components';")}
 <h3 id="animation">Animation</h3>
 <p>
 	By default, skeletons include a subtle pulse animation to indicate activity. If you prefer a
-	static placeholder, you can disable this by setting <Badge>animation="none"</Badge>.
+	static placeholder, you can disable this by setting <Badge variant="secondary">animation="none"</Badge>.
 </p>
 <Playground {code}>
 	<div class="max-w-3xs relative flex w-full flex-col items-start gap-2.5">

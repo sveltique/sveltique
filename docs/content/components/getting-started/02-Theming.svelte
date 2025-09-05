@@ -101,7 +101,7 @@ const introductionCode = `@custom-variant dark (&:where(.dark, .dark *));
 	Theming in Sveltique is done via CSS variables. By changing them, you can change your whole site's
 	design.
 </p>
-<p>Below, you can find the theme used for this website, which you can put in <Badge>theme.css</Badge>.</p>
+<p>Below, you can find the theme used for this website, which you can put in <Badge variant="secondary">theme.css</Badge>.</p>
 <Alert class="mb-4">
     You can tweak any values to your liking, as long the names are left intact.
 </Alert>

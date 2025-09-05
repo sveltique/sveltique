@@ -34,8 +34,8 @@ const code = {
 
 <h1 id="number-input">Number Input</h1>
 <p>
-	An JS-enhanced input for numbers, with increment/decrement buttons and built-in <Badge>min</Badge>
-	and <Badge>max</Badge> enforcement.
+	An JS-enhanced input for numbers, with increment/decrement buttons and built-in <Badge variant="secondary">min</Badge>
+	and <Badge variant="secondary">max</Badge> enforcement.
 </p>
 
 <h2 id="basic-usage">Basic Usage</h2>

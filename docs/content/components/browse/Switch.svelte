@@ -50,7 +50,7 @@ function ontoggle(checked: boolean) {
 
 <h3 id="toggle-event">Toggle event</h3>
 <p>
-    If you want to execute code when the switch's value changes, you can use the <Badge>ontoggle</Badge>
+    If you want to execute code when the switch's value changes, you can use the <Badge variant="secondary">ontoggle</Badge>
     callback.
 </p>
 <Playground code={toggleEventCode}>

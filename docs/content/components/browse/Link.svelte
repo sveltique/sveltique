@@ -68,9 +68,9 @@ const underlineCode = `${script('import { Link } from "@sveltique/components";')
 
 <h3 id="external-links">External links</h3>
 <p>
-	For external links, you can set the <Badge>external</Badge> attribute. It handles setting <Badge
+	For external links, you can set the <Badge variant="secondary">external</Badge> attribute. It handles setting <Badge variant="secondary"
 		>target="_blank"</Badge
-	>, <Badge>rel="noreferrer"</Badge>, and adds a small top right arrow icon (<IconArrowUpRight class="inline w-5 aspect-square" />).
+	>, <Badge variant="secondary">rel="noreferrer"</Badge>, and adds a small top right arrow icon (<IconArrowUpRight class="inline w-5 aspect-square" />).
 </p>
 <p>You can override the target and rel attributes individually if you need to.</p>
 <Playground code={externalCode}>
@@ -86,7 +86,7 @@ const underlineCode = `${script('import { Link } from "@sveltique/components";')
 <h2 id="customization">Customization</h2>
 
 <h3 id="icon">Icon</h3>
-<p>By default, external links include an up right arrow icon. You can use the <Badge>icon</Badge> snippet to customize or remove it.</p>
+<p>By default, external links include an up right arrow icon. You can use the <Badge variant="secondary">icon</Badge> snippet to customize or remove it.</p>
 <Playground code={iconCode}>
     <Link
 		href="https://developer.mozilla.org"
@@ -117,7 +117,7 @@ const underlineCode = `${script('import { Link } from "@sveltique/components";')
 	By default, links are underlined to conform with <Link
 		href="https://webaim.org/blog/wcag-2-0-and-link-colors/"
 		external>accessibility guidelines</Link
-	>. However, you can change this behavior using the <Badge>underline</Badge> attribute.
+	>. However, you can change this behavior using the <Badge variant="secondary">underline</Badge> attribute.
 </p>
 <Playground code={underlineCode}>
 	<Link href="#">underline="always"</Link>

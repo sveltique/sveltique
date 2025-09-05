@@ -105,7 +105,7 @@ const disabledCode = `${script('import { Button } from "@sveltique/components";'
 
 <h3 id="color">Color</h3>
 <p>
-    The <Badge>color</Badge> attribute changes the button's color : primary (default),
+    The <Badge variant="secondary">color</Badge> attribute changes the button's color : primary (default),
     the default color scheme for main actions, and danger, for destructive or
     irreversible actions.
 </p>
@@ -125,7 +125,7 @@ const disabledCode = `${script('import { Button } from "@sveltique/components";'
 
 <h3 id="disabled">Disabled</h3>
 <p>
-	When a button is disabled via the <Badge>disabled</Badge> prop, it reduces its opacity and disables
+	When a button is disabled via the <Badge variant="secondary">disabled</Badge> prop, it reduces its opacity and disables
 	pointer events to indicate it is inactive and not clickable.
 </p>
 <Playground code={disabledCode} class="max-sm:flex-col">

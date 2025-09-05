@@ -78,7 +78,7 @@ const nonStandardRangesCode = `${script(`import { Progress } from "@sveltique/co
 <h2 id="non-standard-ranges">Non-standard ranges</h2>
 <p>
 	The progress bar is meant to be used for values between 0 and 100. If your min and/or max is
-	outside that range, you can use the <Badge>normalizeProgress()</Badge> helper.
+	outside that range, you can use the <Badge variant="secondary">normalizeProgress()</Badge> helper.
 </p>
 <Playground code={nonStandardRangesCode}>
 	<Progress value={normalizeProgress(203, 47, 296)} />

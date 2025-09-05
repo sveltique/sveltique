@@ -74,7 +74,7 @@ const placementCode = `${script("import { Button, Tooltip } from '@sveltique/com
 
 <h2 id="basic-usage">Basic Usage</h2>
 <p>
-    Surround the element on which you want to add a tooltip. Next, bind them using the <Badge>ref</Badge>
+    Surround the element on which you want to add a tooltip. Next, bind them using the <Badge variant="secondary">ref</Badge>
     property.
 </p>
 <Playground {code}>
@@ -115,11 +115,11 @@ const placementCode = `${script("import { Button, Tooltip } from '@sveltique/com
 <h2 id="accessibility">Accessibility</h2>
 <p>
 	To make the tooltip accessible, it must be linked to the item it describes. For this, pass down
-	the tooltip's ID by using the <Badge>props</Badge> parameter.
+	the tooltip's ID by using the <Badge variant="secondary">props</Badge> parameter.
 </p>
 <Alert class="mb-4">
 	You can set a custom ID on the tooltip and the props will use it. Otherwise, it will use a
-	generated one via <Badge>$props.id()</Badge>.
+	generated one via <Badge variant="secondary">$props.id()</Badge>.
 </Alert>
 <CodeBlock code={accessibleCode} />
 
@@ -127,7 +127,7 @@ const placementCode = `${script("import { Button, Tooltip } from '@sveltique/com
 <p>
     If you want to absolutely position the element on which to add the tooltip, you must instead
     absolutely position the container regrouping the element and the tooltip using the
-    <Badge>containerClass</Badge> attribute.
+    <Badge variant="secondary">containerClass</Badge> attribute.
 </p>
 <CodeBlock code={`<Tooltip
     title="Edit post"

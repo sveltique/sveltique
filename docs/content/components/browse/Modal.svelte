@@ -187,9 +187,9 @@ const accessibleLabelAndDescriptionCode = `${script('import { Button, Modal } fr
 	</Modal>
 </Playground>
 
-<h3 id="without-actions-snippet">Without <Badge>actions</Badge> snippet</h3>
+<h3 id="without-actions-snippet">Without <Badge variant="secondary">actions</Badge> snippet</h3>
 <p>
-	What if you don't want your actions at the bottom of the modal ? In that case, you can use the <Badge
+	What if you don't want your actions at the bottom of the modal ? In that case, you can use the <Badge variant="secondary"
 		>children</Badge
 	> snippet to access the close function.
 </p>
@@ -229,7 +229,7 @@ const accessibleLabelAndDescriptionCode = `${script('import { Button, Modal } fr
 <h2 id="controlling-open-closed-state">Controlling open/closed state</h2>
 <p>
 	If you need to control the open/closed state of the modal outside of the markup, you can bind to
-	<Badge>isOpen</Badge>.
+	<Badge variant="secondary">isOpen</Badge>.
 </p>
 <Playground code={controlledStateCode}>
     <Button onclick={() => (isOpen = true)}>Show modal</Button>
@@ -270,7 +270,7 @@ const accessibleLabelAndDescriptionCode = `${script('import { Button, Modal } fr
 
 <h3 id="allow-overlay-click">Allow overlay click</h3>
 <p>
-	You should only set <Badge>closeOnOverlayClick</Badge> for low-stakes interactions where accidentally
+	You should only set <Badge variant="secondary">closeOnOverlayClick</Badge> for low-stakes interactions where accidentally
 	closing the modal will not cause loss of important data or irreversible actions. See the
 	<Link external href="https://www.w3.org/WAI/ARIA/apg/patterns/dialogmodal/">
 		accessibility guidelines
@@ -299,8 +299,8 @@ const accessibleLabelAndDescriptionCode = `${script('import { Button, Modal } fr
     a description (describing the primary purpose of the modal).
 </p>
 <p>
-    The <Badge>children</Badge> snippet contains spreadable props (respectively <Badge>labelProps</Badge>
-    and <Badge>descriptionProps</Badge>) which you can use in your markup.
+    The <Badge variant="secondary">children</Badge> snippet contains spreadable props (respectively <Badge variant="secondary">labelProps</Badge>
+    and <Badge variant="secondary">descriptionProps</Badge>) which you can use in your markup.
 </p>
 <Playground code={accessibleLabelAndDescriptionCode}>
 	<Modal backdropProps={{ z: 1000 }}>

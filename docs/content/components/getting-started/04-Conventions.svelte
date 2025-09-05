@@ -28,24 +28,24 @@ const tailwindIntellisenseCode = `"tailwindCSS.classAttributes": [
 
 <h2 id="ref-attribute">Ref attribute</h2>
 <p>
-    Every Sveltique component exposes a <Badge>ref</Badge> attribute, giving you direct access to the
+    Every Sveltique component exposes a <Badge variant="secondary">ref</Badge> attribute, giving you direct access to the
     component's root element.
 </p>
 <CodeBlock code={refCode} />
 
 <h2 id="classes">Classes</h2>
 <p>
-    Every component accepts a <Badge>class</Badge> attribute. For most of components, rendering a single
+    Every component accepts a <Badge variant="secondary">class</Badge> attribute. For most of components, rendering a single
     element, this applies directly to it.
 </p>
 <p>
     For more complex components, the attribute is applied to the most relevant element. If you need
-    to style the root element instead, the <Badge>containerClass</Badge> attribute is available.
+    to style the root element instead, the <Badge variant="secondary">containerClass</Badge> attribute is available.
 </p>
 
 <h3 id="tailwind-intellisense">Tailwind Intellisense</h3>
 <p>
-    We recommend adding <Badge>containerClass</Badge> to the list of attributes recognized by the TailwindCSS
+    We recommend adding <Badge variant="secondary">containerClass</Badge> to the list of attributes recognized by the TailwindCSS
     VSCode extension, enabling autocompletions, hover previews, and other editor features.
 </p>
 <CodeBlock code={tailwindIntellisenseCode} filename="settings.json" lang="json" />
