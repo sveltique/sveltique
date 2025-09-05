@@ -8,6 +8,12 @@ export interface LabelProps extends ReplaceWithTWMergeClass<HTMLLabelAttributes>
 let { children, class: className, ...restProps }: LabelProps = $props();
 </script>
 
+<!--
+@component
+Labels or describes an associated form control.
+@see https://sveltique.dev/docs/components/browse/label
+-->
+
 <label data-label class={label({ className })} {...restProps}>
     {@render children?.()}
 </label>
