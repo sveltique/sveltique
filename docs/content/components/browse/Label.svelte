@@ -1,3 +1,9 @@
+<script module>
+export const metadata = {
+	description: "Labels or describes an associated form control."
+};
+</script>
+
 <script>
 import { Alert, Checkbox, Label, Link } from "@sveltique/components";
 import Playground from "$components/Playground.svelte";
@@ -16,7 +22,7 @@ const basicUsageCode = `${script('import { Checkbox, Label } from "@sveltique/co
 <h1 id="label">Label</h1>
 <p>Labels or describes an associated form control.</p>
 <Alert>
-    If you're looking to build a form field with a label, an error message and auto placements, checkout
+    To build a full form field with a label, an error message, and configurable placement, checkout
     the <Link href="/docs/components/browse/field">Field</Link> component.
 </Alert>
 
