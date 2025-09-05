@@ -1,5 +1,11 @@
 # @sveltique/components
 
+## 0.2.2
+
+### Patch Changes
+
+- [#11](https://github.com/sveltique/sveltique/pull/11) [`a849dbf`](https://github.com/sveltique/sveltique/commit/a849dbfb1a045df1d5df72f579e3726b1e505a60) Thanks [@novaotp](https://github.com/novaotp)! - Downgraded tailwind-variants from ^2.1.0 to 2.0.1 to fix [class merging issues](https://github.com/heroui-inc/tailwind-variants/issues/258)
+
 ## 0.2.1
 
 ### Patch Changes
