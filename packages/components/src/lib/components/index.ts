@@ -1,5 +1,6 @@
 export * from "./accordion/index.js";
 export * from "./alert/index.js";
+export * from "./aspect-ratio/index.js";
 export * from "./backdrop/index.js";
 export * from "./badge/index.js";
 export * from "./button/index.js";
