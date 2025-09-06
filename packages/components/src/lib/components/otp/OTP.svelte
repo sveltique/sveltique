@@ -1,11 +1,14 @@
 <script lang="ts">
-import { flushSync, onMount } from "svelte";
-import type { WithRef } from "$lib/types.js";
-import Cell from "./Cell.svelte";
-import type { MouseEventHandler } from "svelte/elements";
+import { onMount } from "svelte";
+import type { HTMLAttributes, MouseEventHandler } from "svelte/elements";
+import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { isHTMLElement } from "$utils/is-html-element.js";
+import Cell from "./Cell.svelte";
+import { otp } from "./variants.js";
 
-interface Props extends WithRef<HTMLElement | HTMLDivElement> {
+interface Props
+	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLElement>>,
+		WithRef<HTMLElement | HTMLDivElement> {
 	/** @default 6 */
 	length?: number;
 	name?: string;
@@ -13,7 +16,14 @@ interface Props extends WithRef<HTMLElement | HTMLDivElement> {
 	value?: string;
 }
 
-let { length = 6, name, ref = $bindable(), value = $bindable("") }: Props = $props();
+let {
+	class: className,
+	length = 6,
+	name,
+	ref = $bindable(),
+	value = $bindable(""),
+	...restProps
+}: Props = $props();
 
 let activeCellId = $state<string>("");
 let values = $derived(toCharArray(value, length));
@@ -37,7 +47,7 @@ function toCharArray(str: string, len: number): string[] {
 	const chars = str.split("");
 	const minLengthChars = chars.concat(Array(len).fill(""));
 
-	return minLengthChars.slice(0, length);
+	return minLengthChars.slice(0, len);
 }
 
 const onclick: MouseEventHandler<HTMLDivElement> = (event) => {
@@ -51,27 +61,25 @@ const onclick: MouseEventHandler<HTMLDivElement> = (event) => {
 	activeCellId = target.id;
 };
 
-function onpaste(event: ClipboardEvent) {
+/** Pastes the latest clipboard value in the cells. */
+function onpaste(event: ClipboardEvent): void {
 	event.preventDefault();
 
-	// @ts-ignore
-	const data = (event.clipboardData || window.clipboardData).getData("text") as string;
+	const data = event.clipboardData?.getData("text") ?? "";
 
-	values = toCharArray(data, length);
+	const _tempValues = toCharArray(data, length);
+
+	values = _tempValues;
+	value = _tempValues.map((v) => (v !== "" ? v : " ")).join("");
 }
 
-function onvaluechange(index: number, newValue: string) {
-	let _tempValues = structuredClone(values);
-
-	console.log("before", _tempValues);
-
+/** Updates a cell at the given index. */
+function onvaluechange(index: number, newValue: string): void {
+	const _tempValues = structuredClone(values);
 	_tempValues[index] = newValue;
-	value = _tempValues.map((v) => (v !== "" ? v : " ")).join("");
+
 	values = _tempValues;
-
-	console.log("after", _tempValues);
-
-	flushSync();
+	value = _tempValues.map((v) => (v !== "" ? v : " ")).join("");
 }
 </script>
 
@@ -86,7 +94,8 @@ function onvaluechange(index: number, newValue: string) {
     data-otp
     data-length={length}
     data-active-cell-id={activeCellId}
-    class="relative flex justify-between items-center"
+    class={otp({ className })}
+    {...restProps}
 >
     <Cell value={values[0]} onvaluechange={(v) => onvaluechange(0, v)} position="first" />
     {#each { length: length - 2 } as _, i}

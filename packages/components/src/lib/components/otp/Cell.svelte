@@ -42,19 +42,28 @@ useMutationObserver(
 );
 
 onKeyUp(
-	"Backspace",
-	() => {
+	["Backspace", "Delete"],
+	(_, key) => {
 		if (!ref) return;
 
 		if (value !== "") {
 			value = "";
 			onvaluechange?.("");
+
+			return;
 		}
 
-		if (position !== "first") {
-			const previousCell = ref.previousElementSibling as HTMLElement;
-			previousCell.focus();
-		}
+		if (key === "Backspace" && position === "first") return;
+		if (key === "Delete" && position === "last") return;
+
+		const sibling = getSibling(ref, {
+			attribute: "data-otp-cell",
+			previous: key === "Backspace"
+		});
+		if (!sibling) return;
+
+		parent!.setAttribute("data-active-cell-id", sibling.id);
+		sibling.focus();
 	},
 	{ element: () => ref }
 );
@@ -71,7 +80,10 @@ onKeyDown(
 			attribute: "data-otp-cell",
 			previous: key === "ArrowLeft"
 		});
-		sibling?.focus();
+		if (!sibling) return;
+
+		parent!.setAttribute("data-active-cell-id", sibling.id);
+		sibling.focus();
 	},
 	{ element: () => ref }
 );
@@ -80,8 +92,11 @@ function oninput(event: InputEvent & { currentTarget: HTMLInputElement }) {
 	if (event.inputType === "deleteContentBackward") return;
 	if (!ref) return;
 
-	value = event.currentTarget.value;
-	onvaluechange?.(event.currentTarget.value);
+	const char = event.currentTarget.value.at(-1)!;
+
+	(ref as HTMLInputElement).value = char;
+	value = char;
+	onvaluechange?.(char);
 
 	const nextCell = getSibling(ref, { attribute: "data-otp-cell", previous: false });
 	if (!nextCell) return;
@@ -100,7 +115,6 @@ function oninput(event: InputEvent & { currentTarget: HTMLInputElement }) {
     {value}
     id={uid}
     type="text"
-    maxlength={1}
     tabindex={isActiveCell ? 0 : -1}
     data-otp-cell
     data-position={position}
