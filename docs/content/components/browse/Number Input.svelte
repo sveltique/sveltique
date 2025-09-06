@@ -32,7 +32,17 @@ const code = `${script('import { NumberInput } from "@sveltique/components";')}
 </Alert>
 
 <h2 id="basic-usage">Basic Usage</h2>
-<p>Key behaviors:</p>
+<Alert type="info" class="mb-4">
+	Use the <Badge variant="secondary">containerClass</Badge> attribute to control the input's width.
+</Alert>
+<Playground {code} class="flex-col">
+	<NumberInput step={5} value={50} min={0} max={100} containerClass="w-3xs" />
+    <p class="text-sm italic text-muted-foreground text-center text-balance">
+        Tip : try setting values outside the constraints (0 - 100)
+    </p>
+</Playground>
+
+<h2 id="features">Features</h2>
 <ul>
     <li>
         Values are clamped to the allowed range whenever the <Badge variant="secondary">onchange</Badge>
@@ -44,12 +54,3 @@ const code = `${script('import { NumberInput } from "@sveltique/components";')}
         is blank.
     </li>
 </ul>
-<Alert type="info" class="mb-4">
-	Use the <Badge variant="secondary">containerClass</Badge> attribute to control the input's width.
-</Alert>
-<Playground {code} class="flex-col">
-	<NumberInput step={5} value={50} min={0} max={100} containerClass="w-3xs" />
-    <p class="text-sm italic text-muted-foreground text-center text-balance">
-        Tip : try setting values outside the constraints (0 - 100)
-    </p>
-</Playground>

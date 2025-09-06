@@ -23,7 +23,7 @@ const code = {
 <h1 id="text-area">Text Area</h1>
 <p>A syled replacement for the native <code>textarea</code> element.</p>
 <Alert>
-    Consider using a <Link>{'<TextInput />'}</Link> if you only need one line.
+    Consider using a <Link>TextInput</Link> if you only need one line.
 </Alert>
 
 <h2 id="basic-usage">Basic Usage</h2>

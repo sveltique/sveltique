@@ -5,7 +5,7 @@ export const metadata = {
 </script>
 
 <script lang="ts">
-	import { Accordion, Badge } from '@sveltique/components';
+	import { Accordion, Badge, Kbd, Link } from '@sveltique/components';
 	import Playground from '$components/Playground.svelte';
 	import CodeBlock from '$components/CodeBlock.svelte';
 	import IconAerialLiftFilled from '@tabler/icons-svelte/icons/aerial-lift-filled';
@@ -151,8 +151,8 @@ export const metadata = {
 	<Accordion.Root class="max-w-md">
 		<Accordion.Item header="Accordion 1">
 			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate impedit deserunt amet
-				officia qui tenetur laboriosam consequatur incidunt, voluptatum atque.
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate impedit deserunt
+                amet officia qui tenetur laboriosam consequatur incidunt, voluptatum atque.
 			</p>
 		</Accordion.Item>
 		<Accordion.Item header="Accordion 2">
@@ -176,8 +176,8 @@ export const metadata = {
 			{/snippet}
 
 			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate impedit deserunt amet
-				officia qui tenetur laboriosam consequatur incidunt, voluptatum atque.
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate impedit deserunt
+                amet officia qui tenetur laboriosam consequatur incidunt, voluptatum atque.
 			</p>
 		</Accordion.Item>
 		<Accordion.Item>
@@ -195,16 +195,30 @@ export const metadata = {
 	</Accordion.Root>
 </Playground>
 
+<h2 id="features">Features</h2>
+<ul>
+    <li>Navigate between headers with <Kbd>ArrowUp</Kbd> and <Kbd>ArrowDown</Kbd></li>
+    <li>Toggle sections with <Kbd>Enter</Kbd> or <Kbd>Space</Kbd></li>
+    <li>
+        Choose whether <Link href="#only-expand-one-at-a-time">one or multiple sections</Link> can stay
+        open
+    </li>
+    <li>Provides a smooth sliding transition when opening or closing</li>
+</ul>
+
 <h2 id="customization">Customization</h2>
 
 <h3 id="expand-icon">Icon</h3>
-<p>You can customize the expand icon by using the <Badge variant="secondary">icon</Badge> snippet on the items.</p>
+<p>
+    You can customize the expand icon by using the <Badge variant="secondary">icon</Badge> snippet on
+    the items.
+</p>
 <Playground code={expandIconCode}>
 	<Accordion.Root class="max-w-md">
 		<Accordion.Item header="Accordion 1">
 			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate impedit deserunt amet
-				officia qui tenetur laboriosam consequatur incidunt, voluptatum atque.
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate impedit deserunt
+                amet officia qui tenetur laboriosam consequatur incidunt, voluptatum atque.
 			</p>
 
             {#snippet icon({ props })}
@@ -225,13 +239,16 @@ export const metadata = {
 </Playground>
 
 <h3 id="expand-by-default">Expand by default</h3>
-<p>You can expand the first item by default via the <Badge variant="secondary">defaultExpand</Badge> attribute on the root container.</p>
+<p>
+    You can expand the first item by default via the <Badge variant="secondary">defaultExpand</Badge>
+    attribute on the root container.
+</p>
 <Playground code={defaultExpandCode}>
 	<Accordion.Root defaultExpand class="max-w-md">
 		<Accordion.Item header="Accordion 1">
 			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate impedit deserunt amet
-				officia qui tenetur laboriosam consequatur incidunt, voluptatum atque.
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate impedit deserunt
+                amet officia qui tenetur laboriosam consequatur incidunt, voluptatum atque.
 			</p>
 		</Accordion.Item>
 		<Accordion.Item header="Accordion 2">
@@ -245,14 +262,16 @@ export const metadata = {
 
 <h3 id="only-expand-one-at-a-time">Only expand one at a time</h3>
 <p>
-	If you wish to keep only one accordion open at a time, you can set <Badge variant="secondary">multiple</Badge> to false.
+	If you wish to keep only one accordion open at a time, you can set <Badge variant="secondary">
+        multiple
+    </Badge> to false.
 </p>
 <Playground code={onlyExpandOneAtATimeCode}>
 	<Accordion.Root multiple={false} class="max-w-md">
 		<Accordion.Item header="Accordion 1">
 			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate impedit deserunt amet
-				officia qui tenetur laboriosam consequatur incidunt, voluptatum atque.
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate impedit deserunt
+                amet officia qui tenetur laboriosam consequatur incidunt, voluptatum atque.
 			</p>
 		</Accordion.Item>
 		<Accordion.Item header="Accordion 2">
@@ -271,7 +290,8 @@ export const metadata = {
 	By default, accordion items use an <Badge variant="secondary">h3</Badge> element for the header.
 </p>
 <p>
-	You can change this to adapt it to your document hierarchy using the <Badge variant="secondary">headingLevel</Badge>
-    attribute. Permitted values are h1 to h6.
+	You can change this to adapt it to your document hierarchy using the <Badge variant="secondary">
+        headingLevel
+    </Badge> attribute. Permitted values are h1 to h6.
 </p>
 <CodeBlock code={headingLevelCode} />

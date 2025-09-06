@@ -6,23 +6,29 @@ export const metadata = {
 </script>
 
 <script lang="ts">
-import { Link, Paper } from "@sveltique/components";
+import { AspectRatio, Link, Paper } from "@sveltique/components";
 import Playground from "$components/Playground.svelte";
-    import { script } from "$utils/playground";
+import { script } from "$utils/playground";
 
-const basicCode = `${script('import { Paper } from "@sveltique/components";')}
+const basicCode = `${script('import { AspectRatio, Paper } from "@sveltique/components";')}
 
-<Paper class="flex flex-col rounded-xl w-xs overflow-hidden">
-    <img
-        src="/images/cat.webp"
-        alt="Cats"
-        class="w-full aspect-video object-cover"
-    />
-    <div class="relative w-full flex flex-col items-start gap-3 p-6">
-        <h3 class="font-bold text-foreground">Cats are the cutest!</h3>
-        <p class="text-sm">And yes, I prefer cats to dogs.</p>
+<Paper class="w-full flex flex-col max-w-xs overflow-hidden">
+    <AspectRatio ratio={16 / 9}>
+        <img
+            src="/images/cat.webp"
+            alt="Cats"
+            class="w-full h-full object-cover"
+        />
+    </AspectRatio>
+    <div class="relative w-full flex flex-col items-start gap-3 p-4">
+        <h3 class="font-bold text-foreground">
+            Cats are the cutest!
+        </h3>
+        <p class="text-sm">
+            And yes, I prefer cats to dogs.
+        </p>
     </div>
-</Paper>`
+</Paper>`;
 </script>
 
 <h1 id="paper">Paper</h1>
@@ -30,13 +36,15 @@ const basicCode = `${script('import { Paper } from "@sveltique/components";')}
 
 <h2 id="basic-usage">Basic Usage</h2>
 <Playground code={basicCode} class="flex-col">
-	<Paper class="flex flex-col rounded-xl w-xs overflow-hidden">
-        <img
-            src="/images/cat.webp"
-            alt="Cats"
-            class="w-full aspect-video object-cover"
-        />
-        <div class="relative w-full flex flex-col items-start gap-3 p-6">
+	<Paper class="w-full flex flex-col max-w-xs overflow-hidden">
+        <AspectRatio ratio={16 / 9}>
+            <img
+                src="/images/cat.webp"
+                alt="Cats"
+                class="w-full h-full object-cover"
+            />
+        </AspectRatio>
+        <div class="relative w-full flex flex-col items-start gap-3 p-4">
             <h3 class="font-bold text-foreground">
                 Cats are the cutest!
             </h3>

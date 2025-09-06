@@ -6,10 +6,19 @@ export const metadata = {
 </script>
 
 <script lang="ts">
-import { Alert, Checkbox, Field, Link, NumberInput, Switch, TextInput } from "@sveltique/components";
+import {
+	Alert,
+	Badge,
+	Checkbox,
+	Field,
+	Link,
+	NumberInput,
+	Switch,
+	TextInput
+} from "@sveltique/components";
 import Playground from "$components/Playground.svelte";
-    import { script } from "$utils/playground";
-    import { theme } from "$lib/contexts/theme.svelte";
+import { theme } from "$lib/contexts/theme.svelte";
+import { script } from "$utils/playground";
 
 let age = $state(16);
 let ageError = $derived.by(() => {
@@ -20,12 +29,19 @@ let ageError = $derived.by(() => {
 
 const basicUsageCode = `${script('import { Field, TextInput } from "@sveltique/components";')}
 
-<Field label="Full Name" class="w-[200px]">
-    <!-- props: { id: string; "aria-invalid": boolean; "aria-describedby": string | undefined; } -->
+<Field
+    label="Full Name"
+    class="max-w-3xs"
+>
+    <!-- props: {
+        id: string;
+        "aria-invalid": boolean;
+        "aria-describedby": string | undefined;
+    } -->
     {#snippet input({ props })}
         <TextInput {...props} />
     {/snippet}
-</Field>`
+</Field>`;
 
 const ageCode = `${script(`import { Field, NumberInput } from '@sveltique/components';
 
@@ -36,7 +52,11 @@ const ageCode = `${script(`import { Field, NumberInput } from '@sveltique/compon
         }
     });`)}
 
-<Field label="Age" error={ageError} class="w-[240px]">
+<Field
+    label="Age"
+    error={ageError}
+    class="max-w-3xs"
+>
     {#snippet input({ props })}
         <NumberInput
             bind:value={age}
@@ -49,7 +69,10 @@ const ageCode = `${script(`import { Field, NumberInput } from '@sveltique/compon
 
 const placementCode = `${script('import { Checkbox, Field, Switch } from "@sveltique/components";')}
 
-<Field label="Switch to dark theme" placement="left">
+<Field
+    label="Switch to dark theme"
+    placement="left"
+>
     {#snippet input({ props })}
         <Switch
             checked={theme.isDark}
@@ -58,26 +81,36 @@ const placementCode = `${script('import { Checkbox, Field, Switch } from "@svelt
         />
     {/snippet}
 </Field>
-<Field label="I have read the Terms of Services." placement="right">
+<Field
+    label="I have read the Terms of Services."
+    placement="right"
+>
     {#snippet input({ props })}
         <Checkbox {...props} />
     {/snippet}
-</Field>`
+</Field>`;
 </script>
 
 <h1 id="field">Field</h1>
-<p>Provides a consistent structure for form controls, by including a label and an error message when provided.</p>
+<p>
+    Provides a consistent structure for form controls, by including a label and an error message when
+    provided.
+</p>
 
 <h2 id="basic-usage">Basic Usage</h2>
 <p>
-	The <code>{'<Field />'}</code> accepts any input element, or custom ones such as <Link href="/docs/components/browse/text-input">
-        {'<TextInput />'}
-    </Link>, <Link href="/docs/components/browse/number-input">{'<NumberInput />'}</Link> or <Link href="/docs/components/browse/select">
-        {'<Select />'}
+	A field takes an <Badge variant="secondary">input</Badge> snippet, exposing props for linking
+    the label with the input, and for accessibility purposes.
+</p>
+<p>
+    You can use any input element, or custom ones such as <Link href="/docs/components/browse/text-input">
+        Text Input
+    </Link>, <Link href="/docs/components/browse/number-input">Number Input</Link> or <Link href="/docs/components/browse/select">
+        Select
     </Link>.
 </p>
 <Playground code={basicUsageCode}>
-    <Field label="Full Name" class="w-[200px]">
+    <Field label="Full Name" class="max-w-3xs">
 		{#snippet input({ props })}
 			<TextInput {...props} />
 		{/snippet}
@@ -91,7 +124,7 @@ const placementCode = `${script('import { Checkbox, Field, Switch } from "@svelt
     it manually like in this example.
 </Alert>
 <Playground code={ageCode} class="flex-col">
-	<Field label="Age" error={ageError} class="w-[240px]">
+	<Field label="Age" error={ageError} class="max-w-3xs">
 		{#snippet input({ props })}
 			<NumberInput bind:value={age} min={0} max={99} {...props} />
 		{/snippet}
@@ -105,9 +138,10 @@ const placementCode = `${script('import { Checkbox, Field, Switch } from "@svelt
 
 <h3 id="placement">Placement</h3>
 <p>
-    By default, the label appears on top of the input. However, in certain cases, such as inputs, you
-    may want to place the label differently : top (default), left and right.
+    By default, the label appears on top of the input. However, in somes cases, such as with switches
+    or checkboxes, you may want to place the label differently.
 </p>
+<p>You have three placement options : top (default), left and right.</p>
 <Playground code={placementCode}>
     <div class="relative flex flex-col items-center gap-6">
         <Field label="Switch to dark theme" placement="left">
