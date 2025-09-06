@@ -70,7 +70,7 @@ function onpaste(event: ClipboardEvent): void {
 	const _tempValues = toCharArray(data, length);
 
 	values = _tempValues;
-	value = _tempValues.map((v) => (v !== "" ? v : " ")).join("");
+	value = _tempValues.join("");
 }
 
 /** Updates a cell at the given index. */
@@ -79,7 +79,7 @@ function onvaluechange(index: number, newValue: string): void {
 	_tempValues[index] = newValue;
 
 	values = _tempValues;
-	value = _tempValues.map((v) => (v !== "" ? v : " ")).join("");
+	value = _tempValues.join("");
 }
 </script>
 
