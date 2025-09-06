@@ -1,5 +1,5 @@
 <script lang="ts">
-import { onMount, untrack } from "svelte";
+import { flushSync, onMount } from "svelte";
 import type { WithRef } from "$lib/types.js";
 import Cell from "./Cell.svelte";
 import type { MouseEventHandler } from "svelte/elements";
@@ -15,19 +15,8 @@ interface Props extends WithRef<HTMLElement | HTMLDivElement> {
 
 let { length = 6, name, ref = $bindable(), value = $bindable("") }: Props = $props();
 
-let activeCellId = $state<string>();
-
+let activeCellId = $state<string>("");
 let values = $derived(toCharArray(value, length));
-
-let innerCells = $derived.by(() => {
-	const elements = ref?.querySelectorAll("[data-otp-cell]");
-
-	if (!elements) return;
-
-	const arr = Array.from(elements) as HTMLElement[];
-
-	return arr;
-});
 
 onMount(() => {
 	if (length < 2) {
@@ -36,14 +25,12 @@ onMount(() => {
 });
 
 onMount(() => {
-	if (!innerCells) return;
+	if (!ref) return;
 
-	activeCellId = innerCells.at(0)?.id;
-});
+	const children = Array.from(ref.children);
+	const firstCell = children.find((element) => element.getAttribute("data-otp-cell"));
 
-$effect(() => {
-	console.log(values);
-	value = values.join("");
+	activeCellId = firstCell?.id ?? "";
 });
 
 function toCharArray(str: string, len: number): string[] {
@@ -57,8 +44,9 @@ const onclick: MouseEventHandler<HTMLDivElement> = (event) => {
 	if (!ref) return;
 
 	const target = event.target;
-	if (!isHTMLElement(target) || !ref.contains(target) || !target.hasAttribute("data-otp-cell"))
+	if (!isHTMLElement(target) || !ref.contains(target) || !target.hasAttribute("data-otp-cell")) {
 		return;
+	}
 
 	activeCellId = target.id;
 };
@@ -73,8 +61,17 @@ function onpaste(event: ClipboardEvent) {
 }
 
 function onvaluechange(index: number, newValue: string) {
-	values[index] = newValue;
-	value = values.join("");
+	let _tempValues = structuredClone(values);
+
+	console.log("before", _tempValues);
+
+	_tempValues[index] = newValue;
+	value = _tempValues.map((v) => (v !== "" ? v : " ")).join("");
+	values = _tempValues;
+
+	console.log("after", _tempValues);
+
+	flushSync();
 }
 </script>
 
@@ -95,5 +92,5 @@ function onvaluechange(index: number, newValue: string) {
     {#each { length: length - 2 } as _, i}
         <Cell value={values[i + 1]} onvaluechange={(v) => onvaluechange(i + 1, v)} />
     {/each}
-    <Cell value={values[-1]} onvaluechange={(v) => onvaluechange(-1, v)} position="last" />
+    <Cell value={values[length - 1]} onvaluechange={(v) => onvaluechange(length - 1, v)} position="last" />
 </div>
