@@ -1,5 +1,11 @@
 import { tv, type VariantProps } from "tailwind-variants";
 
+export const otp = tv({
+	base: "relative flex justify-between items-center"
+});
+
+export type OTPVariants = VariantProps<typeof otp>;
+
 export const otpCell = tv({
 	base: [
 		"w-10 h-14 border border-muted bg-background text-foreground text-center",
