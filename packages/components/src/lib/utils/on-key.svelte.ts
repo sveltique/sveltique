@@ -51,6 +51,10 @@ function _onKey(
 				_element,
 				event,
 				(e) => {
+					if (preventDefault) {
+						e.preventDefault();
+					}
+
 					const keyboardEvent = e as KeyboardEvent;
 					keyboardEvent.key === key && callback(keyboardEvent, key);
 				},
