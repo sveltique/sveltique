@@ -64,7 +64,6 @@ onKeyUp(
 
 		parent!.setAttribute("data-active-cell-id", sibling.id);
 		sibling.focus();
-		(sibling as HTMLInputElement).setSelectionRange(1, 1);
 	},
 	{ element: () => ref }
 );
@@ -85,7 +84,6 @@ onKeyDown(
 
 		parent!.setAttribute("data-active-cell-id", sibling.id);
 		sibling.focus();
-		(sibling as HTMLInputElement).setSelectionRange(1, 1);
 	},
 	{ element: () => ref }
 );
