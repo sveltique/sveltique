@@ -2,6 +2,8 @@ import { BROWSER } from "esm-env";
 import { on } from "svelte/events";
 import type { MaybeGetter } from "$lib/types.js";
 
+type OnKeyCallback = (event: KeyboardEvent, key: string) => void;
+
 interface OnKeyOptions {
 	/** @default window */
 	element?: MaybeGetter<EventTarget | undefined>;
@@ -11,7 +13,7 @@ interface OnKeyOptions {
 
 export function onKeyUp(
 	key: string | string[],
-	callback: (event: KeyboardEvent) => void,
+	callback: OnKeyCallback,
 	options: OnKeyOptions = {}
 ) {
 	_onKey("keyup", key, callback, options);
@@ -19,7 +21,7 @@ export function onKeyUp(
 
 export function onKeyDown(
 	key: string | string[],
-	callback: (event: KeyboardEvent) => void,
+	callback: OnKeyCallback,
 	options: OnKeyOptions = {}
 ) {
 	_onKey("keydown", key, callback, options);
@@ -28,7 +30,7 @@ export function onKeyDown(
 function _onKey(
 	event: string,
 	key: string | string[],
-	callback: (event: KeyboardEvent) => void,
+	callback: OnKeyCallback,
 	options: OnKeyOptions = {}
 ) {
 	const { element, preventDefault = false } = options;
@@ -50,7 +52,7 @@ function _onKey(
 				event,
 				(e) => {
 					const keyboardEvent = e as KeyboardEvent;
-					keyboardEvent.key === key && callback(keyboardEvent);
+					keyboardEvent.key === key && callback(keyboardEvent, key);
 				},
 				{
 					passive: !preventDefault
