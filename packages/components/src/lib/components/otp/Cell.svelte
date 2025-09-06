@@ -64,6 +64,7 @@ onKeyUp(
 
 		parent!.setAttribute("data-active-cell-id", sibling.id);
 		sibling.focus();
+		(sibling as HTMLInputElement).setSelectionRange(1, 1);
 	},
 	{ element: () => ref }
 );
@@ -84,6 +85,7 @@ onKeyDown(
 
 		parent!.setAttribute("data-active-cell-id", sibling.id);
 		sibling.focus();
+		(sibling as HTMLInputElement).setSelectionRange(1, 1);
 	},
 	{ element: () => ref }
 );
@@ -104,6 +106,19 @@ function oninput(event: InputEvent & { currentTarget: HTMLInputElement }) {
 	parent!.setAttribute("data-active-cell-id", nextCell.id);
 	nextCell.focus();
 }
+
+function onclick() {
+	moveCursorAtEnd();
+}
+
+function onfocus() {
+	moveCursorAtEnd();
+}
+
+function moveCursorAtEnd() {
+	if (!ref) return;
+	(ref as HTMLInputElement).setSelectionRange(1, 1);
+}
 </script>
 
 <input
@@ -112,6 +127,8 @@ function oninput(event: InputEvent & { currentTarget: HTMLInputElement }) {
         // @ts-ignore
         oninput(e)
     }}
+    {onclick}
+    {onfocus}
     {value}
     id={uid}
     type="text"
