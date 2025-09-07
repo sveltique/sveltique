@@ -12,3 +12,7 @@ export type WithRef<T extends HTMLElement> = {
 };
 
 export type MaybeGetter<T> = T | (() => T);
+
+export type Reactive<T> = {
+	current: T;
+};
