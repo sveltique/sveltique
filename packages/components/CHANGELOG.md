@@ -1,5 +1,11 @@
 # @sveltique/components
 
+## 0.4.0
+
+### Minor Changes
+
+- [#17](https://github.com/sveltique/sveltique/pull/17) [`02a7f9b`](https://github.com/sveltique/sveltique/commit/02a7f9b1ace21d0d11164e8f033ec012d4427419) Thanks [@novaotp](https://github.com/novaotp)! - Added `AspectRatio` component
+
 ## 0.3.1
 
 ### Patch Changes
