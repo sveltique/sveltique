@@ -17,6 +17,6 @@ Denotes textual user input from a keyboard, voice input, or any other text entry
 @see https://sveltique.dev/docs/components/browse/kbd
 -->
 
-<kbd bind:this={ref} data-kbd class={kbd()} {...restProps}>
+<kbd bind:this={ref} data-kbd class={kbd({ className })} {...restProps}>
 	{@render children?.()}
 </kbd>

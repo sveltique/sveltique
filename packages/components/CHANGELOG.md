@@ -1,5 +1,11 @@
 # @sveltique/components
 
+## 0.4.1
+
+### Patch Changes
+
+- `Kbd` now applies the `class` attribute when set
+
 ## 0.4.0
 
 ### Minor Changes
