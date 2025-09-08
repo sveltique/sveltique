@@ -9,7 +9,7 @@ import { cnBase } from "tailwind-variants";
 import { page } from "$app/state";
 import { setOnThisPageContext } from "$lib/contexts/on-this-page.svelte.js";
 
-let { children, data } = $props();
+let { children, data, params } = $props();
 
 const headings = setOnThisPageContext();
 
@@ -70,21 +70,21 @@ $effect(() => {
 		class="sticky left-0 top-16 z-50 hidden h-[calc(100vh-4rem)] items-start justify-end overflow-auto p-6 pt-12 lg:flex lg:pl-24 xl:pl-6 xl:w-full"
 	>
         <nav class="relative w-60 flex flex-col gap-5 text-sm font-semibold">
-            {#each data.sidebar as rootItem, index (index)}
+            {#each data.sidebar as { category, slugCategory, items } (category)}
                 <div class="relative flex w-full flex-col gap-2.5">
-                    <span>{rootItem.name}</span>
+                    <span>{category}</span>
                     <div class="relative flex w-full flex-col">
-                        {#each rootItem.children as item (item.name)}
+                        {#each items as { name, slugName } (name)}
                             <a
-                                href="/docs/components/{item.slugPath}"
+                                href="/docs/{params.sidebar}/{slugCategory}/{slugName}"
                                 class={cnBase(
                                     'py-1',
-                                    page.url.pathname.endsWith(item.slugPath)
+                                    page.url.pathname.endsWith(slugName)
                                         ? 'text-primary'
                                         : 'text-muted-foreground'
                                 )}
                             >
-                                {item.name}
+                                {name}
                             </a>
                         {/each}
                     </div>
@@ -175,22 +175,22 @@ $effect(() => {
                     "p-6 shadow-[0_0_12px_4px_rgba(0,0,0,0.15)] text-sm"
                 ])}
 			>
-				{#each data.sidebar as rootItem, index (index)}
+				{#each data.sidebar as { category, slugCategory, items } (category)}
                     <div class="relative flex w-full flex-col gap-2.5">
-                        <span class="font-bold">{rootItem.name}</span>
+                        <span class="font-bold">{category}</span>
                         <div class="relative flex w-full flex-col">
-                            {#each rootItem.children as item (item.name)}
+                            {#each items as { name, slugName } (name)}
                                 <a
-                                    href="/docs/components/{item.slugPath}"
+                                    href="/docs/{params.sidebar}/{slugCategory}/{slugName}"
                                     onclick={() => (showMenu = false)}
                                     class={cnBase(
                                         'py-1 font-semibold',
-                                        page.url.pathname.endsWith(item.slugPath)
+                                        page.url.pathname.endsWith(slugName)
                                             ? 'text-primary'
                                             : 'text-muted-foreground'
                                     )}
                                 >
-                                    {item.name}
+                                    {name}
                                 </a>
                             {/each}
                         </div>

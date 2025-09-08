@@ -8,12 +8,9 @@
 		"components.dev": "npm --prefix ./packages/components run build:watch",
 		"components.install": "npm --prefix ./packages/components install",
 		"components.build": "npm --prefix ./packages/components run build",
-		"codex.dev": "npm --prefix ./internal/codex run dev",
-		"codex.install": "npm --prefix ./internal/codex install",
-		"codex.build": "npm --prefix ./internal/codex run build",
-		"install": "npm run components.install && npm run codex.install && npm run docs.install",
-		"dev": "concurrently 'npm:components.dev' 'npm:codex.dev' 'npm:docs.dev'",
-		"build": "npm run components.build && npm run codex.build && npm run docs.build",
+		"install": "npm run components.install && npm run docs.install",
+		"dev": "concurrently 'npm:components.dev' 'npm:docs.dev'",
+		"build": "npm run components.build && npm run docs.build",
 		"changesets:release": "changeset publish"
 	},
 	"devDependencies": {
@@ -22,5 +19,5 @@
 		"@changesets/cli": "^2.29.6",
 		"concurrently": "^9.2.0"
 	},
-	"workspaces": ["packages/*", "internal/*"]
+	"workspaces": ["packages/*"]
 }

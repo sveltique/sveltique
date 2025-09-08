@@ -1,7 +1,7 @@
 <script lang="ts">
 import { button, Separator } from "@sveltique/components";
 
-let { data } = $props();
+let { data, params } = $props();
 </script>
 
 <svelte:head>
@@ -17,7 +17,7 @@ let { data } = $props();
     <div class="relative w-full flex flex-col sm:flex-row items-center gap-6">
         {#if data.previous}
             <a
-                href="/docs/components/{data.previous.slugPath}"
+                href="/docs/{params.sidebar}/{data.previous.slugCategory}/{data.previous.slugName}"
                 class={button({ variant: "outline", class: "w-full px-4 py-3 rounded-large flex flex-col items-start gap-1" })}
             >
                 <span class="text-muted-foreground font-medium text-xs">Previous page</span>
@@ -28,7 +28,7 @@ let { data } = $props();
         {/if}
         {#if data.next}
             <a
-                href="/docs/components/{data.next.slugPath}"
+                href="/docs/{params.sidebar}/{data.next.slugCategory}/{data.next.slugName}"
                 class={button({ variant: "outline", class: "w-full px-4 py-3 rounded-large flex flex-col items-end gap-1" })}
             >
                 <span class="text-muted-foreground font-medium text-xs">Next page</span>
