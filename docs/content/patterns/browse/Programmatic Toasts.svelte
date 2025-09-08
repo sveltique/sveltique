@@ -1,0 +1,115 @@
+<script lang="ts">
+import { Alert, Badge, Button, Link } from "@sveltique/components";
+import CodeBlock from "$components/CodeBlock.svelte";
+import Playground from "$components/Playground.svelte";
+import { toasts } from "$lib/contexts/toast.svelte";
+import { script } from "$utils/playground";
+
+const programmaticCallsCode = {
+	logic: `import type { ToastVariants } from "@sveltique/components";
+
+interface AddData {
+    /** @default 'info' */
+    type?: ToastVariants["type"];
+    content: string;
+}
+
+interface ToastData extends Required<AddData> {
+    id: string;
+}
+
+class Toasts {
+    private _current = $state<ToastData[]>([]);
+
+    get current() {
+        return this._current;
+    }
+
+    public add(data: AddData) {
+        const { type = "info", content } = data;
+
+        const id = crypto.randomUUID();
+
+        this._current.push({ id, type, content });
+
+        setTimeout(() => {
+            this._current = this._current.filter((toast) => toast.id !== id);
+        }, 3000);
+    }
+}
+
+export const toasts = new Toasts();`,
+	rootContainer: `<svelte:options runes={true} />
+
+${script(`import { Toast } from "@sveltique/components";
+    import { toasts } from "path/to/toasts";`)}
+
+<div
+    role="status"
+    aria-live="polite"
+    class="fixed right-6 bottom-6 z-[1000] flex w-[calc(100%-3rem)] sm:max-w-xs flex-col justify-center gap-2"
+>
+    {#each toasts.current as { id, type, content } (id)}
+        <div
+            animate:flip={{ duration: 150 }}
+            transition:fly={{ x: 50, duration: 200 }}
+        >
+            <Toast {type}>
+                {content}
+            </Toast>
+        </div>
+    {/each}
+</div>`,
+	usage: `${script(`import { Button } from "@sveltique/components";
+    import ToastContainer from "$components/toast/ToastContainer.svelte";
+    import { toasts } from "path/to/toasts";
+    
+    function onclick() {
+        toasts.add({
+            type: "success",
+            content: "I'm a toast !"
+        });
+    }`)}
+    
+<Button {onclick}>
+    Add a toast
+</Button>
+<ToastContainer />`
+};
+</script>
+
+<h1 id="programmatic-toasts">Programmatic Toasts</h1>
+<p>
+    While static toasts are useful, creating them programmatically allows you to display notifications
+    in response to events or user actions dynamically.
+</p>
+<p>Here's a simple example implementation.</p>
+<Alert class="mb-4">
+    See the <Link href="/docs/components/browse/toast">Toast</Link> component.
+</Alert>
+
+<h2 id="logic">Logic</h2>
+<p>
+    First, we have to handle the logic. We are going to make a class that stores the list of current
+    toasts, a method to add them and a timeout after 3 seconds.
+</p>
+<CodeBlock code={programmaticCallsCode.logic} lang="ts" showLineNumbers />
+
+<h2 id="root-container">Root container</h2>
+<p>Next, we need a root container, which will be responsible for displaying the toasts.</p>
+<CodeBlock code={programmaticCallsCode.rootContainer} showLineNumbers />
+
+<h2 id="usage">Usage</h2>
+<p>
+    Finally, we can start using our <Badge variant="secondary">toasts</Badge> object to create toasts
+    programmatically.
+</p>
+<Alert class="mb-4">
+    In production code, you can put your toast container at the root of your application since you
+    only need to define it once.
+</Alert>
+<Playground code={programmaticCallsCode.usage}>
+    <Button onclick={() => toasts.add({ type: "success", content: "I'm a toast !" })}>
+        Add a toast
+    </Button>
+</Playground>

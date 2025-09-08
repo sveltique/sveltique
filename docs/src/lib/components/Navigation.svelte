@@ -51,6 +51,15 @@ let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
             >
                 Components
             </a>
+            <a
+                href="/docs/patterns"
+                class={cnBase(
+                    "text-sm px-3 py-1.5 duration-150 hover:text-primary",
+                    page.url.pathname.startsWith('/docs/patterns') && "text-primary"
+                )}
+            >
+                Patterns
+            </a>
             <Separator orientation="vertical" />
             <Tooltip title="See the release notes">
                 {#snippet children({ props, ref })}
@@ -127,6 +136,18 @@ let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
                         )}
                     >
                         Components
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="/docs/patterns"
+                        onclick={() => (showMenu = false)}
+                        class={cnBase(
+                            "px-3 py-1.5",
+                            page.url.pathname.startsWith('/docs/patterns') && "text-primary"
+                        )}
+                    >
+                        Patterns
                     </a>
                 </li>
                 <li>

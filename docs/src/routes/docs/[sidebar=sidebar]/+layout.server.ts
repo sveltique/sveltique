@@ -1,5 +1,4 @@
 import { loadSidebar } from "$lib/content/index.server";
-import type { SidebarCategory } from "$lib/content/types";
 
 export async function load({ params }) {
 	return {
