@@ -11,7 +11,10 @@ import { script } from "$utils/playground";
 
 const code = `${script('import { TextInput } from "@sveltique/components";')}
     
-<TextInput class="max-w-96" />`;
+<TextInput
+    placeholder="Enter your name here..."
+    class="max-w-96"
+/>`;
 </script>
 
 <h1 id="text-input">Text Input</h1>
@@ -19,5 +22,5 @@ const code = `${script('import { TextInput } from "@sveltique/components";')}
 
 <h2 id="basic-usage">Basic Usage</h2>
 <Playground {code}>
-	<TextInput class="max-w-96" />
+	<TextInput placeholder="Enter your name here..." class="max-w-96" />
 </Playground>

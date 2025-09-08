@@ -117,10 +117,6 @@ const placementCode = `${script("import { Button, Tooltip } from '@sveltique/com
 	To make the tooltip accessible, it must be linked to the item it describes. For this, pass down
 	the tooltip's ID by using the <Badge variant="secondary">props</Badge> parameter.
 </p>
-<Alert class="mb-4">
-	You can set a custom ID on the tooltip and the props will use it. Otherwise, it will use a
-	generated one via <Badge variant="secondary">$props.id()</Badge>.
-</Alert>
 <CodeBlock code={accessibleCode} />
 
 <h2 id="caveats">Caveats</h2>
