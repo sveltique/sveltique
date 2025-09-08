@@ -101,17 +101,8 @@ function orderSidebar(sidebar: SidebarCategory[], slugCategories: string[]) {
 
 /** Adds the metadata in place. */
 function addMetadata(sidebar: SidebarCategory[]): SidebarCategory[] {
-	let once = false;
-
 	for (const [i, category] of sidebar.entries()) {
 		for (const [j, item] of category.items.entries()) {
-			if (!once) {
-				console.log(i, category);
-				console.log(j, item);
-
-				once = true;
-			}
-
 			if (j > 0) {
 				item.metadata.previous = {
 					slugCategory: category.slugCategory,
