@@ -1,12 +1,25 @@
 <script lang="ts">
-import { Alert, Badge, Button, Link } from "@sveltique/components";
+import { Button, Link } from "@sveltique/components";
 import CodeBlock from "$components/CodeBlock.svelte";
 import Playground from "$components/Playground.svelte";
 import { toasts } from "$lib/contexts/toast.svelte";
 import { script } from "$utils/playground";
 
-const programmaticCallsCode = {
-	logic: `import type { ToastVariants } from "@sveltique/components";
+const usageCode = `${script(`import { Button } from "@sveltique/components";
+    import { toasts } from "$lib/toasts/toast.svelte.ts";
+    
+    function onclick() {
+        toasts.add({
+            type: "success",
+            content: "I'm a toast !"
+        });
+    }`)}
+    
+<Button {onclick}>
+    Add a toast
+</Button>`;
+
+const logicCode = `import type { ToastVariants } from "@sveltique/components";
 
 interface AddData {
     /** @default 'info' */
@@ -38,11 +51,12 @@ class Toasts {
     }
 }
 
-export const toasts = new Toasts();`,
-	rootContainer: `<svelte:options runes={true} />
+export const toasts = new Toasts();`;
+
+const rootContainerCode = `<svelte:options runes />
 
 ${script(`import { Toast } from "@sveltique/components";
-    import { toasts } from "path/to/toasts";`)}
+    import { toasts } from "./toast.svelte.ts";`)}
 
 <div
     role="status"
@@ -59,57 +73,54 @@ ${script(`import { Toast } from "@sveltique/components";
             </Toast>
         </div>
     {/each}
-</div>`,
-	usage: `${script(`import { Button } from "@sveltique/components";
-    import ToastContainer from "$components/toast/ToastContainer.svelte";
-    import { toasts } from "path/to/toasts";
+</div>`;
+
+const mountContainerCode = `${script(`import "../app.css";
+    import ToastContainer from "$lib/toasts/ToastContainer.svelte";
     
-    function onclick() {
-        toasts.add({
-            type: "success",
-            content: "I'm a toast !"
-        });
-    }`)}
-    
-<Button {onclick}>
-    Add a toast
-</Button>
-<ToastContainer />`
-};
+    let { children } = $props();`)}
+
+<ToastContainer />
+{@render children()}`;
 </script>
 
 <h1 id="programmatic-toasts">Programmatic Toasts</h1>
 <p>
-    While static toasts are useful, creating them programmatically allows you to display notifications
-    in response to events or user actions dynamically.
+    While <Link href="/docs/components/browse/toast">static toasts</Link> are useful, creating them
+    programmatically lets you show notifications in response to events or user actions.
 </p>
-<p>Here's a simple example implementation.</p>
-<Alert class="mb-4">
-    See the <Link href="/docs/components/browse/toast">Toast</Link> component.
-</Alert>
-
-<h2 id="logic">Logic</h2>
-<p>
-    First, we have to handle the logic. We are going to make a class that stores the list of current
-    toasts, a method to add them and a timeout after 3 seconds.
-</p>
-<CodeBlock code={programmaticCallsCode.logic} lang="ts" showLineNumbers />
-
-<h2 id="root-container">Root container</h2>
-<p>Next, we need a root container, which will be responsible for displaying the toasts.</p>
-<CodeBlock code={programmaticCallsCode.rootContainer} showLineNumbers />
-
-<h2 id="usage">Usage</h2>
-<p>
-    Finally, we can start using our <Badge variant="secondary">toasts</Badge> object to create toasts
-    programmatically.
-</p>
-<Alert class="mb-4">
-    In production code, you can put your toast container at the root of your application since you
-    only need to define it once.
-</Alert>
-<Playground code={programmaticCallsCode.usage}>
+<Playground code={usageCode}>
     <Button onclick={() => toasts.add({ type: "success", content: "I'm a toast !" })}>
         Add a toast
     </Button>
 </Playground>
+
+<h2 id="features">Features</h2>
+<ul>
+    <li>Created programmatically (e.g. via button click)</li>
+    <li>Stacked vertically in the bottom-right corner of the screen</li>
+    <li>Automatically dismissed after 3 seconds</li>
+    <li>Announced to assistive technologies via ARIA live regions</li>
+</ul>
+
+<h2 id="implementation">Implementation</h2>
+
+<h3 id="handling-toast-logic">Handling toast logic</h3>
+<p>
+    First, let's handle the logic. We'll make a class that stores the list of current toasts, a method
+    to add them and a timeout after 3 seconds.
+</p>
+<CodeBlock code={logicCode} lang="ts" showLineNumbers filename="toast.svelte.ts" />
+
+<h3 id="creating-the-root-container">Creating the root container</h3>
+<p>
+    Next, we create a root container for the toasts. This container will hold and display all toast
+    notifications, and you typically only need one instance in your application.
+</p>
+<CodeBlock code={rootContainerCode} showLineNumbers filename="ToastContainer.svelte" />
+
+<h3 id="mounting-the-root-container">Mounting the root container</h3>
+<p>
+    Finally, place the container in your app’s root layout so it’s available throughout your application.
+</p>
+<CodeBlock code={mountContainerCode} showLineNumbers filename="+layout.svelte" />

@@ -1,7 +1,8 @@
 <script lang="ts">
-import { Badge, Button, Kbd, Paper, Separator } from "@sveltique/components";
+import { Button, Kbd, Paper, Separator } from "@sveltique/components";
 import Playground from "$components/Playground.svelte";
 import { script } from "$utils/playground";
+import CodeBlock from "$components/CodeBlock.svelte";
 
 let containerRef = $state<HTMLDivElement>();
 let contextMenuRef = $state<HTMLDivElement>();
@@ -31,143 +32,63 @@ function closeContextMenu() {
 	showContextMenu = false;
 }
 
-function closeContextMenuOnInspector(event: KeyboardEvent) {
-	if (!event.ctrlKey || !event.shiftKey || event.key !== "I") return;
+const implementationCode = `${script(`import { Button, Kbd, Paper, Separator } from "@sveltique/components";
 
-	closeContextMenu();
-}
+    let containerRef = $state<HTMLDivElement>();
+    let contextMenuRef = $state<HTMLDivElement>();
 
-const makingTheContextMenuCode = `${script(`import { Button, Kbd, Paper, Separator } from "@sveltique/components";
+    let showContextMenu = $state(false);
+    let mousePosition = $state({ x: 0, y: 0 });
 
-    interface Props {
-        onclose: () => void;
+    /** Opens the context menu and updates the mouse's position. */
+    function openContextMenu(event: MouseEvent) {
+        event.preventDefault();
+
+        showContextMenu = true;
+        mousePosition = { x: event.clientX, y: event.clientY };
     }
-    
-    let { onclose }: Props = $props();`)}
 
-<Paper>
-    <div class="p-1.5">
-        <Button
-            onclick={onclose}
-            variant="text"
-            class="w-full justify-start"
-        >
-            Open
-        </Button>
-        <Button
-            onclick={onclose}
-            variant="text"
-            class="w-full justify-start"
-        >
-            Rename
-        </Button>
-    </div>
-    <Separator />
-    <div class="p-1.5">
-        <Button
-            onclick={onclose}
-            variant="text"
-            class="w-full justify-start"
-        >
-            Delete
-        </Button>
-    </div>
-    <Separator />
-    <div class="p-1.5">
-        <Button
-            onclick={onclose}
-            variant="text"
-            class="w-full justify-start flex items-center gap-5"
-        >
-            Inspect <Kbd>Ctrl+Shift+I</Kbd>
-        </Button>
-    </div>
-</Paper>`;
-</script>
+    /** Closes the context menu if a mouse down happened outside the context menu. */
+    function onGlobalMouseDown(event: MouseEvent) {
+        if (!containerRef || !contextMenuRef) return;
 
-<svelte:window onmousedown={onGlobalMouseDown} onkeydown={closeContextMenuOnInspector} />
+        const target = event.target;
+        if (!event.target || !(target instanceof HTMLElement) || contextMenuRef.contains(target)) {
+            return;
+        }
 
-<h1 id="context-menu">Context Menu</h1>
-<p>Learn to make context menu.</p>
-<p>Requirements :</p>
-<ul>
-    <li>The context menu only appears when right-clicking in a box</li>
-    <li>The context menu appears at the bottom right of the mouse click</li>
-    <li>Clicking on an action closes the context menu</li>
-    <li>Mouse down outside the context menu closes it</li>
-</ul>
-<Playground>
-    <div
-        bind:this={containerRef}
-        oncontextmenu={openContextMenu}
-        role="presentation"
-        class="relative w-full max-w-3xs h-32 p-6 grid place-items-center border-2 border-dashed rounded-large border-muted"
+        closeContextMenu();
+    }
+
+    function closeContextMenu() {
+        showContextMenu = false;
+    }`)}
+
+<svelte:window onmousedown={onGlobalMouseDown} />
+
+<div
+    bind:this={containerRef}
+    oncontextmenu={openContextMenu}
+    aria-haspopup="menu"
+    class="relative w-full max-w-3xs h-32 p-6 grid place-items-center border-2 border-dashed rounded-large border-muted"
+>
+    <p class="text-sm text-balance text-center text-muted-foreground">
+        Right-click to open the context menu
+    </p>
+</div>
+
+{#if showContextMenu}
+    <Paper
+        bind:ref={contextMenuRef}
+        role="menu"
+        style="top: {mousePosition.y}px; left: {mousePosition.x}px;"
+        class="fixed shadow-lg"
     >
-        <p class="text-sm text-balance text-center text-muted-foreground">
-            Right-click to open the context menu
-        </p>
-    </div>
-
-    {#if showContextMenu}
-        <Paper
-            bind:ref={contextMenuRef}
-            style="top: {mousePosition.y}px; left: {mousePosition.x}px;"
-            class="fixed shadow-lg"
-        >
-            <div class="p-1.5">
-                <Button
-                    onclick={closeContextMenu}
-                    variant="text"
-                    class="w-full justify-start"
-                >
-                    Open
-                </Button>
-                <Button
-                    onclick={closeContextMenu}
-                    variant="text"
-                    class="w-full justify-start"
-                >
-                    Rename
-                </Button>
-            </div>
-            <Separator />
-            <div class="p-1.5">
-                <Button
-                    onclick={closeContextMenu}
-                    variant="text"
-                    class="w-full justify-start"
-                >
-                    Delete
-                </Button>
-            </div>
-            <Separator />
-            <div class="p-1.5">
-                <Button
-                    onclick={closeContextMenu}
-                    variant="text"
-                    class="w-full justify-start flex items-center gap-5"
-                >
-                    Inspect <Kbd>Ctrl+Shift+I</Kbd>
-                </Button>
-            </div>
-        </Paper>
-    {/if}
-</Playground>
-
-<h2>Process</h2>
-
-<h3>Making the context menu</h3>
-<p>
-    Let's start by defining our context menu in <Badge variant="secondary">
-        $lib/components/ContextMenu.svelte
-    </Badge>. It will handle simple buttons.
-</p>
-<Playground code={makingTheContextMenuCode}>
-    <Paper class="shadow-lg">
         <div class="p-1.5">
             <Button
                 onclick={closeContextMenu}
                 variant="text"
+                role="menuitem"
                 class="w-full justify-start"
             >
                 Open
@@ -175,6 +96,7 @@ const makingTheContextMenuCode = `${script(`import { Button, Kbd, Paper, Separat
             <Button
                 onclick={closeContextMenu}
                 variant="text"
+                role="menuitem"
                 class="w-full justify-start"
             >
                 Rename
@@ -185,6 +107,7 @@ const makingTheContextMenuCode = `${script(`import { Button, Kbd, Paper, Separat
             <Button
                 onclick={closeContextMenu}
                 variant="text"
+                role="menuitem"
                 class="w-full justify-start"
             >
                 Delete
@@ -195,27 +118,94 @@ const makingTheContextMenuCode = `${script(`import { Button, Kbd, Paper, Separat
             <Button
                 onclick={closeContextMenu}
                 variant="text"
-                class="w-full justify-start flex items-center gap-5"
+                role="menuitem"
+                class="w-full justify-start"
             >
-                Inspect <Kbd class="text-sm">Ctrl+Shift+I</Kbd>
+                Inspect <Kbd class="ml-3">Ctrl+Shift+I</Kbd>
             </Button>
         </div>
     </Paper>
-</Playground>
+{/if}`;
+</script>
 
-<h3>Context Menu Zone</h3>
-<p>Next, let's define the zone where our custom context menu will appear.</p>
-<Playground>
+<svelte:window onmousedown={onGlobalMouseDown} />
+
+<h1 id="context-menu">Context Menu</h1>
+<p>Provides a contextual menu of actions, triggered by a right-click inside a target area.</p>
+<Playground code={implementationCode}>
+    <!-- svelte-ignore a11y_no_static_element_interactions -->
     <div
-        role="presentation"
+        bind:this={containerRef}
+        oncontextmenu={openContextMenu}
+        aria-haspopup="menu"
         class="relative w-full max-w-3xs h-32 p-6 grid place-items-center border-2 border-dashed rounded-large border-muted"
     >
         <p class="text-sm text-balance text-center text-muted-foreground">
             Right-click to open the context menu
         </p>
     </div>
+
+    {#if showContextMenu}
+        <Paper
+            bind:ref={contextMenuRef}
+            role="menu"
+            style="top: {mousePosition.y}px; left: {mousePosition.x}px;"
+            class="fixed shadow-lg"
+        >
+            <div class="p-1.5">
+                <Button
+                    onclick={closeContextMenu}
+                    variant="text"
+                    role="menuitem"
+                    class="w-full justify-start"
+                >
+                    Open
+                </Button>
+                <Button
+                    onclick={closeContextMenu}
+                    variant="text"
+                    role="menuitem"
+                    class="w-full justify-start"
+                >
+                    Rename
+                </Button>
+            </div>
+            <Separator />
+            <div class="p-1.5">
+                <Button
+                    onclick={closeContextMenu}
+                    variant="text"
+                    role="menuitem"
+                    class="w-full justify-start"
+                >
+                    Delete
+                </Button>
+            </div>
+            <Separator />
+            <div class="p-1.5">
+                <Button
+                    onclick={closeContextMenu}
+                    variant="text"
+                    role="menuitem"
+                    class="w-full justify-start"
+                >
+                    Inspect <Kbd class="ml-3">Ctrl+Shift+I</Kbd>
+                </Button>
+            </div>
+        </Paper>
+    {/if}
 </Playground>
 
-<h3>Combining</h3>
-<p>Finally, let's combine both our zone and our context menu. We only want our </p>
+<h2 id="requirements">Features</h2>
+<ul>
+    <li>The context menu only appears when right-clicking inside the target zone</li>
+    <li>The menu is positioned at the mouse click (bottom right)</li>
+    <li>Selecting an action or clicking anywhere outside the menu closes it</li>
+</ul>
 
+<h2>Implementation</h2>
+<p>
+    Below is a simple implementation of a custom context menu. Right-click inside the dashed zone to
+    open it, then choose an action or click outside the menu to close.
+</p>
+<CodeBlock code={implementationCode} showLineNumbers />
