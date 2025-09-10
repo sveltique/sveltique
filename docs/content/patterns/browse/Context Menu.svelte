@@ -40,7 +40,7 @@ const implementationCode = `${script(`import { Button, Kbd, Paper, Separator } f
     let showContextMenu = $state(false);
     let mousePosition = $state({ x: 0, y: 0 });
 
-    /** Opens the context menu and updates the mouse's position. */
+    /** Opens the context menu and updates the mouse position. */
     function openContextMenu(event: MouseEvent) {
         event.preventDefault();
 
@@ -48,12 +48,16 @@ const implementationCode = `${script(`import { Button, Kbd, Paper, Separator } f
         mousePosition = { x: event.clientX, y: event.clientY };
     }
 
-    /** Closes the context menu if a mouse down happened outside the context menu. */
+    /** Closes the context menu if a click occurs outside of it. */
     function onGlobalMouseDown(event: MouseEvent) {
         if (!containerRef || !contextMenuRef) return;
 
         const target = event.target;
-        if (!event.target || !(target instanceof HTMLElement) || contextMenuRef.contains(target)) {
+        if (
+            !event.target ||
+            !(target instanceof HTMLElement) ||
+            contextMenuRef.contains(target)
+        ) {
             return;
         }
 
@@ -188,7 +192,7 @@ const creatingContextMenuCode = `${script(`import { Button, Kbd, Paper, Separato
     </div>
 </Paper>`;
 
-const creatingTriggerBox = `<div
+const creatingTriggerArea = `<div
     aria-haspopup="menu"
     class="relative w-full max-w-3xs h-32 p-6 grid place-items-center border-2 border-dashed rounded-large border-muted"
 >
@@ -202,7 +206,7 @@ const handlingStateCode = `${script(`import ContextMenu from "./ContextMenu.svel
     let showContextMenu = $state(false);
     let mousePosition = $state({ x: 0, y: 0 });
 
-     /** Opens the context menu and updates the mouse position. */
+    /** Opens the context menu and updates the mouse position. */
     function openContextMenu(event: MouseEvent) {
         event.preventDefault();
 
@@ -249,7 +253,11 @@ const closeOnOutsideClickCode = `${script(`import ContextMenu from "./ContextMen
         if (!containerRef || !contextMenuRef) return;
 
         const target = event.target;
-        if (!event.target || !(target instanceof HTMLElement) || contextMenuRef.contains(target)) {
+        if (
+            !event.target ||
+            !(target instanceof HTMLElement) ||
+            contextMenuRef.contains(target)
+        ) {
             return;
         }
 
@@ -274,16 +282,20 @@ const closeOnOutsideClickCode = `${script(`import ContextMenu from "./ContextMen
 </div>
 
 {#if showContextMenu}
-    <ContextMenu bind:ref={contextMenuRef} {mousePosition} close={closeContextMenu} />
+    <ContextMenu
+        bind:ref={contextMenuRef}
+        {mousePosition}
+        close={closeContextMenu}
+    />
 {/if}`;
 </script>
 
 <svelte:window onmousedown={onGlobalMouseDown} />
 
 <h1 id="context-menu">Context Menu</h1>
-<p>Provides a contextual menu of actions, triggered by a right-click inside a target area.</p>
+<p>Provides a contextual menu of actions, triggered by right-clicking inside a target area.</p>
 <Alert class="mb-4">
-    Only interested in the code ? See the preview's code.
+    Only want the code? Check the inline preview below.
 </Alert>
 <Playground code={implementationCode}>
     <!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -351,29 +363,23 @@ const closeOnOutsideClickCode = `${script(`import ContextMenu from "./ContextMen
 
 <h2 id="requirements">Features</h2>
 <ul>
-    <li>The context menu only appears when right-clicking inside the target zone</li>
-    <li>The menu is positioned at the mouse click (bottom right)</li>
-    <li>Selecting an action or clicking anywhere outside the menu closes it</li>
+    <li>Appears only when right-clicking inside the target area</li>
+    <li>Positions itself at the mouse cursor</li>
+    <li>Closes when selecting an action or clicking outside the menu</li>
 </ul>
 
 <h2 id="component-structure">Component Structure</h2>
 <ul>
     <li>
-        A dedicated component for the context menu : <Badge variant="secondary">ContextMenu.svelte</Badge>
+        A dedicated <Badge variant="secondary">ContextMenu.svelte</Badge> component for the context menu
     </li>
     <li>
-        The root component managing the trigger box and the context menu : <Badge variant="secondary">
-            App.svelte
-        </Badge>
+        <Badge variant="secondary">App.svelte</Badge> as the root component managing the trigger area and
+        the context menu
     </li>
 </ul>
 
 <h2 id="implementation">Implementation</h2>
-<p>
-    Below is a simple implementation of a custom context menu. Right-click inside the dashed box to
-    open it, then choose an action or click outside the menu to close.
-</p>
-
 
 <h3 id="creating-the-context-menu">Creating the context menu</h3>
 <p>
@@ -381,20 +387,25 @@ const closeOnOutsideClickCode = `${script(`import ContextMenu from "./ContextMen
         ContextMenu.svelte
     </Badge>.
 </p>
+<p>We are also exposing a few properties which we will use later.</p>
+<Alert class="mb-4">
+    Currently, the buttons are placeholders, as they only close the context menu. In your implementation,
+    run your own logic first, then call <Badge variant="secondary">close</Badge>.
+</Alert>
 <CodeBlock code={creatingContextMenuCode} showLineNumbers filename="ContextMenu.svelte" />
 
-<h3 id="creating-the-trigger-box">Creating the trigger box</h3>
-<p>Next, inside the root component, let's make the trigger box of the context menu.</p>
-<CodeBlock code={creatingTriggerBox} showLineNumbers filename="App.svelte" />
+<h3 id="creating-the-trigger-area">Creating the trigger area</h3>
+<p>Next, in the root component, create the trigger area that will open the context menu.</p>
+<CodeBlock code={creatingTriggerArea} showLineNumbers filename="App.svelte" />
 
-<h3 id="handling-open-close-state">Handling open-closed state</h3>
-<p>Now, let's handling the open-close state of the context menu. </p>
+<h3 id="handling-open-close-state">Handling open/close state</h3>
+<p>Now, let’s handle the open/close state of the context menu.</p>
 <p>
-    We want to open the context menu on the bottom corner of the mouse when right-clicking inside the
-    box. Next, we want to close the context menu whenever a button is clicked.
+    We want the menu to appear at the mouse cursor when right-clicking inside the area. It should close
+    whenever a menu action is selected.
 </p>
-<CodeBlock code={handlingStateCode} showLineNumbers filename="App.svelte" highlightedLines="2-18,21,30-32" />
+<CodeBlock code={handlingStateCode} showLineNumbers filename="App.svelte" highlightedLines="2-17,21,30-32" />
 
-<h3 id="close-menu-on-outside-click">Close menu on outside click</h3>
-<p>Finally, we want to close the menu when we click anywhere outside the context menu.</p>
-<CodeBlock code={closeOnOutsideClickCode} showLineNumbers filename="App.svelte" highlightedLines="4-5,18-28,35,38,49" />
+<h3 id="closing-on-outside-click">Closing on outside click</h3>
+<p>Finally, let’s close the menu whenever a click happens outside of it.</p>
+<CodeBlock code={closeOnOutsideClickCode} showLineNumbers filename="App.svelte" highlightedLines="4-5,18-32,39,42,54" />
