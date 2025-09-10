@@ -1,7 +1,7 @@
 import { redirect } from "@sveltejs/kit";
 import { SIDEBAR_NAMES } from "$lib/content/constants";
 
-export async function load({ parent }) {
+export async function load({ params, parent }) {
 	const { sidebar } = await parent();
 
 	const [
@@ -11,7 +11,7 @@ export async function load({ parent }) {
 		}
 	] = sidebar;
 
-	redirect(303, `/docs/components/${slugCategory}/${slugName}`);
+	redirect(303, `/docs/${params.sidebar}/${slugCategory}/${slugName}`);
 }
 
 export function entries() {
