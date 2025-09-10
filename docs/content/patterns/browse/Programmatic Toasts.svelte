@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Button, Link } from "@sveltique/components";
+import { Badge, Button, Link } from "@sveltique/components";
 import CodeBlock from "$components/CodeBlock.svelte";
 import Playground from "$components/Playground.svelte";
 import { toasts } from "$lib/contexts/toast.svelte";
@@ -101,6 +101,12 @@ const mountContainerCode = `${script(`import "../app.css";
     <li>Stacked vertically in the bottom-right corner of the screen</li>
     <li>Automatically dismissed after 3 seconds</li>
     <li>Announced to assistive technologies via ARIA live regions</li>
+</ul>
+
+<h2 id="structure">Structure</h2>
+<ul>
+    <li><Badge variant="secondary">toast.svelte.ts</Badge> to store our toasts and logic</li>
+    <li><Badge variant="secondary">ToastContainer.svelte</Badge> to render our toasts</li>
 </ul>
 
 <h2 id="implementation">Implementation</h2>
