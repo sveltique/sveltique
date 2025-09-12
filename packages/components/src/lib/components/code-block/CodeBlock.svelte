@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { BundledLanguage, BundledTheme, HighlighterGeneric } from "shiki";
-import type { Snippet } from "svelte";
+import { onMount, type Snippet } from "svelte";
 import type { ClassNameValue } from "tailwind-merge";
 import type { TWMergeClass, WithRef } from "$lib/types.js";
 import { Button } from "../button/index.js";
@@ -41,8 +41,6 @@ let {
 	copyTitle = fallbackCopyTitle
 }: CodeBlockProps = $props();
 
-let isCopied = $state(false);
-
 let {
 	code: codeCss,
 	container,
@@ -50,6 +48,11 @@ let {
 	header: headerCss,
 	filename: filenameCss
 } = $derived(codeBlock());
+
+let isCopied = $state(false);
+
+let biggestSpanWidth = $state<number>();
+let preStyle = $derived(biggestSpanWidth ? `--span-width: ${biggestSpanWidth}px;` : "");
 
 let iconSnippet = $derived(isCopied ? copiedIcon : copyIcon);
 let parsedLines = $derived(parseNumberRanges(highlightedLines));
@@ -73,6 +76,15 @@ async function copy() {
 function fallbackCopyTitle(isCopied: boolean) {
 	return isCopied ? "Copied" : "Copy to clipboard";
 }
+
+onMount(() => {
+	if (!ref) return;
+
+	const spans = Array.from(ref.querySelectorAll("pre code span")).filter(
+		(el) => el instanceof HTMLElement
+	);
+	biggestSpanWidth = Math.max(...spans.map((span) => span.scrollWidth));
+});
 </script>
 
 <!--
@@ -93,7 +105,12 @@ Display syntax-highlighted code snippets. Ideal anywhere you need clear, readabl
     {:else}
         {@render copyButton()}
 	{/if}
-	<pre data-code-block-pre data-show-line-numbers={showLineNumbers} class={pre({ className })}>
+	<pre
+        data-code-block-pre
+        data-show-line-numbers={showLineNumbers}
+        style={preStyle}
+        class={pre({ className })}
+    >
         <code class={codeCss()}>
             {@html assembleLines(tokensResult.tokens, parsedLines)}
         </code>
@@ -176,14 +193,19 @@ Display syntax-highlighted code snippets. Ideal anywhere you need clear, readabl
 {/snippet}
 
 <style>
-	:global([data-code-block] pre) {
-		counter-reset: line;
+	[data-code-block] pre :global {
+        counter-reset: line;
 
-		& [data-code-line] {
-			padding: 2px 20px;
-		}
+        [data-code-line=""] {
+            padding: 2px 20px;
+            width: var(--span-width, auto);
 
-		&[data-show-line-numbers='true'] [data-code-line]::before {
+            &[data-highlighted="true"] {
+                background-color: color-mix(in oklab, currentColor 12%, transparent);
+            }
+        }
+
+		&[data-show-line-numbers="true"] [data-code-line]::before {
 			counter-increment: line;
 			content: counter(line);
 			display: inline-block;
