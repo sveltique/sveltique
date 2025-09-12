@@ -1,10 +1,18 @@
 # @sveltique/components
 
+## 0.4.2
+
+### Patch Changes
+
+- [#24](https://github.com/sveltique/sveltique/pull/24) [`6453206`](https://github.com/sveltique/sveltique/commit/64532069767050bf11435d9a903216ca0da3dbc1) Thanks [@novaotp](https://github.com/novaotp)! - `Codeblock` spans now take the full scrollable width
+
+- [#20](https://github.com/sveltique/sveltique/pull/20) [`b2394b0`](https://github.com/sveltique/sveltique/commit/b2394b02dc57d457580b065b3d908313f08e2f2d) Thanks [@dependabot](https://github.com/apps/dependabot)! - chore(deps): bump devalue from 5.1.1 to 5.3.2 in /packages/components
+
 ## 0.4.1
 
 ### Patch Changes
 
-- `Kbd` now applies the `class` attribute when set
+- [#19](https://github.com/sveltique/sveltique/pull/19) [`51b5943`](https://github.com/sveltique/sveltique/commit/51b59434ec2d9505084923e432ee1f895ed1a711) Thanks [@novaotp](https://github.com/novaotp)! - `Kbd` now applies the `class` attribute when set
 
 ## 0.4.0
 
