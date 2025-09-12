@@ -4,11 +4,8 @@ export function assembleLines(tokens: ThemedToken[][], parsedLines: number[]) {
 	return tokens
 		.map((t, idx) => {
 			const isHighlighted = parsedLines.includes(idx + 1);
-			const styles = isHighlighted
-				? "background-color: color-mix(in srgb, currentColor 12%, transparent);"
-				: "";
 
-			return `<span data-code-line style="${styles}">${assembleTokens(t)}</span>`;
+			return `<span data-code-line data-highlighted="${isHighlighted}">${assembleTokens(t)}</span>`;
 		})
 		.join("");
 }
