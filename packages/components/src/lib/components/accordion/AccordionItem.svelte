@@ -1,7 +1,7 @@
 <script lang="ts">
 import { onMount, type Snippet } from "svelte";
 import { slide } from "svelte/transition";
-import type { TWMergeClass } from "$lib/types.js";
+import type { TWMergeClass, WithRef } from "$lib/types.js";
 import { useMutationObserver } from "$utils/use-mutation-observer.svelte.js";
 import { accordionItem } from "./variants.js";
 
@@ -17,7 +17,7 @@ type IconSnippet = Snippet<
 	]
 >;
 
-export interface AccordionItemProps extends TWMergeClass {
+export interface AccordionItemProps extends TWMergeClass, WithRef<HTMLElement | HTMLDivElement> {
 	children: Snippet;
 	header: string | Snippet;
 	value?: string;
@@ -28,15 +28,14 @@ let {
 	children,
 	class: className,
 	header,
-	value,
-	icon = fallbackIcon
+	icon = fallbackIcon,
+	ref = $bindable(),
+	value
 }: AccordionItemProps = $props();
 
 const uid = $props.id();
 
-let ref = $state<HTMLDivElement>();
 let parent = $state<HTMLDivElement>();
-
 let open = $state(false);
 let headingLevel = $state<string>()!;
 
@@ -51,7 +50,9 @@ let {
 } = $derived(accordionItem({ open }));
 
 onMount(() => {
-	parent = ref?.parentElement as HTMLDivElement;
+	if (!ref) return;
+
+	parent = ref.parentElement as HTMLDivElement;
 	headingLevel = parent.getAttribute("data-heading-level")!;
 	updateOpen();
 });

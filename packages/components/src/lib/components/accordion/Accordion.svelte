@@ -2,12 +2,14 @@
 import { onMount, type Snippet } from "svelte";
 import type { HTMLAttributes } from "svelte/elements";
 import { on } from "svelte/events";
-import type { ReplaceWithTWMergeClass } from "$lib/types.js";
+import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { onKeyDown, onKeyUp } from "$utils/on-key.svelte.js";
 import { getActiveElement } from "$utils/use-active-element.svelte.js";
 import { accordion } from "./variants.js";
 
-export interface AccordionProps extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>> {
+export interface AccordionProps
+	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
+		WithRef<HTMLElement | HTMLDivElement> {
 	children?: Snippet;
 	/**
 	 * Whether to make the first item expanded by default.
@@ -34,13 +36,12 @@ let {
 	class: className,
 	defaultExpand = false,
 	headingLevel = "h3",
-	multiple = true
+	multiple = true,
+	ref = $bindable()
 }: AccordionProps = $props();
 
-let ref = $state<HTMLDivElement>();
-let values = $state<string[]>([]);
-
 const activeElement = getActiveElement();
+let values = $state<string[]>([]);
 
 onMount(() => {
 	if (!ref || !defaultExpand) return;
