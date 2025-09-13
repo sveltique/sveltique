@@ -17,7 +17,7 @@ type IconSnippet = Snippet<
 	]
 >;
 
-export interface AccordionItemProps extends TWMergeClass, WithRef<HTMLElement | HTMLDivElement> {
+export interface AccordionItemProps extends TWMergeClass, WithRef<HTMLDivElement> {
 	children: Snippet;
 	header: string | Snippet;
 	value?: string;

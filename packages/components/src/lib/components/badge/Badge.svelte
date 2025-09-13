@@ -3,10 +3,7 @@ import type { Snippet } from "svelte";
 import type { TWMergeClass, WithRef } from "$lib/types.js";
 import { type BadgeVariants, badge } from "./variants.js";
 
-export interface BadgeProps
-	extends BadgeVariants,
-		TWMergeClass,
-		WithRef<HTMLElement | HTMLDivElement> {
+export interface BadgeProps extends BadgeVariants, TWMergeClass, WithRef<HTMLDivElement> {
 	children?: Snippet;
 }
 

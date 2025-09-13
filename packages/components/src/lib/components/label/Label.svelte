@@ -6,7 +6,7 @@ import { type LabelVariants, label } from "./variants.js";
 export interface LabelProps
 	extends ReplaceWithTWMergeClass<HTMLLabelAttributes>,
 		LabelVariants,
-		WithRef<HTMLElement | HTMLLabelElement> {}
+		WithRef<HTMLLabelElement> {}
 
 let { children, class: className, ref = $bindable(), ...restProps }: LabelProps = $props();
 </script>

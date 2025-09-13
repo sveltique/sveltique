@@ -12,10 +12,7 @@ type Ref = {
 	current: any | undefined;
 };
 
-export interface TooltipProps
-	extends TWMergeClass,
-		WithRef<HTMLElement | HTMLDivElement>,
-		TooltipVariants {
+export interface TooltipProps extends TWMergeClass, WithRef<HTMLDivElement>, TooltipVariants {
 	children?: Snippet<[{ ref: Ref; props: { "aria-describedby": string } }]>;
 	containerClass?: ClassNameValue;
 	id?: string;

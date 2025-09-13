@@ -4,7 +4,7 @@ import { fade } from "svelte/transition";
 import type { TWMergeClass, WithRef } from "$lib/types.js";
 import { backdrop } from "./variants.js";
 
-export interface BackdropProps extends TWMergeClass, WithRef<HTMLElement | HTMLDivElement> {
+export interface BackdropProps extends TWMergeClass, WithRef<HTMLDivElement> {
 	children?: Snippet;
 	/** @default 150 */
 	fadeDuration?: number;

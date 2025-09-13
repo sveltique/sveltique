@@ -9,7 +9,7 @@ import { Tooltip } from "../tooltip/index.js";
 import { assembleLines, parseNumberRanges, transformHTMLEntities } from "./code-block.js";
 import { codeBlock } from "./variants.js";
 
-export interface CodeBlockProps extends TWMergeClass, WithRef<HTMLElement | HTMLDivElement> {
+export interface CodeBlockProps extends TWMergeClass, WithRef<HTMLDivElement> {
 	code: string;
 	containerClass?: ClassNameValue;
 	lang: BundledLanguage;

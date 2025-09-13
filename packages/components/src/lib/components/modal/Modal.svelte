@@ -23,7 +23,7 @@ type ChildrenSnippet = Snippet<
 
 export interface ModalProps
 	extends ReplaceWithTWMergeClass<Omit<HTMLAttributes<HTMLElement>, "children">>,
-		WithRef<HTMLElement | HTMLDivElement>,
+		WithRef<HTMLDivElement>,
 		ModalVariants {
 	actions?: Snippet<[{ close: VoidFunction }]>;
 	children?: ChildrenSnippet;

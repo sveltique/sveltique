@@ -5,7 +5,7 @@ import type { ClassNameValue } from "tailwind-merge";
 import type { WithRef } from "$lib/types.js";
 import { type SelectVariants, select } from "./variants.js";
 
-export interface SelectProps extends WithRef<HTMLElement | HTMLDivElement>, SelectVariants {
+export interface SelectProps extends WithRef<HTMLDivElement>, SelectVariants {
 	id?: string;
 	children?: Snippet;
 	class?: ClassNameValue;

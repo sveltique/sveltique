@@ -7,7 +7,7 @@ export interface SwitchProps
 	extends ReplaceWithTWMergeClass<
 			Omit<HTMLButtonAttributes, "disabled" | "onclick" | "ontoggle">
 		>,
-		WithRef<HTMLElement | HTMLButtonElement>,
+		WithRef<HTMLButtonElement>,
 		SwitchVariants {
 	ontoggle?: (checked: boolean) => void;
 }
