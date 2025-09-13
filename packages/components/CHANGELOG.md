@@ -1,5 +1,13 @@
 # @sveltique/components
 
+## 0.4.3
+
+### Patch Changes
+
+- [#27](https://github.com/sveltique/sveltique/pull/27) [`278de9d`](https://github.com/sveltique/sveltique/commit/278de9de138ec2dca8aac931946eaf2c87f089c2) Thanks [@novaotp](https://github.com/novaotp)! - Exposing ref for components that didn't yet
+
+- [#28](https://github.com/sveltique/sveltique/pull/28) [`e83b2b9`](https://github.com/sveltique/sveltique/commit/e83b2b944423ade47e0a158ef12b6c37279b6700) Thanks [@novaotp](https://github.com/novaotp)! - Components expose `ref` as the correct type
+
 ## 0.4.2
 
 ### Patch Changes
