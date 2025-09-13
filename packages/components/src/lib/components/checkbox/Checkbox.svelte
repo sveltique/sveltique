@@ -6,7 +6,7 @@ import { type CheckboxVariants, checkbox } from "./variants.js";
 export interface CheckboxProps
 	extends Omit<HTMLInputAttributes, "checked" | "class" | "disabled" | "type">,
 		TWMergeClass,
-		WithRef<HTMLElement | HTMLInputElement>,
+		WithRef<HTMLInputElement>,
 		CheckboxVariants {}
 
 let {

@@ -18,7 +18,7 @@ type IconSnippet = Snippet<
 
 export interface LinkProps
 	extends ReplaceWithTWMergeClass<HTMLAnchorAttributes>,
-		WithRef<HTMLElement | HTMLAnchorElement>,
+		WithRef<HTMLAnchorElement>,
 		LinkVariants {
 	/**
 	 * Shorthand for setting `target="_blank"` and `rel="noreferrer"`.

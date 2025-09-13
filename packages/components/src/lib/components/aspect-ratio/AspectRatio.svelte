@@ -6,7 +6,7 @@ import { type AspectRatioVariants, aspectRatio } from "./variants.js";
 
 export interface AspectRatioProps
 	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLElement>>,
-		WithRef<HTMLElement | HTMLDivElement>,
+		WithRef<HTMLDivElement>,
 		AspectRatioVariants {
 	children?: Snippet;
 	ratio: number;

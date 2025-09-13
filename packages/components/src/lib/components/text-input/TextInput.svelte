@@ -6,7 +6,7 @@ import { type TextInputVariants, textInput } from "./variants.js";
 export interface TextInputProps
 	extends Omit<HTMLInputAttributes, "class" | "value">,
 		TWMergeClass,
-		WithRef<HTMLElement | HTMLInputElement>,
+		WithRef<HTMLInputElement>,
 		TextInputVariants {
 	value?: string;
 }

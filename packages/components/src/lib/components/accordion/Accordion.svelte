@@ -9,7 +9,7 @@ import { accordion } from "./variants.js";
 
 export interface AccordionProps
 	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
-		WithRef<HTMLElement | HTMLDivElement> {
+		WithRef<HTMLDivElement> {
 	children?: Snippet;
 	/**
 	 * Whether to make the first item expanded by default.

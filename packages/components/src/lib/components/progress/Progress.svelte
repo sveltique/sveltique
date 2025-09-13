@@ -2,10 +2,7 @@
 import type { TWMergeClass, WithRef } from "$lib/types.js";
 import { type ProgressVariants, progress } from "./variants.js";
 
-export interface ProgressProps
-	extends TWMergeClass,
-		ProgressVariants,
-		WithRef<HTMLElement | HTMLDivElement> {
+export interface ProgressProps extends TWMergeClass, ProgressVariants, WithRef<HTMLDivElement> {
 	value: number;
 }
 

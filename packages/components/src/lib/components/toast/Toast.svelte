@@ -4,10 +4,7 @@ import type { TWMergeClass, WithRef } from "$lib/types.js";
 import Button from "../button/Button.svelte";
 import { type ToastVariants, toast } from "./variants.js";
 
-export interface ToastProps
-	extends TWMergeClass,
-		WithRef<HTMLElement | HTMLDivElement>,
-		ToastVariants {
+export interface ToastProps extends TWMergeClass, WithRef<HTMLDivElement>, ToastVariants {
 	closeAriaLabel?: string;
 	/** If passed, renders a close button. */
 	onClose?: () => void;

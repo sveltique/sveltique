@@ -9,7 +9,7 @@ import { type SelectOptionVariants, selectOption } from "./variants.js";
 export interface SelectOptionProps
 	extends Omit<HTMLAttributes<HTMLLIElement>, "class">,
 		SelectOptionVariants,
-		WithRef<HTMLElement | HTMLLIElement> {
+		WithRef<HTMLLIElement> {
 	/** @default $props.id() */
 	id?: string;
 	value: string;

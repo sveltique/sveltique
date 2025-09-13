@@ -6,7 +6,7 @@ import { type NumberInputVariants, numberInput } from "./variants.js";
 
 export interface NumberInputProps
 	extends Omit<HTMLInputAttributes, "class" | "step" | "min" | "max" | "value">,
-		WithRef<HTMLElement | HTMLDivElement>,
+		WithRef<HTMLDivElement>,
 		NumberInputVariants {
 	containerClass?: string | undefined;
 	class?: ClassNameValue;

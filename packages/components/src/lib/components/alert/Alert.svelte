@@ -15,10 +15,7 @@ type IconSnippet = Snippet<
 	]
 >;
 
-export interface AlertProps
-	extends TWMergeClass,
-		AlertVariants,
-		WithRef<HTMLElement | HTMLDivElement> {
+export interface AlertProps extends TWMergeClass, AlertVariants, WithRef<HTMLDivElement> {
 	children?: Snippet;
 	icon?: IconSnippet;
 }

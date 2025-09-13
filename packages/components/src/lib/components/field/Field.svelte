@@ -19,10 +19,7 @@ type InputSnippet = Snippet<
 	]
 >;
 
-export interface FieldProps
-	extends TWMergeClass,
-		WithRef<HTMLElement | HTMLDivElement>,
-		FieldVariants {
+export interface FieldProps extends TWMergeClass, WithRef<HTMLDivElement>, FieldVariants {
 	input: InputSnippet;
 	error?: string | undefined;
 	label?: string | undefined;

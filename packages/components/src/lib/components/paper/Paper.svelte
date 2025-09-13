@@ -7,7 +7,7 @@ export interface PaperProps
 	extends Omit<HTMLAttributes<HTMLDivElement>, "class">,
 		TWMergeClass,
 		PaperVariants,
-		WithRef<HTMLElement | HTMLDivElement> {}
+		WithRef<HTMLDivElement> {}
 
 let {
 	children,

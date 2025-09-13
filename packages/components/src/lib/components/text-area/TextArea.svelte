@@ -5,7 +5,7 @@ import { type TextAreaVariants, textArea } from "./variants.js";
 
 export interface TextAreaProps
 	extends ReplaceWithTWMergeClass<Omit<HTMLTextareaAttributes, "value">>,
-		WithRef<HTMLElement | HTMLTextAreaElement>,
+		WithRef<HTMLTextAreaElement>,
 		TextAreaVariants {
 	value?: string;
 }

@@ -5,7 +5,7 @@ import { type SkeletonVariants, skeleton } from "./variants.js";
 
 export interface SkeletonProps
 	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
-		WithRef<HTMLElement | HTMLDivElement>,
+		WithRef<HTMLDivElement>,
 		SkeletonVariants {}
 
 let {
