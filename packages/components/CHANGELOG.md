@@ -1,5 +1,11 @@
 # @sveltique/components
 
+## 0.4.5
+
+### Patch Changes
+
+- [#32](https://github.com/sveltique/sveltique/pull/32) [`33bd2f3`](https://github.com/sveltique/sveltique/commit/33bd2f3e9d8ddecafe98ce72b060dcdab4b4dd77) Thanks [@novaotp](https://github.com/novaotp)! - Removed `Codeblock` container overflow-hidden
+
 ## 0.4.4
 
 ### Patch Changes
