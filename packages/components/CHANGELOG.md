@@ -1,5 +1,11 @@
 # @sveltique/components
 
+## 0.4.4
+
+### Patch Changes
+
+- [#29](https://github.com/sveltique/sveltique/pull/29) [`817d3f7`](https://github.com/sveltique/sveltique/commit/817d3f769980a5e331dcff5ca957abae2759fe70) Thanks [@novaotp](https://github.com/novaotp)! - `Codeblock`'s pre and code take the full height of the container
+
 ## 0.4.3
 
 ### Patch Changes
