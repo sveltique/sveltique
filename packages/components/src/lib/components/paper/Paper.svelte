@@ -1,20 +1,26 @@
+<script module>
+const OUTLINE_ELEVATION = 0;
+</script>
+
 <script lang="ts">
-import type { HTMLAttributes } from "svelte/elements";
-import type { TWMergeClass, WithRef } from "$lib/types.js";
-import { type PaperVariants, paper } from "./variants.js";
+    import type { HTMLAttributes } from "svelte/elements";
+    import type { TWMergeClass, WithRef } from "$lib/types.js";
+    import { type PaperVariants, paper } from "./variants.js";
 
-export interface PaperProps
-	extends Omit<HTMLAttributes<HTMLDivElement>, "class">,
-		TWMergeClass,
-		PaperVariants,
-		WithRef<HTMLDivElement> {}
+    export interface PaperProps
+        extends Omit<HTMLAttributes<HTMLDivElement>, "class">,
+            TWMergeClass,
+            PaperVariants,
+            WithRef<HTMLDivElement> {}
 
-let {
-	children,
-	class: className = undefined,
-	ref = $bindable(),
-	...restProps
-}: PaperProps = $props();
+    let {
+        children,
+        class: className = undefined,
+        elevation = 0,
+        ref = $bindable(),
+        variant = "outline",
+        ...restProps
+    }: PaperProps = $props();
 </script>
 
 <!--
@@ -23,6 +29,11 @@ A surface to organize related content and, when needed, display actions in a con
 @see https://sveltique.dev/docs/components/browse/paper
 -->
 
-<div bind:this={ref} data-paper class={paper({ className })} {...restProps}>
-	{@render children?.()}
+<div
+    bind:this={ref}
+    data-paper
+    class={paper({ variant, elevation, className })}
+    {...restProps}
+>
+    {@render children?.()}
 </div>

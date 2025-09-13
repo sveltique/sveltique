@@ -16,6 +16,13 @@
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 
+	/* DERIVED ELEVATED BACKGROUND COLORS */
+	--color-background-elevated-1: color-mix(in oklab, var(--background), var(--color-white) 3%);
+	--color-background-elevated-2: color-mix(in oklab, var(--background), var(--color-white) 6%);
+	--color-background-elevated-3: color-mix(in oklab, var(--background), var(--color-white) 9%);
+	--color-background-elevated-4: color-mix(in oklab, var(--background), var(--color-white) 12%);
+	--color-background-elevated-5: color-mix(in oklab, var(--background), var(--color-white) 15%);
+
 	/* Primary color */
 	--color-primary: var(--primary);
 	--color-primary-foreground: var(--primary-foreground);

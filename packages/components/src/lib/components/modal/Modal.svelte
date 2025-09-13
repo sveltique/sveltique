@@ -3,9 +3,10 @@ import { type Snippet, untrack } from "svelte";
 import type { HTMLAttributes } from "svelte/elements";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { onKeyUp } from "$utils/on-key.svelte.js";
-import { flyAndScale } from "../../transitions/fly-and-scale.js";
-import { default as Backdrop, type BackdropProps } from "../backdrop/Backdrop.svelte";
 import { modal, type ModalVariants } from "./variants.js";
+import { flyAndScale } from "../../transitions/fly-and-scale.js";
+import { Backdrop, type BackdropProps } from "../backdrop/index.js";
+import Paper from "../paper/Paper.svelte";
 
 type Ref = { current: HTMLElement | undefined };
 
@@ -100,17 +101,19 @@ A dialog component that interrupts the user flow to capture attention. Displays 
 {#if isOpen}
 	<Backdrop onClick={() => closeOnOverlayClick && close()} {...backdropProps}>
 		<div
-            bind:this={ref}
 			transition:flyAndScale={{ duration: 150 }}
-			id={uid}
-			role="alertdialog"
-            data-modal
-			aria-modal="true"
-			aria-labelledby="{uid}-label"
-			aria-describedby="{uid}-description"
-			class={dialog({ className })}
-			{...restProps}
 		>
+            <Paper
+                bind:ref
+                id={uid}
+                role="alertdialog"
+                data-modal
+                aria-modal="true"
+                aria-labelledby="{uid}-label"
+                aria-describedby="{uid}-description"
+                class={dialog({ className })}
+                {...restProps}
+            >
 			{@render children?.({
 				close,
 				labelProps: { id: `${uid}-label` },
@@ -122,6 +125,7 @@ A dialog component that interrupts the user flow to capture attention. Displays 
 					{@render actions({ close })}
 				</div>
 			{/if}
+            </Paper>
 		</div>
 	</Backdrop>
 {/if}
