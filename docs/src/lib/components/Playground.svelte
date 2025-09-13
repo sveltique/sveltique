@@ -1,9 +1,10 @@
 <script lang="ts">
 import { Paper } from "@sveltique/components";
-import type { Snippet } from "svelte";
+import { onMount, type Snippet } from "svelte";
 import type { ClassNameValue } from "tailwind-merge";
 import { cnBase } from "tailwind-variants";
 import CodeBlock from "./CodeBlock.svelte";
+import { getDynamicHeight } from "$utils/dynamic-height.svelte";
 
 type Code = {
 	short: string;
@@ -19,6 +20,16 @@ interface Props {
 let { children, class: className, code }: Props = $props();
 
 let showCode = $state(false);
+let playgroundRef = $state<HTMLDivElement>();
+
+let playgroundHeight = getDynamicHeight(() => playgroundRef, {
+	min: 400,
+	attribute: "offsetHeight"
+});
+
+let heightStyle = $derived(
+	playgroundHeight.current ? `height: ${playgroundHeight.current}px;` : ""
+);
 </script>
 
 <div data-playground class="relative mb-4 flex w-full flex-col items-start gap-2.5">
@@ -44,13 +55,19 @@ let showCode = $state(false);
 	</div>
 	{#if showCode}
 		<!-- TODO : remove the code?.expanded support -->
-		<CodeBlock
-			code={typeof code === 'string' ? code : (code?.expanded ?? '')}
-			showLineNumbers
-			class="h-[400px]"
-		/>
+		<div style={heightStyle} class="relative w-full">
+            <CodeBlock
+                code={typeof code === 'string' ? code : (code?.expanded ?? '')}
+                showLineNumbers
+                containerClass="h-full"
+            />
+        </div>
 	{:else}
-		<Paper class={cnBase("flex h-[400px] w-full items-center justify-center gap-5 p-6", className)}>
+		<Paper
+            bind:ref={playgroundRef}
+            style={heightStyle}
+            class={cnBase("flex w-full items-center justify-center gap-5 p-6", className)}
+        >
             {@render children?.()}
 		</Paper>
 	{/if}
