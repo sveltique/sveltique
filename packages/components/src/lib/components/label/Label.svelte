@@ -1,11 +1,14 @@
 <script lang="ts">
 import type { HTMLLabelAttributes } from "svelte/elements";
-import type { ReplaceWithTWMergeClass } from "$lib/types.js";
+import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { type LabelVariants, label } from "./variants.js";
 
-export interface LabelProps extends ReplaceWithTWMergeClass<HTMLLabelAttributes>, LabelVariants {}
+export interface LabelProps
+	extends ReplaceWithTWMergeClass<HTMLLabelAttributes>,
+		LabelVariants,
+		WithRef<HTMLElement | HTMLLabelElement> {}
 
-let { children, class: className, ...restProps }: LabelProps = $props();
+let { children, class: className, ref = $bindable(), ...restProps }: LabelProps = $props();
 </script>
 
 <!--
@@ -14,6 +17,6 @@ Labels or describes an associated form control.
 @see https://sveltique.dev/docs/components/browse/label
 -->
 
-<label data-label class={label({ className })} {...restProps}>
+<label bind:this={ref} data-label class={label({ className })} {...restProps}>
     {@render children?.()}
 </label>

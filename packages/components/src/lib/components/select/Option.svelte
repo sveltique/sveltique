@@ -2,12 +2,14 @@
 import { onMount } from "svelte";
 import type { HTMLAttributes } from "svelte/elements";
 import type { ClassNameValue } from "tailwind-merge";
+import type { WithRef } from "$lib/types.js";
 import { useMutationObserver } from "$utils/use-mutation-observer.svelte.js";
 import { type SelectOptionVariants, selectOption } from "./variants.js";
 
 export interface SelectOptionProps
 	extends Omit<HTMLAttributes<HTMLLIElement>, "class">,
-		SelectOptionVariants {
+		SelectOptionVariants,
+		WithRef<HTMLElement | HTMLLIElement> {
 	/** @default $props.id() */
 	id?: string;
 	value: string;
@@ -19,25 +21,32 @@ export interface SelectOptionProps
 }
 
 let {
-	children,
 	id,
-	value,
+	children,
 	class: className,
-	selected: _selected = false,
 	disabled = false,
+	ref = $bindable(),
+	selected: _selected = false,
+	value,
 	...restProps
 }: SelectOptionProps = $props();
 
 const uid = $props.id();
 
 let parent = $state<HTMLUListElement>();
-let ref = $state<HTMLLIElement>();
 
 let focused = $state(false);
 let selected = $derived(_selected);
 let _id = $derived(id ?? uid);
 
 const { container, icon } = $derived(selectOption({ disabled, focused }));
+
+onMount(() => {
+	if (!ref) return;
+
+	parent = ref.parentElement as HTMLUListElement;
+	selected = value === parent.getAttribute("data-selected-value");
+});
 
 useMutationObserver(
 	() => parent,
@@ -60,11 +69,6 @@ useMutationObserver(
 		attributeFilter: ["data-focused-id"]
 	}
 );
-
-onMount(() => {
-	parent = ref?.parentElement as HTMLUListElement;
-	selected = value === parent.getAttribute("data-selected-value");
-});
 </script>
 
 <!--
