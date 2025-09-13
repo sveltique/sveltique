@@ -6,7 +6,11 @@ import type { ClassNameValue } from "tailwind-merge";
 import type { TWMergeClass, WithRef } from "$lib/types.js";
 import { type TooltipVariants, tooltip } from "./variants.js";
 
-type Ref = { current: HTMLElement | undefined };
+type Ref = {
+	/** @note Expects a subclass of `HTMLElement`. */
+	// biome-ignore lint/suspicious/noExplicitAny: Not sure how to allow any subclass type of HTMLElement
+	current: any | undefined;
+};
 
 export interface TooltipProps
 	extends TWMergeClass,
