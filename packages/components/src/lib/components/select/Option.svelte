@@ -1,19 +1,17 @@
 <script lang="ts">
 import { onMount } from "svelte";
 import type { HTMLAttributes } from "svelte/elements";
-import type { ClassNameValue } from "tailwind-merge";
-import type { WithRef } from "$lib/types.js";
+import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { useMutationObserver } from "$utils/use-mutation-observer.svelte.js";
 import { type SelectOptionVariants, selectOption } from "./variants.js";
 
 export interface SelectOptionProps
-	extends Omit<HTMLAttributes<HTMLLIElement>, "class">,
+	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLLIElement>>,
 		SelectOptionVariants,
 		WithRef<HTMLLIElement> {
 	/** @default $props.id() */
 	id?: string;
 	value: string;
-	class?: ClassNameValue;
 	/** @default false */
 	selected?: boolean;
 	/** @default false */

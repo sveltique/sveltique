@@ -2,14 +2,16 @@
 import { onMount, type Snippet } from "svelte";
 import { on } from "svelte/events";
 import type { ClassNameValue } from "tailwind-merge";
-import type { WithRef } from "$lib/types.js";
+import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { type SelectVariants, select } from "./variants.js";
+import type { HTMLAttributes } from "svelte/elements";
 
 export interface SelectProps extends WithRef<HTMLDivElement>, SelectVariants {
 	id?: string;
 	children?: Snippet;
 	class?: ClassNameValue;
 	containerClass?: ClassNameValue;
+	containerProps?: ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>;
 	name?: string;
 	value?: string;
 	placeholder?: string;
@@ -20,7 +22,8 @@ export interface SelectProps extends WithRef<HTMLDivElement>, SelectVariants {
 let {
 	children,
 	class: className,
-	containerClass,
+	containerClass: __DEPRECATED_containerClass,
+	containerProps = {},
 	id,
 	name,
 	placeholder = "",
@@ -36,9 +39,9 @@ let listBoxRef = $state<HTMLUListElement>()!;
 
 let open = $state(false);
 let valueContent = $state<string | undefined>();
-
 let focusedId = $state<string>();
 
+let { class: containerClass, ...restContainerProps } = $derived(containerProps);
 const {
 	container,
 	listBox,
@@ -182,7 +185,13 @@ function getChildById(id: string) {
 }
 </script>
 
-<div bind:this={ref} id={componentId} data-select class={container({ class: containerClass })}>
+<div
+    bind:this={ref}
+    id={componentId}
+    data-select
+    class={container({ class: [__DEPRECATED_containerClass, containerClass] })}
+    {...restContainerProps}
+>
 	<input type="hidden" {name} {value} />
 	<button
 		bind:this={triggerRef}

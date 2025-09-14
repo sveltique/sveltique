@@ -1,13 +1,18 @@
 <script lang="ts">
-import type { TWMergeClass, WithRef } from "$lib/types.js";
+import type { HTMLAttributes } from "svelte/elements";
+import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { type SeparatorVariants, separator } from "./variants.js";
 
-export interface SeparatorProps extends TWMergeClass, WithRef<HTMLDivElement>, SeparatorVariants {}
+export interface SeparatorProps
+	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
+		WithRef<HTMLDivElement>,
+		SeparatorVariants {}
 
 let {
 	class: className = undefined,
 	orientation = "horizontal",
-	ref = $bindable()
+	ref = $bindable(),
+	...restProps
 }: SeparatorProps = $props();
 </script>
 
@@ -24,4 +29,5 @@ A thin, visible line used to separate content and create visual grouping.
 	aria-orientation={orientation}
 	aria-hidden="true"
 	class={separator({ orientation, className })}
+    {...restProps}
 ></div>

@@ -1,13 +1,22 @@
 <script lang="ts">
 import type { Snippet } from "svelte";
-import type { TWMergeClass, WithRef } from "$lib/types.js";
+import type { HTMLAttributes } from "svelte/elements";
+import type { ReplaceWithTWMergeClass, TWMergeClass, WithRef } from "$lib/types.js";
 import Button from "../button/Button.svelte";
 import { type ToastVariants, toast } from "./variants.js";
 
-export interface ToastProps extends TWMergeClass, WithRef<HTMLDivElement>, ToastVariants {
+export interface ToastProps
+	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
+		WithRef<HTMLDivElement>,
+		ToastVariants {
 	closeAriaLabel?: string;
-	/** If passed, renders a close button. */
+	/**
+	 * If passed, renders a close button.
+	 * @deprecated Use `onclose` instead.
+	 */
 	onClose?: () => void;
+	/** If passed, renders a close button. */
+	onclose?: () => void;
 	action?: Snippet;
 	children: Snippet;
 	open?: boolean;
@@ -18,12 +27,15 @@ let {
 	children,
 	class: className,
 	closeAriaLabel,
+	onClose: __DEPRECATED_onClose,
+	onclose,
 	open = $bindable(true),
 	ref = $bindable(),
 	type = "info",
-	onClose
+	...restProps
 }: ToastProps = $props();
 
+let onClose = $derived(onclose ?? __DEPRECATED_onClose);
 let { container, icon, content, closeButton, closeIcon } = $derived(toast({ type }));
 </script>
 
@@ -34,7 +46,7 @@ Brief notifications of processes that have been or will be performed.
 -->
 
 {#if open}
-	<div bind:this={ref} role="alert" data-toast class={container({ className })}>
+	<div bind:this={ref} role="alert" data-toast class={container({ className })} {...restProps}>
 		{@render toastIcon()}
 
 		<p data-toast-content class={content()}>

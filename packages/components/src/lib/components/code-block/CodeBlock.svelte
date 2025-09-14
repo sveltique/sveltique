@@ -2,16 +2,21 @@
 import type { BundledLanguage, BundledTheme, HighlighterGeneric } from "shiki";
 import { onMount, type Snippet } from "svelte";
 import type { ClassNameValue } from "tailwind-merge";
-import type { TWMergeClass, WithRef } from "$lib/types.js";
+import type { ReplaceWithTWMergeClass, TWMergeClass, WithRef } from "$lib/types.js";
 import { Button } from "../button/index.js";
 import { Separator } from "../separator/index.js";
 import { Tooltip } from "../tooltip/index.js";
 import { assembleLines, parseNumberRanges, transformHTMLEntities } from "./code-block.js";
 import { codeBlock } from "./variants.js";
+import type { HTMLAttributes } from "svelte/elements";
 
-export interface CodeBlockProps extends TWMergeClass, WithRef<HTMLDivElement> {
+export interface CodeBlockProps
+	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLPreElement>>,
+		WithRef<HTMLDivElement> {
 	code: string;
+	/** @deprecated Use `containerProps` instead. */
 	containerClass?: ClassNameValue;
+	containerProps?: ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>;
 	lang: BundledLanguage;
 	theme: BundledTheme;
 	highlighter: HighlighterGeneric<BundledLanguage, BundledTheme>;
@@ -28,7 +33,8 @@ export interface CodeBlockProps extends TWMergeClass, WithRef<HTMLDivElement> {
 
 let {
 	class: className,
-	containerClass,
+	containerClass: __DEPRECATED_containerClass,
+	containerProps = {},
 	code,
 	lang,
 	theme,
@@ -38,9 +44,11 @@ let {
 	filename,
 	ref = $bindable(),
 	icon,
-	copyTitle = fallbackCopyTitle
+	copyTitle = fallbackCopyTitle,
+	...restProps
 }: CodeBlockProps = $props();
 
+let { class: containerClass, ...restContainerProps } = $derived(containerProps);
 let {
 	code: codeCss,
 	container,
@@ -98,7 +106,8 @@ Display syntax-highlighted code snippets. Ideal anywhere you need clear, readabl
     bind:this={ref}
     data-code-block
     style="color: {tokensResult.fg}; background-color: {tokensResult.bg}"
-    class={container({ class: containerClass })}
+    class={container({ class: [__DEPRECATED_containerClass, containerClass] })}
+    {...restContainerProps}
 >
 	{#if filename}
 		{@render header()}
@@ -110,8 +119,9 @@ Display syntax-highlighted code snippets. Ideal anywhere you need clear, readabl
         data-show-line-numbers={showLineNumbers}
         style={preStyle}
         class={pre({ className })}
+        {...restProps}
     >
-        <code class={codeCss()}>
+        <code data-code-block-code class={codeCss()}>
             {@html assembleLines(tokensResult.tokens, parsedLines)}
         </code>
     </pre>
@@ -119,7 +129,7 @@ Display syntax-highlighted code snippets. Ideal anywhere you need clear, readabl
 
 {#snippet header()}
     <div data-code-block-header class={headerCss()}>
-        <div class="relative flex items-center justify-start gap-2.5">
+        <div data-code-block-filename class="relative flex items-center justify-start gap-2.5">
             {@render icon?.()}
             <p class={filenameCss()}>{filename}</p>
         </div>

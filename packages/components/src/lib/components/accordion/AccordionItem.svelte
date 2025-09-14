@@ -1,9 +1,10 @@
 <script lang="ts">
 import { onMount, type Snippet } from "svelte";
 import { slide } from "svelte/transition";
-import type { TWMergeClass, WithRef } from "$lib/types.js";
+import type { ReplaceWithTWMergeClass, TWMergeClass, WithRef } from "$lib/types.js";
 import { useMutationObserver } from "$utils/use-mutation-observer.svelte.js";
 import { accordionItem } from "./variants.js";
+import type { HTMLAttributes } from "svelte/elements";
 
 type IconSnippet = Snippet<
 	[
@@ -17,7 +18,9 @@ type IconSnippet = Snippet<
 	]
 >;
 
-export interface AccordionItemProps extends TWMergeClass, WithRef<HTMLDivElement> {
+export interface AccordionItemProps
+	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
+		WithRef<HTMLDivElement> {
 	children: Snippet;
 	header: string | Snippet;
 	value?: string;
@@ -30,7 +33,8 @@ let {
 	header,
 	icon = fallbackIcon,
 	ref = $bindable(),
-	value
+	value,
+	...restProps
 }: AccordionItemProps = $props();
 
 const uid = $props.id();
@@ -70,7 +74,7 @@ function updateOpen() {
 }
 </script>
 
-<div bind:this={ref} data-accordion-item class={container({ className })}>
+<div bind:this={ref} data-accordion-item class={container({ className })} {...restProps}>
 	<svelte:element this={headingLevel} class="contents">
 		<button
 			id={uid}

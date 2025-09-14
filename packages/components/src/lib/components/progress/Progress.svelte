@@ -1,12 +1,22 @@
 <script lang="ts">
-import type { TWMergeClass, WithRef } from "$lib/types.js";
+import type { HTMLAttributes } from "svelte/elements";
+import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { type ProgressVariants, progress } from "./variants.js";
 
-export interface ProgressProps extends TWMergeClass, ProgressVariants, WithRef<HTMLDivElement> {
+export interface ProgressProps
+	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
+		ProgressVariants,
+		WithRef<HTMLDivElement> {
 	value: number;
 }
 
-let { class: className, ref = $bindable(), transition = true, value }: ProgressProps = $props();
+let {
+	class: className,
+	ref = $bindable(),
+	transition = true,
+	value,
+	...restProps
+}: ProgressProps = $props();
 
 let { fill, track } = $derived(progress({ transition }));
 </script>
@@ -25,6 +35,7 @@ A visual indicator of progress toward completing a task or reaching a limit, suc
     aria-valuemin={0}
     aria-valuemax={100}
     class={track({ className })}
+    {...restProps}
 >
 	<div data-progress-fill style="transform: translateX({value}%);" class={fill()}></div>
 </div>

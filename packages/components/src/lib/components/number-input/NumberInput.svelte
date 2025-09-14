@@ -1,14 +1,16 @@
 <script lang="ts">
-import type { HTMLInputAttributes } from "svelte/elements";
+import type { HTMLAttributes, HTMLInputAttributes } from "svelte/elements";
 import type { ClassNameValue } from "tailwind-merge";
-import type { WithRef } from "$lib/types.js";
+import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { type NumberInputVariants, numberInput } from "./variants.js";
 
 export interface NumberInputProps
 	extends Omit<HTMLInputAttributes, "class" | "step" | "min" | "max" | "value">,
 		WithRef<HTMLDivElement>,
 		NumberInputVariants {
+	/** @deprecated Use `containerProps` instead. */
 	containerClass?: string | undefined;
+	containerProps?: ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>;
 	class?: ClassNameValue;
 	value?: number | null;
 	/** @default 1 */
@@ -20,7 +22,8 @@ export interface NumberInputProps
 let {
 	id,
 	class: className,
-	containerClass,
+	containerClass: __DEPRECATED_containerClass,
+	containerProps = {},
 	max,
 	min,
 	ref = $bindable(),
@@ -30,6 +33,8 @@ let {
 }: NumberInputProps = $props();
 
 let inputRef = $state<HTMLInputElement>();
+
+let { class: containerClass, ...restContainerProps } = $derived(containerProps);
 const { container, input, decrement, increment, icon } = $derived(numberInput());
 
 function changeValue(v: string | number) {
@@ -64,7 +69,12 @@ An enhanced input for working with numbers. It includes increment/decrement cont
 @see https://sveltique.dev/docs/components/browse/number-input
 -->
 
-<div bind:this={ref} data-number-input class={container({ class: containerClass })}>
+<div
+    bind:this={ref}
+    data-number-input
+    class={container({ class: [__DEPRECATED_containerClass, containerClass] })}
+    {...restContainerProps}
+>
 	<button onclick={() => changeValue((value ?? 0) - step)} class={decrement()}>
 		{@render minusIcon()}
 	</button>
