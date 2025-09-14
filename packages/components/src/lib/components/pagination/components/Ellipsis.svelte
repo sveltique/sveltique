@@ -1,0 +1,33 @@
+<script lang="ts">
+import type { HTMLAttributes } from "svelte/elements";
+import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
+import { pagination } from "../variants.js";
+
+export interface PaginationEllipsisProps
+	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLSpanElement>>,
+		WithRef<HTMLSpanElement> {}
+
+let { class: className, ref = $bindable(), ...restProps }: PaginationEllipsisProps = $props();
+
+let { container, icon } = $derived(pagination.ellipsis());
+</script>
+
+<li>
+    <span bind:this={ref} data-pagination-ellipsis class={container({ className })} {...restProps}>
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class={icon()}
+        >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+    </span>
+</li>
