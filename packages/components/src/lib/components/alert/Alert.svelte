@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { Snippet } from "svelte";
-import type { TWMergeClass, WithRef } from "$lib/types.js";
+import type { HTMLAttributes } from "svelte/elements";
+import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { type AlertVariants, alert } from "./variants.js";
 
 type IconSnippet = Snippet<
@@ -15,7 +16,10 @@ type IconSnippet = Snippet<
 	]
 >;
 
-export interface AlertProps extends TWMergeClass, AlertVariants, WithRef<HTMLDivElement> {
+export interface AlertProps
+	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
+		AlertVariants,
+		WithRef<HTMLDivElement> {
 	children?: Snippet;
 	icon?: IconSnippet;
 }
@@ -25,7 +29,8 @@ let {
 	class: className = "",
 	icon = fallbackIcon,
 	ref = $bindable(),
-	type = "info"
+	type = "info",
+	...restProps
 }: AlertProps = $props();
 
 const { container, icon: iconCss } = $derived(alert({ type, className }));
@@ -37,7 +42,7 @@ A visual message box used to communicate contextual feedback to users, such as i
 @see https://sveltique.dev/docs/components/browse/alert
 -->
 
-<div bind:this={ref} role="alert" data-alert class={container({ className })}>
+<div bind:this={ref} role="alert" data-alert class={container({ className })} {...restProps}>
 	{@render icon({ props: { "aria-hidden": true, class: iconCss() } })}
 	<span>{@render children?.()}</span>
 </div>

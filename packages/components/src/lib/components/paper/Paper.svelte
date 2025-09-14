@@ -1,11 +1,10 @@
 <script lang="ts">
 import type { HTMLAttributes } from "svelte/elements";
-import type { TWMergeClass, WithRef } from "$lib/types.js";
+import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { type PaperVariants, paper } from "./variants.js";
 
 export interface PaperProps
-	extends Omit<HTMLAttributes<HTMLDivElement>, "class">,
-		TWMergeClass,
+	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
 		PaperVariants,
 		WithRef<HTMLDivElement> {}
 

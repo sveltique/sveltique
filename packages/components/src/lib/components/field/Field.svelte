@@ -1,7 +1,8 @@
 <script lang="ts">
 import type { Snippet } from "svelte";
-import type { TWMergeClass, WithRef } from "$lib/types.js";
-import Label from "../label/Label.svelte";
+import type { HTMLAttributes } from "svelte/elements";
+import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
+import { Label } from "../label/index.js";
 import { type FieldVariants, field } from "./variants.js";
 
 type InputSnippet = Snippet<
@@ -19,7 +20,10 @@ type InputSnippet = Snippet<
 	]
 >;
 
-export interface FieldProps extends TWMergeClass, WithRef<HTMLDivElement>, FieldVariants {
+export interface FieldProps
+	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
+		WithRef<HTMLDivElement>,
+		FieldVariants {
 	input: InputSnippet;
 	error?: string | undefined;
 	label?: string | undefined;
@@ -31,7 +35,8 @@ let {
 	error = undefined,
 	label = undefined,
 	placement = "top",
-	ref = $bindable()
+	ref = $bindable(),
+	...restProps
 }: FieldProps = $props();
 
 const id = $props.id();
@@ -45,7 +50,7 @@ Provides a consistent structure for form controls, by including a label and an e
 @see https://sveltique.dev/docs/components/browse/field
 -->
 
-<div bind:this={ref} data-field class={container({ className })}>
+<div bind:this={ref} data-field class={container({ className })} {...restProps}>
 	<div class={labelInputContainer()}>
         <Label for={id} data-field-label>{label}</Label>
         {@render input({

@@ -3,7 +3,7 @@ import { onMount, type Snippet } from "svelte";
 import type { HTMLAttributes } from "svelte/elements";
 import { on } from "svelte/events";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
-import { onKeyDown, onKeyUp } from "$utils/on-key.svelte.js";
+import { onKeyDown } from "$utils/on-key.svelte.js";
 import { getActiveElement } from "$utils/use-active-element.svelte.js";
 import { accordion } from "./variants.js";
 
@@ -37,7 +37,8 @@ let {
 	defaultExpand = false,
 	headingLevel = "h3",
 	multiple = true,
-	ref = $bindable()
+	ref = $bindable(),
+	...restProps
 }: AccordionProps = $props();
 
 const activeElement = getActiveElement();
@@ -159,6 +160,7 @@ function focusNext(container: HTMLElement) {
 	data-heading-level={headingLevel}
 	data-open-values={values.join(',')}
 	class={accordion({ className })}
+    {...restProps}
 >
 	{@render children?.()}
 </div>
