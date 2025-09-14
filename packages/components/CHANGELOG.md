@@ -1,5 +1,13 @@
 # @sveltique/components
 
+## 0.5.0
+
+### Minor Changes
+
+- [#34](https://github.com/sveltique/sveltique/pull/34) [`30d0981`](https://github.com/sveltique/sveltique/commit/30d09815d4af1f99f4635aafa42593b0cc5dfceb) Thanks [@novaotp](https://github.com/novaotp)! - Added `Avatar` component
+
+- [#33](https://github.com/sveltique/sveltique/pull/33) [`4f3857e`](https://github.com/sveltique/sveltique/commit/4f3857e09fd768d85dd99107295019c19df3c654) Thanks [@novaotp](https://github.com/novaotp)! - Added containerProps/restProps for every component
+
 ## 0.4.5
 
 ### Patch Changes
