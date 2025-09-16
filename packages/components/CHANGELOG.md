@@ -1,5 +1,11 @@
 # @sveltique/components
 
+## 0.6.0
+
+### Minor Changes
+
+- [#35](https://github.com/sveltique/sveltique/pull/35) [`14fbc47`](https://github.com/sveltique/sveltique/commit/14fbc47a41aa077682e48b01f859f77568778738) Thanks [@novaotp](https://github.com/novaotp)! - Added `Pagination` component
+
 ## 0.5.0
 
 ### Minor Changes
