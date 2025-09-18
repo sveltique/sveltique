@@ -208,7 +208,8 @@ Display syntax-highlighted code snippets. Ideal anywhere you need clear, readabl
 
         [data-code-line=""] {
             padding: 2px 20px;
-            width: var(--span-width, auto);
+            /* 20px extra for right padding */
+            width: calc(var(--span-width, auto) + 20px);
 
             &[data-highlighted="true"] {
                 background-color: color-mix(in oklab, currentColor 12%, transparent);
