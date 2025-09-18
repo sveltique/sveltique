@@ -32,22 +32,22 @@ export const button = tv({
 		{
 			shape: "rectangle",
 			size: "small",
-			class: "rounded-small px-3 py-1.5"
+			class: "rounded-small px-3 py-1.5 h-8"
 		},
 		{
 			shape: "rectangle",
 			size: "medium",
-			class: "rounded px-4 py-2"
+			class: "rounded px-4 py-2 h-9"
 		},
 		{
 			shape: "square",
 			size: "small",
-			class: "p-1 rounded-small"
+			class: "p-1 rounded-small size-8"
 		},
 		{
 			shape: "square",
 			size: "medium",
-			class: "p-2 rounded"
+			class: "p-2 rounded size-9"
 		},
 		{
 			variant: "contained",
