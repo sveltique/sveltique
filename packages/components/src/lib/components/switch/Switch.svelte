@@ -9,6 +9,7 @@ export interface SwitchProps
 		>,
 		WithRef<HTMLButtonElement>,
 		SwitchVariants {
+	/** @deprecated Use the `checked` property instead. */
 	ontoggle?: (checked: boolean) => void;
 }
 
