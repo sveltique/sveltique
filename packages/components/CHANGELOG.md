@@ -1,5 +1,15 @@
 # @sveltique/components
 
+## 0.6.1
+
+### Patch Changes
+
+- [#41](https://github.com/sveltique/sveltique/pull/41) [`a2be107`](https://github.com/sveltique/sveltique/commit/a2be1077d761ba87d0890d4835ba92f448d5bbeb) Thanks [@novaotp](https://github.com/novaotp)! - Added padding-right to `CodeBlock` spans
+
+- [#39](https://github.com/sveltique/sveltique/pull/39) [`6adbd11`](https://github.com/sveltique/sveltique/commit/6adbd112ddf46b8a8eef7562c886ecbf667a9b24) Thanks [@novaotp](https://github.com/novaotp)! - Deprecated `ontoggle` event on `Switch` component
+
+- [#38](https://github.com/sveltique/sveltique/pull/38) [`7d26f7c`](https://github.com/sveltique/sveltique/commit/7d26f7c08a21e749492488098f0fed4545affd0d) Thanks [@novaotp](https://github.com/novaotp)! - Buttons have a defined size
+
 ## 0.6.0
 
 ### Minor Changes
