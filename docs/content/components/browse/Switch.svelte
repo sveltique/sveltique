@@ -5,10 +5,15 @@ export const metadata = {
 </script>
 
 <script lang="ts">
-import { Badge, Switch } from "@sveltique/components";
+import { Badge, Button, Switch } from "@sveltique/components";
 import Playground from "$components/Playground.svelte";
-import { toasts } from "$lib/contexts/toast.svelte";
 import { script } from "$utils/playground";
+
+let checked = $state(false);
+
+function toggle() {
+    checked = !checked;
+}
 
 const basicUsageCode = `${script("import { Switch } from '@sveltique/components';")}
 
@@ -17,24 +22,18 @@ const basicUsageCode = `${script("import { Switch } from '@sveltique/components'
 <Switch disabled />
 <Switch checked disabled />`;
 
-const toggleEventCode = `${script(`import { Switch } from "@sveltique/components";
-    import { toasts } from "path/to/toasts";
+const controllingStateCode = `${script(`import { Switch } from '@sveltique/components';
 
-    function ontoggle(checked: boolean) {
-        const type = checked ? "success" : "danger";
-        const content = checked ? "Switch is toggled." : "Switch is not toggled.";
+    let checked = $state(false);
 
-        toasts.add({ type, content });
+    function toggle() {
+        checked = !checked;
     }`)}
 
-<Switch {ontoggle} />`;
-
-function ontoggle(checked: boolean) {
-    const type = checked ? "success" : "danger";
-    const content = checked ? "Switch is toggled." : "Switch is not toggled.";
-
-    toasts.add({ type, content });
-}
+<Switch bind:checked />
+<Button onclick={toggle}>
+    Toggle switch
+</Button>`
 </script>
 
 <h1 id="switch">Switch</h1>
@@ -48,11 +47,12 @@ function ontoggle(checked: boolean) {
 	<Switch checked disabled />
 </Playground>
 
-<h3 id="toggle-event">Toggle event</h3>
+<h2 id="controlling-state">Controlling state</h2>
 <p>
-    If you want to execute code when the switch's value changes, you can use the <Badge variant="secondary">ontoggle</Badge>
-    callback.
+    You can bind to the <Badge variant="secondary">checked</Badge> property to manually control the
+    state of the switch.
 </p>
-<Playground code={toggleEventCode}>
-    <Switch {ontoggle} />
+<Playground code={controllingStateCode} class="flex-col">
+    <Switch bind:checked />
+    <Button onclick={toggle}>Toggle switch</Button>
 </Playground>
