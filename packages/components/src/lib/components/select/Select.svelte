@@ -1,15 +1,16 @@
 <script lang="ts">
 import { onMount, type Snippet } from "svelte";
+import type { HTMLAttributes } from "svelte/elements";
 import { on } from "svelte/events";
 import type { ClassNameValue } from "tailwind-merge";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { type SelectVariants, select } from "./variants.js";
-import type { HTMLAttributes } from "svelte/elements";
 
 export interface SelectProps extends WithRef<HTMLDivElement>, SelectVariants {
 	id?: string;
 	children?: Snippet;
 	class?: ClassNameValue;
+	/** @deprecated Use `containerProps` instead. */
 	containerClass?: ClassNameValue;
 	containerProps?: ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>;
 	name?: string;
@@ -51,139 +52,147 @@ const {
 	placeholder: placeholderCss
 } = $derived(select({ open }));
 
-onMount(() => {
+onMount(selectDefaultOption);
+$effect(handleFocusedOption);
+
+/* $effect(() => {
+	if (!open && document.activeElement === listBoxRef) {
+		triggerRef?.focus();
+	}
+}); */
+
+/** If `value` is given, select the corresponding option. */
+function selectDefaultOption() {
+	if (!listBoxRef || !value) return;
+
 	const elements = getListChildren();
 
-	// Focused day is the first one if no value selected
-	// Otherwise, the focused day starts at the current value
-	if (!value) {
-		focusedId = elements.at(0)?.id;
-		return;
-	}
+	const defaultElement = elements.find(
+		(element) =>
+			element.hasAttribute("data-select-option") &&
+			element.getAttribute("data-value") === value &&
+			element.getAttribute("data-disabled") !== "true"
+	);
 
-	if (!listBoxRef) return;
+	if (!defaultElement) return;
+
+	value = defaultElement.getAttribute("data-value")!;
+	valueContent = defaultElement.textContent;
+}
+
+/** Handles focus management when the listbox opens. */
+function handleFocusedOption() {
+	if (!open) return;
+
+	const elements = getListChildren();
 
 	const defaultElement =
 		elements.find(
 			(element) =>
 				element.hasAttribute("data-select-option") &&
-				element.getAttribute("data-value") === value
-		) ?? elements.at(0);
+				element.getAttribute("data-value") === value &&
+				element.getAttribute("data-disabled") !== "true"
+		) ?? getFirstActiveOption();
 
-	if (!defaultElement) return;
+	focusedId = defaultElement?.id;
+}
 
-	focusedId = defaultElement.id;
-	value = defaultElement.getAttribute("data-value")!;
-	valueContent = defaultElement.textContent;
-});
+function onGlobalClick(event: MouseEvent) {
+	const target = event.target;
 
-$effect(() => {
-	return on(window, "click", (event) => {
-		const target = event.target;
+	// Invalid target, skip
+	if (!target || !(target instanceof HTMLElement)) return;
 
-		if (!target || !(target instanceof HTMLElement) || target === triggerRef) {
-			return;
-		}
+	// Trigger handles its own onclick
+	if (target === triggerRef) return;
 
-		if (listBoxRef !== target && !listBoxRef.contains(target)) {
-			open = false;
-			return;
-		}
-
-		if (
-			!target.hasAttribute("data-select-option") ||
-			target.getAttribute("data-disabled") === "true"
-		) {
-			return;
-		}
-
-		value = target.getAttribute("data-value")!;
-		valueContent = target.textContent;
-
+	if (!listBoxRef.contains(target)) {
 		open = false;
-	});
-});
+		return;
+	}
 
-$effect(() => {
+	if (
+		!target.hasAttribute("data-select-option") ||
+		target.getAttribute("data-disabled") === "true"
+	) {
+		return;
+	}
+
+	value = target.getAttribute("data-value")!;
+	valueContent = target.textContent;
+	open = false;
+}
+
+function onGlobalKeyDown(event: KeyboardEvent) {
 	if (!open) return;
 
-	if (value) {
-		const elements = getListChildren();
+	const target = event.target;
 
-		const defaultElement =
-			elements.find(
-				(element) =>
-					element.hasAttribute("data-select-option") &&
-					element.getAttribute("data-value") === value
-			) ?? elements.at(0);
+	if (!target || !(target instanceof HTMLElement)) return;
+	if (!ref || !ref.contains(target)) return;
 
-		if (defaultElement) {
-			focusedId = defaultElement.id;
-		}
-	}
+	event.preventDefault();
 
-	return on(window, "keydown", (event) => {
-		event.preventDefault();
-
-		if (!focusedId) return;
-		if (event.key === "Escape") {
-			open = false;
-		}
-
-		const child = getChildById(focusedId);
-		if (!child) return;
-
-		if (event.key === "ArrowUp") {
-			if (!child.previousElementSibling) return;
-
-			focusedId = child.previousElementSibling.id;
-		} else if (event.key === "ArrowDown") {
-			if (!child.nextElementSibling) return;
-
-			focusedId = child.nextElementSibling.id;
-		} else if (event.key === "Enter" || event.key === " ") {
-			value = child.getAttribute("data-value")!;
-			valueContent = child.textContent;
-
-			open = false;
-		}
-	});
-});
-
-$effect(() => {
-	if (open) return;
-
-	const elements = getListChildren();
-
-	if (!value) {
-		focusedId = elements.at(0)?.id;
+	if (
+		event.key === "Escape" ||
+		(!focusedId && target === triggerRef && ["Enter", " "].includes(event.key))
+	) {
+		open = false;
 		return;
-	} else {
-		if (!listBoxRef) return;
-
-		const defaultElement =
-			elements.find(
-				(element) =>
-					element.hasAttribute("data-select-option") &&
-					element.getAttribute("data-value") === value
-			) ?? elements.at(0);
-
-		if (!defaultElement) return;
-
-		focusedId = defaultElement.id;
 	}
-});
+
+	if (!focusedId) return;
+
+	const currentOption = getOptionById(focusedId);
+	if (!currentOption) return;
+
+	if (event.key === "Enter" || event.key === " ") {
+		value = currentOption.getAttribute("data-value")!;
+		valueContent = currentOption.textContent;
+		open = false;
+	} else if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+		const sibling = getActiveSibling(currentOption, event.key === "ArrowUp");
+
+		if (sibling) {
+			focusedId = sibling.id;
+		}
+	}
+}
 
 function getListChildren() {
 	return Array.from(listBoxRef.children) as HTMLLIElement[];
 }
 
-function getChildById(id: string) {
+function getFirstActiveOption() {
+	const elements = getListChildren();
+
+	return elements.find((el) => el.getAttribute("data-disabled") !== "true");
+}
+
+function getOptionById(id: string) {
 	const elements = getListChildren();
 
 	return elements.find((element) => element.id === id);
 }
+
+function getActiveSibling(element: HTMLElement, previous: boolean = true) {
+	const prop = previous ? "previousElementSibling" : "nextElementSibling";
+	let sibling = element[prop] as HTMLElement | null;
+
+	while (sibling) {
+		const isOption = sibling.getAttribute("data-select-option");
+		const isDisabled = sibling.getAttribute("data-disabled") === "true";
+
+		if (isOption && !isDisabled) return sibling;
+
+		sibling = sibling[prop] as HTMLElement | null;
+	}
+
+	return null;
+}
 </script>
+
+<svelte:window onclick={onGlobalClick} onkeydown={onGlobalKeyDown} />
 
 <div
     bind:this={ref}
@@ -199,9 +208,10 @@ function getChildById(id: string) {
 		onclick={() => (open = !open)}
 		role="combobox"
         data-select-trigger
+		aria-activedescendant={focusedId}
 		aria-controls="{componentId}-listbox"
 		aria-expanded={open}
-		aria-activedescendant={focusedId}
+        aria-haspopup="listbox"
 		class={trigger()}
 		{...restProps}
 	>
@@ -212,21 +222,7 @@ function getChildById(id: string) {
 				<span class={placeholderCss()}>{placeholder}</span>
 			{/if}
 		</span>
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			width="24"
-			height="24"
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			stroke-width="2"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-			class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down {triggerIcon()}"
-		>
-			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-			<path d="M6 9l6 6l6 -6" />
-		</svg>
+		{@render chevronDown()}
 	</button>
 	<ul
 		bind:this={listBoxRef}
@@ -241,3 +237,21 @@ function getChildById(id: string) {
 		{@render children?.()}
 	</ul>
 </div>
+
+{#snippet chevronDown()}
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down {triggerIcon()}"
+    >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M6 9l6 6l6 -6" />
+    </svg>
+{/snippet}
