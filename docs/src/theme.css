@@ -5,7 +5,7 @@
 	--radius-\*: initial;
 
 	/* Fonts */
-	--font-codeblock: var(--font-codeblock); /* Ensure you have imported the font before */
+	--font-codeblock: "Cascadia Code", sans-serif;
 
 	/* Generic colors */
 	--color-black: #000;
@@ -40,18 +40,13 @@
 	--color-danger-muted: color-mix(in oklab, var(--danger), var(--background) 10%);
 
 	/* Radius and DERIVED RADIUS */
-	--radius: var(--base-radius);
-	--radius-small: calc(var(--base-radius) / 2);
-	--radius-large: calc(var(--base-radius) * 2);
+	--radius: 0.5rem;
+	--radius-small: calc(var(--radius) / 2);
+	--radius-large: calc(var(--radius) * 2);
 	--radius-full: 9999px;
 }
 
 :root {
-	/* Ensure you have imported the font before */
-	--font-codeblock: "Cascadia Code", sans-serif;
-
-	--base-radius: 0.5rem;
-
 	/* Background color */
 	--background: white;
 	--foreground: oklch(20.5% 0 0);
