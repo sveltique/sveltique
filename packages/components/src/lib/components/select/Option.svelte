@@ -84,6 +84,8 @@ Designed to be a drop-in replacement for the native `option` element.
 	data-value={value}
 	data-selected={selected}
 	data-disabled={disabled}
+    aria-selected={selected}
+    aria-disabled={disabled}
 	class={container({ className })}
 	{...restProps}
 >
