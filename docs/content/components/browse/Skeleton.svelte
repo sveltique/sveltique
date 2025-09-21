@@ -6,7 +6,7 @@ export const metadata = {
 </script>
 
 <script lang="ts">
-import { Badge, Skeleton } from "@sveltique/components";
+import { Alert, Badge, Skeleton } from "@sveltique/components";
 import Playground from "$components/Playground.svelte";
 import { script } from "$utils/playground.js";
 
@@ -43,10 +43,11 @@ const animationNoneCode = `${script("import { Skeleton } from '@sveltique/compon
 </p>
 
 <h2 id="basic-usage">Basic Usage</h2>
-<p>
-	When using a <code>{'<Skeleton />'}</code>, you must explicitly provide their <Badge variant="secondary">width</Badge>
-	and <Badge variant="secondary">height</Badge>.
-</p>
+<Alert class="mb-4">
+    You must explicitly provide a <Badge variant="secondary">width</Badge> and <Badge variant="secondary">
+        height
+    </Badge>.
+</Alert>
 <Playground code={basicUsageCode}>
 	<div class="max-w-3xs relative flex w-full flex-col items-start gap-2.5">
 		<Skeleton class="h-32 w-full" />
