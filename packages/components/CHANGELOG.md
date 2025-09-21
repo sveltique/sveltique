@@ -1,5 +1,11 @@
 # @sveltique/components
 
+## 0.6.2
+
+### Patch Changes
+
+- [#42](https://github.com/sveltique/sveltique/pull/42) [`e3209b5`](https://github.com/sveltique/sveltique/commit/e3209b552125a60f36080c2eb613f63961f95e51) Thanks [@novaotp](https://github.com/novaotp)! - Fixed `Select.Option` disabled handling
+
 ## 0.6.1
 
 ### Patch Changes
