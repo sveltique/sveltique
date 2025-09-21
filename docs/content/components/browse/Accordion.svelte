@@ -206,6 +206,18 @@ export const metadata = {
     <li>Provides a smooth sliding transition when opening or closing</li>
 </ul>
 
+<h2 id="structure">Structure</h2>
+<ul>
+    <li>
+        <Badge variant="secondary">Accordion.Root</Badge> : Wraps the component, managing state, and
+        keyboard navigation.
+    </li>
+    <li>
+        <Badge variant="secondary">Accordion.Item</Badge> : Defines an individual item, containing a
+        trigget and its content.
+    </li>
+</ul>
+
 <h2 id="customization">Customization</h2>
 
 <h3 id="expand-icon">Icon</h3>
