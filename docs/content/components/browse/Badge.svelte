@@ -5,9 +5,10 @@ export const metadata = {
 </script>
 
 <script>
-import { Badge, badge } from "@sveltique/components";
+import { Badge, badge, Button } from "@sveltique/components";
 import IconCircleDashedCheck from "@tabler/icons-svelte/icons/circle-dashed-check";
 import IconTrash from "@tabler/icons-svelte/icons/trash";
+import IconBellFilled from "@tabler/icons-svelte/icons/bell-filled";
 import Playground from "$components/Playground.svelte";
 import { script } from "$utils/playground";
 
@@ -24,6 +25,20 @@ const numberCode = `${script('import { Badge } from "@sveltique/components";')}
 <Badge variant="secondary" number>10</Badge>
 <Badge variant="outline" number>15</Badge>
 <Badge variant="danger" number>99+</Badge>`;
+
+const notificationCountCode = `${script(`import { Badge } from '@sveltique/components';
+    import IconBellFilled from '@tabler/icons-svelte/icons/bell-filled';`)}
+
+<Button variant="text" shape="square">
+    <IconBellFilled />
+    <Badge
+        variant="danger"
+        number
+        class="absolute top-1 right-1 translate-x-1/2 -translate-y-1/2"
+    >
+        99+
+    </Badge>
+</Button>`
 
 const iconWithTextCode = `${script(`import { Badge } from '@sveltique/components';
     import IconCircleDashedCheck from '@tabler/icons-svelte/icons/circle-dashed-check';
@@ -77,6 +92,16 @@ const interactiveBadgeCode = `${script("import { badge } from '@sveltique/compon
 </Playground>
 
 <h2 id="examples">Examples</h2>
+
+<h3>Notification count</h3>
+<Playground code={notificationCountCode}>
+    <Button variant="text" shape="square">
+        <IconBellFilled />
+        <Badge variant="danger" number class="absolute top-1 right-1 translate-x-1/2 -translate-y-1/2">
+            99+
+        </Badge>
+    </Button>
+</Playground>
 
 <h3 id="icon-with-text">Icon with text</h3>
 <Playground code={iconWithTextCode}>
