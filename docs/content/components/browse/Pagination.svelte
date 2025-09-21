@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Badge, Pagination } from "@sveltique/components";
+import { Alert, Badge, Link, Pagination } from "@sveltique/components";
 import IconChevronLeft from "@tabler/icons-svelte/icons/chevron-left";
 import IconChevronRight from "@tabler/icons-svelte/icons/chevron-right";
 import Playground from "$components/Playground.svelte";
@@ -47,6 +47,11 @@ const ariaLabelCode = `${script('import { Pagination } from "@sveltique/componen
 
 <h1 id="pagination">Pagination</h1>
 <p>Enables navigation through a range of pages, with support for previous/next links and skipped pages.</p>
+<Alert>
+    Looking to dynamically create a pagination ? Check out the <Link href="/docs/patterns/browse/dynamic-pagination">
+        Dynamic Pagination
+    </Link> pattern.
+</Alert>
 
 <h2 id="basic-usage">Basic Usage</h2>
 <Playground code={basicUsageCode}>

@@ -6,7 +6,7 @@ export const metadata = {
 </script>
 
 <script lang="ts">
-import { Badge, Progress } from "@sveltique/components";
+import { Alert, Badge, Label, Progress } from "@sveltique/components";
 import { normalizeProgress } from "@sveltique/components/utils";
 import { tick } from "svelte";
 import CodeBlock from "$components/CodeBlock.svelte";
@@ -16,6 +16,9 @@ import { script } from "$utils/playground";
 let intervalValue = $state(100);
 let step = $state(1);
 let value = $state(0);
+
+let storageUsed = $state(88);
+let storageLimit = $state(100);
 
 $effect(() => {
 	const interval = setInterval(async () => {
@@ -33,7 +36,7 @@ $effect(() => {
 
 const basicUsageCode = `${script('import { Progress } from "@sveltique/components";')}
     
-<Progress value={73} />`
+<Progress value={73} />`;
 
 const updatingValueCode = `${script(`import { Progress } from "@sveltique/components";
     
@@ -50,13 +53,42 @@ const updatingValueCode = `${script(`import { Progress } from "@sveltique/compon
         }, 100);
     });`)}
     
-<Progress {value} />`
+<Progress {value} />`;
 
 const nonStandardRangesCode = `${script(`import { Progress } from "@sveltique/components";
     import { normalizeProgress } from "@sveltique/components/utils";`)}
 
 <!-- normalizeProgress(value, min, max) -->
-<Progress value={normalizeProgress(203, 47, 296)} />`
+<Progress value={normalizeProgress(203, 47, 296)} />`;
+
+const quotaCode = `${script(`import { Alert, Label, Progress } from "@sveltique/components";
+
+    let storageUsed = $state(88);
+    let storageLimit = $state(100);`)}
+
+<div class="relative w-full max-w-md flex flex-col gap-3">
+    {#if storageUsed > 80}
+        {@const percentage = Math.round(storageUsed * 100 / storageLimit)}
+        <Alert type="warning">
+            You're approaching your storage limit ({percentage}%). Consider upgrading to a Pro plan.
+        </Alert>
+    {/if}
+    <div class="relative w-full flex flex-col gap-3">
+        <div class="relative w-full flex justify-between items-center">
+            <Label for="storage-used">
+                Storage usage
+            </Label>
+            <span class="text-sm">
+                {storageUsed} / {storageLimit} GB
+            </span>
+        </div>
+        <Progress
+            id="storage-used"
+            value={storageUsed}
+            class="[&>[data-progress-fill]]:bg-warning"
+        />
+    </div>
+</div>`;
 </script>
 
 <h1 id="progress">Progress</h1>
@@ -92,3 +124,28 @@ const nonStandardRangesCode = `${script(`import { Progress } from "@sveltique/co
 	re-rendering process. In that case, you should disable the transition.
 </p>
 <CodeBlock code={'<Progress {value} transition={false} />'} />
+
+<h2 id="examples">Examples</h2>
+
+<h3>Quota</h3>
+<Playground code={quotaCode}>
+    <div class="relative w-full max-w-md flex flex-col gap-3">
+        {#if storageUsed > 80}
+            {@const percentage = Math.round(storageUsed * 100 / storageLimit)}
+            <Alert type="warning">
+                You're approaching your storage limit ({percentage}%). Consider upgrading to a Pro plan.
+            </Alert>
+        {/if}
+        <div class="relative w-full flex flex-col gap-3">
+            <div class="relative w-full flex justify-between items-center">
+                <Label for="storage-used">Storage usage</Label>
+                <span class="text-sm">{storageUsed} / {storageLimit} GB</span>
+            </div>
+            <Progress
+                id="storage-used"
+                value={storageUsed}
+                class="[&>[data-progress-fill]]:bg-warning"
+            />
+        </div>
+    </div>
+</Playground>

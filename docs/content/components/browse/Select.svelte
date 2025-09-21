@@ -6,7 +6,7 @@ export const metadata = {
 </script>
 
 <script lang="ts">
-import { Alert, Badge, Select } from "@sveltique/components";
+import { Alert, Badge, Kbd, Select } from "@sveltique/components";
 import Playground from "$components/Playground.svelte";
 import { script } from "$utils/playground";
 
@@ -133,3 +133,22 @@ const disablingOptionsCode = `${script(`import { Select } from '@sveltique/compo
         {/each}
 	</Select.Root>
 </Playground>
+
+<h2 id="features">Features</h2>
+<ul>
+    <li>Handles focus, selection, and disabled states</li>
+    <li>Navigate between options with <Kbd>ArrowUp</Kbd> and <Kbd>ArrowDown</Kbd></li>
+    <li>Select an option with <Kbd>Enter</Kbd> or <Kbd>Space</Kbd></li>
+</ul>
+
+<h2 id="structure">Structure</h2>
+<ul>
+    <li>
+        <Badge variant="secondary">Select.Root</Badge> : Wraps the component and controls state, dropdown
+        positioning, and keyboard input.
+    </li>
+    <li>
+        <Badge variant="secondary">Select.Option</Badge> : Defines an individual option with built-in
+        focus, selection, and disabled handling.
+    </li>
+</ul>
