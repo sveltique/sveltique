@@ -40,6 +40,12 @@ const complexFallbackCode = `${script(`import { Avatar } from "@sveltique/compon
     <Avatar src="/images/avatar.webp" alt="Username" />
 </Playground>
 
+<h2 id="features">Features</h2>
+<ul>
+    <li>Shows the image if available</li>
+    <li>Automatically displays a fallback if the image is loading or fails to load</li>
+</ul>
+
 <h2 id="fallback">Fallback</h2>
 <p>
    If the image fails to load or no <Badge variant="secondary">src</Badge> is provided, you can use
