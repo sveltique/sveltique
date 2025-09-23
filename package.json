@@ -1,23 +1,27 @@
 {
-	"name": "monorepo",
-	"scripts": {
-		"docs.dev": "npm --prefix ./docs run dev",
-		"docs.install": "npm --prefix ./docs install",
-		"docs.build": "npm --prefix ./docs run build",
-		"docs.preview": "npm --prefix ./docs run preview",
-		"components.dev": "npm --prefix ./packages/components run build:watch",
-		"components.install": "npm --prefix ./packages/components install",
-		"components.build": "npm --prefix ./packages/components run build",
-		"install": "npm run components.install && npm run docs.install",
-		"dev": "concurrently 'npm:components.dev' 'npm:docs.dev'",
-		"build": "npm run components.build && npm run docs.build",
-		"changesets:release": "changeset publish"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "2.2.2",
-		"@changesets/changelog-github": "^0.5.1",
-		"@changesets/cli": "^2.29.6",
-		"concurrently": "^9.2.0"
-	},
-	"workspaces": ["packages/*"]
+    "name": "monorepo",
+    "scripts": {
+        "docs.dev": "npm --prefix ./docs run dev",
+        "docs.install": "npm --prefix ./docs install",
+        "docs.build": "npm --prefix ./docs run build",
+        "docs.preview": "npm --prefix ./docs run preview",
+        "components.dev": "npm --prefix ./packages/components run build:watch",
+        "components.install": "npm --prefix ./packages/components install",
+        "components.build": "npm --prefix ./packages/components run build",
+        "components.docs.dev": "npm --prefix ./packages/components run generate.docs:watch",
+        "components.docs.build": "npm --prefix ./packages/components run generate.docs",
+        "install": "npm run components.install && npm run docs.install",
+        "dev": "concurrently 'npm:components.dev' 'npm:components.docs.dev' 'npm:docs.dev'",
+        "build": "npm run components.build && npm run components.docs.build && npm run docs.build",
+        "changesets:release": "changeset publish"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "2.2.2",
+        "@changesets/changelog-github": "^0.5.1",
+        "@changesets/cli": "^2.29.6",
+        "concurrently": "^9.2.0"
+    },
+    "workspaces": [
+        "packages/*"
+    ]
 }
