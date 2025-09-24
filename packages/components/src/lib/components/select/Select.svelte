@@ -1,7 +1,6 @@
 <script lang="ts">
 import { onMount, type Snippet } from "svelte";
 import type { HTMLAttributes } from "svelte/elements";
-import { on } from "svelte/events";
 import type { ClassNameValue } from "tailwind-merge";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { type SelectVariants, select } from "./variants.js";
