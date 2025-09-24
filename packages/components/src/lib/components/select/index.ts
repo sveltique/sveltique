@@ -1,5 +1,5 @@
-import Option from "./Option.svelte";
-import Root from "./Select.svelte";
+import Option, { type SelectOptionProps } from "./Option.svelte";
+import Root, { type SelectProps } from "./Select.svelte";
 
 export {
 	type SelectOptionVariants,
@@ -7,6 +7,8 @@ export {
 	select,
 	selectOption
 } from "./variants.js";
+
+export type { SelectProps, SelectOptionProps };
 
 /**
  * A styled, accessible dropdown replacement for the native `select` element, ensuring consistent appearance and behavior across browsers.
