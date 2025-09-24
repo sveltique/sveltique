@@ -2,7 +2,7 @@
 import { Backdrop, button, Paper } from "@sveltique/components";
 import IconChevronRight from "@tabler/icons-svelte/icons/chevron-right";
 import IconMenuDeep from "@tabler/icons-svelte/icons/menu-deep";
-import { untrack } from "svelte";
+import { setContext, untrack } from "svelte";
 import { on } from "svelte/events";
 import { fly } from "svelte/transition";
 import { cnBase } from "tailwind-variants";
@@ -10,6 +10,8 @@ import { page } from "$app/state";
 import { setOnThisPageContext } from "$lib/contexts/on-this-page.svelte.js";
 
 let { children, data, params } = $props();
+
+setContext("api_reference", data.apiReference);
 
 const headings = setOnThisPageContext();
 

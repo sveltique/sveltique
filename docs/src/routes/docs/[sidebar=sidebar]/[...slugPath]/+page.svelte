@@ -1,7 +1,16 @@
 <script lang="ts">
 import { button, Separator } from "@sveltique/components";
+import { getContext } from "svelte";
+import { page } from "$app/state";
+import ApiReference from "$components/api-reference/APIReference.svelte";
+import type { SimplifiedGroup } from "$lib/reference/generator.js";
 
 let { data, params } = $props();
+
+const apiReference = getContext<SimplifiedGroup[]>("api_reference");
+
+let name = $derived(page.url.pathname.split("/").at(-1));
+let group = $derived(apiReference.find((group) => group.name === name));
 </script>
 
 <svelte:head>
@@ -12,6 +21,10 @@ let { data, params } = $props();
 <div class="relative w-full pb-16 flex flex-col gap-12">
     <div id="content" class="relative w-full">
         <data.Component />
+
+        {#if group}
+            <ApiReference {group} />
+        {/if}
     </div>
     <Separator />
     <div class="relative w-full flex flex-col sm:flex-row items-center gap-6">
