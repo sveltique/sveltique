@@ -1,5 +1,17 @@
 # @sveltique/components
 
+## 0.6.3
+
+### Patch Changes
+
+- [#51](https://github.com/sveltique/sveltique/pull/51) [`674687f`](https://github.com/sveltique/sveltique/commit/674687f86b69dd9196eca9bbbd4a3e8406154db8) Thanks [@novaotp](https://github.com/novaotp)! - `Select.Root` open is now bindable
+
+- [#50](https://github.com/sveltique/sveltique/pull/50) [`0d76fec`](https://github.com/sveltique/sveltique/commit/0d76fecce9685f0c44fe73504a569863f49506cd) Thanks [@novaotp](https://github.com/novaotp)! - Exported `PaginationProps` from `Pagination`
+
+- [#49](https://github.com/sveltique/sveltique/pull/49) [`458df00`](https://github.com/sveltique/sveltique/commit/458df0086cac1cfe0230de5879a7d1c0ed46171f) Thanks [@novaotp](https://github.com/novaotp)! - Added comments to every property
+
+- [#46](https://github.com/sveltique/sveltique/pull/46) [`bd01628`](https://github.com/sveltique/sveltique/commit/bd0162868c0affbc198f7d263e1e5818c7086e43) Thanks [@novaotp](https://github.com/novaotp)! - Exported `SelectProps` and `SelectOptionProps` from `Select`
+
 ## 0.6.2
 
 ### Patch Changes
