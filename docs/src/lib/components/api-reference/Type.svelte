@@ -21,7 +21,7 @@ let { name, properties } = $derived(docType);
     <div class="relative w-full py-2 text-muted-foreground font-semibold">
         Property
     </div>
-    {#each properties as { comment, defaultValue, deprecated, name, optional, type }}
+    {#each properties as { comment, defaultValue, deprecated, name, bindable, optional, type }}
         <div class="relative w-full py-2 flex justify-between items-center">
             <div class="pr-6 flex gap-3">
                 <Badge
@@ -39,7 +39,7 @@ let { name, properties } = $derived(docType);
                     <Badge variant="danger">required</Badge>
                 {/if}
 
-                {#if name === "ref"}
+                {#if bindable}
                     <Badge>$bindable</Badge>
                 {/if}
             </div>
@@ -101,7 +101,7 @@ let { name, properties } = $derived(docType);
         <div class="w-[30%] pr-6">Type</div>
         <div class="w-2/5">Description</div>
     </div>
-    {#each properties as { comment, defaultValue, deprecated, name, optional, type }}
+    {#each properties as { comment, defaultValue, deprecated, name, bindable, optional, type }}
         <div class="relative w-full py-2 flex justify-between items-center">
             <div class="w-[30%] pr-6 flex gap-3">
                 <Badge
@@ -119,7 +119,7 @@ let { name, properties } = $derived(docType);
                     <Badge variant="danger">required</Badge>
                 {/if}
 
-                {#if name === "ref"}
+                {#if bindable}
                     <Badge>$bindable</Badge>
                 {/if}
             </div>
