@@ -3,13 +3,14 @@
 type SimplifiedProperty = {
 	name: string;
 	optional: boolean;
+	bindable: boolean;
 	type: string;
 	comment: string;
 	deprecated?: string;
 	defaultValue?: string;
 };
 
-type SimplifiedType = {
+export type SimplifiedType = {
 	name: string;
 	extends?: string;
 	properties: SimplifiedProperty[];
@@ -69,6 +70,11 @@ function extractType(t: any): string {
 function extractExtends(item: any): string | undefined {
 	if (!item.extendedTypes?.length) return undefined;
 	return item.extendedTypes.map(extractType).join(" & ");
+}
+
+function extractBindable(node: any): boolean {
+	if (!node.comment?.blockTags) return false;
+	return node.comment.blockTags.some((t: any) => t.tag === "@bindable");
 }
 
 function extractDefault(node: any): string | undefined {
@@ -143,6 +149,7 @@ export function simplifyDocs(docs: any): SimplifiedGroup[] {
 							props.push({
 								name: prop.name,
 								optional: !!prop.flags?.isOptional,
+								bindable: extractBindable(prop),
 								type: extractType(prop.type),
 								comment: extractComment(prop),
 								deprecated: extractDeprecated(prop),
@@ -154,6 +161,14 @@ export function simplifyDocs(docs: any): SimplifiedGroup[] {
 					if (!groups[folder]) {
 						groups[folder] = { name: folder, types: [] };
 					}
+
+					props.sort((a, b) => {
+						if (a.optional !== b.optional) {
+							return a.optional ? 1 : -1;
+						}
+
+						return a.name.localeCompare(b.name);
+					});
 
 					groups[folder].types.push({
 						name: item.name,

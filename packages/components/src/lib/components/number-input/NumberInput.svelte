@@ -1,21 +1,43 @@
 <script lang="ts">
 import type { HTMLAttributes, HTMLInputAttributes } from "svelte/elements";
-import type { ClassNameValue } from "tailwind-merge";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { type NumberInputVariants, numberInput } from "./variants.js";
 
 export interface NumberInputProps
-	extends Omit<HTMLInputAttributes, "class" | "step" | "min" | "max" | "value">,
+	extends ReplaceWithTWMergeClass<Omit<HTMLInputAttributes, "step" | "min" | "max" | "value">>,
 		WithRef<HTMLDivElement>,
 		NumberInputVariants {
-	/** @deprecated Use `containerProps` instead. */
+	/**
+	 * Additional classes to add to the element.
+	 * @deprecated Use `containerProps` instead.
+	 * @default —
+	 */
 	containerClass?: string | undefined;
+	/**
+	 * Additional properties to customize the root container.
+	 * @default {}
+	 */
 	containerProps?: ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>;
-	class?: ClassNameValue;
+	/**
+	 * The value of the input.
+	 * @bindable
+	 * @default null
+	 */
 	value?: number | null;
-	/** @default 1 */
+	/**
+	 * The granularity that the value must adhere to.
+	 * @default 1
+	 */
 	step?: number | undefined;
+	/**
+	 * The minimum value of the input.
+	 * @default —
+	 */
 	min?: number | undefined;
+	/**
+	 * The maxium value of the input.
+	 * @default —
+	 */
 	max?: number | undefined;
 }
 

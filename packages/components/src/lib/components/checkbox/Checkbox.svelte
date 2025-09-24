@@ -6,7 +6,19 @@ import { type CheckboxVariants, checkbox } from "./variants.js";
 export interface CheckboxProps
 	extends ReplaceWithTWMergeClass<Omit<HTMLInputAttributes, "checked" | "disabled" | "type">>,
 		WithRef<HTMLInputElement>,
-		CheckboxVariants {}
+		CheckboxVariants {
+	/**
+	 * Whether the checkbox is checked or not.
+	 * @bindable
+	 * @default —
+	 */
+	checked?: CheckboxVariants["checked"];
+	/**
+	 * Whether the checkbox is disabled or not.
+	 * @default false
+	 */
+	disabled?: CheckboxVariants["disabled"];
+}
 
 let {
 	checked = $bindable(),

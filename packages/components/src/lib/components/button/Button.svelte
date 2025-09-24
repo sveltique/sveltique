@@ -8,7 +8,33 @@ import { type ButtonVariants, button } from "./variants.js";
 export interface ButtonProps
 	extends ReplaceWithTWMergeClass<Omit<HTMLButtonAttributes, "color" | "disabled">>,
 		ButtonVariants,
-		WithRef<HTMLButtonElement> {}
+		WithRef<HTMLButtonElement> {
+	/**
+	 * The color of the button to render.
+	 * @default "primary"
+	 */
+	color?: ButtonVariants["color"];
+	/**
+	 * The size of the button to render.
+	 * @default "medium"
+	 */
+	size?: ButtonVariants["size"];
+	/**
+	 * The variant of the button to render.
+	 * @default "contained"
+	 */
+	variant?: ButtonVariants["variant"];
+	/**
+	 * The shape of the button to render.
+	 * @default "rectangle"
+	 */
+	shape?: ButtonVariants["shape"];
+	/**
+	 * Whether the button is disabled or not.
+	 * @default false
+	 */
+	disabled?: ButtonVariants["disabled"];
+}
 
 let {
 	children,

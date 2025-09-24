@@ -9,13 +9,28 @@ export interface SelectOptionProps
 	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLLIElement>>,
 		SelectOptionVariants,
 		WithRef<HTMLLIElement> {
-	/** @default $props.id() */
+	/**
+	 * The ID of the option.
+	 * @default $props.id()
+	 */
 	id?: string;
+	/** The value of the option. */
 	value: string;
-	/** @default false */
+	/**
+	 * Whether the option is selected or not.
+	 * @default false
+	 */
 	selected?: boolean;
-	/** @default false */
-	disabled?: boolean;
+	/**
+	 * Whether the option is disabled or not.
+	 * @default false
+	 */
+	disabled?: SelectOptionVariants["disabled"];
+	/**
+	 * Whether the option is focused or not.
+	 * @default false
+	 */
+	focused?: SelectOptionVariants["focused"];
 }
 
 let {

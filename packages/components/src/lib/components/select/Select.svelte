@@ -6,17 +6,64 @@ import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { type SelectVariants, select } from "./variants.js";
 
 export interface SelectProps extends WithRef<HTMLDivElement>, SelectVariants {
+	/**
+	 * The ID of the trigger.
+	 * @default —
+	 */
 	id?: string;
+	/**
+	 * The children content to render.
+	 * @default —
+	 */
 	children?: Snippet;
+	/**
+	 * Additional classes to add to the trigger.
+	 * @default —
+	 */
 	class?: ClassNameValue;
-	/** @deprecated Use `containerProps` instead. */
+	/**
+	 * Additional classes to add to the root container.
+	 * @deprecated Use `containerProps` instead.
+	 * @default —
+	 */
 	containerClass?: ClassNameValue;
+	/**
+	 * Additional properties to customize the root container.
+	 * @default {}
+	 */
 	containerProps?: ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>;
+	/**
+	 * The name of the input.
+	 * @default —
+	 */
 	name?: string;
+	/**
+	 * The value of the select.
+	 * @bindable
+	 * @default —
+	 */
 	value?: string;
+	/**
+	 * The placeholder of the trigger.
+	 * @default —
+	 */
 	placeholder?: string;
+	/**
+	 * Whether the select is valid or not.
+	 * @default —
+	 */
 	"aria-invalid"?: boolean;
+	/**
+	 * The ID of the element describing the trigger.
+	 * @default —
+	 */
 	"aria-describedby"?: string;
+	/**
+	 * Whether the select is open or not.
+	 * @bindable
+	 * @default false
+	 */
+	open?: SelectVariants["open"];
 }
 
 let {

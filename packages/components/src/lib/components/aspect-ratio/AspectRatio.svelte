@@ -8,7 +8,12 @@ export interface AspectRatioProps
 	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLElement>>,
 		WithRef<HTMLDivElement>,
 		AspectRatioVariants {
+	/**
+	 * The children content to render.
+	 * @default —
+	 */
 	children?: Snippet;
+	/** The desired aspect ratio of the container. */
 	ratio: number;
 }
 

@@ -1,13 +1,17 @@
 <script lang="ts">
 import type { HTMLInputAttributes } from "svelte/elements";
-import type { TWMergeClass, WithRef } from "$lib/types.js";
+import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { type TextInputVariants, textInput } from "./variants.js";
 
 export interface TextInputProps
-	extends Omit<HTMLInputAttributes, "class" | "value">,
-		TWMergeClass,
+	extends ReplaceWithTWMergeClass<Omit<HTMLInputAttributes, "value">>,
 		WithRef<HTMLInputElement>,
 		TextInputVariants {
+	/**
+	 * The value of the text input.
+	 * @bindable
+	 * @default ""
+	 */
 	value?: string;
 }
 

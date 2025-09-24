@@ -7,7 +7,13 @@ export interface ProgressProps
 	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
 		ProgressVariants,
 		WithRef<HTMLDivElement> {
+	/** The value of the progress bar. */
 	value: number;
+	/**
+	 * Whether to smoothly transition to a new value or not.
+	 * @default true
+	 */
+	transition?: ProgressVariants["transition"];
 }
 
 let {

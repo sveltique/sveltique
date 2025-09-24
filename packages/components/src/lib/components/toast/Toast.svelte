@@ -9,17 +9,40 @@ export interface ToastProps
 	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
 		WithRef<HTMLDivElement>,
 		ToastVariants {
+	/**
+	 * The aria-label of the close button rendered when `onclose` is given.
+	 * @default —
+	 */
 	closeAriaLabel?: string;
 	/**
-	 * If passed, renders a close button.
+	 * If passed, renders a close button that runs the callback.
 	 * @deprecated Use `onclose` instead.
+	 * @default —
 	 */
 	onClose?: () => void;
-	/** If passed, renders a close button. */
+	/**
+	 * If passed, renders a close button that runs the callback.
+	 * @default —
+	 */
 	onclose?: () => void;
+	/**
+	 * The action of the toast. Takes precedence over `onclose`.
+	 * @default —
+	 */
 	action?: Snippet;
+	/** The children content to render. */
 	children: Snippet;
+	/**
+	 * Whether the toast is open or not.
+	 * @bindable
+	 * @default true
+	 */
 	open?: boolean;
+	/**
+	 * The type of toast to render.
+	 * @default "info"
+	 */
+	type?: ToastVariants["type"];
 }
 
 let {

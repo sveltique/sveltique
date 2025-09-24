@@ -10,9 +10,28 @@ type Status = "idle" | "loading" | "ready" | "error";
 export interface AvatarProps
 	extends ReplaceWithTWMergeClass<HTMLImgAttributes>,
 		WithRef<HTMLDivElement> {
+	/**
+	 * The fallback to render while the avatar is loading or failed to load.
+	 *
+	 * Takes precedence over `fallback`.
+	 * @default —
+	 */
 	children?: Snippet;
+	/**
+	 * Additional properties to customize root container.
+	 * @default {}
+	 */
 	containerProps?: ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>;
+	/**
+	 * The fallback to render while the avatar is loading or failed to load.
+	 * @default ""
+	 */
 	fallback?: string;
+	/**
+	 * The underlying DOM element of the image.
+	 * @bindable
+	 * @default —
+	 */
 	imageRef?: HTMLImageElement;
 }
 

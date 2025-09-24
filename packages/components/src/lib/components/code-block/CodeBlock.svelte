@@ -13,21 +13,49 @@ import type { HTMLAttributes } from "svelte/elements";
 export interface CodeBlockProps
 	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLPreElement>>,
 		WithRef<HTMLDivElement> {
+	/** The code to render. */
 	code: string;
-	/** @deprecated Use `containerProps` instead. */
+	/**
+	 * Additional classes to add to the root container.
+	 * @deprecated Use `containerProps` instead.
+	 * @default —
+	 */
 	containerClass?: ClassNameValue;
+	/**
+	 * Additional properties to customize the root container.
+	 * @default {}
+	 */
 	containerProps?: ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>;
+	/** The language of the code to render. */
 	lang: BundledLanguage;
+	/** The theme of the code to render. */
 	theme: BundledTheme;
+	/** The shiki highlighter instance to use to highlight the code. */
 	highlighter: HighlighterGeneric<BundledLanguage, BundledTheme>;
-	/** @default false */
+	/**
+	 * Whether to show the line numbers or not.
+	 * @default false
+	 */
 	showLineNumbers?: boolean;
-	/** @default '' */
+	/**
+	 * The lines to highlight in the code.
+	 * @default ""
+	 */
 	highlightedLines?: string;
+	/**
+	 * The filename of the code to render.
+	 * @default —
+	 */
 	filename?: string;
-	/** Only works if you pass in a `filename`. */
+	/**
+	 * The icon of the code to render. Only works if you pass in a `filename`.
+	 * @default —
+	 */
 	icon?: Snippet;
-	/** The title of the copy button's tooltip. */
+	/**
+	 * The title of the copy button's tooltip.
+	 * @default —
+	 */
 	copyTitle?: (isCopied: boolean) => string;
 }
 

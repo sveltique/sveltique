@@ -7,6 +7,11 @@ export interface TextAreaProps
 	extends ReplaceWithTWMergeClass<Omit<HTMLTextareaAttributes, "value">>,
 		WithRef<HTMLTextAreaElement>,
 		TextAreaVariants {
+	/**
+	 * The value of the text area.
+	 * @bindable
+	 * @default —
+	 */
 	value?: string;
 }
 
