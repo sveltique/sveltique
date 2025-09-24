@@ -162,6 +162,14 @@ export function simplifyDocs(docs: any): SimplifiedGroup[] {
 						groups[folder] = { name: folder, types: [] };
 					}
 
+					props.sort((a, b) => {
+						if (a.optional !== b.optional) {
+							return a.optional ? 1 : -1;
+						}
+
+						return a.name.localeCompare(b.name);
+					});
+
 					groups[folder].types.push({
 						name: item.name,
 						extends: extractExtends(item),
