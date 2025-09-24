@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"lib": ["esnext", "DOM", "DOM.Iterable"],
+		"moduleResolution": "bundler",
+		"target": "esnext"
+	},
+	"files": ["./dist/components/index.d.ts"],
+	"typedocOptions": {
+		"excludeExternals": true,
+		"outputs": [
+			{
+				"name": "json",
+				"path": "./docs.json"
+			}
+		]
+	}
+}
