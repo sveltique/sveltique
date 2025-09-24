@@ -73,6 +73,7 @@ let {
 	containerProps = {},
 	id,
 	name,
+	open = $bindable(false),
 	placeholder = "",
 	ref = $bindable(),
 	value = $bindable(),
@@ -84,7 +85,6 @@ const componentId = $props.id();
 let triggerRef = $state<HTMLButtonElement>()!;
 let listBoxRef = $state<HTMLUListElement>()!;
 
-let open = $state(false);
 let valueContent = $state<string | undefined>();
 let focusedId = $state<string>();
 
