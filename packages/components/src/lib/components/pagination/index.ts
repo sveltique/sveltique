@@ -36,4 +36,5 @@ export const Pagination = {
 	Ellipsis
 };
 
-export { type PaginationItemProps } from "./types.js";
+export type { PaginationProps } from "./components/Root.svelte";
+export type { PaginationItemProps } from "./types.js";
