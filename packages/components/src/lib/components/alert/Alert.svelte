@@ -20,8 +20,21 @@ export interface AlertProps
 	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
 		AlertVariants,
 		WithRef<HTMLDivElement> {
+	/**
+	 * The children content to render.
+	 * @default —
+	 */
 	children?: Snippet;
+	/**
+	 * The icon of the alert.
+	 * @default —
+	 */
 	icon?: IconSnippet;
+	/**
+	 * The type of the alert to render.
+	 * @default "info"
+	 */
+	type?: AlertVariants["type"];
 }
 
 let {

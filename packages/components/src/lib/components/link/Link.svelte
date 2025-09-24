@@ -21,17 +21,20 @@ export interface LinkProps
 		WithRef<HTMLAnchorElement>,
 		LinkVariants {
 	/**
-	 * Shorthand for setting `target="_blank"` and `rel="noreferrer"`.
-	 * @note Passing target and/or rel overrides the values set by `external`.
+	 * Whether the link is external or not. Shorthand for setting `target="_blank"` and `rel="noreferrer"`.
+	 *
+	 * Passing `target` and/or `rel` overrides the values set by `external`.
 	 * @default false
 	 */
 	external?: boolean;
-	/** @default "always" */
-	underline?: "always" | "hover" | "none";
 	/**
-	 * The icon to use for external links.
-	 *
-	 * Set to `false` to not show the icon.
+	 * The underlining strategy to use.
+	 * @default "always"
+	 */
+	underline?: LinkVariants["underline"];
+	/**
+	 * The icon to use for external links. Set to `false` to hide it.
+	 * @default —
 	 */
 	icon?: IconSnippet | false;
 }

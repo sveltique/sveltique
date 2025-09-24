@@ -5,8 +5,14 @@ import type { ButtonVariants } from "../button/variants.js";
 export interface PaginationItemProps
 	extends ReplaceWithTWMergeClass<HTMLAnchorAttributes>,
 		WithRef<HTMLAnchorElement> {
-	/** Customize the underlying button's styles. */
+	/**
+	 * Additional properties to customize the button's styles.
+	 * @default {}
+	 */
 	buttonVariants?: ButtonVariants;
-	/** @default false */
+	/**
+	 * Whether the current item is active or not.
+	 * @default false
+	 */
 	isActive?: boolean;
 }

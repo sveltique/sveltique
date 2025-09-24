@@ -9,7 +9,22 @@ export interface SwitchProps
 		>,
 		WithRef<HTMLButtonElement>,
 		SwitchVariants {
-	/** @deprecated Use the `checked` property instead. */
+	/**
+	 * Whether the switch is checked or not.
+	 * @bindable
+	 * @default false
+	 */
+	checked?: SwitchVariants["checked"];
+	/**
+	 * Whether the switch is disabled or not.
+	 * @default false
+	 */
+	disabled?: SwitchVariants["disabled"];
+	/**
+	 * A callback that runs when the switch is toggled.
+	 * @deprecated Use the `checked` property instead.
+	 * @default —
+	 */
 	ontoggle?: (checked: boolean) => void;
 }
 

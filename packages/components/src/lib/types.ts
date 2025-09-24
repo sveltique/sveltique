@@ -4,10 +4,19 @@ import type { ClassNameValue } from "tailwind-merge";
 export type ReplaceWithTWMergeClass<T> = Omit<T, "class"> & TWMergeClass;
 
 export type TWMergeClass = {
+	/**
+	 * Additional classes to add to the element.
+	 * @default —
+	 */
 	class?: ClassNameValue;
 };
 
 export type WithRef<T extends HTMLElement> = {
+	/**
+	 * The underlying DOM element that is rendered.
+	 * @bindable
+	 * @default —
+	 */
 	ref?: T;
 };
 

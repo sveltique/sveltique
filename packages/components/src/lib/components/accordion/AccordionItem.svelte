@@ -1,10 +1,10 @@
 <script lang="ts">
 import { onMount, type Snippet } from "svelte";
+import type { HTMLAttributes } from "svelte/elements";
 import { slide } from "svelte/transition";
-import type { ReplaceWithTWMergeClass, TWMergeClass, WithRef } from "$lib/types.js";
+import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { useMutationObserver } from "$utils/use-mutation-observer.svelte.js";
 import { accordionItem } from "./variants.js";
-import type { HTMLAttributes } from "svelte/elements";
 
 type IconSnippet = Snippet<
 	[
@@ -21,9 +21,19 @@ type IconSnippet = Snippet<
 export interface AccordionItemProps
 	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
 		WithRef<HTMLDivElement> {
+	/** The children content to render. */
 	children: Snippet;
+	/** The header of the item. */
 	header: string | Snippet;
+	/**
+	 * The value of the item, used to identify its state. Generates a unique ID otherwise.
+	 * @default $props.id()
+	 */
 	value?: string;
+	/**
+	 * The icon displayed for the expand control.
+	 * @default —
+	 */
 	icon?: IconSnippet;
 }
 

@@ -4,7 +4,7 @@ import type { HTMLAttributes } from "svelte/elements";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { onKeyUp } from "$utils/on-key.svelte.js";
 import { flyAndScale } from "../../transitions/fly-and-scale.js";
-import { default as Backdrop, type BackdropProps } from "../backdrop/Backdrop.svelte";
+import { Backdrop, type BackdropProps } from "../backdrop/index.js";
 import { modal, type ModalVariants } from "./variants.js";
 
 type Ref = { current: HTMLElement | undefined };
@@ -25,8 +25,20 @@ export interface ModalProps
 	extends ReplaceWithTWMergeClass<Omit<HTMLAttributes<HTMLElement>, "children">>,
 		WithRef<HTMLDivElement>,
 		ModalVariants {
+	/**
+	 * The actions of the modal.
+	 * @default —
+	 */
 	actions?: Snippet<[{ close: VoidFunction }]>;
+	/**
+	 * The children content to render.
+	 * @default —
+	 */
 	children?: ChildrenSnippet;
+	/**
+	 * The trigger of the modal.
+	 * @default —
+	 */
 	trigger?: TriggerSnippet;
 	/**
 	 * Whether to close the modal if the overlay is clicked.
@@ -35,10 +47,14 @@ export interface ModalProps
 	 * @default false
 	 */
 	closeOnOverlayClick?: boolean;
-	/** @default false */
+	/**
+	 * Whether the modal is open or not.
+	 * @bindable
+	 * @default false
+	 */
 	isOpen?: boolean;
 	/**
-	 * Customize the backdrop component directly.
+	 * Additional properties to customize the backdrop.
 	 * @default {}
 	 */
 	backdropProps?: Omit<BackdropProps, "onClick">;

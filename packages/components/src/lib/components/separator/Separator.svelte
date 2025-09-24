@@ -6,7 +6,13 @@ import { type SeparatorVariants, separator } from "./variants.js";
 export interface SeparatorProps
 	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
 		WithRef<HTMLDivElement>,
-		SeparatorVariants {}
+		SeparatorVariants {
+	/**
+	 * The orientation of the separator.
+	 * @default "horizontal"
+	 */
+	orientation?: SeparatorVariants["orientation"];
+}
 
 let {
 	class: className = undefined,

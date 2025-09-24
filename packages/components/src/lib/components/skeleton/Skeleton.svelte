@@ -6,7 +6,13 @@ import { type SkeletonVariants, skeleton } from "./variants.js";
 export interface SkeletonProps
 	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
 		WithRef<HTMLDivElement>,
-		SkeletonVariants {}
+		SkeletonVariants {
+	/**
+	 * Which animation to render.
+	 * @default "pulse"
+	 */
+	animation?: SkeletonVariants["animation"];
+}
 
 let {
 	animation = "pulse",

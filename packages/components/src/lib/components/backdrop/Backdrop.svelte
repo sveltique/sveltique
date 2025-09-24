@@ -8,20 +8,37 @@ import { backdrop } from "./variants.js";
 export interface BackdropProps
 	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
 		WithRef<HTMLDivElement> {
+	/**
+	 * The children content to render.
+	 * @default —
+	 */
 	children?: Snippet;
 	/**
-	 * @default 150
+	 * The duration of the fading transition.
 	 * @deprecated Use `transitionProps` instead.
+	 * @default 150
 	 */
 	fadeDuration?: number;
+	/**
+	 * The props of the fading transition.
+	 * @default { duration: 150 }
+	 */
 	transitionProps?: FadeParams;
 	/**
 	 * An alias for setting `style="z-index: XX"`.
 	 * @default 10
 	 */
 	z?: number;
-	/** @deprecated Use `onclick` instead. */
+	/**
+	 * A callback that runs when the backdrop is clicked.
+	 * @default —
+	 * @deprecated Use `onclick` instead.
+	 */
 	onClick?: () => void;
+	/**
+	 * A callback that runs when the backdrop is clicked.
+	 * @default —
+	 */
 	onclick?: () => void;
 }
 

@@ -24,9 +24,23 @@ export interface FieldProps
 	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
 		WithRef<HTMLDivElement>,
 		FieldVariants {
+	/** The form control of the field. */
 	input: InputSnippet;
+	/**
+	 * The error message of the control.
+	 * @default —
+	 */
 	error?: string | undefined;
+	/**
+	 * The label of the control.
+	 * @default —
+	 */
 	label?: string | undefined;
+	/**
+	 * The placement of the label.
+	 * @default "top"
+	 */
+	placement?: FieldVariants["placement"];
 }
 
 let {

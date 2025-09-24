@@ -17,14 +17,39 @@ export interface TooltipProps
 	extends ReplaceWithTWMergeClass<Omit<HTMLAttributes<HTMLDivElement>, "children">>,
 		WithRef<HTMLDivElement>,
 		TooltipVariants {
+	/**
+	 * The children content on which to add the tooltip.
+	 * @default —
+	 */
 	children?: Snippet<[{ ref: Ref; props: { "aria-describedby": string } }]>;
-	/** @deprecated Use `containerProps` instead. */
+	/**
+	 * Additional classes to add to the root container.
+	 * @deprecated Use `containerProps` instead.
+	 * @default —
+	 */
 	containerClass?: ClassNameValue;
+	/**
+	 * Additional properties to customize the root container.
+	 * @default {}
+	 */
 	containerProps?: ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>;
+	/**
+	 * The ID of the tooltip.
+	 * @default $props.id
+	 */
 	id?: string;
+	/** The content of the tooltip. */
 	title: string;
-	/** @default 1000 */
+	/**
+	 * The z-index of the tooltip. Shorthand for `style="z: XX"`.
+	 * @default 1000
+	 */
 	z?: number;
+	/**
+	 * The placement of the tooltip.
+	 * @default "bottom"
+	 */
+	placement?: TooltipVariants["placement"];
 }
 
 let {
