@@ -1,5 +1,11 @@
 # @sveltique/components
 
+## 0.7.0
+
+### Minor Changes
+
+- [#52](https://github.com/sveltique/sveltique/pull/52) Thanks [@novaotp](https://github.com/novaotp)! - Added `Portal` component
+
 ## 0.6.3
 
 ### Patch Changes
