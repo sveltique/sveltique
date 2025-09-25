@@ -15,6 +15,7 @@ export * from "./modal/index.js";
 export * from "./number-input/index.js";
 export * from "./pagination/index.js";
 export * from "./paper/index.js";
+export * from "./portal/index.js";
 export * from "./progress/index.js";
 export * from "./select/index.js";
 export * from "./separator/index.js";
