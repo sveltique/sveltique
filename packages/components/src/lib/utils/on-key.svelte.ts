@@ -1,3 +1,4 @@
+import { BROWSER } from "esm-env";
 import { on } from "svelte/events";
 import type { MaybeGetter } from "$lib/types.js";
 
@@ -30,10 +31,15 @@ function _onKey(
 	callback: (event: KeyboardEvent) => void,
 	options: OnKeyOptions = {}
 ) {
-	const { element = window, preventDefault = false } = options;
+	const { element, preventDefault = false } = options;
 
 	const _keys = $derived(Array.isArray(key) ? key : [key]);
-	const _element = $derived(typeof element === "function" ? element() : element);
+	const _element = $derived.by(() => {
+		if (!BROWSER) return undefined;
+
+		const normalized = element instanceof Function ? element() : element;
+		return normalized ?? window;
+	});
 
 	$effect(() => {
 		if (!_element) return;
