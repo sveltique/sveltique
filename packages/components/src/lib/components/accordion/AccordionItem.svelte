@@ -51,7 +51,7 @@ const uid = $props.id();
 
 let parent = $state<HTMLDivElement>();
 let open = $state(false);
-let headingLevel = $state<string>()!;
+let headingLevel = $state<string>("");
 
 let _value = $derived(value ?? uid);
 
