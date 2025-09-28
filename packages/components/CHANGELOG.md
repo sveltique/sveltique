@@ -1,5 +1,13 @@
 # @sveltique/components
 
+## 0.7.1
+
+### Patch Changes
+
+- [#56](https://github.com/sveltique/sveltique/pull/56) [`a37fcd2`](https://github.com/sveltique/sveltique/commit/a37fcd26e27bbed8ffbf7672266e66e1e57b167d) Thanks [@novaotp](https://github.com/novaotp)! - Fixed `Accordion.Item` dynamic heading level
+
+- [#55](https://github.com/sveltique/sveltique/pull/55) [`035be8f`](https://github.com/sveltique/sveltique/commit/035be8fed6e0797e9c5ce796d0648d2cc7fe32f3) Thanks [@novaotp](https://github.com/novaotp)! - Made `on-key.svelte.ts` SSR-friendly
+
 ## 0.7.0
 
 ### Minor Changes
