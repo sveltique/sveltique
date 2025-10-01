@@ -1,3 +1,9 @@
+<script module>
+export const metadata = {
+	description: "Displays an image representing a user, with a fallback."
+};
+</script>
+
 <script lang="ts">
 import { Alert, Avatar, Badge } from "@sveltique/components";
 import { stringToHSL } from "@sveltique/components/utils";

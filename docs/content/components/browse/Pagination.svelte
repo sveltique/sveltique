@@ -1,3 +1,10 @@
+<script module>
+export const metadata = {
+	description:
+		"Enables navigation through a range of pages, with support for previous/next links and skipped pages."
+};
+</script>
+
 <script lang="ts">
 import { Alert, Badge, Link, Pagination } from "@sveltique/components";
 import IconChevronLeft from "@tabler/icons-svelte/icons/chevron-left";
