@@ -1,5 +1,17 @@
 # @sveltique/components
 
+## 0.8.0
+
+### Minor Changes
+
+- [#58](https://github.com/sveltique/sveltique/pull/58) [`dc45f87`](https://github.com/sveltique/sveltique/commit/dc45f87dc7acaf08f96101020307095a3fccc336) Thanks [@novaotp](https://github.com/novaotp)! - Added a `FileInput` component
+
+- [#57](https://github.com/sveltique/sveltique/pull/57) [`826eaf6`](https://github.com/sveltique/sveltique/commit/826eaf681d5680a10f974e7fed0974abe911aa88) Thanks [@novaotp](https://github.com/novaotp)! - Added helper text property to `Field` component
+
+### Patch Changes
+
+- [#59](https://github.com/sveltique/sveltique/pull/59) [`a991a15`](https://github.com/sveltique/sveltique/commit/a991a1597f3a839cd21a3d0146b6b60fb31514d4) Thanks [@novaotp](https://github.com/novaotp)! - Improved/fixed comments for components
+
 ## 0.7.1
 
 ### Patch Changes
