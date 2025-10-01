@@ -10,8 +10,14 @@ export { type AccordionItemVariants, accordion, accordionItem } from "./variants
  * @see https://sveltique.dev/docs/components/browse/accordion
  */
 export const Accordion = {
-	/** The root component of an accordion. */
+	/**
+	 * The root component of an accordion.
+	 * @see https://sveltique.dev/docs/components/browse/accordion
+	 */
 	Root,
-	/** An individual item inside an accordion. */
+	/**
+	 * An individual item inside an accordion.
+	 * @see https://sveltique.dev/docs/components/browse/accordion
+	 */
 	Item
 };
