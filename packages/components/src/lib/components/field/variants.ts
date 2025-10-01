@@ -5,6 +5,7 @@ export const field = tv({
 		container: "relative w-full flex flex-col items-start gap-3",
 		labelInputContainer: "relative w-full flex",
 		error: "text-sm text-danger flex gap-3 items-center",
+		helper: "text-sm text-muted-foreground flex gap-3 items-center",
 		icon: "h-5 aspect-square shrink-0"
 	},
 	variants: {

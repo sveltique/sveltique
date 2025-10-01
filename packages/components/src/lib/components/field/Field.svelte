@@ -5,17 +5,19 @@ import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { Label } from "../label/index.js";
 import { type FieldVariants, field } from "./variants.js";
 
+type InputSnippetProps = {
+	/** The ID to link the label and the input. */
+	id: string;
+	/** Whether the input is invalid or not. */
+	"aria-invalid": boolean;
+	/** If invalid, the ID of the error message, undefined otherwise. */
+	"aria-describedby": string | undefined;
+};
+
 type InputSnippet = Snippet<
 	[
 		{
-			props: {
-				/** The ID to link the label and the input. */
-				id: string;
-				/** Whether the input is invalid or not. */
-				"aria-invalid": boolean;
-				/** If invalid, the ID of the error message, undefined otherwise. */
-				"aria-describedby": string | undefined;
-			};
+			props: InputSnippetProps;
 		}
 	]
 >;
@@ -32,6 +34,11 @@ export interface FieldProps
 	 */
 	error?: string | undefined;
 	/**
+	 * The helper text of the control.
+	 * @default —
+	 */
+	helper?: string | undefined;
+	/**
 	 * The label of the control.
 	 * @default —
 	 */
@@ -47,6 +54,7 @@ let {
 	class: className = undefined,
 	input,
 	error = undefined,
+	helper = undefined,
 	label = undefined,
 	placement = "top",
 	ref = $bindable(),
@@ -55,33 +63,59 @@ let {
 
 const id = $props.id();
 
-const { container, error: errorCss, labelInputContainer, icon } = $derived(field({ placement }));
+const {
+	container,
+	error: errorCss,
+	helper: helperCss,
+	labelInputContainer,
+	icon
+} = $derived(field({ placement }));
+
+let inputProps: InputSnippetProps = $derived.by(() => {
+	return {
+		id,
+		"aria-invalid": !!error,
+		"aria-describedby": getInputDescribedBy()
+	};
+});
+
+function getInputDescribedBy(): string | undefined {
+	const ids = [helper && `${id}-helper`, error && `${id}-error`];
+	return ids.filter(Boolean).join(" ") || undefined;
+}
 </script>
 
 <!--
 @component
-Provides a consistent structure for form controls, by including a label and an error message when provided.
+Provides a consistent structure for form controls by integrating a label, helper text, and error message when supplied.
 @see https://sveltique.dev/docs/components/browse/field
 -->
 
 <div bind:this={ref} data-field class={container({ className })} {...restProps}>
 	<div class={labelInputContainer()}>
         <Label for={id} data-field-label>{label}</Label>
-        {@render input({
-                props: {
-                    id,
-                    'aria-invalid': !!error,
-                    'aria-describedby': error ? `${id}-error` : undefined
-                }
-        })}
+        {@render input({ props: inputProps })}
     </div>
-	{#if error}
+	{@render helperMessage()}
+	{@render errorMessage()}
+</div>
+
+{#snippet helperMessage()}
+    {#if helper}
+		<p id="{id}-helper" role="note" data-field-helper class={helperCss()}>
+			{helper}
+		</p>
+	{/if}
+{/snippet}
+
+{#snippet errorMessage()}
+    {#if error}
 		<p id="{id}-error" role="alert" data-field-error class={errorCss()}>
 			{@render errorIcon()}
 			{error}
 		</p>
 	{/if}
-</div>
+{/snippet}
 
 {#snippet errorIcon()}
 	<svg
