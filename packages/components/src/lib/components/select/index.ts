@@ -15,8 +15,14 @@ export type { SelectProps, SelectOptionProps };
  * @see https://sveltique.dev/docs/components/browse/select
  */
 export const Select = {
-	/** The root element of a select element. */
+	/**
+	 * The root element of a select element.
+	 * @see https://sveltique.dev/docs/components/browse/select
+	 */
 	Root,
-	/** A single option in the select's dropdown. */
+	/**
+	 * A single option in the select's dropdown.
+	 * @see https://sveltique.dev/docs/components/browse/select
+	 */
 	Option
 };

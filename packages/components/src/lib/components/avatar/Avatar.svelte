@@ -75,6 +75,12 @@ $effect(() => {
 });
 </script>
 
+<!--
+@component
+Displays an image representing a user, with a fallback.
+@see https://sveltique.dev/docs/components/browse/avatar
+-->
+
 <div
     bind:this={ref}
     data-avatar

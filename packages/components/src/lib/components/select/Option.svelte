@@ -84,13 +84,6 @@ useMutationObserver(
 );
 </script>
 
-<!--
-@component
-An option in a select component.
-
-Designed to be a drop-in replacement for the native `option` element.
--->
-
 <li
 	bind:this={ref}
 	id={_id}
