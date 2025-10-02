@@ -22,6 +22,7 @@ export * from "./select/index.js";
 export * from "./separator/index.js";
 export * from "./skeleton/index.js";
 export * from "./switch/index.js";
+export * from "./tabs/index.js";
 export * from "./text-area/index.js";
 export * from "./text-input/index.js";
 export * from "./toast/index.js";
