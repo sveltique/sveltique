@@ -23,3 +23,13 @@ The monorepo for design-related stuff.
    ```
 
 3. Visit http://localhost:5173
+
+### Create a new component
+
+1. Scaffold your component (from root directory).
+
+```sh
+npx tsx .\scripts\scaffolder\cli.ts component NameInPascalCase
+```
+
+2. Inspect and edit the newly created files.
