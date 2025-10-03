@@ -1,5 +1,6 @@
 {
     "name": "monorepo",
+    "type": "module",
     "scripts": {
         "docs.dev": "npm --prefix ./docs run dev",
         "docs.install": "npm --prefix ./docs install",
@@ -19,7 +20,11 @@
         "@biomejs/biome": "2.2.2",
         "@changesets/changelog-github": "^0.5.1",
         "@changesets/cli": "^2.29.6",
-        "concurrently": "^9.2.0"
+        "@types/node": "^24.6.2",
+        "chalk": "^5.6.2",
+        "commander": "^14.0.1",
+        "concurrently": "^9.2.0",
+        "tsx": "^4.20.6"
     },
     "workspaces": [
         "packages/*"
