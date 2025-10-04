@@ -11,10 +11,21 @@ export const accordionItem = tv({
 		trigger:
 			"group cursor-pointer flex items-center justify-between gap-5 text-start focus:outline-none",
 		header: "pointer-events-none relative flex w-full items-center justify-between gap-5 text-start group-focus:outline-none group-focus-visible:ring-2 group-focus-visible:ring-primary group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-background",
-		icon: "w-5 min-w-5 duration-150 ease-in-out",
+		icon: "w-5 min-w-5",
 		panel: "flex w-full flex-col gap-2 pt-4"
 	},
 	variants: {
+		animation: {
+			system: {
+				icon: "motion-safe:duration-150 motion-safe:ease-in-out"
+			},
+			always: {
+				icon: "duration-150 ease-in-out"
+			},
+			never: {
+				icon: "duration-0"
+			}
+		},
 		open: {
 			true: {
 				header: "font-bold",
