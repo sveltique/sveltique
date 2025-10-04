@@ -32,7 +32,7 @@ export interface DrawerProps
 		WithRef<HTMLDivElement>,
 		DrawerVariants {
 	/**
-	 * The actions of the modal.
+	 * The actions of the drawer.
 	 * @default —
 	 */
 	actions?: Snippet<[{ close: VoidFunction }]>;
@@ -42,19 +42,19 @@ export interface DrawerProps
 	 */
 	children?: ChildrenSnippet;
 	/**
-	 * The trigger of the modal.
+	 * The trigger of the drawer.
 	 * @default —
 	 */
 	trigger?: TriggerSnippet;
 	/**
-	 * Whether to close the modal if the overlay is clicked.
+	 * Whether to close the drawer if the overlay is clicked.
 	 *
-	 * This should only be enabled for low-stake modals.
+	 * This should only be enabled for low-stake drawers.
 	 * @default false
 	 */
 	closeOnOverlayClick?: boolean;
 	/**
-	 * Whether the modal is open or not.
+	 * Whether the drawer is open or not.
 	 * @bindable
 	 * @default false
 	 */
@@ -129,7 +129,7 @@ const close = () => (isOpen = false);
 <!--
 @component
 A dialog component that interrupts the user flow to capture attention. Displays content in a centered overlay with a dimmed backdrop.
-@see https://sveltique.dev/docs/components/browse/modal
+@see https://sveltique.dev/docs/components/browse/drawer
 -->
 
 {@render trigger?.({ ref: triggerRef, open })}

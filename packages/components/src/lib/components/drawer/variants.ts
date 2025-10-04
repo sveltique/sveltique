@@ -14,10 +14,10 @@ export const drawer = tv({
 				dialog: "top-0 left-0 w-full max-h-[80vh]"
 			},
 			left: {
-				dialog: "top-0 left-0 h-full w-3/4 max-w-sm"
+				dialog: "top-0 left-0 h-full w-4/5 max-w-sm"
 			},
 			right: {
-				dialog: "top-0 right-0 h-full w-3/4 max-w-sm"
+				dialog: "top-0 right-0 h-full w-4/5 max-w-sm"
 			},
 			bottom: {
 				dialog: "bottom-0 left-0 w-full max-h-[80vh]"
