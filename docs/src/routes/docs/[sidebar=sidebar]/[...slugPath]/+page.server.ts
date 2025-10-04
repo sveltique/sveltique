@@ -18,7 +18,7 @@ export async function load({ params, parent }) {
 
 export async function entries() {
 	const futureSidebars = SIDEBAR_NAMES.map(async (sidebarName) => {
-		const sidebar = await loadSidebar(`./content/${sidebarName}`);
+		const sidebar = await loadSidebar(sidebarName);
 
 		return sidebar.flatMap((category) => {
 			return category.items.map((item) => {

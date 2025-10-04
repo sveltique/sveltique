@@ -4,7 +4,15 @@ import CodeBlock from "$components/CodeBlock.svelte";
 import Playground from "$components/Playground.svelte";
 import { script } from "$utils/playground";
 
-const code = `${script("import { Button, Tooltip } from '@sveltique/components';")}
+const sveltiqueProviderCode = `${script(`import { SveltiqueProvider } from '@sveltique/components/config';
+    
+    let { children } = $props();`)}
+
+<SveltiqueProvider>
+    {@render children()}
+</SveltiqueProvider>`;
+
+const importCode = `${script("import { Button, Tooltip } from '@sveltique/components';")}
 
 <Tooltip title="Sveltique is awesome">
     {#snippet children({ props, ref })}
@@ -25,11 +33,23 @@ const code = `${script("import { Button, Tooltip } from '@sveltique/components';
 
 <h2 id="quick-start">Quick start</h2>
 <p>
-    After <Link href="/docs/components/getting-started/installation">installing</Link> and
-    <Link href="/docs/components/getting-started/theming">setting up your theme</Link>, you can finally
-    start importing Sveltique components in your project !
+    After <Link href="/docs/components/getting-started/installation">installing</Link> and <Link href="/docs/components/getting-started/theming">
+        setting up your theme
+    </Link>, you can start using Sveltique in your project !
 </p>
-<Playground {code}>
+
+<h3 id="setup-provider">Setup Provider</h3>
+<p>
+    Wrap your entire application with the provider. It enables for setting global settings, such as
+    animation strategy (more to come later).
+</p>
+<CodeBlock code={sveltiqueProviderCode} showLineNumbers filename="+layout.svelte" />
+
+<h3>Enjoy</h3>
+<p>
+    You can start importing 
+</p>
+<Playground code={importCode}>
     <Tooltip title="Sveltique is awesome">
         {#snippet children({ props, ref })}
             <Button bind:ref={ref.current} {...props}>Hover me !</Button>

@@ -1,6 +1,7 @@
 import { readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { capitalize, slugify } from "$utils/string";
+import type { SidebarName } from "./constants";
 import type { SidebarCategory, SidebarItem } from "./types";
 
 /** Searches for a given `slugPath` in a `sidebar`. */
@@ -12,11 +13,24 @@ export function find(sidebar: SidebarCategory[], slugPath: string) {
 		?.items.find((item) => item.slugName === name);
 }
 
+/** Loads the sidebar in a specific order. */
+export async function loadSidebar(sidebar: SidebarName): ReturnType<typeof loadSidebarWithOrder> {
+	const order =
+		sidebar === "components"
+			? ["getting-started", "configuration", "browse"]
+			: ["getting-started", "browse"];
+
+	return loadSidebarWithOrder(`./content/${sidebar}`, order);
+}
+
 /**
  * @param path The path to the sidebar.
  * @param order If given, will follow the given order of categories.
  */
-export async function loadSidebar(path: string, order: string[] = []): Promise<SidebarCategory[]> {
+export async function loadSidebarWithOrder(
+	path: string,
+	order: string[] = []
+): Promise<SidebarCategory[]> {
 	const categories = await readdir(path);
 
 	const futureSidebar = categories.map(async (category) => {
