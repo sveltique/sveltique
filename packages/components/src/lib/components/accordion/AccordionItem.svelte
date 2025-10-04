@@ -2,6 +2,11 @@
 import { onMount, type Snippet } from "svelte";
 import type { HTMLAttributes } from "svelte/elements";
 import { slide } from "svelte/transition";
+import {
+	getProviderContext,
+	type OverrideProviderContextOptions,
+	resolveAnimation
+} from "$lib/config/index.js";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { useMutationObserver } from "$utils/use-mutation-observer.svelte.js";
 import { accordionItem } from "./variants.js";
@@ -20,7 +25,8 @@ type IconSnippet = Snippet<
 
 export interface AccordionItemProps
 	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
-		WithRef<HTMLDivElement> {
+		WithRef<HTMLDivElement>,
+		OverrideProviderContextOptions {
 	/** The children content to render. */
 	children: Snippet;
 	/** The header of the item. */
@@ -38,6 +44,7 @@ export interface AccordionItemProps
 }
 
 let {
+	animation = undefined,
 	children,
 	class: className,
 	header,
@@ -47,12 +54,15 @@ let {
 	...restProps
 }: AccordionItemProps = $props();
 
+const providerContext = getProviderContext();
+
 const uid = $props.id();
 
 let parent = $state<HTMLDivElement>();
 let open = $state(false);
 let headingLevel = $state<string>("");
 
+let _animation = $derived(animation ?? providerContext.animation);
 let _value = $derived(value ?? uid);
 
 let {
@@ -61,7 +71,7 @@ let {
 	panel,
 	header: headerCss,
 	trigger
-} = $derived(accordionItem({ open }));
+} = $derived(accordionItem({ animation: _animation, open }));
 
 onMount(() => {
 	if (!ref) return;
@@ -108,7 +118,7 @@ function updateOpen() {
 
 	{#if open}
 		<div
-			transition:slide={{ duration: 150 }}
+			transition:slide={{ duration: resolveAnimation(_animation, 150, 0) }}
 			id="{uid}-panel"
             data-accordion-item-panel
 			aria-labelledby={uid}
