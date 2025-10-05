@@ -1,5 +1,15 @@
 # @sveltique/components
 
+## 0.9.0
+
+### Minor Changes
+
+- [#63](https://github.com/sveltique/sveltique/pull/63) [`46fd1fb`](https://github.com/sveltique/sveltique/commit/46fd1fba4dfc08c65d9d942a682b98b811fb0782) Thanks [@novaotp](https://github.com/novaotp)! - Added `Drawer` component
+
+- [#62](https://github.com/sveltique/sveltique/pull/62) [`af08f6b`](https://github.com/sveltique/sveltique/commit/af08f6b8261649f2c22c71eba1563114cfe64a76) Thanks [@novaotp](https://github.com/novaotp)! - Added props for the control in `Field`
+
+- [#61](https://github.com/sveltique/sveltique/pull/61) [`c424a1e`](https://github.com/sveltique/sveltique/commit/c424a1e757baf10f99de8cbbe86c8797d285abd1) Thanks [@novaotp](https://github.com/novaotp)! - Added a `Scrollable` component
+
 ## 0.8.0
 
 ### Minor Changes
