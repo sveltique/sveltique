@@ -7,6 +7,7 @@ export * from "./badge/index.js";
 export * from "./button/index.js";
 export * from "./checkbox/index.js";
 export * from "./code-block/index.js";
+export * from "./drawer/index.js";
 export * from "./field/index.js";
 export * from "./file-input/index.js";
 export * from "./kbd/index.js";
