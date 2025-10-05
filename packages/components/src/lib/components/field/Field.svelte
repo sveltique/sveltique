@@ -48,10 +48,16 @@ export interface FieldProps
 	 * @default "top"
 	 */
 	placement?: FieldVariants["placement"];
+	/**
+	 * Additional properties to customize the control container.
+	 * @default {}
+	 */
+	controlProps?: ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>;
 }
 
 let {
 	class: className = undefined,
+	controlProps = {},
 	input,
 	error = undefined,
 	helper = undefined,
@@ -63,7 +69,9 @@ let {
 
 const id = $props.id();
 
-const {
+let { class: controlClass, ...restControlProps } = $derived(controlProps);
+
+let {
 	container,
 	error: errorCss,
 	helper: helperCss,
@@ -92,7 +100,11 @@ Provides a consistent structure for form controls by integrating a label, helper
 -->
 
 <div bind:this={ref} data-field class={container({ className })} {...restProps}>
-	<div class={labelInputContainer()}>
+	<div
+        data-field-control
+        class={labelInputContainer({ class: controlClass })}
+        {...restControlProps}
+    >
         <Label for={id} data-field-label>{label}</Label>
         {@render input({ props: inputProps })}
     </div>
