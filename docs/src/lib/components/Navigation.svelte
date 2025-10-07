@@ -1,5 +1,16 @@
 <script lang="ts">
-import { Button, button, Link, Separator, Tooltip } from "@sveltique/components";
+import {
+	Alert,
+	Button,
+	button,
+	Drawer,
+	Field,
+	Link,
+	Select,
+	Separator,
+	Tooltip
+} from "@sveltique/components";
+import IconAdjustments from "@tabler/icons-svelte/icons/adjustments";
 import IconBrandGithub from "@tabler/icons-svelte/icons/brand-github";
 import IconMenuDeep from "@tabler/icons-svelte/icons/menu-deep";
 import IconMoonFilled from "@tabler/icons-svelte/icons/moon-filled";
@@ -7,7 +18,9 @@ import IconSunFilled from "@tabler/icons-svelte/icons/sun-filled";
 import IconX from "@tabler/icons-svelte/icons/x";
 import { cnBase } from "tailwind-variants";
 import { page } from "$app/state";
+import { sveltiqueProvider } from "$lib/contexts/sveltique.svelte";
 import { theme } from "$lib/contexts/theme.svelte";
+import { toTitleCase } from "$utils/string";
 
 interface Props {
 	version: string;
@@ -22,10 +35,10 @@ let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
 </script>
 
 <header
-    class="sticky left-0 top-0 z-50 hidden h-16 w-full border-b border-muted bg-background lg:block"
+    class="hidden lg:block top-0 left-0 z-50 sticky bg-background border-muted border-b w-full h-16"
 >
     <nav
-        class="relative flex h-full w-full items-center justify-between gap-6 px-6 max-w-[94rem] mx-auto dark:text-zinc-100"
+        class="relative flex justify-between items-center gap-6 mx-auto px-6 w-full max-w-[94rem] h-full dark:text-zinc-100"
     >
         <div class="relative flex items-center gap-10">
             <Tooltip title="Go to home page">
@@ -87,51 +100,155 @@ let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
                         class={button({ variant: "text", shape: "square" })}
                         {...props}
                     >
-                        <IconBrandGithub class="h-5 w-5" />
+                        <IconBrandGithub class="w-5 h-5" />
                     </a>
                 {/snippet}
             </Tooltip>
-            <Tooltip title="Switch to {theme.isDark ? 'light' : 'dark'} mode">
-                {#snippet children({ props, ref })}
+            <Drawer closeOnOverlayClick backdropProps={{ z: 1000 }}>
+                {#snippet trigger({ open, ref })}
                     <Button
                         bind:ref={ref.current}
-                        onclick={() => theme.switch()}
+                        onclick={open}
                         variant="text"
                         shape="square"
-                        {...props}
+                        aria-label="Open settings"
                     >
-                        <ThemeIcon class="h-5 w-5" />
+                        <IconAdjustments />
                     </Button>
                 {/snippet}
-            </Tooltip>
+
+                {#snippet children({ labelProps, descriptionProps })}
+                    <div class="relative flex flex-col gap-6 w-full">
+                        <div class="relative flex flex-col gap-3 w-full">
+                            <h2 class="font-bold text-2xl" {...labelProps}>Settings</h2>
+                            <p {...descriptionProps}>Adjust your documentation preferences.</p>
+                            <Alert class="p-4 text-sm">Additional settings will be available soon.</Alert>
+                        </div>
+                        <div class="relative flex flex-col gap-3 w-full">
+                            <Field label="Theme" placement="left" controlProps={{ class: "w-full justify-between" }}>
+                                {#snippet input({ props })}
+                                    <Button
+                                        onclick={() => theme.switch()}
+                                        variant="text"
+                                        shape="square"
+                                        {...props}
+                                    >
+                                        <ThemeIcon class="w-5 h-5" />
+                                    </Button>
+                                {/snippet}
+                            </Field>
+                            <Field label="Animation" placement="left" controlProps={{ class: "w-full justify-between" }}>
+                                {#snippet input({ props })}
+                                    <Select.Root
+                                        bind:value={sveltiqueProvider.animation}
+                                        containerProps={{ class: "w-28" }}
+                                        {...props}
+                                    >
+                                        {#each ["system", "always", "never"] as animation (animation)}
+                                            <Select.Option value={animation}>
+                                                {toTitleCase(animation)}
+                                            </Select.Option>
+                                        {/each}
+                                    </Select.Root>
+                                {/snippet}
+                            </Field>
+                        </div>
+                    </div>
+                {/snippet}
+
+                {#snippet actions({ close })}
+                    <Button onclick={close} variant="text">Close</Button>
+                {/snippet}
+            </Drawer>
         </div>
     </nav>
 </header>
 
 <header
-    class="relative left-0 top-0 z-50 h-16 w-full border-b border-muted bg-background lg:hidden"
+    class="lg:hidden top-0 left-0 z-50 relative bg-background border-muted border-b w-full h-16"
 >
-    <nav class="relative flex h-full w-full items-center justify-between px-6">
+    <nav class="relative flex justify-between items-center px-6 w-full h-full">
         <a href="/" onclick={() => (showMenu = false)} class="font-bold">
             SVELTIQUE
         </a>
-        <button
-            onclick={() => (showMenu = !showMenu)}
-            class="grid h-full place-items-center cursor-pointer"
-        >
-            <MobileMenuIcon />
-        </button>
+        <div class="relative flex items-center gap-3 h-full">
+            <Drawer closeOnOverlayClick backdropProps={{ z: 1000 }}>
+                {#snippet trigger({ open, ref })}
+                    <Button
+                        bind:ref={ref.current}
+                        onclick={open}
+                        variant="text"
+                        shape="square"
+                        aria-label="Open settings"
+                    >
+                        <IconAdjustments />
+                    </Button>
+                {/snippet}
+
+                {#snippet children({ labelProps, descriptionProps })}
+                    <div class="relative flex flex-col gap-6 w-full">
+                        <div class="relative flex flex-col gap-3 w-full">
+                            <h2 class="font-bold text-2xl" {...labelProps}>Settings</h2>
+                            <p {...descriptionProps}>Adjust your documentation preferences.</p>
+                            <Alert class="p-4 text-sm">Additional settings will be available soon.</Alert>
+                        </div>
+                        <div class="relative flex flex-col gap-3 w-full">
+                            <Field label="Theme" placement="left" controlProps={{ class: "w-full justify-between" }}>
+                                {#snippet input({ props })}
+                                    <Button
+                                        onclick={() => theme.switch()}
+                                        variant="text"
+                                        shape="square"
+                                        {...props}
+                                    >
+                                        <ThemeIcon class="w-5 h-5" />
+                                    </Button>
+                                {/snippet}
+                            </Field>
+                            <Field label="Animation" placement="left" controlProps={{ class: "w-full justify-between" }}>
+                                {#snippet input({ props })}
+                                    <Select.Root
+                                        bind:value={sveltiqueProvider.animation}
+                                        containerProps={{ class: "w-28" }}
+                                        {...props}
+                                    >
+                                        {#each ["system", "always", "never"] as animation (animation)}
+                                            <Select.Option value={animation}>
+                                                {toTitleCase(animation)}
+                                            </Select.Option>
+                                        {/each}
+                                    </Select.Root>
+                                {/snippet}
+                            </Field>
+                        </div>
+                    </div>
+                {/snippet}
+
+                {#snippet actions({ close })}
+                    <Button onclick={close} variant="text">Close</Button>
+                {/snippet}
+            </Drawer>
+            <Button
+                onclick={() => (showMenu = !showMenu)}
+                variant="text"
+                shape="square"
+                class="-mr-2"
+                aria-label={showMenu ? "Close menu" : "Show menu"}
+            >
+                <MobileMenuIcon />
+            </Button>
+        </div>
     </nav>
 
     {#if showMenu}
-        <div class="fixed top-16 left-0 flex w-full flex-col h-[calc(100vh-4rem)] z-50 p-6 bg-background gap-12">
-            <menu class="relative w-full flex flex-col gap-3">
+        <div class="top-16 left-0 z-50 fixed flex flex-col gap-6 bg-background p-6 w-full h-[calc(100vh-4rem)]">
+            <menu class="relative flex flex-col gap-3 w-full">
                 <li>
                     <a
                         href="/docs/components"
                         onclick={() => (showMenu = false)}
                         class={cnBase(
-                            "px-3 py-1.5",
+                            "py-1.5",
                             page.url.pathname.startsWith('/docs/components') && "text-primary"
                         )}
                     >
@@ -143,43 +260,37 @@ let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
                         href="/docs/patterns"
                         onclick={() => (showMenu = false)}
                         class={cnBase(
-                            "px-3 py-1.5",
+                            "py-1.5",
                             page.url.pathname.startsWith('/docs/patterns') && "text-primary"
                         )}
                     >
                         Patterns
                     </a>
                 </li>
+            </menu>
+            <Separator />
+            <menu class="relative flex flex-col gap-3 w-full">
                 <li>
                     <Link
                         href="https://github.com/sveltique/sveltique/releases"
                         external
                         onclick={() => (showMenu = false)}
-                        class="px-3 py-1.5"
+                        class="py-1.5"
                     >
                         Releases
                     </Link>
                 </li>
+                <li>
+                    <Link
+                        href="https://github.com/sveltique/sveltique"
+                        external
+                        aria-label="See the Github repository in another tab."
+                        class="py-1.5"
+                    >
+                        Github
+                    </Link>
+                </li>
             </menu>
-            <Separator />
-            <div class="relative w-full flex justify-center items-center gap-3">
-                <a
-                    href="https://github.com/sveltique/sveltique"
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="See the Github repository in another tab."
-                    class={button({ variant: "text", shape: "square" })}
-                >
-                    <IconBrandGithub class="h-5 w-5" />
-                </a>
-                <Button
-                    onclick={() => theme.switch()}
-                    variant="text"
-                    shape="square"
-                >
-                    <ThemeIcon class="h-5 w-5" />
-                </Button>
-            </div>
         </div>
     {/if}
 </header>
