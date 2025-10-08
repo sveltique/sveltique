@@ -258,7 +258,7 @@ function getActiveSibling(element: HTMLElement, previous: boolean = true) {
 		aria-controls="{componentId}-listbox"
 		aria-expanded={open}
         aria-haspopup="listbox"
-		class={trigger()}
+		class={trigger({ className })}
 		{...restProps}
 	>
 		<span class={triggerContent()}>
