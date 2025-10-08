@@ -104,62 +104,7 @@ let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
                     </a>
                 {/snippet}
             </Tooltip>
-            <Drawer closeOnOverlayClick backdropProps={{ z: 1000 }}>
-                {#snippet trigger({ open, ref })}
-                    <Button
-                        bind:ref={ref.current}
-                        onclick={open}
-                        variant="text"
-                        shape="square"
-                        aria-label="Open settings"
-                    >
-                        <IconAdjustments />
-                    </Button>
-                {/snippet}
-
-                {#snippet children({ labelProps, descriptionProps })}
-                    <div class="relative flex flex-col gap-6 w-full">
-                        <div class="relative flex flex-col gap-3 w-full">
-                            <h2 class="font-bold text-2xl" {...labelProps}>Settings</h2>
-                            <p {...descriptionProps}>Adjust your documentation preferences.</p>
-                            <Alert class="p-4 text-sm">Additional settings will be available soon.</Alert>
-                        </div>
-                        <div class="relative flex flex-col gap-3 w-full">
-                            <Field label="Theme" placement="left" controlProps={{ class: "w-full justify-between" }}>
-                                {#snippet input({ props })}
-                                    <Button
-                                        onclick={() => theme.switch()}
-                                        variant="text"
-                                        shape="square"
-                                        {...props}
-                                    >
-                                        <ThemeIcon class="w-5 h-5" />
-                                    </Button>
-                                {/snippet}
-                            </Field>
-                            <Field label="Animation" placement="left" controlProps={{ class: "w-full justify-between" }}>
-                                {#snippet input({ props })}
-                                    <Select.Root
-                                        bind:value={sveltiqueProvider.animation}
-                                        containerProps={{ class: "w-28" }}
-                                        {...props}
-                                    >
-                                        {#each ["system", "always", "never"] as animation (animation)}
-                                            <Select.Option value={animation}>
-                                                {toTitleCase(animation)}
-                                            </Select.Option>
-                                        {/each}
-                                    </Select.Root>
-                                {/snippet}
-                            </Field>
-                        </div>
-                    </div>
-                {/snippet}
-
-                {#snippet actions({ close })}
-                    <Button onclick={close} variant="text">Close</Button>
-                {/snippet}
-            </Drawer>
+            {@render settings()}
         </div>
     </nav>
 </header>
@@ -172,62 +117,7 @@ let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
             SVELTIQUE
         </a>
         <div class="relative flex items-center gap-3 h-full">
-            <Drawer closeOnOverlayClick backdropProps={{ z: 1000 }}>
-                {#snippet trigger({ open, ref })}
-                    <Button
-                        bind:ref={ref.current}
-                        onclick={open}
-                        variant="text"
-                        shape="square"
-                        aria-label="Open settings"
-                    >
-                        <IconAdjustments />
-                    </Button>
-                {/snippet}
-
-                {#snippet children({ labelProps, descriptionProps })}
-                    <div class="relative flex flex-col gap-6 w-full">
-                        <div class="relative flex flex-col gap-3 w-full">
-                            <h2 class="font-bold text-2xl" {...labelProps}>Settings</h2>
-                            <p {...descriptionProps}>Adjust your documentation preferences.</p>
-                            <Alert class="p-4 text-sm">Additional settings will be available soon.</Alert>
-                        </div>
-                        <div class="relative flex flex-col gap-3 w-full">
-                            <Field label="Theme" placement="left" controlProps={{ class: "w-full justify-between" }}>
-                                {#snippet input({ props })}
-                                    <Button
-                                        onclick={() => theme.switch()}
-                                        variant="text"
-                                        shape="square"
-                                        {...props}
-                                    >
-                                        <ThemeIcon class="w-5 h-5" />
-                                    </Button>
-                                {/snippet}
-                            </Field>
-                            <Field label="Animation" placement="left" controlProps={{ class: "w-full justify-between" }}>
-                                {#snippet input({ props })}
-                                    <Select.Root
-                                        bind:value={sveltiqueProvider.animation}
-                                        containerProps={{ class: "w-28" }}
-                                        {...props}
-                                    >
-                                        {#each ["system", "always", "never"] as animation (animation)}
-                                            <Select.Option value={animation}>
-                                                {toTitleCase(animation)}
-                                            </Select.Option>
-                                        {/each}
-                                    </Select.Root>
-                                {/snippet}
-                            </Field>
-                        </div>
-                    </div>
-                {/snippet}
-
-                {#snippet actions({ close })}
-                    <Button onclick={close} variant="text">Close</Button>
-                {/snippet}
-            </Drawer>
+            {@render settings()}
             <Button
                 onclick={() => (showMenu = !showMenu)}
                 variant="text"
@@ -294,3 +184,63 @@ let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
         </div>
     {/if}
 </header>
+
+{#snippet settings()}
+    <Drawer closeOnOverlayClick backdropProps={{ z: 1000 }}>
+        {#snippet trigger({ open, ref })}
+            <Button
+                bind:ref={ref.current}
+                onclick={open}
+                variant="text"
+                shape="square"
+                aria-label="Open settings"
+            >
+                <IconAdjustments />
+            </Button>
+        {/snippet}
+
+        {#snippet children({ labelProps, descriptionProps })}
+            <div class="relative flex flex-col gap-6 w-full">
+                <div class="relative flex flex-col gap-3 w-full">
+                    <h2 class="font-bold text-2xl" {...labelProps}>Settings</h2>
+                    <p {...descriptionProps}>Adjust your documentation preferences.</p>
+                    <Alert class="p-4 text-sm">Additional settings will be available soon.</Alert>
+                </div>
+                <div class="relative flex flex-col gap-3 w-full">
+                    <Field label="Theme" placement="left" controlProps={{ class: "w-full justify-between" }}>
+                        {#snippet input({ props })}
+                            <Button
+                                onclick={() => theme.switch()}
+                                variant="text"
+                                shape="square"
+                                {...props}
+                            >
+                                <ThemeIcon class="w-5 h-5" />
+                            </Button>
+                        {/snippet}
+                    </Field>
+                    <Field label="Animation" placement="left" controlProps={{ class: "w-full justify-between" }}>
+                        {#snippet input({ props })}
+                            <Select.Root
+                                bind:value={sveltiqueProvider.animation}
+                                containerProps={{ class: "w-28 [&_[data-select-listbox]]:bg-inherit" }}
+                                class="bg-inherit"
+                                {...props}
+                            >
+                                {#each ["system", "always", "never"] as animation (animation)}
+                                    <Select.Option value={animation}>
+                                        {toTitleCase(animation)}
+                                    </Select.Option>
+                                {/each}
+                            </Select.Root>
+                        {/snippet}
+                    </Field>
+                </div>
+            </div>
+        {/snippet}
+
+        {#snippet actions({ close })}
+            <Button onclick={close} variant="text">Close</Button>
+        {/snippet}
+    </Drawer>
+{/snippet}
