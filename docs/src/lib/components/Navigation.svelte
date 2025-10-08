@@ -223,7 +223,7 @@ let ThemeIcon = $derived(theme.isDark ? IconSunFilled : IconMoonFilled);
                         {#snippet input({ props })}
                             <Select.Root
                                 bind:value={sveltiqueProvider.animation}
-                                containerProps={{ class: "w-28 [&_[data-select-listbox]]:bg-inherit" }}
+                                containerProps={{ class: "w-32 [&_[data-select-listbox]]:bg-inherit" }}
                                 class="bg-inherit"
                                 {...props}
                             >
