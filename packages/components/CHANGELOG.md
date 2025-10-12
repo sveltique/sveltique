@@ -1,5 +1,17 @@
 # @sveltique/components
 
+## 0.10.0
+
+### Minor Changes
+
+- [#65](https://github.com/sveltique/sveltique/pull/65) [`de55d1e`](https://github.com/sveltique/sveltique/commit/de55d1eee7e07ddb968b5de1196e1ef82c676672) Thanks [@novaotp](https://github.com/novaotp)! - Removed theme resets :
+  - All colors are now allowed, since there is no reason not to.
+  - Using Tailwind radiuses instead of defined ones
+
+### Patch Changes
+
+- [#64](https://github.com/sveltique/sveltique/pull/64) [`00ef200`](https://github.com/sveltique/sveltique/commit/00ef200511f749f9759428786f928f66d82112f6) Thanks [@novaotp](https://github.com/novaotp)! - Passing `class` property to select trigger
+
 ## 0.9.0
 
 ### Minor Changes
