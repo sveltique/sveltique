@@ -56,7 +56,7 @@ const exampleDrawerCode = `${script(`import {
         <div
             transition:slide={{ axis: "y", duration: 150 }}
             class={[
-                "fixed bottom-0 left-0 w-full shadow-[0_0_4px_8px_rgba(0,0,0,0.2)] p-6 rounded-t-large",
+                "fixed bottom-0 left-0 w-full shadow-[0_0_4px_8px_rgba(0,0,0,0.2)] p-6 rounded-t-2xl",
                 "dark:bg-[color-mix(in_oklch,var(--background),var(--foreground)_5%)]"
             ]}
         >
@@ -123,7 +123,7 @@ const exampleDrawerCode = `${script(`import {
             <div
                 transition:slide={{ axis: "y", duration: 150 }}
                 class={[
-                    "fixed bottom-0 left-0 w-full shadow-[0_0_4px_8px_rgba(0,0,0,0.2)] p-6 rounded-t-large",
+                    "fixed bottom-0 left-0 w-full shadow-[0_0_4px_8px_rgba(0,0,0,0.2)] p-6 rounded-t-2xl",
                     "dark:bg-[color-mix(in_oklch,var(--background),var(--foreground)_5%)]"
                 ]}
             >

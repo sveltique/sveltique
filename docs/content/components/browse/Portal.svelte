@@ -15,7 +15,7 @@ let basicUsageCode = `${script(`import { Portal } from "@sveltique/components";
 
     let target = $state<HTMLDivElement>();`)}
 
-<div class="p-4 rounded border-2 border-dashed border-muted">
+<div class="p-4 rounded-lg border-2 border-dashed border-muted">
     <p>You might think I would render here</p>
     <Portal {target}>
         <p>But I'm actually here</p>
@@ -30,7 +30,7 @@ let basicUsageCode = `${script(`import { Portal } from "@sveltique/components";
 <h2>Basic Usage</h2>
 <p>You can portal elements using DOM nodes or query selectors.</p>
 <Playground code={basicUsageCode} class="flex-col">
-    <div class="p-4 rounded border-2 border-dashed border-muted">
+    <div class="p-4 rounded-lg border-2 border-dashed border-muted">
         <p>You might think I would render here</p>
         <Portal {target}>
             <p>But I'm actually here</p>
