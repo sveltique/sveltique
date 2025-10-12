@@ -74,7 +74,7 @@ const implementationCode = `${script(`import { Button, Kbd, Paper, Separator } f
     bind:this={containerRef}
     oncontextmenu={openContextMenu}
     aria-haspopup="menu"
-    class="relative w-full max-w-3xs h-32 p-6 grid place-items-center border-2 border-dashed rounded-large border-muted"
+    class="relative w-full max-w-3xs h-32 p-6 grid place-items-center border-2 border-dashed rounded-2xl border-muted"
 >
     <p class="text-sm text-balance text-center text-muted-foreground">
         Right-click to open the context menu
@@ -194,7 +194,7 @@ const creatingContextMenuCode = `${script(`import { Button, Kbd, Paper, Separato
 
 const creatingTriggerArea = `<div
     aria-haspopup="menu"
-    class="relative w-full max-w-3xs h-32 p-6 grid place-items-center border-2 border-dashed rounded-large border-muted"
+    class="relative w-full max-w-3xs h-32 p-6 grid place-items-center border-2 border-dashed rounded-2xl border-muted"
 >
     <p class="text-sm text-balance text-center text-muted-foreground">
         Right-click to open the context menu
@@ -221,7 +221,7 @@ const handlingStateCode = `${script(`import ContextMenu from "./ContextMenu.svel
 <div
     oncontextmenu={openContextMenu}
     aria-haspopup="menu"
-    class="relative w-full max-w-3xs h-32 p-6 grid place-items-center border-2 border-dashed rounded-large border-muted"
+    class="relative w-full max-w-3xs h-32 p-6 grid place-items-center border-2 border-dashed rounded-2xl border-muted"
 >
     <p class="text-sm text-balance text-center text-muted-foreground">
         Right-click to open the context menu
@@ -274,7 +274,7 @@ const closeOnOutsideClickCode = `${script(`import ContextMenu from "./ContextMen
     bind:ref={containerRef}
     oncontextmenu={openContextMenu}
     aria-haspopup="menu"
-    class="relative w-full max-w-3xs h-32 p-6 grid place-items-center border-2 border-dashed rounded-large border-muted"
+    class="relative w-full max-w-3xs h-32 p-6 grid place-items-center border-2 border-dashed rounded-2xl border-muted"
 >
     <p class="text-sm text-balance text-center text-muted-foreground">
         Right-click to open the context menu
@@ -303,7 +303,7 @@ const closeOnOutsideClickCode = `${script(`import ContextMenu from "./ContextMen
         bind:this={containerRef}
         oncontextmenu={openContextMenu}
         aria-haspopup="menu"
-        class="relative w-full max-w-3xs h-32 p-6 grid place-items-center border-2 border-dashed rounded-large border-muted"
+        class="relative w-full max-w-3xs h-32 p-6 grid place-items-center border-2 border-dashed rounded-2xl border-muted"
     >
         <p class="text-sm text-balance text-center text-muted-foreground">
             Right-click to open the context menu

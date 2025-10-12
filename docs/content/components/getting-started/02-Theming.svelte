@@ -5,22 +5,8 @@ import CodeBlock from "$components/CodeBlock.svelte";
 const introductionCode = `@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --color-\*: initial;
-    --radius-\*: initial;
-
     /* Fonts */
     --font-codeblock: "Cascadia Code", sans-serif;
-
-    /* Radius */
-    --radius: 0.5rem;
-    --radius-small: calc(var(--radius) / 2);
-    --radius-large: calc(var(--radius) * 2);
-    --radius-full: 9999px;
-
-    /* Generic colors */
-    --color-black: #000;
-    --color-white: #fff;
-    --color-transparent: transparent;
 
     /* Background color */
     --color-background: var(--background);

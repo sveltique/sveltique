@@ -14,7 +14,7 @@ const basicUsageCode = `${script('import { AspectRatio } from "@sveltique/compon
 
 <AspectRatio
     ratio={16 / 9}
-    class="w-full max-w-md rounded-large"
+    class="w-full max-w-md rounded-2xl"
 >
     <img
         src="/images/kitten.webp"
@@ -30,7 +30,7 @@ const basicUsageCode = `${script('import { AspectRatio } from "@sveltique/compon
 <h2 id="basic-usage">Basic Usage</h2>
 <Alert class="mb-4">To enforce the ratio, you must define either a width or height.</Alert>
 <Playground code={basicUsageCode} class="flex-col">
-    <AspectRatio ratio={16 / 9} class="w-full max-w-md rounded-large">
+    <AspectRatio ratio={16 / 9} class="w-full max-w-md rounded-2xl">
         <img src="/images/kitten.webp" alt="Kitten in grass" class="w-full h-full object-cover" />
     </AspectRatio>
     <p class="text-sm italic">

@@ -1,79 +1,65 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-	--color-\*: initial;
-	--radius-\*: initial;
+    /* Fonts */
+    --font-codeblock: "Cascadia Code", sans-serif;
 
-	/* Fonts */
-	--font-codeblock: "Cascadia Code", sans-serif;
+    /* Background color */
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
 
-	/* Generic colors */
-	--color-black: #000;
-	--color-white: #fff;
-	--color-transparent: transparent;
+    /* Primary color */
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
 
-	/* Background color */
-	--color-background: var(--background);
-	--color-foreground: var(--foreground);
+    /* Accent colors */
+    --color-info: var(--info);
+    --color-success: var(--success);
+    --color-warning: var(--warning);
+    --color-danger: var(--danger);
 
-	/* Primary color */
-	--color-primary: var(--primary);
-	--color-primary-foreground: var(--primary-foreground);
+    /* DERIVED COLORS */
+    --color-muted: color-mix(in oklab, var(--background), var(--foreground) 10%);
+    --color-muted-foreground: color-mix(in oklab, var(--background), var(--foreground) 50%);
 
-	/* Accent colors */
-	--color-info: var(--info);
-	--color-success: var(--success);
-	--color-warning: var(--warning);
-	--color-danger: var(--danger);
+    --color-primary-muted: color-mix(in oklab, var(--primary), var(--background) 10%);
+    --color-primary-disabled: color-mix(in oklab, var(--primary), var(--background) 50%);
 
-	/* DERIVED COLORS */
-	--color-muted: color-mix(in oklab, var(--background), var(--foreground) 10%);
-	--color-muted-foreground: color-mix(in oklab, var(--background), var(--foreground) 50%);
-
-	--color-primary-muted: color-mix(in oklab, var(--primary), var(--background) 10%);
-	--color-primary-disabled: color-mix(in oklab, var(--primary), var(--background) 50%);
-
-	--color-info-light: color-mix(in oklab, var(--info), var(--background) 90%);
-	--color-success-light: color-mix(in oklab, var(--success), var(--background) 90%);
-	--color-warning-light: color-mix(in oklab, var(--warning), var(--background) 90%);
-	--color-danger-light: color-mix(in oklab, var(--danger), var(--background) 90%);
-	--color-danger-muted: color-mix(in oklab, var(--danger), var(--background) 10%);
-
-	/* Radius and DERIVED RADIUS */
-	--radius: 0.5rem;
-	--radius-small: calc(var(--radius) / 2);
-	--radius-large: calc(var(--radius) * 2);
-	--radius-full: 9999px;
+    --color-info-light: color-mix(in oklab, var(--info), var(--background) 90%);
+    --color-success-light: color-mix(in oklab, var(--success), var(--background) 90%);
+    --color-warning-light: color-mix(in oklab, var(--warning), var(--background) 90%);
+    --color-danger-light: color-mix(in oklab, var(--danger), var(--background) 90%);
+    --color-danger-muted: color-mix(in oklab, var(--danger), var(--background) 10%);
 }
 
 :root {
-	/* Background color */
-	--background: white;
-	--foreground: oklch(20.5% 0 0);
+    /* Background color */
+    --background: white;
+    --foreground: oklch(20.5% 0 0);
 
-	/* Primary color */
-	--primary: oklch(48.8% 0.243 264.376);
-	--primary-foreground: white;
+    /* Primary color */
+    --primary: oklch(48.8% 0.243 264.376);
+    --primary-foreground: white;
 
-	/* Accent colors */
-	--info: oklch(62.3% 0.214 259.815);
-	--success: oklch(72.3% 0.219 149.579);
-	--warning: oklch(79.5% 0.184 86.047);
-	--danger: oklch(63.7% 0.237 25.331);
+    /* Accent colors */
+    --info: oklch(62.3% 0.214 259.815);
+    --success: oklch(72.3% 0.219 149.579);
+    --warning: oklch(79.5% 0.184 86.047);
+    --danger: oklch(63.7% 0.237 25.331);
 
-	@variant dark {
-		/* Background color */
-		--background: oklch(20.5% 0 0);
-		--foreground: white;
+    @variant dark {
+        /* Background color */
+        --background: oklch(20.5% 0 0);
+        --foreground: white;
 
-		/* Primary color */
-		--primary: oklch(82.8% 0.111 230.318);
-		--primary-foreground: oklch(20.5% 0 0);
+        /* Primary color */
+        --primary: oklch(82.8% 0.111 230.318);
+        --primary-foreground: oklch(20.5% 0 0);
 
-		/* Accent colors */
-		--info: oklch(62.3% 0.214 259.815);
-		--success: oklch(72.3% 0.219 149.579);
-		--warning: oklch(79.5% 0.184 86.047);
-		--danger: oklch(63.7% 0.237 25.331);
-	}
+        /* Accent colors */
+        --info: oklch(62.3% 0.214 259.815);
+        --success: oklch(72.3% 0.219 149.579);
+        --warning: oklch(79.5% 0.184 86.047);
+        --danger: oklch(63.7% 0.237 25.331);
+    }
 }

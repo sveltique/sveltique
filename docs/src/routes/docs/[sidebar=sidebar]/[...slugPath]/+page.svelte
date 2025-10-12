@@ -31,7 +31,7 @@ let group = $derived(apiReference.find((group) => group.name === name));
         {#if data.previous}
             <a
                 href="/docs/{params.sidebar}/{data.previous.slugCategory}/{data.previous.slugName}"
-                class={button({ variant: "outline", class: "w-full px-4 py-3 h-auto rounded-large flex flex-col items-start gap-1" })}
+                class={button({ variant: "outline", class: "w-full px-4 py-3 h-auto rounded-2xl flex flex-col items-start gap-1" })}
             >
                 <span class="text-muted-foreground font-medium text-xs">Previous page</span>
                 <span class="text-primary font-bold text-base">{data.previous.name}</span>
@@ -42,7 +42,7 @@ let group = $derived(apiReference.find((group) => group.name === name));
         {#if data.next}
             <a
                 href="/docs/{params.sidebar}/{data.next.slugCategory}/{data.next.slugName}"
-                class={button({ variant: "outline", class: "w-full px-4 py-3 h-auto rounded-large flex flex-col items-end gap-1" })}
+                class={button({ variant: "outline", class: "w-full px-4 py-3 h-auto rounded-2xl flex flex-col items-end gap-1" })}
             >
                 <span class="text-muted-foreground font-medium text-xs">Next page</span>
                 <span class="text-primary font-bold text-base">{data.next.name}</span>
