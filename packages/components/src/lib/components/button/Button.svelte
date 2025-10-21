@@ -10,11 +10,6 @@ export interface ButtonProps
 		ButtonVariants,
 		WithRef<HTMLButtonElement> {
 	/**
-	 * The color of the button to render.
-	 * @default "primary"
-	 */
-	color?: ButtonVariants["color"];
-	/**
 	 * Whether to make the button take the full width of the available space or not.
 	 * @default false
 	 */
@@ -48,7 +43,6 @@ let {
 	fullWidth = false,
 	ref = $bindable(),
 	type = "button",
-	color = "primary",
 	shape = "rectangle",
 	size = "medium",
 	variant = "contained",
@@ -82,7 +76,7 @@ Buttons allow users to take actions, and make choices, with a single tap.
 	{disabled}
     data-button
 	aria-disabled={disabled}
-	class={button({ shape, size, variant, color, disabled, fullWidth, className: cnBase(className, hasClicked && "duration-100 scale-[97%]") })}
+	class={button({ shape, size, variant, disabled, fullWidth, className: cnBase(className, hasClicked && "duration-100 scale-[97%]") })}
 	{...restProps}
 >
 	{@render children?.()}

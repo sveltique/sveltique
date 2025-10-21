@@ -73,11 +73,12 @@ const colorCode = `${script('import { Button } from "@sveltique/components";')}
 <p>Buttons allow users to take actions, and make choices, with a single tap.</p>
 
 <h2 id="basic-usage">Basic Usage</h2>
-<p>A button has three variants: contained (default), outline, and text.</p>
+<p>A button has four variants: contained (default), outline, text, and danger.</p>
 <Playground code={basicUsageCode} class="md:flex-row flex-col">
-	<Button>CONTAINED</Button>
-	<Button variant="outline">OUTLINE</Button>
-	<Button variant="text">TEXT</Button>
+	<Button>Contained</Button>
+	<Button variant="outline">Outline</Button>
+	<Button variant="text">Text</Button>
+	<Button variant="danger">Danger</Button>
 </Playground>
 
 <h3 id="disabled">Disabled</h3>
@@ -85,10 +86,11 @@ const colorCode = `${script('import { Button } from "@sveltique/components";')}
 <p>
 	It reduces its opacity and disables pointer events to indicate it is inactive and not clickable.
 </p>
-<Playground code={disabledCode} class="max-sm:flex-col">
+<Playground code={disabledCode} class="max-md:flex-col">
 	<Button disabled>Disabled Contained</Button>
 	<Button disabled variant="outline">Disabled Outline</Button>
 	<Button disabled variant="text">Disabled Text</Button>
+	<Button disabled variant="danger">Disabled Text</Button>
 </Playground>
 
 <h2 id="customization">Customization</h2>
@@ -126,25 +128,5 @@ const colorCode = `${script('import { Button } from "@sveltique/components";')}
 		<Button shape="square">
 			<IconPlus />
 		</Button>
-	</div>
-</Playground>
-
-<h3 id="color">Color</h3>
-<p>
-    The <Badge variant="secondary">color</Badge> attribute changes the button's color : primary (default),
-    the default color scheme for main actions, and danger, for destructive or
-    irreversible actions.
-</p>
-<Playground code={colorCode} class="flex-col">
-	<div class="relative flex justify-center items-center gap-5 w-full">
-		<Button color="primary">Primary</Button>
-		<Button color="primary" variant="outline">Primary Outline</Button>
-		<Button color="primary" variant="text">Primary Text</Button>
-	</div>
-
-	<div class="relative flex justify-center items-center gap-5 w-full">
-		<Button color="danger">Danger</Button>
-		<Button color="danger" variant="outline">Danger Outline</Button>
-		<Button color="danger" variant="text">Danger Text</Button>
 	</div>
 </Playground>

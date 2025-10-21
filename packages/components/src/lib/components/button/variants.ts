@@ -8,9 +8,10 @@ export const button = tv({
     ],
     variants: {
         variant: {
-            contained: "",
-            outline: "border border-solid font-medium",
-            text: "",
+            contained: "bg-primary text-primary-foreground not-disabled:hover:bg-primary-muted focus-visible:ring-primary",
+            outline: "bg-transparent text-foreground not-disabled:hover:bg-muted border-muted border border-solid focus-visible:ring-primary",
+            text: "bg-transparent text-foreground not-disabled:hover:bg-muted focus-visible:ring-primary",
+            danger: "bg-danger text-white not-disabled:hover:bg-danger-muted focus-visible:ring-danger"
         },
         shape: {
             rectangle: "",
@@ -25,10 +26,6 @@ export const button = tv({
         },
         fullWidth: {
             true: "w-full"
-        },
-        color: {
-            primary: "focus:ring-primary",
-            danger: "focus:ring-danger",
         },
     },
     compoundVariants: [
@@ -51,46 +48,12 @@ export const button = tv({
             shape: "square",
             size: "medium",
             class: "p-2 rounded-lg size-9",
-        },
-        {
-            variant: "contained",
-            color: "primary",
-            class:
-                "bg-primary text-primary-foreground not-disabled:hover:bg-primary-muted",
-        },
-        {
-            variant: "outline",
-            color: "primary",
-            class:
-                "bg-transparent text-foreground not-disabled:hover:bg-muted border-muted",
-        },
-        {
-            variant: "text",
-            color: "primary",
-            class: "bg-transparent text-foreground not-disabled:hover:bg-muted",
-        },
-        {
-            variant: "contained",
-            color: "danger",
-            class: "bg-danger text-white not-disabled:hover:bg-danger-muted",
-        },
-        {
-            variant: "outline",
-            color: "danger",
-            class:
-                "bg-transparent text-danger border border-muted not-disabled:hover:bg-muted",
-        },
-        {
-            variant: "text",
-            color: "danger",
-            class: "bg-transparent text-danger not-disabled:hover:bg-muted",
-        },
+        }
     ],
     defaultVariants: {
         size: "medium",
         variant: "contained",
         shape: "rectangle",
-        color: "primary",
         disabled: false,
     },
 });
