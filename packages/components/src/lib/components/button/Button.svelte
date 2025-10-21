@@ -49,19 +49,7 @@ let {
 	...restProps
 }: ButtonProps = $props();
 
-let hasClicked = $state(false);
-
-$effect(() => {
-	if (!ref) return;
-
-	return on(ref, "click", () => {
-		hasClicked = true;
-
-		setTimeout(() => {
-			hasClicked = false;
-		}, 100);
-	});
-});
+let css = $derived(button({ shape, size, variant, fullWidth, className }));
 </script>
 
 <!--
@@ -70,14 +58,6 @@ Buttons allow users to take actions, and make choices, with a single tap.
 @see https://sveltique.dev/docs/components/browse/button
 -->
 
-<button
-	bind:this={ref}
-	{type}
-	{disabled}
-    data-button
-	aria-disabled={disabled}
-	class={button({ shape, size, variant, fullWidth, className: cnBase(className, hasClicked && "duration-100 scale-[97%]") })}
-	{...restProps}
->
+<button bind:this={ref} {type} {disabled} data-button class={css} {...restProps}>
 	{@render children?.()}
 </button>
