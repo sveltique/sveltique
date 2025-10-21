@@ -10,10 +10,10 @@ export interface ButtonProps
 		ButtonVariants,
 		WithRef<HTMLButtonElement> {
 	/**
-	 * The color of the button to render.
-	 * @default "primary"
+	 * Whether to make the button take the full width of the available space or not.
+	 * @default false
 	 */
-	color?: ButtonVariants["color"];
+	fullWidth?: boolean;
 	/**
 	 * The size of the button to render.
 	 * @default "medium"
@@ -33,35 +33,23 @@ export interface ButtonProps
 	 * Whether the button is disabled or not.
 	 * @default false
 	 */
-	disabled?: ButtonVariants["disabled"];
+	disabled?: boolean;
 }
 
 let {
 	children,
 	class: className,
 	disabled,
+	fullWidth = false,
 	ref = $bindable(),
 	type = "button",
-	color = "primary",
 	shape = "rectangle",
 	size = "medium",
 	variant = "contained",
 	...restProps
 }: ButtonProps = $props();
 
-let hasClicked = $state(false);
-
-$effect(() => {
-	if (!ref) return;
-
-	return on(ref, "click", () => {
-		hasClicked = true;
-
-		setTimeout(() => {
-			hasClicked = false;
-		}, 100);
-	});
-});
+let css = $derived(button({ shape, size, variant, fullWidth, className }));
 </script>
 
 <!--
@@ -70,14 +58,6 @@ Buttons allow users to take actions, and make choices, with a single tap.
 @see https://sveltique.dev/docs/components/browse/button
 -->
 
-<button
-	bind:this={ref}
-	{type}
-	{disabled}
-    data-button
-	aria-disabled={disabled}
-	class={button({ shape, size, variant, color, disabled, className: cnBase(className, hasClicked && "duration-100 scale-[97%]") })}
-	{...restProps}
->
+<button bind:this={ref} {type} {disabled} data-button class={css} {...restProps}>
 	{@render children?.()}
 </button>
