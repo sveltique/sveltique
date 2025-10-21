@@ -109,7 +109,7 @@ const colorCode = `${script('import { Button } from "@sveltique/components";')}
 <Playground code={shapeCode}>
 	<Button>Add an item</Button>
 	<Button shape="square">
-		<IconPlus class="size-5" />
+		<IconPlus />
 	</Button>
 </Playground>
 

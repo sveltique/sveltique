@@ -5,6 +5,7 @@ export const button = tv({
     base: [
         "relative duration-150 ease-in-out flex justify-center items-center gap-2.5 cursor-pointer [&_*]:pointer-events-none",
         "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-background focus-visible:ring-offset-2",
+        "[&_svg:not([class*='size-'])]:size-5 [&_svg]:shrink-0",
         "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed aria-disabled:opacity-50"
     ],
     variants: {
@@ -19,8 +20,8 @@ export const button = tv({
             square: "",
         },
         size: {
-            small: "text-xs",
-            medium: "text-sm",
+            small: "text-xs [&_svg:not([class*='size-'])]:size-4",
+            medium: "text-sm [&_svg:not([class*='size-'])]:size-5",
         },
         fullWidth: {
             true: "w-full"
