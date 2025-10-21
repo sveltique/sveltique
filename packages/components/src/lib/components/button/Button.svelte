@@ -15,6 +15,11 @@ export interface ButtonProps
 	 */
 	color?: ButtonVariants["color"];
 	/**
+	 * Whether to make the button take the full width of the available space or not.
+	 * @default false
+	 */
+	fullWidth?: boolean;
+	/**
 	 * The size of the button to render.
 	 * @default "medium"
 	 */
@@ -40,6 +45,7 @@ let {
 	children,
 	class: className,
 	disabled,
+	fullWidth = false,
 	ref = $bindable(),
 	type = "button",
 	color = "primary",
@@ -76,7 +82,7 @@ Buttons allow users to take actions, and make choices, with a single tap.
 	{disabled}
     data-button
 	aria-disabled={disabled}
-	class={button({ shape, size, variant, color, disabled, className: cnBase(className, hasClicked && "duration-100 scale-[97%]") })}
+	class={button({ shape, size, variant, color, disabled, fullWidth, className: cnBase(className, hasClicked && "duration-100 scale-[97%]") })}
 	{...restProps}
 >
 	{@render children?.()}
