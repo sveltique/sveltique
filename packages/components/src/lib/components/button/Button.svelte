@@ -33,7 +33,7 @@ export interface ButtonProps
 	 * Whether the button is disabled or not.
 	 * @default false
 	 */
-	disabled?: ButtonVariants["disabled"];
+	disabled?: boolean;
 }
 
 let {
@@ -76,7 +76,7 @@ Buttons allow users to take actions, and make choices, with a single tap.
 	{disabled}
     data-button
 	aria-disabled={disabled}
-	class={button({ shape, size, variant, disabled, fullWidth, className: cnBase(className, hasClicked && "duration-100 scale-[97%]") })}
+	class={button({ shape, size, variant, fullWidth, className: cnBase(className, hasClicked && "duration-100 scale-[97%]") })}
 	{...restProps}
 >
 	{@render children?.()}

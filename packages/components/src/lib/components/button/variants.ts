@@ -5,6 +5,7 @@ export const button = tv({
     base: [
         "relative duration-150 ease-in-out flex justify-center items-center gap-2.5 cursor-pointer [&_*]:pointer-events-none",
         "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-background focus-visible:ring-offset-2",
+        "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed aria-disabled:opacity-50"
     ],
     variants: {
         variant: {
@@ -20,9 +21,6 @@ export const button = tv({
         size: {
             small: "text-xs",
             medium: "text-sm",
-        },
-        disabled: {
-            true: "cursor-not-allowed opacity-50", // TODO : add custom disabled color on each button...
         },
         fullWidth: {
             true: "w-full"
@@ -53,8 +51,7 @@ export const button = tv({
     defaultVariants: {
         size: "medium",
         variant: "contained",
-        shape: "rectangle",
-        disabled: false,
+        shape: "rectangle"
     },
 });
 
