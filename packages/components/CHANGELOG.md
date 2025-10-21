@@ -1,5 +1,11 @@
 # @sveltique/components
 
+## 0.11.0
+
+### Minor Changes
+
+- [#67](https://github.com/sveltique/sveltique/pull/67) [`88799a0`](https://github.com/sveltique/sveltique/commit/88799a0ea9b870871af1a077b309889eb30fafc0) Thanks [@novaotp](https://github.com/novaotp)! - Improved button (contains BREAKING CHANGES)
+
 ## 0.10.0
 
 ### Minor Changes
