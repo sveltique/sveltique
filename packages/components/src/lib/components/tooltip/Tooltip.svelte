@@ -5,6 +5,7 @@ import { on } from "svelte/events";
 import { fade } from "svelte/transition";
 import type { ClassNameValue } from "tailwind-merge";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
+import { motionSafe } from "$utils/motion-safe.js";
 import { type TooltipVariants, tooltip } from "./variants.js";
 
 type Ref = {
@@ -109,7 +110,7 @@ Display informative text when users hover over, focus on, or tap an element.
     
 	{#if show}
 		<div
-			transition:fade={{ duration: 150 }}
+			transition:fade={{ duration: motionSafe(0, 150) }}
 			id={_id}
 			role="tooltip"
 			tabindex="-1"
