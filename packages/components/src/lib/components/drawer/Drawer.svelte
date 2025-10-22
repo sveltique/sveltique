@@ -4,6 +4,7 @@ import { cubicOut } from "svelte/easing";
 import type { HTMLAttributes } from "svelte/elements";
 import { type FlyParams, fly } from "svelte/transition";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
+import { motionSafe } from "$utils/motion-safe.js";
 import { onKeyUp } from "$utils/on-key.svelte.js";
 import { Backdrop, type BackdropProps } from "../backdrop/index.js";
 import { Portal } from "../portal/index.js";
@@ -100,7 +101,11 @@ let drawerFrom = $derived.by(() => {
 		return { y: 100 };
 	}
 });
-let transitionProps = $derived<FlyParams>({ ...drawerFrom, duration: 200, easing: cubicOut });
+let transitionProps = $derived<FlyParams>({
+	...drawerFrom,
+	duration: motionSafe(0, 200),
+	easing: cubicOut
+});
 
 let { actions: actionsCss, dialog } = $derived(drawer({ from }));
 

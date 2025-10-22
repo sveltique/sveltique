@@ -4,6 +4,7 @@ import type { HTMLAttributes } from "svelte/elements";
 import { type FadeParams, fade } from "svelte/transition";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { backdrop } from "./variants.js";
+import { motionSafe } from "$utils/motion-safe.js";
 
 export interface BackdropProps
 	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
@@ -55,7 +56,14 @@ let {
 	...restProps
 }: BackdropProps = $props();
 
-let _transitionProps = $derived({ duration: fadeDuration, ...transitionProps });
+let _transitionProps = $derived.by(() => {
+	const merged = { duration: fadeDuration, ...transitionProps };
+
+	return {
+		...merged,
+		duration: motionSafe(0, merged.duration)
+	};
+});
 
 function onBackdropClick(event: MouseEvent) {
 	if (event.target !== ref) return;

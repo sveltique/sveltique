@@ -3,6 +3,7 @@ import { onMount, type Snippet } from "svelte";
 import type { HTMLAttributes } from "svelte/elements";
 import { slide } from "svelte/transition";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
+import { motionSafe } from "$utils/motion-safe.js";
 import { useMutationObserver } from "$utils/use-mutation-observer.svelte.js";
 import { accordionItem } from "./variants.js";
 
@@ -108,7 +109,7 @@ function updateOpen() {
 
 	{#if open}
 		<div
-			transition:slide={{ duration: 150 }}
+			transition:slide={{ duration: motionSafe(0, 150) }}
 			id="{uid}-panel"
             data-accordion-item-panel
 			aria-labelledby={uid}
