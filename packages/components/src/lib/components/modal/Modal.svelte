@@ -6,6 +6,7 @@ import { onKeyUp } from "$utils/on-key.svelte.js";
 import { flyAndScale } from "../../transitions/fly-and-scale.js";
 import { Backdrop, type BackdropProps } from "../backdrop/index.js";
 import { modal, type ModalVariants } from "./variants.js";
+import { motionSafe } from "$utils/motion-safe.js";
 
 type Ref = { current: HTMLElement | undefined };
 
@@ -117,7 +118,7 @@ A dialog component that interrupts the user flow to capture attention. Displays 
 	<Backdrop onClick={() => closeOnOverlayClick && close()} {...backdropProps}>
 		<div
             bind:this={ref}
-			transition:flyAndScale={{ duration: 150 }}
+			transition:flyAndScale={{ duration: motionSafe(0, 150) }}
 			id={uid}
 			role="alertdialog"
             data-modal
