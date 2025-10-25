@@ -64,8 +64,12 @@ class OnThisPageContext {
 		}, [] as Heading[]);
 	}
 
-	/** Only gets headings which are not in playground elements. */
+	/** Only gets headings which are not in playground elements and don't include `data-no-sidebar`. */
 	private _filterContentHeadings(headings: NodeListOf<HTMLHeadingElement>): HTMLHeadingElement[] {
-		return Array.from(headings).filter((heading) => !heading.closest("[data-playground]"));
+		return Array.from(headings).filter((heading) => {
+			return (
+				!heading.closest("[data-playground]") && !heading.hasAttribute("data-no-sidebar")
+			);
+		});
 	}
 }
