@@ -1,5 +1,11 @@
 # @sveltique/components
 
+## 0.11.1
+
+### Patch Changes
+
+- [#68](https://github.com/sveltique/sveltique/pull/68) [`81c4900`](https://github.com/sveltique/sveltique/commit/81c4900b8297cd0c59c9db588159202fe782aaf7) Thanks [@novaotp](https://github.com/novaotp)! - Made everything `motion-safe`
+
 ## 0.11.0
 
 ### Minor Changes
