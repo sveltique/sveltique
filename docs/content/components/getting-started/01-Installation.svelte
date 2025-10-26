@@ -8,7 +8,7 @@ import CodeBlock from "$components/CodeBlock.svelte";
     <meta name="description" content="Install Sveltique components library." />
 </svelte:head>
 
-<h1 id="installation" class="text-3xl font-bold">Installation</h1>
+<h1 id="installation" class="font-bold text-3xl">Installation</h1>
 <p>Install Sveltique components library.</p>
 <Alert type="danger" class="mb-4">
     Until 1.0, this library is not suited for production-level code, as there may be breaking changes
@@ -24,19 +24,28 @@ import CodeBlock from "$components/CodeBlock.svelte";
 <p>You can easily import the library via npm.</p>
 <CodeBlock code="npm install @sveltique/components" lang="bash" />
 
-<h3 id="peer-dependencies">Peer dependencies</h3>
-<p>Note that you should at least have Svelte at version 5.25.0 to use the library.</p>
-<CodeBlock
-    code={`"peerDependencies": {
-    "svelte": "^5.25.0"
-}`}
-    lang="json"
-/>
+<h2 id="peer-dependencies">Peer dependencies</h2>
 
-<h3 id="optional-dependencies">Optional dependencies</h3>
+<h3 id="svelte"><Badge variant="secondary" class="text-base">svelte</Badge></h3>
+<p>
+    You should at least have <Badge variant="secondary">svelte</Badge> at version 5.25.0 to use the
+    library.
+</p>
+
+<h3 id="@floating-ui/dom"><Badge variant="secondary" class="text-base">@floating-ui/dom</Badge></h3>
+<p>
+    If you use one of these components, you should at least have <Badge variant="secondary">@floating-ui/dom</Badge>
+    at version 1.7.4 to use the library.
+</p>
+<ul>
+    <li><Link href="/docs/components/browse/tooltip">Tooltip</Link></li>
+</ul>
+<CodeBlock code="npm install @floating-ui/dom" lang="bash" />
+
+<h2 id="optional-dependencies">Optional dependencies</h2>
 <p>These libraries are optional if you don't use the components that rely on them.</p>
 
-<h4 id="code-block">Code Block</h4>
+<h3 id="code-block">CodeBlock</h3>
 <p>
     The <code>{"<CodeBlock />"}</code> component uses <Link href="https://shiki.style" external
         >shiki</Link
