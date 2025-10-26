@@ -157,11 +157,11 @@ Display syntax-highlighted code snippets. Ideal anywhere you need clear, readabl
 
 {#snippet header()}
     <div data-code-block-header class={headerCss()}>
-        <div data-code-block-filename class="relative flex items-center justify-start gap-2.5">
+        <div data-code-block-filename class="relative flex justify-start items-center gap-2.5">
             {@render icon?.()}
             <p class={filenameCss()}>{filename}</p>
         </div>
-        <Tooltip title={copyTitle(isCopied)} placement="top">
+        <Tooltip title={copyTitle(isCopied)}>
             {#snippet children({ props, ref })}
                 <Button bind:ref={ref.current} onclick={copy} variant="text" shape="square" {...props}>
                     {@render iconSnippet()}
@@ -173,18 +173,14 @@ Display syntax-highlighted code snippets. Ideal anywhere you need clear, readabl
 {/snippet}
 
 {#snippet copyButton()}
-    <Tooltip
-        title={copyTitle(isCopied)}
-        placement="top"
-        containerClass="absolute z-10 right-3 {tokensResult.tokens.length === 1 ? "top-1/2 -translate-y-1/2" : "top-3"}"
-    >
+    <Tooltip title={copyTitle(isCopied)}>
         {#snippet children({ props, ref })}
             <Button
                 bind:ref={ref.current}
                 onclick={copy}
                 variant="text"
                 shape="square"
-                class="bg-muted"
+                class="absolute bg-muted z-10 right-3 {tokensResult.tokens.length === 1 ? "top-1/2 -translate-y-1/2" : "top-3"}"
                 {...props}
             >
                 {@render iconSnippet()}
@@ -204,7 +200,7 @@ Display syntax-highlighted code snippets. Ideal anywhere you need clear, readabl
 		stroke-width="2"
 		stroke-linecap="round"
 		stroke-linejoin="round"
-		class="icon icon-tabler icons-tabler-outline icon-tabler-clipboard size-5"
+		class="icons-tabler-outline size-5 icon icon-tabler icon-tabler-clipboard"
 	>
 		<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 		<path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
@@ -223,7 +219,7 @@ Display syntax-highlighted code snippets. Ideal anywhere you need clear, readabl
 		stroke-width="2"
 		stroke-linecap="round"
 		stroke-linejoin="round"
-		class="icon icon-tabler icons-tabler-outline icon-tabler-check size-5"
+		class="icons-tabler-outline size-5 icon icon-tabler icon-tabler-check"
 	>
 		<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 		<path d="M5 12l5 5l10 -10" />
