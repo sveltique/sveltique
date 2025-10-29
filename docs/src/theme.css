@@ -63,3 +63,7 @@
         --danger: oklch(63.7% 0.237 25.331);
     }
 }
+
+[data-tooltip] {
+    z-index: 1000;
+}

@@ -73,6 +73,7 @@
         "tailwind-variants": "2.0.1"
     },
     "peerDependencies": {
+        "@floating-ui/dom": "^1.7.4",
         "svelte": "^5.25.0"
     },
     "optionalDependencies": {
