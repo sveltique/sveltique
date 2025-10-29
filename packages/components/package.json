@@ -1,5 +1,6 @@
 {
     "name": "@sveltique/components",
+    "description": "Build beautiful and consistent user interfaces with ready-to-use components, a cohesive design system and Tailwind's flexibility.",
     "version": "0.12.0",
     "keywords": [
         "svelte",
@@ -9,6 +10,17 @@
         "tailwindcss"
     ],
     "license": "MIT",
+    "author": {
+        "name": "Sajidur Rahman"
+    },
+    "homepage": "https://sveltique.dev",
+    "bugs": "https://github.com/sveltique/sveltique/issues",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sveltique/sveltique.git",
+        "directory": "packages/components"
+    },
+    "type": "module",
     "scripts": {
         "build": "npm run prepack",
         "build:watch": "npm run prepack:watch",
@@ -32,7 +44,6 @@
     ],
     "svelte": "./dist/components/index.js",
     "types": "./dist/components/index.d.ts",
-    "type": "module",
     "exports": {
         ".": {
             "types": "./dist/components/index.d.ts",
