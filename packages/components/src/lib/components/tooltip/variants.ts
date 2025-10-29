@@ -1,23 +1,10 @@
 import { tv, type VariantProps } from "tailwind-variants";
 
 export const tooltip = tv({
-  slots: {
-    container: "relative",
-    tip: "absolute left-1/2 -translate-x-1/2 text-foreground whitespace-nowrap bg-background rounded-sm border border-muted shadow-sm p-2 text-xs",
-  },
-  variants: {
-    placement: {
-      bottom: {
-        tip: "top-[calc(100%+8px)]",
-      },
-      top: {
-        tip: "bottom-[calc(100%+8px)]",
-      },
-    },
-  },
-  defaultVariants: {
-    placement: "bottom",
-  },
+    slots: {
+        container: "absolute top-0 left-0 w-max text-background whitespace-nowrap bg-foreground rounded-sm p-2 text-xs",
+        arrow: "absolute bg-foreground size-2 rotate-45 rounded-xs",
+    }
 });
 
 export type TooltipVariants = VariantProps<typeof tooltip>;
