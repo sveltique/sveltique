@@ -1,5 +1,13 @@
 # @sveltique/components
 
+## 0.12.0
+
+### Minor Changes
+
+- [#72](https://github.com/sveltique/sveltique/pull/72) Thanks [@novaotp](https://github.com/novaotp)! - Improved alert
+
+- [#71](https://github.com/sveltique/sveltique/pull/71) Thanks [@novaotp](https://github.com/novaotp)! - Tooltip positioned with @floating-ui/dom
+
 ## 0.11.1
 
 ### Patch Changes
