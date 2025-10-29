@@ -14,13 +14,15 @@ const basicUsageCode = `${script('import { Button } from "@sveltique/components"
 
 <Button>CONTAINED</Button>
 <Button variant="outline">OUTLINE</Button>
-<Button variant="text">TEXT</Button>`;
+<Button variant="text">TEXT</Button>
+<Button variant="danger">Danger</Button>`;
 
 const disabledCode = `${script('import { Button } from "@sveltique/components";')}
 
 <Button disabled>Disabled Contained</Button>
 <Button disabled variant="outline">Disabled Outline</Button>
-<Button disabled variant="text">Disabled Text</Button>`;
+<Button disabled variant="text">Disabled Text</Button>
+<Button disabled variant="danger">Disabled Danger</Button>`;
 
 const fullWidthCode = `${script('import { Button } from "@sveltique/components";')}
 
@@ -30,9 +32,7 @@ const fullWidthCode = `${script('import { Button } from "@sveltique/components";
 
 const shapeCode = `${script('import { Button } from "@sveltique/components";')}
 
-<Button>
-    Add an item
-</Button>
+<Button>Add an item</Button>
 <Button shape="square">
     <IconPlus />
 </Button>`;
@@ -42,7 +42,6 @@ const sizeCode = `${script('import { Button } from "@sveltique/components";')}
 <div class="relative flex justify-center items-center gap-5 w-full">
     <Button size="small">Add an item</Button>
     <Button>Add an item</Button>
-    <Button size="large">Add an item</Button>
 </div>
 
 <div class="relative flex justify-center items-center gap-5 w-full">
@@ -90,7 +89,7 @@ const colorCode = `${script('import { Button } from "@sveltique/components";')}
 	<Button disabled>Disabled Contained</Button>
 	<Button disabled variant="outline">Disabled Outline</Button>
 	<Button disabled variant="text">Disabled Text</Button>
-	<Button disabled variant="danger">Disabled Text</Button>
+	<Button disabled variant="danger">Disabled Danger</Button>
 </Playground>
 
 <h2 id="customization">Customization</h2>
