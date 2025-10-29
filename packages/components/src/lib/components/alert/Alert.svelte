@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { Snippet } from "svelte";
 import type { HTMLAttributes } from "svelte/elements";
+import { cnBase } from "tailwind-variants";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { type AlertVariants, alert } from "./variants.js";
 
@@ -9,8 +10,6 @@ type IconSnippet = Snippet<
 		{
 			props: {
 				"aria-hidden": true;
-				/** CSS to manage the size of the icon. */
-				class: string;
 			};
 		}
 	]
@@ -26,6 +25,17 @@ export interface AlertProps
 	 */
 	children?: Snippet;
 	/**
+	 * Additional props for the content.
+	 * @default {}
+	 */
+	contentProps?: ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>;
+	/**
+	 * The underlying DOM element of the content.
+	 * @bindable
+	 * @default —
+	 */
+	contentRef?: HTMLDivElement;
+	/**
 	 * The icon of the alert.
 	 * @default —
 	 */
@@ -40,13 +50,15 @@ export interface AlertProps
 let {
 	children,
 	class: className = "",
+	contentProps = {},
+	contentRef = $bindable(),
 	icon = fallbackIcon,
 	ref = $bindable(),
 	type = "info",
 	...restProps
 }: AlertProps = $props();
 
-const { container, icon: iconCss } = $derived(alert({ type, className }));
+let { class: contentClassName, ...restContentProps } = $derived(contentProps);
 </script>
 
 <!--
@@ -55,12 +67,19 @@ A visual message box used to communicate contextual feedback to users, such as i
 @see https://sveltique.dev/docs/components/browse/alert
 -->
 
-<div bind:this={ref} role="alert" data-alert class={container({ className })} {...restProps}>
-	{@render icon({ props: { "aria-hidden": true, class: iconCss() } })}
-	<span>{@render children?.()}</span>
+<div bind:this={ref} role="alert" data-alert class={alert({ type, className })} {...restProps}>
+	{@render icon({ props: { "aria-hidden": true } })}
+	<div
+        bind:this={contentRef}
+        data-alert-content
+        class={cnBase(contentClassName)}
+        {...restContentProps}
+    >
+        {@render children?.()}
+    </div>
 </div>
 
-{#snippet fallbackIcon({ props: { class: css, ...props } }: Parameters<IconSnippet>[0])}
+{#snippet fallbackIcon({ props }: Parameters<IconSnippet>[0])}
 	{#if type === 'success'}
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +87,7 @@ A visual message box used to communicate contextual feedback to users, such as i
 			height="24"
 			viewBox="0 0 24 24"
 			fill="currentColor"
-			class="icon icon-tabler icons-tabler-filled icon-tabler-circle-check {css}"
+			class="text-success"
 			{...props}
 		>
 			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -83,7 +102,7 @@ A visual message box used to communicate contextual feedback to users, such as i
 			height="24"
 			viewBox="0 0 24 24"
 			fill="currentColor"
-			class="icon icon-tabler icons-tabler-filled icon-tabler-info-circle {css}"
+			class="text-info"
 			{...props}
 		>
 			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -98,7 +117,7 @@ A visual message box used to communicate contextual feedback to users, such as i
 			height="24"
 			viewBox="0 0 24 24"
 			fill="currentColor"
-			class="icon icon-tabler icons-tabler-filled icon-tabler-alert-triangle {css}"
+			class="text-warning"
 			{...props}
 		>
 			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -114,7 +133,7 @@ A visual message box used to communicate contextual feedback to users, such as i
 			height="24"
 			viewBox="0 0 24 24"
 			fill="currentColor"
-			class="icon icon-tabler icons-tabler-filled icon-tabler-exclamation-circle {css}"
+			class="text-danger"
 			{...props}
 		>
 			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
