@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { Snippet } from "svelte";
 import type { HTMLAttributes } from "svelte/elements";
+import { cnBase } from "tailwind-variants";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { type AlertVariants, alert } from "./variants.js";
 
@@ -24,6 +25,17 @@ export interface AlertProps
 	 */
 	children?: Snippet;
 	/**
+	 * Additional props for the content.
+	 * @default {}
+	 */
+	contentProps?: ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>;
+	/**
+	 * The underlying DOM element of the content.
+	 * @bindable
+	 * @default —
+	 */
+	contentRef?: HTMLDivElement;
+	/**
 	 * The icon of the alert.
 	 * @default —
 	 */
@@ -38,11 +50,15 @@ export interface AlertProps
 let {
 	children,
 	class: className = "",
+	contentProps = {},
+	contentRef = $bindable(),
 	icon = fallbackIcon,
 	ref = $bindable(),
 	type = "info",
 	...restProps
 }: AlertProps = $props();
+
+let { class: contentClassName, ...restContentProps } = $derived(contentProps);
 </script>
 
 <!--
@@ -53,7 +69,14 @@ A visual message box used to communicate contextual feedback to users, such as i
 
 <div bind:this={ref} role="alert" data-alert class={alert({ type, className })} {...restProps}>
 	{@render icon({ props: { "aria-hidden": true } })}
-	<span>{@render children?.()}</span>
+	<div
+        bind:this={contentRef}
+        data-alert-content
+        class={cnBase(contentClassName)}
+        {...restContentProps}
+    >
+        {@render children?.()}
+    </div>
 </div>
 
 {#snippet fallbackIcon({ props }: Parameters<IconSnippet>[0])}
