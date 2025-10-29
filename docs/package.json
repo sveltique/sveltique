@@ -30,6 +30,7 @@
         "vite": "^7.1.11"
     },
     "dependencies": {
+        "@floating-ui/dom": "^1.7.4",
         "@sveltique/components": "*",
         "@tabler/icons-svelte": "^3.34.1",
         "tailwind-merge": "^3.3.1",
