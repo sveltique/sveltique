@@ -1,30 +1,21 @@
 <script lang="ts">
-import { onMount } from "svelte";
+import { cnBase } from "tailwind-variants";
 import type { WithRef } from "$lib/types.js";
-import { onKeyDown, onKeyUp } from "$utils/on-key.svelte.js";
-import { useMutationObserver } from "$utils/use-mutation-observer.svelte.js";
-import { getSibling } from "./utils.js";
-import { type OTPCellVariants, otpCell } from "./variants.js";
+import { getLocalContext } from "../context.svelte.js";
+import { type OTPCellVariants, otpCell } from "../variants.js";
 
 interface Props extends WithRef<HTMLElement | HTMLInputElement>, OTPCellVariants {
-	/** @default "middle" */
-	position?: "first" | "middle" | "last";
-	/** @default "" */
-	value?: string;
-	onvaluechange?: (value: string) => void;
+	/** The position of the cell in the OTP input. */
+	index: number;
 }
 
-let {
-	onvaluechange,
-	position = "middle",
-	ref = $bindable(),
-	value = "",
-	...restProps
-}: Props = $props();
+let { index, ref = $bindable(), ...restProps }: Props = $props();
 
 const uid = $props.id();
 
-let parent = $state<HTMLElement>();
+const context = getLocalContext();
+
+/* let parent = $state<HTMLElement>();
 let isActiveCell = $state<boolean>();
 
 onMount(() => {
@@ -116,23 +107,23 @@ function onfocus() {
 function moveCursorAtEnd() {
 	if (!ref) return;
 	(ref as HTMLInputElement).setSelectionRange(1, 1);
+} */
+
+function oninput(event: Event & { currentTarget: HTMLInputElement }) {
+	event.preventDefault();
+
+	context.value[index] = event.currentTarget.value;
 }
 </script>
 
 <input
     bind:this={ref}
-    oninput={(e) => {
-        // @ts-ignore
-        oninput(e)
-    }}
-    {onclick}
-    {onfocus}
-    {value}
+    {oninput}
     id={uid}
     type="text"
-    tabindex={isActiveCell ? 0 : -1}
+    tabindex={context.activeCellIndex === index ? 0 : -1}
     data-otp-cell
-    data-position={position}
-    class={otpCell({ position })}
+    data-index={index}
+    class={cnBase(otpCell(), !!context.at(index) && "caret-transparent")}
     {...restProps}
 />

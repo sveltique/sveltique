@@ -1,5 +1,6 @@
 <script lang="ts">
 import { Kbd, OTP } from "@sveltique/components";
+import IconPointFilled from "@tabler/icons-svelte/icons/point-filled";
 import Playground from "$components/Playground.svelte";
 
 let value = $state("");
@@ -10,7 +11,19 @@ let value = $state("");
 
 <h2 id="basic-usage">Basic Usage</h2>
 <Playground class="flex-col">
-    <OTP bind:value />
+    <OTP.Root bind:value length={6}>
+        <OTP.Group>
+            <OTP.Cell index={0} />
+            <OTP.Cell index={1} />
+            <OTP.Cell index={2} />
+        </OTP.Group>
+        <IconPointFilled aria-hidden="true" />
+        <OTP.Group>
+            <OTP.Cell index={3} />
+            <OTP.Cell index={4} />
+            <OTP.Cell index={5} />
+        </OTP.Group>
+    </OTP.Root>
     <p class="text-sm">Current value: {value}</p>
 </Playground>
 

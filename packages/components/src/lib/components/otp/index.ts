@@ -1,6 +1,9 @@
-import Root from "./OTP.svelte";
+import Cell from "./components/Cell.svelte";
+import Group from "./components/Group.svelte";
+import Root from "./components/Root.svelte";
 
-// @ts-ignore
-export const OTP: typeof Root & { Root: typeof Root } = Root;
-// @ts-ignore
-OTP.Root = Root;
+export const OTP = {
+    Root,
+    Group,
+    Cell
+}
