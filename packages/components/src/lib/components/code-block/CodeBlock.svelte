@@ -1,14 +1,14 @@
 <script lang="ts">
 import type { BundledLanguage, BundledTheme, HighlighterGeneric } from "shiki";
-import { onMount, type Snippet } from "svelte";
+import { type Snippet } from "svelte";
+import type { HTMLAttributes } from "svelte/elements";
 import type { ClassNameValue } from "tailwind-merge";
-import type { ReplaceWithTWMergeClass, TWMergeClass, WithRef } from "$lib/types.js";
+import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { Button } from "../button/index.js";
 import { Separator } from "../separator/index.js";
 import { Tooltip } from "../tooltip/index.js";
 import { assembleLines, parseNumberRanges, transformHTMLEntities } from "./code-block.js";
 import { codeBlock } from "./variants.js";
-import type { HTMLAttributes } from "svelte/elements";
 
 export interface CodeBlockProps
 	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLPreElement>>,
@@ -87,9 +87,6 @@ let {
 
 let isCopied = $state(false);
 
-let biggestSpanWidth = $state<number>();
-let preStyle = $derived(biggestSpanWidth ? `--span-width: ${biggestSpanWidth}px;` : "");
-
 let iconSnippet = $derived(isCopied ? copiedIcon : copyIcon);
 let parsedLines = $derived(parseNumberRanges(highlightedLines));
 let tokensResult = $derived.by(() => {
@@ -112,15 +109,6 @@ async function copy() {
 function fallbackCopyTitle(isCopied: boolean) {
 	return isCopied ? "Copied" : "Copy to clipboard";
 }
-
-onMount(() => {
-	if (!ref) return;
-
-	const spans = Array.from(ref.querySelectorAll("pre code span")).filter(
-		(el) => el instanceof HTMLElement
-	);
-	biggestSpanWidth = Math.max(...spans.map((span) => span.scrollWidth));
-});
 </script>
 
 <!--
@@ -145,7 +133,6 @@ Display syntax-highlighted code snippets. Ideal anywhere you need clear, readabl
 	<pre
         data-code-block-pre
         data-show-line-numbers={showLineNumbers}
-        style={preStyle}
         class={pre({ className })}
         {...restProps}
     >
@@ -231,9 +218,8 @@ Display syntax-highlighted code snippets. Ideal anywhere you need clear, readabl
         counter-reset: line;
 
         [data-code-line=""] {
-            padding: 2px 20px;
-            /* 20px extra for right padding */
-            width: calc(var(--span-width, auto) + 20px);
+            padding: 2px 1.25rem;
+            min-width: max-content;
 
             &[data-highlighted="true"] {
                 background-color: color-mix(in oklab, currentColor 12%, transparent);
@@ -245,9 +231,9 @@ Display syntax-highlighted code snippets. Ideal anywhere you need clear, readabl
 			content: counter(line);
 			display: inline-block;
 			width: 1rem;
-			margin-right: 2rem;
+			margin-right: 1.5rem;
 			text-align: right;
-			color: gray;
+			color: var(--color-muted-foreground);
 		}
 	}
 </style>
