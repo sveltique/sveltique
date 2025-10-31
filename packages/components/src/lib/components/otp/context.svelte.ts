@@ -1,7 +1,6 @@
 import { getContext, setContext, untrack } from "svelte";
 
 type OTPContextOptions = {
-	activeCellIndex: number;
 	length: number;
 	value: string[];
 	setValue: (newValue: string) => string;
@@ -19,13 +18,11 @@ export function setLocalContext(options: () => OTPContextOptions): OTPContext {
 
 class OTPContext {
 	public length: number;
-	public activeCellIndex: number;
 	public value: string[];
 	public setValue: (newValue: string) => string;
 
 	constructor(options: () => OTPContextOptions) {
 		this.length = $state(options().length);
-		this.activeCellIndex = $state(options().activeCellIndex);
 		this.value = $state(options().value);
 		this.setValue = $state(options().setValue);
 

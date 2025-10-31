@@ -30,7 +30,6 @@ let {
 
 const context = setLocalContext(() => {
 	return {
-		activeCellIndex: 0,
 		length,
 		value: toCharArray(value, length),
 		setValue: (newValue: string) => (value = newValue)
@@ -99,7 +98,6 @@ function toCharArray(str: string, len: number): string[] {
     bind:this={ref}
     role="group"
     data-otp-root
-    data-active-cell-id={context.activeCellIndex}
     data-length={context.length}
     data-value={context.value}
     class={otp({ className })}

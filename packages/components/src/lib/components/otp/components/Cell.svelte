@@ -17,6 +17,16 @@ const uid = $props.id();
 
 const context = getLocalContext();
 
+let tabindex = $derived.by(() => {
+	const firstEmptyChar = context.value.findIndex((v) => v === "");
+
+	if (firstEmptyChar === -1) {
+		return index === context.length - 1 ? 0 : -1;
+	}
+
+	return index === firstEmptyChar ? 0 : -1;
+});
+
 /* let parent = $state<HTMLElement>();
 let isActiveCell = $state<boolean>();
 
@@ -24,92 +34,7 @@ onMount(() => {
 	if (!ref) return;
 
 	parent = ref.parentElement!;
-});
-
-useMutationObserver(
-	() => parent,
-	() => {
-		isActiveCell = parent!.getAttribute("data-active-cell-id") === uid;
-	},
-	{ attributes: true }
-);
-
-onKeyUp(
-	["Backspace", "Delete"],
-	(_, key) => {
-		if (!ref) return;
-
-		if (value !== "") {
-			value = "";
-			onvaluechange?.("");
-
-			return;
-		}
-
-		if (key === "Backspace" && position === "first") return;
-		if (key === "Delete" && position === "last") return;
-
-		const sibling = getSibling(ref, {
-			attribute: "data-otp-cell",
-			previous: key === "Backspace"
-		});
-		if (!sibling) return;
-
-		parent!.setAttribute("data-active-cell-id", sibling.id);
-		sibling.focus();
-	},
-	{ element: () => ref }
-);
-
-onKeyDown(
-	["ArrowLeft", "ArrowRight"],
-	(_, key) => {
-		if (!ref) return;
-
-		if (key === "ArrowLeft" && position === "first") return;
-		if (key === "ArrowRight" && position === "last") return;
-
-		const sibling = getSibling(ref, {
-			attribute: "data-otp-cell",
-			previous: key === "ArrowLeft"
-		});
-		if (!sibling) return;
-
-		parent!.setAttribute("data-active-cell-id", sibling.id);
-		sibling.focus();
-	},
-	{ element: () => ref }
-);
-
-function oninput(event: InputEvent & { currentTarget: HTMLInputElement }) {
-	if (event.inputType === "deleteContentBackward") return;
-	if (!ref) return;
-
-	const char = event.currentTarget.value.at(-1)!;
-
-	(ref as HTMLInputElement).value = char;
-	value = char;
-	onvaluechange?.(char);
-
-	const nextCell = getSibling(ref, { attribute: "data-otp-cell", previous: false });
-	if (!nextCell) return;
-
-	parent!.setAttribute("data-active-cell-id", nextCell.id);
-	nextCell.focus();
-}
-
-function onclick() {
-	moveCursorAtEnd();
-}
-
-function onfocus() {
-	moveCursorAtEnd();
-}
-
-function moveCursorAtEnd() {
-	if (!ref) return;
-	(ref as HTMLInputElement).setSelectionRange(1, 1);
-} */
+}); */
 
 onKeyDown(
 	["Backspace", "Delete"],
@@ -140,11 +65,28 @@ onKeyDown(
 	{ element: () => ref }
 );
 
+onKeyDown(
+	["ArrowLeft", "ArrowRight"],
+	(_, key) => {
+		if (!ref) return;
+
+		if (key === "ArrowRight" && context.value[index] === "") return;
+
+		getSibling(ref, {
+			attribute: "data-otp-cell",
+			previous: key === "ArrowLeft"
+		})?.focus();
+	},
+	{ element: () => ref }
+);
+
 function oninput(event: Event & { currentTarget: HTMLInputElement }) {
 	if (!ref) return;
 	if ("inputType" in event && event.inputType === "deleteContentBackward") return;
 
-	context.value[index] = event.currentTarget.value.at(-1) ?? "";
+	if (!("data" in event)) return;
+
+	context.value[index] = event.data as string;
 	getSibling(ref, { attribute: "data-otp-cell", previous: false })?.focus();
 }
 </script>
@@ -155,9 +97,9 @@ function oninput(event: Event & { currentTarget: HTMLInputElement }) {
     {oninput}
     id={uid}
     type="text"
-    tabindex={context.activeCellIndex === index ? 0 : -1}
+    {tabindex}
     data-otp-cell
     data-index={index}
-    class={cnBase(otpCell(), !!context.at(index) && "caret-transparent")}
+    class={cnBase(otpCell(), !!context.value[index] && "caret-transparent")}
     {...restProps}
 />
