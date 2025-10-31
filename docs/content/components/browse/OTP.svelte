@@ -10,29 +10,52 @@ import { Badge, Kbd, OTP } from "@sveltique/components";
 import IconPointFilled from "@tabler/icons-svelte/icons/point-filled";
 import Playground from "$components/Playground.svelte";
 import { Table } from "$components/table";
+import { script } from "$utils/playground";
 
 let value = $state("");
+
+const basicUsageCode = `${script('import { OTP } from "@sveltique/components";')}
+
+<OTP.Root length={6}>
+    {#each { length: 6 } as _, index (index)}
+        <OTP.Cell {index} />
+    {/each}
+</OTP.Root>`;
+
+const groupsCode = `${script(`import { OTP } from "@sveltique/components";
+    import IconPointFilled from "@tabler/icons-svelte/icons/point-filled";`)}
+
+<OTP.Root length={6} class="gap-4">
+    <OTP.Group>
+        <OTP.Cell index={0} />
+        <OTP.Cell index={1} />
+        <OTP.Cell index={2} />
+    </OTP.Group>
+    <IconPointFilled aria-hidden="true" class="text-muted-foreground" />
+    <OTP.Group>
+        <OTP.Cell index={3} />
+        <OTP.Cell index={4} />
+        <OTP.Cell index={5} />
+    </OTP.Group>
+</OTP.Root>`
 </script>
 
 <h1 id="otp">OTP</h1>
 <p>A multi-cell input component for entering one-time passwords (OTP) or verification codes.</p>
 
 <h2 id="basic-usage">Basic Usage</h2>
-<Playground class="flex-col">
+<Playground code={basicUsageCode} class="flex-col">
     <OTP.Root bind:value length={6}>
-        <OTP.Cell index={0} />
-        <OTP.Cell index={1} />
-        <OTP.Cell index={2} />
-        <OTP.Cell index={3} />
-        <OTP.Cell index={4} />
-        <OTP.Cell index={5} />
+        {#each { length: 6 } as _, index (index)}
+            <OTP.Cell {index} />
+        {/each}
     </OTP.Root>
     <p class="text-sm">Current value: {value}</p>
 </Playground>
 
-<h2 id="group">Groups</h2>
+<h2 id="groups">Groups</h2>
 <p>You can group cells using <Badge variant="secondary">OTP.Group</Badge>.</p>
-<Playground class="flex-col">
+<Playground code={groupsCode} class="flex-col">
     <OTP.Root length={6} class="gap-4">
         <OTP.Group>
             <OTP.Cell index={0} />
