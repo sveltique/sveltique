@@ -89,12 +89,41 @@ function oninput(event: Event & { currentTarget: HTMLInputElement }) {
 	context.value[index] = event.data as string;
 	getSibling(ref, { attribute: "data-otp-cell", previous: false })?.focus();
 }
+
+function onpaste(event: ClipboardEvent) {
+	if (!context.root) return;
+
+	event.preventDefault();
+
+	const chars = (event.clipboardData?.getData("text") ?? "").split("");
+
+	context.value[index] = chars[0] ?? "";
+
+	let finalIndex = index + 1;
+	for (let i = 1; i < chars.length; i++) {
+		if (context.value[finalIndex] !== "") break;
+
+		context.value[finalIndex] = chars[i];
+		finalIndex++;
+	}
+
+	const children = Array.from(context.root.children) as HTMLElement[];
+	const element = children.find((child) => {
+		return (
+			child.getAttribute("data-otp-cell") === "true" &&
+			child.getAttribute("data-index") === String(Math.min(finalIndex, context.length - 1))
+		);
+	});
+
+	element?.focus();
+}
 </script>
 
 <input
     bind:this={ref}
     bind:value={context.value[index]}
     {oninput}
+    {onpaste}
     id={uid}
     type="text"
     {tabindex}

@@ -1,30 +1,31 @@
 import { getContext, setContext, untrack } from "svelte";
 
-type OTPContextOptions = {
-	length: number;
-	value: string[];
-	setValue: (newValue: string) => string;
-};
-
 const KEY = Symbol("OTPContextKey");
 
 export function getLocalContext(): OTPContext {
 	return getContext(KEY);
 }
 
-export function setLocalContext(options: () => OTPContextOptions): OTPContext {
-	return setContext(KEY, new OTPContext(options));
+export function setLocalContext(context: OTPContext): OTPContext {
+	return setContext(KEY, context);
 }
 
-class OTPContext {
+export class OTPContext {
+	public root: HTMLDivElement | undefined;
 	public length: number;
 	public value: string[];
 	public setValue: (newValue: string) => string;
 
-	constructor(options: () => OTPContextOptions) {
-		this.length = $state(options().length);
-		this.value = $state(options().value);
-		this.setValue = $state(options().setValue);
+	constructor(
+		root: () => HTMLDivElement | undefined,
+		length: () => number,
+		value: () => string[],
+		setValue: (newValue: string) => string
+	) {
+		this.root = $derived(root());
+		this.length = $state(length());
+		this.value = $state(value());
+		this.setValue = setValue;
 
 		$effect.root(() => {
 			$effect(() => {

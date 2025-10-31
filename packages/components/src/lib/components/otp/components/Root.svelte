@@ -1,12 +1,12 @@
 <script lang="ts">
 import type { HTMLAttributes } from "svelte/elements";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
-import { setLocalContext } from "../context.svelte.js";
+import { OTPContext, setLocalContext } from "../context.svelte.js";
 import { otp } from "../variants.js";
 
 interface Props
-	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLElement>>,
-		WithRef<HTMLElement | HTMLDivElement> {
+	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLDivElement>>,
+		WithRef<HTMLDivElement> {
 	/** The length of the OTP input. */
 	length: number;
 	/**
@@ -28,13 +28,14 @@ let {
 	...restProps
 }: Props = $props();
 
-const context = setLocalContext(() => {
-	return {
-		length,
-		value: toCharArray(value, length),
-		setValue: (newValue: string) => (value = newValue)
-	};
-});
+const context = setLocalContext(
+	new OTPContext(
+		() => ref,
+		() => length,
+		() => toCharArray(value, length),
+		(newValue: string) => (value = newValue)
+	)
+);
 
 /* onMount(() => {
 	if (length < 2) {
@@ -91,7 +92,7 @@ function toCharArray(str: string, len: number): string[] {
 } */
 </script>
 
-<input type="text" {name} {value} aria-hidden="true" class="hidden" />
+<input type="text" {name} value={context.value.join("")} aria-hidden="true" class="hidden" />
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <div
@@ -99,7 +100,7 @@ function toCharArray(str: string, len: number): string[] {
     role="group"
     data-otp-root
     data-length={context.length}
-    data-value={context.value}
+    data-value={context.value.join("")}
     class={otp({ className })}
     {...restProps}
 >

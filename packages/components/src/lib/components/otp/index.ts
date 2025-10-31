@@ -3,7 +3,7 @@ import Group from "./components/Group.svelte";
 import Root from "./components/Root.svelte";
 
 /**
- * A multi-cell input component for entering one-time passwords (OTP) or verification codes.
+ * A multi-cell input component for entering one-time passwords (OTP) or verification codes, with pasting functionality.
  * @see https://sveltique.dev/docs/components/browse/otp
  */
 export const OTP = {

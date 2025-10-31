@@ -1,7 +1,7 @@
 <script module>
 export const metadata = {
 	description:
-		"A multi-cell input component for entering one-time passwords (OTP) or verification codes."
+		"A multi-cell input component for entering one-time passwords (OTP) or verification codes, with pasting functionality."
 };
 </script>
 
@@ -41,7 +41,7 @@ const groupsCode = `${script(`import { OTP } from "@sveltique/components";
 </script>
 
 <h1 id="otp">OTP</h1>
-<p>A multi-cell input component for entering one-time passwords (OTP) or verification codes.</p>
+<p>A multi-cell input component for entering one-time passwords (OTP) or verification codes, with pasting functionality.</p>
 
 <h2 id="basic-usage">Basic Usage</h2>
 <Playground code={basicUsageCode} class="flex-col">
