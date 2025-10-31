@@ -35,7 +35,7 @@ const localContext = setLocalContext(() => {
 	return {
 		activeCellIndex: 0,
 		length,
-		value: [],
+		value: (value + "      ").slice(0, 6).split(""),
 		setValue: (newValue: string) => (value = newValue)
 	};
 });

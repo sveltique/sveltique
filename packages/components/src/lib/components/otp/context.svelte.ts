@@ -21,15 +21,17 @@ class OTPContext {
 	public length: number;
 	public activeCellIndex: number;
 	public value: string[];
+	public setValue: (newValue: string) => string;
 
 	constructor(options: () => OTPContextOptions) {
-		this.length = $derived(options().length);
-		this.activeCellIndex = $derived(options().activeCellIndex);
-		this.value = $derived(options().value);
+		this.length = $state(options().length);
+		this.activeCellIndex = $state(options().activeCellIndex);
+		this.value = $state(options().value);
+		this.setValue = $state(options().setValue);
 
 		$effect.root(() => {
 			$effect(() => {
-				options().setValue($state.snapshot(this.value).join(""));
+				this.setValue($state.snapshot(this.value).join(""));
 			});
 		});
 	}

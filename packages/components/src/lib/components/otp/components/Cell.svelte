@@ -3,6 +3,7 @@ import { cnBase } from "tailwind-variants";
 import type { WithRef } from "$lib/types.js";
 import { getLocalContext } from "../context.svelte.js";
 import { type OTPCellVariants, otpCell } from "../variants.js";
+import { getSibling } from "../utils.js";
 
 interface Props extends WithRef<HTMLElement | HTMLInputElement>, OTPCellVariants {
 	/** The position of the cell in the OTP input. */
@@ -110,14 +111,24 @@ function moveCursorAtEnd() {
 } */
 
 function oninput(event: Event & { currentTarget: HTMLInputElement }) {
-	event.preventDefault();
+	if (!ref) return;
 
-	context.value[index] = event.currentTarget.value;
+	// @ts-ignore
+	if (event.inputType === "deleteContentBackward") {
+		context.value[index] = "";
+		getSibling(ref, { attribute: "data-otp-cell", previous: true })?.focus();
+		return;
+	}
+
+	context.value[index] = event.currentTarget.value.at(-1) ?? "";
+
+	getSibling(ref, { attribute: "data-otp-cell", previous: false })?.focus();
 }
 </script>
 
 <input
     bind:this={ref}
+    bind:value={context.value[index]}
     {oninput}
     id={uid}
     type="text"
