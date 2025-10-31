@@ -18,6 +18,8 @@ const uid = $props.id();
 const context = getLocalContext();
 
 let tabindex = $derived.by(() => {
+	// TODO : must get index at empty char
+	// but it gets the first empty char, even if there are letters after
 	const firstEmptyChar = context.value.findIndex((v) => v === "");
 
 	if (firstEmptyChar === -1) {
@@ -42,25 +44,21 @@ onKeyDown(
 		if (!ref) return;
 
 		if (key === "Backspace") {
-			if (context.value[index] === "") {
+			if (context.value[index] === "" || context.value[index] === " ") {
+				context.value[index] = "";
 				getSibling(ref, { attribute: "data-otp-cell", previous: true })?.focus();
 			} else {
 				context.value[index] = "";
 			}
 
+			context.value = context.value.copyWithin(index, index + 1);
+
 			return;
+		} else {
+			if (context.value[index] === "") return;
+
+			context.value = context.value.copyWithin(index, index + 1);
 		}
-
-		/* if (key === "Delete" && position === "last") return;
-
-		const sibling = getSibling(ref, {
-			attribute: "data-otp-cell",
-			previous: key === "Backspace"
-		});
-		if (!sibling) return;
-
-		parent!.setAttribute("data-active-cell-id", sibling.id);
-		sibling.focus(); */
 	},
 	{ element: () => ref }
 );
