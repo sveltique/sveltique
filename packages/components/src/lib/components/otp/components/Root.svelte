@@ -1,11 +1,8 @@
 <script lang="ts">
-import { onMount } from "svelte";
-import type { HTMLAttributes, MouseEventHandler } from "svelte/elements";
+import type { HTMLAttributes } from "svelte/elements";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
-import { isHTMLElement } from "$utils/is-html-element.js";
-import { otp } from "../variants.js";
-import Cell from "./Cell.svelte";
 import { setLocalContext } from "../context.svelte.js";
+import { otp } from "../variants.js";
 
 interface Props
 	extends ReplaceWithTWMergeClass<HTMLAttributes<HTMLElement>>,
@@ -31,11 +28,11 @@ let {
 	...restProps
 }: Props = $props();
 
-const localContext = setLocalContext(() => {
+const context = setLocalContext(() => {
 	return {
 		activeCellIndex: 0,
 		length,
-		value: (value + "      ").slice(0, 6).split(""),
+		value: toCharArray(value, length),
 		setValue: (newValue: string) => (value = newValue)
 	};
 });
@@ -55,14 +52,14 @@ const localContext = setLocalContext(() => {
 	activeCellId = firstCell?.id ?? "";
 }); */
 
-/* function toCharArray(str: string, len: number): string[] {
+function toCharArray(str: string, len: number): string[] {
 	const chars = str.split("");
 	const minLengthChars = chars.concat(Array(len).fill(""));
 
 	return minLengthChars.slice(0, len);
 }
 
-const onclick: MouseEventHandler<HTMLDivElement> = (event) => {
+/* const onclick: MouseEventHandler<HTMLDivElement> = (event) => {
 	if (!ref) return;
 
 	const target = event.target;
@@ -102,16 +99,11 @@ const onclick: MouseEventHandler<HTMLDivElement> = (event) => {
     bind:this={ref}
     role="group"
     data-otp-root
-    data-active-cell-id={localContext.activeCellIndex}
-    data-length={localContext.length}
-    data-value={localContext.value}
+    data-active-cell-id={context.activeCellIndex}
+    data-length={context.length}
+    data-value={context.value}
     class={otp({ className })}
     {...restProps}
 >
-    <!-- <Cell value={values[0]} onvaluechange={(v) => onvaluechange(0, v)} position="first" />
-    {#each { length: length - 2 } as _, i}
-        <Cell value={values[i + 1]} onvaluechange={(v) => onvaluechange(i + 1, v)} />
-    {/each}
-    <Cell value={values[length - 1]} onvaluechange={(v) => onvaluechange(length - 1, v)} position="last" /> -->
     {@render children?.()}
 </div>

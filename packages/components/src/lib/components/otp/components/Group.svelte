@@ -8,6 +8,6 @@ interface Props {
 let { children }: Props = $props();
 </script>
 
-<div class="relative flex justify-center items-center">
+<div data-otp-group class="relative flex justify-center items-center">
     {@render children?.()}
 </div>

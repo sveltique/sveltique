@@ -4,6 +4,7 @@ import type { WithRef } from "$lib/types.js";
 import { getLocalContext } from "../context.svelte.js";
 import { type OTPCellVariants, otpCell } from "../variants.js";
 import { getSibling } from "../utils.js";
+import { onKeyDown } from "$utils/on-key.svelte.js";
 
 interface Props extends WithRef<HTMLElement | HTMLInputElement>, OTPCellVariants {
 	/** The position of the cell in the OTP input. */
@@ -110,18 +111,40 @@ function moveCursorAtEnd() {
 	(ref as HTMLInputElement).setSelectionRange(1, 1);
 } */
 
+onKeyDown(
+	["Backspace", "Delete"],
+	(_, key) => {
+		if (!ref) return;
+
+		if (key === "Backspace") {
+			if (context.value[index] === "") {
+				getSibling(ref, { attribute: "data-otp-cell", previous: true })?.focus();
+			} else {
+				context.value[index] = "";
+			}
+
+			return;
+		}
+
+		/* if (key === "Delete" && position === "last") return;
+
+		const sibling = getSibling(ref, {
+			attribute: "data-otp-cell",
+			previous: key === "Backspace"
+		});
+		if (!sibling) return;
+
+		parent!.setAttribute("data-active-cell-id", sibling.id);
+		sibling.focus(); */
+	},
+	{ element: () => ref }
+);
+
 function oninput(event: Event & { currentTarget: HTMLInputElement }) {
 	if (!ref) return;
-
-	// @ts-ignore
-	if (event.inputType === "deleteContentBackward") {
-		context.value[index] = "";
-		getSibling(ref, { attribute: "data-otp-cell", previous: true })?.focus();
-		return;
-	}
+	if ("inputType" in event && event.inputType === "deleteContentBackward") return;
 
 	context.value[index] = event.currentTarget.value.at(-1) ?? "";
-
 	getSibling(ref, { attribute: "data-otp-cell", previous: false })?.focus();
 }
 </script>
