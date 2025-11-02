@@ -23,6 +23,10 @@ const introductionCode = `@custom-variant dark (&:where(.dark, .dark *));
     --color-danger: var(--danger);
 
     /* DERIVED COLORS */
+    --color-background-soft: color-mix(in oklab, var(--background), var(--foreground) 3%);
+    --color-background-softer: color-mix(in oklab, var(--background), var(--foreground) 6%);
+    --color-background-softest: color-mix(in oklab, var(--background), var(--foreground) 9%);
+
     --color-muted: color-mix(in oklab, var(--background), var(--foreground) 10%);
     --color-muted-foreground: color-mix(in oklab, var(--background), var(--foreground) 50%);
 
@@ -51,7 +55,7 @@ const introductionCode = `@custom-variant dark (&:where(.dark, .dark *));
     --warning: oklch(79.5% 0.184 86.047);
     --danger: oklch(63.7% 0.237 25.331);
 
-	@variant dark {
+    @variant dark {
         /* Background color */
         --background: oklch(20.5% 0 0);
         --foreground: white;
