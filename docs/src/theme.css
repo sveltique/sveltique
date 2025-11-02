@@ -19,6 +19,10 @@
     --color-danger: var(--danger);
 
     /* DERIVED COLORS */
+    --color-background-soft: color-mix(in oklab, var(--background), var(--foreground) 3%);
+    --color-background-softer: color-mix(in oklab, var(--background), var(--foreground) 6%);
+    --color-background-softest: color-mix(in oklab, var(--background), var(--foreground) 9%);
+
     --color-muted: color-mix(in oklab, var(--background), var(--foreground) 10%);
     --color-muted-foreground: color-mix(in oklab, var(--background), var(--foreground) 50%);
 
