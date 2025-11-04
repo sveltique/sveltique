@@ -149,7 +149,7 @@ const controlledStateCode = `${script(`import { Popover } from "@sveltique/compo
     </Popover.Root>
 </Playground>
 
-<h3 id="arrow">Close</h3>
+<h3 id="close">Close</h3>
 <p>
     You can add a close button to the content using the <Badge variant="secondary">Popover.Close</Badge>
     component.
