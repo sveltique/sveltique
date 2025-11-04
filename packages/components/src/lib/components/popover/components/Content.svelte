@@ -113,6 +113,7 @@ async function updateTooltipPosition() {
             id="{context.id}-content"
             role="dialog"
             tabindex={-1}
+            aria-modal="true"
             data-popover-content
             class={popoverContent({ className })}
             {variant}

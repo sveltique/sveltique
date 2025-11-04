@@ -12,7 +12,7 @@ export const popoverArrow = tv({
 });
 
 export const popoverClose = tv({
-    base: "absolute top-3 right-3",
+    base: "absolute top-3 right-3 size-7",
 });
 
 export type PopoverContentVariants = VariantProps<typeof popoverContent>;
