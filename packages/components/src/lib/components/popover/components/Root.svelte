@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { Snippet } from "svelte";
-import { PopoverContext, setLocalContext } from "../context.svelte.js";
-import { onKeyDown } from "$utils/on-key.svelte.js";
 import { createFocusTrap } from "focus-trap";
+import type { Snippet } from "svelte";
 import { tabbable } from "tabbable";
+import { onKeyDown } from "$utils/on-key.svelte.js";
+import { PopoverContext, setLocalContext } from "../context.svelte.js";
 
 export interface PopoverProps {
 	/**
