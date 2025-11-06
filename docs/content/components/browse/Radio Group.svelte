@@ -15,23 +15,10 @@ import { script } from '$utils/playground';
 
     $inspect(value)
 
-const basicUsageCode = `${script('import { RadioGroup.Root } from "@sveltique/components";')}
+const basicUsageCode = `${script('import { Label, RadioGroup } from "@sveltique/components";')}
 
-<RadioGroup.Root />`;
-
-/* const exampleOneCode = `${script('import { RadioGroup.Root } from "@sveltique/components";')}
-
-<RadioGroup.Root />`; */
-</script>
-
-<h1 id="component">RadioGroup.Root</h1>
-<p>
-    A radio group is a set of checkable buttons, known as radio buttons, where no more than one of the
-    buttons can be checked at a time.
-</p>
-
-<h2 id="basic-usage">Basic Usage</h2>
-<Playground code={basicUsageCode} class="flex-col">
+<fieldset class="p-4 border border-muted w-52">
+    <legend class="bg-foreground px-2 text-background">Choose an animal</legend>
     <RadioGroup.Root bind:value name="animals" class="flex flex-col gap-1">
         <div class="flex items-center gap-4">
             <RadioGroup.Item value="cat" id="cat" />
@@ -46,6 +33,38 @@ const basicUsageCode = `${script('import { RadioGroup.Root } from "@sveltique/co
             <Label for="snake">Snake</Label>
         </div>
     </RadioGroup.Root>
+</fieldset>`;
+
+/* const exampleOneCode = `${script('import { RadioGroup.Root } from "@sveltique/components";')}
+
+<RadioGroup.Root />`; */
+</script>
+
+<h1 id="component">RadioGroup.Root</h1>
+<p>
+    A radio group is a set of checkable buttons, known as radio buttons, where no more than one of the
+    buttons can be checked at a time.
+</p>
+
+<h2 id="basic-usage">Basic Usage</h2>
+<Playground code={basicUsageCode} class="flex-col">
+    <fieldset class="p-4 border border-muted w-52">
+        <legend class="bg-foreground px-2 text-background">Choose an animal</legend>
+        <RadioGroup.Root bind:value name="animals" class="flex flex-col gap-1">
+            <div class="flex items-center gap-4">
+                <RadioGroup.Item value="cat" id="cat" />
+                <Label for="cat">Cat</Label>
+            </div>
+            <div class="flex items-center gap-4">
+                <RadioGroup.Item value="dog" id="dog" />
+                <Label for="dog">Dog</Label>
+            </div>
+            <div class="flex items-center gap-4">
+                <RadioGroup.Item value="snake" id="snake" />
+                <Label for="snake">Snake</Label>
+            </div>
+        </RadioGroup.Root>
+    </fieldset>
 </Playground>
 
 <h2 id="structure">Structure</h2>
