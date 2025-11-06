@@ -18,7 +18,7 @@ const basicUsageCode = `${script("import { Checkbox } from '@sveltique/component
 
 const withLabelCode = `${script("import { Checkbox, Label } from '@sveltique/components';")}
 
-<div class="relative flex items-center justify-center gap-3">
+<div class="relative flex justify-center items-center gap-3">
     <Checkbox id="tos" />
     <Label for="tos">
         I have read the Terms of Services.
@@ -28,9 +28,9 @@ const withLabelCode = `${script("import { Checkbox, Label } from '@sveltique/com
 
 <h1 id="checkbox">Checkbox</h1>
 <p>Checkboxes allow the user to select one or more items from a set.</p>
-<Alert>
-    Consider using a <Link href="/docs/components/browse/switch">{'<Switch />'}</Link> if you only
-    have one checkbox.
+<Alert class="mb-4">
+    Consider using a <Link href="/docs/components/browse/switch">Switch</Link> if you only have one
+    checkbox.
 </Alert>
 
 <h2 id="basic-usage">Basic Usage</h2>
@@ -45,7 +45,7 @@ const withLabelCode = `${script("import { Checkbox, Label } from '@sveltique/com
 
 <h3>With Label</h3>
 <Playground code={withLabelCode}>
-    <div class="relative flex items-center justify-center gap-3">
+    <div class="relative flex justify-center items-center gap-3">
         <Checkbox id="tos" />
         <Label for="tos">
             I have read the Terms of Services.

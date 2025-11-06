@@ -32,7 +32,7 @@ let {
 <!--
 @component
 Checkboxes allow the user to select one or more items from a set.
-@info Consider using a [\<Switch />](https://sveltique.dev/docs/components/browse/switch) if you only have one checkbox.
+@info Consider using a [Switch](https://sveltique.dev/docs/components/browse/switch) if you only have one checkbox.
 @see https://sveltique.dev/docs/components/browse/checkbox
 -->
 
