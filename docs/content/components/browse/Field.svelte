@@ -11,6 +11,8 @@ import {
 	Badge,
 	Checkbox,
 	Field,
+	Kbd,
+	Label,
 	Link,
 	NumberInput,
 	Switch,
@@ -19,6 +21,24 @@ import {
 import Playground from "$components/Playground.svelte";
 import { theme } from "$lib/contexts/theme.svelte";
 import { script } from "$utils/playground";
+import { Table } from "$components/table";
+
+let checked = $state(false)
+
+let password = $state("")
+let passwordErrors = $derived.by(() => {
+    const errors = [];
+
+    if (password.length < 8) {
+        errors.push("Must have at least 8 characters.")
+    }
+
+    if (!/[#$%^&()]/.test(password)) {
+        errors.push("Must contain at least one special character.")
+    }
+
+    return errors;
+})
 
 let age = $state(16);
 let ageError = $derived.by(() => {
@@ -26,6 +46,10 @@ let ageError = $derived.by(() => {
 		return "You must be at least 18 years old to participate.";
 	}
 });
+
+$effect(() => {
+    theme.setDarkTheme(theme.isDark);
+})
 
 const basicUsageCode = `${script('import { Field, TextInput } from "@sveltique/components";')}
 
@@ -122,11 +146,10 @@ const placementCode = `${script('import { Checkbox, Field, Switch } from "@svelt
     </Link>.
 </p>
 <Playground code={basicUsageCode}>
-    <Field label="Full Name" class="max-w-3xs">
-		{#snippet input({ props })}
-			<TextInput {...props} />
-		{/snippet}
-	</Field>
+    <Field.Root class="max-w-3xs">
+        <Label for="full-name">Full name</Label>
+        <TextInput id="full-name" />
+	</Field.Root>
 </Playground>
 
 <h3 id="error-message">Error Message</h3>
@@ -139,11 +162,13 @@ const placementCode = `${script('import { Checkbox, Field, Switch } from "@svelt
     it manually like in this example.
 </Alert>
 <Playground code={errorMessageCode} class="flex-col">
-	<Field label="Age" error={ageError} class="max-w-3xs">
-		{#snippet input({ props })}
-			<NumberInput bind:value={age} min={0} max={99} {...props} />
-		{/snippet}
-	</Field>
+	<Field.Root class="max-w-3xs">
+        <Label for="age">Age</Label>
+        <NumberInput id="age" bind:value={age} min={0} max={99} />
+        {#if ageError}
+            <Field.Error>{ageError}</Field.Error>
+        {/if}
+	</Field.Root>
     <p class="text-muted-foreground text-sm italic">
         Try setting the age above 18 to make the error disappear.
     </p>
@@ -155,36 +180,95 @@ const placementCode = `${script('import { Checkbox, Field, Switch } from "@svelt
     property.
 </p>
 <Playground code={helperTextCode} class="flex-col">
-	<Field label="Password" helper="Must be at least 8 characters" class="max-w-3xs">
-		{#snippet input({ props })}
-			<TextInput type="password" {...props} />
-		{/snippet}
-	</Field>
+	<Field.Root class="max-w-3xs">
+        <Label for="password">Password</Label>
+        <Field.Helper>Must be at least 8 characters</Field.Helper>
+        <TextInput id="password" type="password" />
+	</Field.Root>
 </Playground>
+
+<h2 id="structure">Structure</h2>
+<Table.Root>
+    <Table.Head>
+        <Table.Row>
+            <Table.Header>Component</Table.Header>
+            <Table.Header>Description</Table.Header>
+        </Table.Row>
+    </Table.Head>
+    <Table.Body>
+        <Table.Row>
+            <Table.Cell><Kbd>Field.Root</Kbd></Table.Cell>
+            <Table.Cell>The root container of the field.</Table.Cell>
+        </Table.Row>
+        <Table.Row>
+            <Table.Cell><Kbd>Field.Helper</Kbd></Table.Cell>
+            <Table.Cell>A helper text for the field.</Table.Cell>
+        </Table.Row>
+        <Table.Row>
+            <Table.Cell><Kbd>Field.Error</Kbd></Table.Cell>
+            <Table.Cell>Error(s) for the field.</Table.Cell>
+        </Table.Row>
+        <Table.Row>
+            <Table.Cell><Kbd>Field.Content</Kbd></Table.Cell>
+            <Table.Cell>Vertical grouping for content.</Table.Cell>
+        </Table.Row>
+    </Table.Body>
+</Table.Root>
 
 <h2 id="customization">Customization</h2>
 
-<h3 id="placement">Label Placement</h3>
+<h3 id="placement">Orientation</h3>
 <p>
     By default, the label appears on top of the input. However, in somes cases, such as with switches
     or checkboxes, you may want to place the label differently.
 </p>
-<p>You have three placement options : top (default), left and right.</p>
+<p>You have two orientation options : vertical (default), and horizontal.</p>
 <Playground code={placementCode}>
     <div class="relative flex flex-col items-center gap-6">
-        <Field label="Switch to dark theme" placement="left">
-            {#snippet input({ props })}
-                <Switch
-                    checked={theme.isDark}
-                    ontoggle={(checked) => theme.setDarkTheme(checked)}
-                    {...props}
-                />
-            {/snippet}
-        </Field>
-        <Field label="I have read the Terms of Services." placement="right">
-            {#snippet input({ props })}
-                <Checkbox {...props} />
-            {/snippet}
-        </Field>
+        <Field.Root orientation="horizontal">
+            <Label for="dark-theme">Switch to dark theme</Label>
+            <Switch
+                id="dark-theme"
+                checked={theme.isDark}
+            />
+        </Field.Root>
+        <Field.Root orientation="horizontal">
+            <Checkbox id="tos-1" />
+            <Label for="tos-1">I have read the Terms of Services.</Label>
+        </Field.Root>
     </div>
+</Playground>
+
+<h2 id="examples">Examples</h2>
+
+<h3 id="complete-field">Complete field</h3>
+<p>Usage of a complete field, i.e. using all the components.</p>
+<Playground>
+    <Field.Root orientation="horizontal" class="max-w-3xs">
+        <Checkbox id="tos-2" bind:checked />
+        <Field.Content>
+            <Label for="tos-2">I have read the Terms of Services.</Label>
+            <Field.Helper>Make sure that you have read everything.</Field.Helper>
+            {#if !checked}
+                <Field.Error>You must check this.</Field.Error>
+            {/if}
+        </Field.Content>
+    </Field.Root>
+</Playground>
+
+<h3 id="multiple-errors">Multiple errors</h3>
+<Playground>
+    <Field.Root class="max-w-3xs">
+        <Label for="password">Password</Label>
+        <TextInput bind:value={password} id="password" type="password" />
+        {#if passwordErrors.length}
+            <ul class="flex flex-col gap-1">
+                {#each passwordErrors as error, index (index)}
+                    <li>
+                        <Field.Error>{error}</Field.Error>
+                    </li>
+                {/each}
+            </ul>
+        {/if}
+    </Field.Root>
 </Playground>

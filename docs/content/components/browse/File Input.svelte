@@ -5,7 +5,7 @@ export const metadata = {
 </script>
 
 <script lang="ts">
-import { Badge, Field, FileInput } from "@sveltique/components";
+import { Badge, Field, FileInput, Label } from "@sveltique/components";
 import CodeBlock from "$components/CodeBlock.svelte";
 import Playground from "$components/Playground.svelte";
 import { script } from "$utils/playground";
@@ -83,9 +83,12 @@ const formExampleCode = `${script(`import { Field, FileInput } from "@sveltique/
 
 <h3 id="form">Form</h3>
 <Playground code={formExampleCode}>
-    <Field label="CV" helper="PDF or DOCX (max. 5 MB)" error={fileError} class="max-w-xs">
-        {#snippet input({ props })}
-            <FileInput bind:file accept=".pdf,.docx" {...props} />
-        {/snippet}
-    </Field>
+    <Field.Root class="max-w-xs">
+        <Label for="cv">CV</Label>
+        <FileInput id="cv" bind:file accept=".pdf,.docx" />
+        <Field.Helper>PDF or DOCX (max. 5 MB)</Field.Helper>
+        {#if fileError}
+            <Field.Error>{fileError}</Field.Error>
+        {/if}
+    </Field.Root>
 </Playground>

@@ -11,7 +11,17 @@ export type TWMergeClass = {
 	class?: ClassNameValue;
 };
 
+/** @deprecated Use `Ref<T>` instead. */
 export type WithRef<T extends HTMLElement> = {
+	/**
+	 * The underlying DOM element that is rendered.
+	 * @bindable
+	 * @default —
+	 */
+	ref?: T;
+};
+
+export type Ref<T extends HTMLElement> = {
 	/**
 	 * The underlying DOM element that is rendered.
 	 * @bindable
