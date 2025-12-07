@@ -7,7 +7,7 @@ import { script } from "$utils/playground";
 const withoutActionsSnippet = `${script(`import { Button, Drawer, Kbd, Scrollable, Separator } from "@sveltique/components";
     import IconX from "@tabler/icons-svelte/icons/x";`)}
 
-<Drawer backdropProps={{ z: 1000 }} class="justify-start gap-6">
+<Drawer.Root backdropProps={{ z: 1000 }} class="justify-start gap-6">
     {#snippet trigger({ open, ref })}
         <Button bind:ref={ref.current} onclick={open}>
             Keyboard shortcuts
@@ -111,11 +111,11 @@ const withoutActionsSnippet = `${script(`import { Button, Drawer, Kbd, Scrollabl
             </div>
         </Scrollable>
     {/snippet}
-</Drawer>`;
+</Drawer.Root>`;
 </script>
 
 <Playground code={withoutActionsSnippet}>
-	<Drawer backdropProps={{ z: 1000 }} class="justify-start gap-6">
+	<Drawer.Root backdropProps={{ z: 1000 }} class="justify-start gap-6">
         {#snippet trigger({ open, ref })}
             <Button bind:ref={ref.current} onclick={open}>
                 Keyboard shortcuts
@@ -206,5 +206,5 @@ const withoutActionsSnippet = `${script(`import { Button, Drawer, Kbd, Scrollabl
                 </div>
             </Scrollable>
         {/snippet}
-    </Drawer>
+    </Drawer.Root>
 </Playground>

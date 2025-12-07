@@ -1,8 +1,8 @@
 <script lang="ts">
-    import CodeBlock from "$components/CodeBlock.svelte";
-    import { script } from "$utils/playground";
+import CodeBlock from "$components/CodeBlock.svelte";
+import { script } from "$utils/playground";
 
-    const controlledStateCode = `${script(`import { Button, Drawer } from "@sveltique/components";
+const controlledStateCode = `${script(`import { Button, Drawer } from "@sveltique/components";
 
     let isOpen = $state(false);`)}
     
@@ -10,11 +10,11 @@
     Edit account
 </Button>
 
-<Drawer bind:isOpen>
+<Drawer.Root bind:isOpen>
     <Button onclick={() => (isOpen = false)}>
         Close
     </Button>
-</Drawer>`;
+</Drawer.Root>`;
 </script>
 
 <CodeBlock code={controlledStateCode} />

@@ -6,9 +6,10 @@ import { type FlyParams, fly } from "svelte/transition";
 import type { ReplaceWithTWMergeClass, WithRef } from "$lib/types.js";
 import { motionSafe } from "$utils/motion-safe.js";
 import { onKeyUp } from "$utils/on-key.svelte.js";
-import { Backdrop, type BackdropProps } from "../backdrop/index.js";
-import { Portal } from "../portal/index.js";
-import { type DrawerVariants, drawer } from "./variants.js";
+import { Backdrop, type BackdropProps } from "../../backdrop/index.js";
+import { Portal } from "../../portal/index.js";
+import { type DrawerVariants, drawer } from "../variants.js";
+import { DrawerContext, setLocalContext } from "../context.svelte.js";
 
 type Ref = {
 	/** @note Expects a subclass of `HTMLElement`. */
@@ -84,6 +85,15 @@ let {
 	ref = $bindable(),
 	...restProps
 }: DrawerProps = $props();
+
+const context = setLocalContext(
+	new DrawerContext({
+		open: {
+			get: () => isOpen,
+			set: (value) => (isOpen = value)
+		}
+	})
+);
 
 const uid = $props.id();
 

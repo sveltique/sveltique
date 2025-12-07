@@ -73,7 +73,7 @@ const closeOnOverlayClickCode = `${script(`import { Button, Drawer, Field, Switc
         isOpen = false;
     }`)}
 
-<Drawer bind:isOpen closeOnOverlayClick>
+<Drawer.Root bind:isOpen closeOnOverlayClick>
     {#snippet trigger({ open })}
         <Button onclick={open}>
             Manage email preferences
@@ -108,11 +108,11 @@ const closeOnOverlayClickCode = `${script(`import { Button, Drawer, Field, Switc
         </Button>
         <Button onclick={close} variant="text">Cancel</Button>
     {/snippet}
-</Drawer>`;
+</Drawer.Root>`;
 </script>
 
 <Playground code={closeOnOverlayClickCode}>
-	<Drawer bind:isOpen closeOnOverlayClick backdropProps={{ z: 1000 }}>
+	<Drawer.Root bind:isOpen closeOnOverlayClick backdropProps={{ z: 1000 }}>
         {#snippet trigger({ open })}
             <Button onclick={open}>Manage email preferences</Button>
         {/snippet}
@@ -145,5 +145,5 @@ const closeOnOverlayClickCode = `${script(`import { Button, Drawer, Field, Switc
             </Button>
             <Button onclick={close} variant="text">Cancel</Button>
         {/snippet}
-    </Drawer>
+    </Drawer.Root>
 </Playground>

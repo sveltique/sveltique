@@ -5,7 +5,7 @@ import { script } from "$utils/playground";
 
 const basicUsageCode = `${script(`import { Button, Drawer, Field, Label, TextInput } from "@sveltique/components";`)}
 
-<Drawer backdropProps={{ z: 1000 }} class="gap-6">
+<Drawer.Root backdropProps={{ z: 1000 }} class="gap-6">
     {#snippet trigger({ open, ref })}
         <Button bind:ref={ref.current} onclick={open}>
             Edit account
@@ -50,11 +50,11 @@ const basicUsageCode = `${script(`import { Button, Drawer, Field, Label, TextInp
             Close
         </Button>
     {/snippet}
-</Drawer>`;
+</Drawer.Root>`;
 </script>
 
 <Playground code={basicUsageCode} class="flex-col items-center">
-    <Drawer backdropProps={{ z: 1000 }} class="gap-6">
+    <Drawer.Root backdropProps={{ z: 1000 }} class="gap-6">
         {#snippet trigger({ open, ref })}
             <Button bind:ref={ref.current} onclick={open}>Edit account</Button>
         {/snippet}
@@ -95,5 +95,5 @@ const basicUsageCode = `${script(`import { Button, Drawer, Field, Label, TextInp
                 Close
             </Button>
         {/snippet}
-    </Drawer>
+    </Drawer.Root>
 </Playground>

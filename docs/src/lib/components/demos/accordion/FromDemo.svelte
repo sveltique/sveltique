@@ -18,7 +18,7 @@ let from = $state<DrawerProps["from"]>("right");
 const fromCode = `${script(`import { Button, Drawer, Field, Label, Select, TextInput } from "@sveltique/components";
 
     const SIDES = ["top", "right", "bottom", "left"] satisfies DrawerProps["from"][];
-    let from = $state<DrawerProps["from"]>("right");
+    let from = $state<Drawer.RootProps["from"]>("right");
     
     function toTitleCase(str: string) {
         return str.at(0)!.toUpperCase() + str.slice(1).toLowerCase();
@@ -42,7 +42,7 @@ const fromCode = `${script(`import { Button, Drawer, Field, Label, Select, TextI
     </Field>
 </div>
 
-<Drawer {from} backdropProps={{ z: 1000 }}>
+<Drawer.Root {from} backdropProps={{ z: 1000 }}>
     {#snippet trigger({ open, ref })}
         <Button bind:ref={ref.current} onclick={open}>
             Edit account
@@ -86,7 +86,7 @@ const fromCode = `${script(`import { Button, Drawer, Field, Label, Select, TextI
             </Button>
         </div>
     {/snippet}
-</Drawer>`;
+</Drawer.Root>`;
 </script>
 
 <Playground code={fromCode} class="flex-col justify-center">
@@ -104,7 +104,7 @@ const fromCode = `${script(`import { Button, Drawer, Field, Label, Select, TextI
         </Field>
     </div>
     
-    <Drawer {from} backdropProps={{ z: 1000 }}>
+    <Drawer.Root {from} backdropProps={{ z: 1000 }}>
         {#snippet trigger({ open, ref })}
             <Button bind:ref={ref.current} onclick={open}>Edit account</Button>
         {/snippet}
@@ -144,5 +144,5 @@ const fromCode = `${script(`import { Button, Drawer, Field, Label, Select, TextI
                 </Button>
             </div>
         {/snippet}
-    </Drawer>
+    </Drawer.Root>
 </Playground>
